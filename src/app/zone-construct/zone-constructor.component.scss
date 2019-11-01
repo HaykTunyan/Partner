@@ -1,0 +1,651 @@
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent;
+}
+
+#map {
+  width: 100%;
+  height: 100vh;
+}
+.mat-drawer-container {
+  min-height: unset !important;
+}
+
+.mat-drawer-backdrop {
+  background-color: transparent;
+}
+
+.mat-drawer-container {
+  min-height: unset !important;
+}
+
+.b {
+  border: 1px solid red;
+}
+
+.logoCreate {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.allContent {
+  min-height: 100vh;
+  background-color: #1C333E;
+  float: left;
+  width: 100%;
+  min-width: 1200px;
+  overflow-x: auto;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: #1c333e !important;
+}
+
+//header and header items style
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 1000000000000;
+  //width: 100%;
+  left: 8%;
+}
+
+.title {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  //width: 25%;
+  justify-content: center;
+}
+
+.titleText {
+  margin-left: 10px;
+  color: black;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.example-container {
+  width: 100%;
+  height: auto;
+}
+
+
+::ng-deep .mat-raised-button {
+  padding: 5px 45px !important;
+  border-radius: 5px !important;
+  margin-right: 15px !important;
+  line-height: 40px !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: white;
+}
+
+::ng-deep .mat-tab-label {
+  margin-top: 10px !important;
+  background: #1c2531 !important;
+  padding: 5px 45px !important;
+  border-radius: 5px !important;
+  margin-right: 15px !important;
+  line-height: 40px !important;
+  font-size: 17px !important;
+  color: white;
+}
+
+.zones {
+  border-radius: 10px;
+  width: 85%;
+  background-color: white;
+  position: relative;
+  align-items: center;
+  display: flex;
+}
+
+div.containerZone .zones:hover {
+  background-color: #75B0CC;
+}
+
+.areaNameDiv:hover {
+  background-color: #75B0CC;
+   border-radius: 10px 10px 0 0;
+}
+
+.areaNameDivActive {
+  background-color: #75B0CC;
+   border-radius: 10px 10px 0 0;
+}
+
+
+
+.areaNameDiv:hover {
+  background-color: #75B0CC;
+   border-radius: 10px 10px 0 0;
+}
+
+.areaNameDivActive {
+  background-color: #75B0CC;
+   border-radius: 10px 10px 0 0;
+}
+
+
+
+.buttonClick {
+  width: 45%;
+}
+
+.col3Div {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-top: 0 !important;
+}
+
+.col9Div {
+  padding-right: 0 !important;
+}
+
+.displayJustifyAlign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marginUnset {
+  margin: unset !important;
+}
+
+.areas {
+  border-radius: 10px;
+  width: 85%;
+  background-color: white;
+  margin-left: 20px;
+
+}
+
+.zoneCheckBox :hover {
+  background: unset !important;
+  border-radius: 10px !important;
+}
+
+.areaDiv {
+  position: relative;
+  margin: 10px 0 10px 0;
+  background-color: #1C333E
+}
+
+mat-tab-body {
+  background-color: #1C333E
+}
+
+.matTabScroll {
+  height: calc(88vh - 45px);
+  overflow: scroll;
+  background-color: #1c333e;
+}
+
+
+
+.btnDiv {
+  width: 100%;
+}
+
+.areaNameDiv {
+  position: relative;
+  min-height: 40px;
+  align-items: center;
+  display: flex;
+}
+
+.areaNameChange {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.areaName {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #607D8B;
+  font-size: 16px;
+  word-break: break-all;
+  width: 80%;
+  cursor: pointer;
+}
+
+.deleteArea {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  cursor: pointer;
+}
+
+.deleteZoneArea {
+  color: #DF2525;
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.zoneNameArea {
+  font-size: 14px;
+  margin-left: 35px;
+  //position: absolute;
+  word-break: break-all;
+  width: 80%;
+}
+
+.areaContent {
+  min-height: 35px;
+  position: relative;
+  align-items: center;
+  display: flex;
+  border-radius: 10px;
+}
+
+.containerZone {
+  padding: 5px 0px 5px 0px;
+  background-color: #1c333e;
+  margin-right: unset !important;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: white;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  margin-left: 10px !important;
+
+}
+
+.zoneName {
+  margin-left: 10px;
+  font-weight: 500;
+  word-break: break-all;
+  width: 80%;
+}
+
+.bgButtonDark {
+  background: #2691bb !important;
+}
+
+.bgButton {
+  background: #c0d0d6 !important;
+}
+
+.bgActive {
+  background: #2691BB !important;
+}
+
+.bgAreaFirst {
+  background: #FFFFFF;
+}
+
+.bgAreaSecond {
+  background: #ECEFF1;
+}
+
+//modalDivStyle
+.modalDiv {
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100000000;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+}
+
+.popupOpasity {
+  width: 860px;
+
+}
+
+.whiteContent {
+  background-color: white;
+  position: relative;
+  margin-top: 40px;
+  border-radius: 10px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 135px;
+  z-index: 10000000;
+}
+
+.userIconContent {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  background-color: #2691BB;
+  border-radius: 50%;
+  top: -40px;
+  right: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+}
+
+.popupInputsContent {
+  width: 52%;
+  display: inline-block;
+}
+
+.popupInput {
+  background-color: transparent;
+  border: none;
+  width: 80%;
+  border-bottom: solid 1px #607D8B;
+  outline: none;
+  margin-left: 5px;
+}
+
+.popupButtonsContent {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chekboxContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chekboxText {
+  float: left;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.leaflet-div-icon .leaflet-editing-icon .my-own-class {
+  background: #f44336 !important;
+  border: 1px solid #666 !important;
+  border-radius: 50%;
+}
+
+.matError {
+  width: 80% !important;
+  float: left;
+}
+
+// delete popup
+.deletePopup {
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  //background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+}
+
+.deleteContent {
+  background-color: white;
+  text-align: center;
+  color: #607D8B;
+  font-weight: bold;
+  width: 350px;
+  padding-top: 20px;
+  border-radius: 10px;
+}
+
+.deleteButtonsContent {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.singleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.yesButton {
+  margin-left: 50px;
+}
+
+.noButton, .yesButton {
+  display: inline-block;
+  font-size: 18px;
+  width: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 2px #ffffff;
+  transition: box-shadow linear 150ms;
+}
+
+.yesButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+
+.noButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+
+.cursor {
+  cursor: pointer;
+  z-index: 5;
+}
+
+.noMargin {
+  margin: 0px;
+}
+
+
+@media (max-width: 1680px) {
+  #map {
+    height: calc(52vw + 10px);
+  }
+  .deleteArea {
+    right: 20px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .deleteArea {
+    right: 15px;
+  }
+  .zoneNameArea {
+    margin-left: 25px;
+  }
+  .zoneName {
+    width: 75%;
+  }
+  .popupOpasity {
+    margin-right: 200px;
+  }
+}
+
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 768px) {
+  .col9Div {
+    padding-left: 0 !important;
+  }
+  .deleteArea {
+    right: 70px;
+  }
+
+  .areas {
+    width: 90%;
+  }
+  .buttonClick {
+    margin-left: 20px;
+
+  }
+
+  div.btnDiv.displayJustifyAlign.but {
+    display: -webkit-box !important;
+  }
+
+  .containerZone {
+    margin-right: 25px;
+  }
+
+
+}
+
+// delete popup
+.deletePopup {
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  //background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+}
+
+.deleteContent {
+  background-color: white;
+  text-align: center;
+  color: #607D8B;
+  font-weight: bold;
+  width: 350px;
+  padding-top: 20px;
+  border-radius: 10px;
+}
+
+.deleteButtonsContent {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.singleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.yesButton {
+  margin-left: 50px;
+}
+
+.noButton, .yesButton {
+  display: inline-block;
+  font-size: 18px;
+  width: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 2px #ffffff;
+  transition: box-shadow linear 150ms;
+}
+
+.yesButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+
+.noButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+
+.cursor {
+  cursor: pointer;
+  z-index: 5;
+}
+
+.noMargin {
+  margin: 0px;
+}
+
+
+@media (max-width: 1680px) {
+  /*#map {
+    height: calc(52vw + 10px);
+  }*/
+  .deleteArea {
+    right: 20px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .deleteArea {
+    right: 15px;
+  }
+  .zoneNameArea {
+    margin-left: 25px;
+  }
+  .zoneName {
+    width: 75%;
+  }
+  .popupOpasity {
+    margin-right: 200px;
+  }
+}
+
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 768px) {
+  .col9Div {
+    padding-left: 0 !important;
+  }
+  .deleteArea {
+    right: 70px;
+  }
+
+  .areas {
+    width: 90%;
+  }
+  .buttonClick {
+    margin-left: 20px;
+
+  }
+
+  div.btnDiv.displayJustifyAlign.but {
+    display: -webkit-box !important;
+  }
+
+  .containerZone {
+    margin-right: 25px;
+  }
+
+
+}

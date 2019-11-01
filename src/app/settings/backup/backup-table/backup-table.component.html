@@ -1,0 +1,162 @@
+<div class='tablesContent backupTable'>
+  <div class="data-table w-100">
+
+    <!-- users table and filter -->
+    <table mdbTable striped="true" hover="true">
+      <thead class="main-color thead-custom">
+      <!-- search thead -->
+      <tr>
+        <!-- Search by name. -->
+        <th scope="col" class=''>
+          <div class='inputPlace'>
+            <i class="fa fa-search menus-icon white-text searchIcon" aria-hidden="true"></i>
+            <mat-form-field class="w-100 white-text">
+              <input matInput placeholder="Backup Name" class="inputPadding" #filterName
+                     (input)="writeInFilterInputs('name',filterName.value)" autocomplete="off">
+            </mat-form-field>
+          </div>
+        </th>
+        <!--Date-->
+        <th scope="col">
+          <mat-form-field id='calendar' class="example-full-width white-text">
+            <input matDatepickerToggleIcon matInput [matDatepicker]="picker" placeholder="Date"
+                   (dateInput)='getDate($event, "filterDate")' [value]='filterDate'
+                   onselectstart="return false"
+                   onpaste="return false;"
+                   onDrag="return false"
+                   onDrop="return false"
+                   (keypress)="false" (keydown)="keyDownDateInput($event, 'filterDate')" autocomplete="off" >
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </th>
+        <!-- Time. -->
+        <th scope="col" class='inputPlace'>
+          <div class='inputPlace'>
+            <i class="fa fa-search menus-icon searchIcon white-text" aria-hidden="true"></i>
+            <mat-form-field class="w-100 white-text">
+              <input class='white-text' #filterTime matInput placeholder="Time"
+                     (keydown)="clearTimeDada($event)" [value] = 'timeValue'
+                     (keypress) = "timeValidation($event, filterTime.value)"
+                     onselectstart="return false"
+                     onpaste="return false;"
+                     onDrag="return false"
+                     onDrop="return false"
+                     (input)="changeTimeFormat(filterTime.value)" autocomplete="off">
+            </mat-form-field>
+          </div>
+        </th>
+        <!--Type-->
+        <th scope="col">
+          <div class='roleFilter'>
+            <div *ngIf='isTypeFilterSelectOptionOpen' class='rolesSelectOption'
+                 (mouseleave)='closeTypeSelectOption()'>
+              <div class='forRolesContentStyle'>
+                <div *ngFor='let type of typesArray; let i = index'>
+                  <div class='role roleInSelectOption' (mousedown)='selectType(type)'>
+                    {{ type }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-icon class="rolesSelectOptionButton cursor" (click)='openTypesSelectOption()'>
+              <i class="material-icons  white-text">arrow_drop_down</i>
+            </mat-icon>
+            <mat-form-field class="w-100 form-select">
+              <input type="text"  placeholder="Type" aria-label="Number" matInput
+                     class="white-text"
+                     [value] = 'typeFilterValue'
+                     autocomplete="off"
+                     onselectstart="return false"
+                     onpaste="return false;"
+                     onDrag="return false"
+                     onDrop="return false"
+                     (keypress)="false" (keydown)="clearTypeFilter($event)">
+            </mat-form-field>
+          </div>
+        </th>
+        <!--Size.-->
+        <th scope="col" class='inputPlace'>
+          <div class='inputPlace'>
+            <i class="fa fa-search menus-icon searchIcon white-text" aria-hidden="true"></i>
+            <mat-form-field class="w-100 white-text">
+              <input matInput placeholder="Size" #filterSize
+                     (input)="writeInFilterInputs('size', filterSize.value)" autocomplete="off">
+            </mat-form-field>
+          </div>
+        </th>
+        <!-- Table column btn and download -->
+        <th class="tools-btn">
+        </th>
+      </tr>
+      <!-- head custom -->
+      <tr class="head-custom">
+        <ng-container *ngFor="let column of backupListElements; let i = index">
+          <th  scope="col" class="font-weight-bold columnTitleContent">
+            <span class="headers-text-color">{{column.name}}</span>
+            <mat-icon *ngIf='!column.sort.status'
+                      class="cursor sortButton noselect" (click)="sortButton(i)">
+              unfold_more
+            </mat-icon>
+            <mat-icon *ngIf='column.sort.status == "asc"'
+                      class="cursor sortButton noselect" (click)="sortButton(i)">
+              expand_less
+            </mat-icon>
+            <mat-icon *ngIf='column.sort.status == "desc"'
+                      class="cursor sortButton marginTop noselect" (click)="sortButton(i)">
+              expand_more
+            </mat-icon>
+          </th>
+        </ng-container>
+        <th scope="col" class="table-tools font-weight-bold text-center city-style">
+          <span class="headers-text-color">Tools</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody *ngIf="backupList" class="banner-color table-custom tbody-custom tableMaxWidth">
+      <tr mdbTableCol *ngFor="let backup of backupList; let i = index">
+        <!-- user name -->
+        <td class="bigText" >
+          <div class = 'tableText'>
+            {{ backup.name}}
+          </div>
+        </td>
+        <td class="bigText">
+          <div class = 'tableText'>
+            {{ backup.backupDate | date: 'MM/dd/yyy' }}
+          </div>
+        </td>
+        <td class="bigText">
+          <div class = 'tableText'>
+            {{ backup.backupTime }}
+          </div>
+        </td>
+        <td class="bigText" >
+          <div class = 'tableText'>
+            {{ typesName[backup.type]}}
+          </div>
+        </td>
+        <td class="bigText">
+          <div class = 'tableText'>
+            {{backup.fileSize }}
+          </div>
+        </td>
+        <!-- tools -->
+        <td class="tools-btn">
+          <div class='tools' align='center'>
+            <mat-icon class = 'cursor noselect downloadIcon'>
+              get_app
+            </mat-icon>
+            <mat-icon class = 'cursor noselect refreshIcon'>
+              settings_backup_restore
+            </mat-icon>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /table data -->
+  </div>
+</div>

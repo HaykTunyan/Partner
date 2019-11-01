@@ -1,0 +1,348 @@
+// Add Partner Component Style.
+  
+// sidenav content
+.sidenav-content {
+    display: flex;
+    padding: 0 15px;
+    min-height: 1000px;
+}
+  
+// Partner Navbar
+.partner-navbar {
+    margin-top: 1rem;
+    color: white;
+    .btn-partner {
+        background: #75B0CC;
+        padding: 5px 45px;
+    }
+    .mat-button,
+    .mat-raised-button {
+        font-size: 20px;
+    }
+    .child-icon {
+       top: 5px; 
+    }
+}
+.nameInput{
+  width: 255px;
+}
+.name-type{
+  width: 928px;
+}
+.inputWeidth{
+  width: 300px;
+}
+.left-input-space{
+  margin-right: 30px;
+}
+.percent-icon {
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+    .fa-percent {
+        font-size: 21px;
+    }
+}
+
+.input-name {
+    top: 20px;
+}
+
+.input-close {
+    top: 40px;
+}
+
+textarea.form-control {
+  min-height: 40px;
+}
+
+.chips-field {
+    .mat-form-field-flex {
+        position: relative;
+        bottom: 20px;
+    }
+}
+
+.form-select {
+    height: auto;
+}
+
+.content-partner {
+    width: 1000px;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #455A64;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #455A64;
+}
+
+.mat-card-header-text {
+    margin: 0;
+}
+
+.upload-btn {
+    padding: 7px 10px;
+    background: white;
+    color: black;
+    border: 1px solid #000000;
+    border-radius: 6px;
+}
+
+.card-header {
+    background: #ECEFF1;
+    border-bottom: none;
+}
+
+.card-footer {
+    background: transparent;
+}
+
+mat-drawer {
+  position: fixed;
+}
+
+// google map style 
+agm-map {
+    width: 100%;
+    height: 300px;
+}
+
+input.mat-chip-input {
+    flex: 1 0 90px; 
+}
+
+//mat-slide-toggle style
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb,
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar{
+  background: #59B10D;
+}
+
+//finansial styles
+.billing-cycle-day {
+  width: 55px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.billing-cycle {
+  .mat-form-field {
+    bottom: 8px;
+  }
+  .content-field {
+    width: 110px;
+  }
+}
+
+.max-credit-limit {
+  .mat-form-field  {
+    width: 250px;
+  }
+}
+
+.icon-position {
+  position: relative;
+  bottom: 10px;
+}
+
+.order-payment {
+  .mat-form-field  {
+    width: 250px;
+  }
+}
+
+.date-picker {
+  ::ng-deep .mat-form-field {
+    height: 20px;
+  }
+  ::ng-deep .mat-form-field-suffix {
+    right: 184px;
+  }
+  ::ng-deep .mat-datepicker-toggle {
+    svg {
+      display: none;
+    }
+  }
+  ::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+  .mat-input-element {
+    display: block;
+    padding-left: 43px;
+  }
+}
+
+.date-picker-btn {
+  bottom: 31px;
+  right: 14px;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-img {
+  width: 250px;
+  height: 80px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.text-width{
+  width: 125px;
+  text-align: end;
+}
+
+//Delete checkboxes
+//::ng-deep .mat-option .mat-pseudo-checkbox {
+//  display: none;
+//}
+
+//Contacts styles
+.contacts-content {
+  margin-top: 89px;
+  .contacts {
+    line-height: 70px;
+  }
+  .contacts-icon {
+    line-height: 60px;
+  }
+}
+
+//Delivery options styles
+.delivery-types {
+  line-height: 0px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background: #C0D0D6;
+}
+.delete-button {
+  position: relative;
+  right: 33%;
+  top: 18px;
+  color: white;
+}
+//Error mssage styles
+.error-massage {
+  margin-top: -15px;
+  font-size: 13px;
+  margin-bottom: -5px;
+  color: #f44336;
+}
+.modal-size {
+  width: 450px;
+  padding: 60px;
+  border: 5px solid #607D8B;
+  i {
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+  }
+  .modal-text {
+    display: flex;
+    justify-content: center;
+    color: #263238;
+    font-weight: bold;
+    padding-top: 30px;
+  }
+  .button-content {
+    display: flex;
+    justify-content: center;
+    padding-top: 63px;
+    button {
+      width: 270px;
+      padding: 17px;
+      border-radius: 10px;
+    }
+  }
+}
+::ng-deep .error-text {
+   .mat-form-field-underline {
+    background-color: red;
+  }
+}
+//keywords
+.add-partner {
+  ::ng-deep .chips-field.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 17px;
+  }
+}
+.hour-input {
+  ::ng-deep .mat-form-field-infix {
+    padding: 0px;
+    border-top: 0px;
+  }
+}
+.automat-active {
+  width: 50px;
+}
+.input-name-update {
+  top: 0px;
+  margin-left: -10px;
+}
+.link-margin {
+  margin-left: 2.2em;
+}
+.contact-person-name {
+  top: 6px;
+}
+.radiobuttonsTextCenter{
+  margin-top: -10px;
+  text-align: end;
+}
+.example-chip-list {
+  width: 250px;
+}
+.chip{
+  max-width: 210px;
+}
+.delayTimeInput{
+  width: 55px;
+  margin-left: 16px;
+  margin-right: 10px;
+}
+.delayTimeTitle{
+  margin-left: 20px;
+}
+.checkboxChenter{
+  padding-top: 11px;
+}
+.userName{
+  width: 140px;
+}
+.userInputs{
+  width: 300px;
+  margin-top: -15px;
+  margin-left: 25px;
+}
+.roles{
+  padding-top: 20px;
+}
+.userClear{
+  margin-top: -10px;
+}
+.userEmail{
+  width: 60px;
+}
+.everyInput{
+  margin-top: -20px;
+}
+.billingInput{
+  width: 100px;
+}
+.inputTitles{
+  text-align: end;
+}
+.toTop{
+  margin-top: 8px;
+  display: block;
+}
+app-street-map{
+  width: 100%;
+  height: 200px;
+  border: solid 1px ;
+}

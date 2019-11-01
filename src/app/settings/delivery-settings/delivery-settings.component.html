@@ -1,0 +1,267 @@
+<mat-drawer-container class="sidenav-container partner-list">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 titleContent">
+          <mat-icon class="titleIcon">motorcycle</mat-icon>
+          <span class="titleText">Delivery Settings</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 padding-left">
+          <!--first box-->
+          <div class="box">
+            <div class="delivery">
+              <span class='deliveryText'> Default Country Delivery Rate </span>
+              <span class="inputContent">
+                <mat-form-field class="example-full-width">
+                  <input matInput #deliveryRate [value]="data.deliveryRate"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         (keypress)="IsEdit ? floatValidation($event, 'deliveryRate'): false"
+                         (input)="getInputValues('deliveryRate', deliveryRate.value)"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='inputTitle'>
+                  GEL
+                </span>
+              </span>
+            </div>
+            <div class="delivery">
+              <span class='deliveryText'> Prevails Over Partner Rate </span>
+              <span class="inputContent noMargin">
+                <div class='checkbox' [ngClass]="{ 'active': data.partnerRate }"
+                     (click)="IsEdit ? partnerRateActivate(): false">
+                      <span class='checkboxButton' [ngClass]="{ 'activeButton': data.partnerRate }"></span>
+                 </div>
+              </span>
+            </div>
+            <div class="delivery">
+              <span class='deliveryText'> Shows When Order is Shown as Pre-order </span>
+              <span class="inputContent">
+                <mat-form-field class="example-full-width">
+                  <input matInput #preOrder [value]="data.preOrderTime? data.preOrderTime: ''"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         (keypress)="IsEdit ? numberValidation($event): false"
+                         (input)="getInputValues('preOrderTime', preOrder.value)"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='inputTitle'>
+                  min
+                </span>
+              </span>
+            </div>
+            <div class="delivery">
+              <span class='deliveryTextShort'> Pick Up Time </span>
+              <span class="inputContent">
+                <mat-form-field class="example-full-width">
+                  <input matInput #pickUp [value]="data.pickUpTime? data.pickUpTime: ''"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         (keypress)="IsEdit ? numberValidation($event): false"
+                         (input)="getInputValues('pickUpTime', pickUp.value)"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='inputTitle'>
+                  min
+                </span>
+              </span>
+            </div>
+            <p class='textDescription'>
+              If less than selected minutes change is not sent for approval to customer. <br>
+              If more then send for approval to Customer.
+            </p>
+          </div>
+        </div>
+        <div class="col-6 padding-right">
+          <!--second box-->
+          <div class="box">
+            <div class="delivery">
+              <span class='deliveryTextShort1'> Surge Delivery Rate </span>
+              <span class="inputContent">
+                <mat-form-field class="example-full-width">
+                  <input matInput #surgeDeliveryRate [value]="data.surgeDeliveryRate"
+                         (keypress)="IsEdit ? floatValidation($event, 'surgeDeliveryRate'): false"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         (input)="getInputValues('surgeDeliveryRate', surgeDeliveryRate.value)"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='inputTitle'>
+                  GEL
+                </span>
+                <mat-form-field class="example-full-width marginLeft">
+                  <input matInput #surgeDeliveryPercent [value]="data.surgeDeliveryPercent? data.surgeDeliveryPercent: ''"
+                         (keypress)="IsEdit ? floatValidation($event, 'surgeDeliveryPercent'): false"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         (input)="getInputValues('surgeDeliveryPercent', surgeDeliveryPercent.value)"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='inputTitle'>
+                  %
+                </span>
+              </span>
+            </div>
+            <div class='DateContent'>
+              <div class="dateInput">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker1" [formControl]="date1" [value]="startDate"
+                         (dateInput)="getDate($event, 'startDate')"
+                         (keypress)="false"
+                         (keydown)="IsEdit ? keyDownDateInput($event, 1): false"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                  <mat-datepicker-toggle *ngIf = 'IsEdit' matSuffix [for]="picker1">
+                    <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="timePicker">
+                <input class="timeInput" #firstTimeElem [value] = 'firstTimeValue'
+                       (focus)="IsEdit ? focusFunction('firstTime'): false"
+                       (focusout) = "IsEdit ? focusOutFunction('firstTime'): false"
+                       (keypress) = "IsEdit ? timeValidation($event, firstTimeElem.value, 'firstTimeValue'): false"
+                       (keydown) = "IsEdit ? clearTimeDada($event, 'firstTimeValue'): false"
+                       (input) = "changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                       autocomplete="off" [readonly]="!IsEdit"
+                       onselectstart="return false" onpaste="return false;"
+                       onDrag="return false" onDrop="return false"
+                       autocomplete="off" autocapitalize="off" autocorrect="off">
+                <div class = 'borderBottom'></div>
+                <div class = 'borderContent'>
+                  <div class = 'borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+                </div>
+              </div>
+              <div class="line">
+                -
+              </div>
+              <div class="timePicker marginRightTime">
+                <input class="timeInput" #secondTimeElem [value] = 'secondTimeValue'
+                       (focus)="IsEdit ? focusFunction('secondTime'): false"
+                       (focusout) = "IsEdit ? focusOutFunction('secondTime'): false"
+                       (keypress) = "IsEdit ? timeValidation($event, secondTimeElem.value, 'secondTimeValue'): false"
+                       (keydown) = "IsEdit ? clearTimeDada($event, 'secondTimeValue'): false"
+                       (input) = "changeTimeFormat(secondTimeElem.value, 'secondTimeValue')" [readonly]="!IsEdit"
+                       onselectstart="return false" onpaste="return false;" onDrag="return false" onDrop="return false"
+                       autocomplete="off" autocapitalize="off" autocorrect="off">
+                <div class = 'borderBottom'></div>
+                <div class = 'borderContent'>
+                  <div class = 'borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+                </div>
+              </div>
+              <div class='dateInput'>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker2" [formControl]="date2" [value]="endDate"
+                         (dateInput)="getDate($event, 'endDate')" (keypress)="false"
+                         (keydown)="IsEdit ? keyDownDateInput($event, 2): false"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                  <mat-datepicker-toggle *ngIf = 'IsEdit' matSuffix [for]="picker2">
+                    <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class='textAreaContent'>
+              <p class='messageText'>Message Text</p>
+              <textarea class="form-control" rows="6"  [readonly]="!IsEdit" [(ngModel)]="data.message"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 padding-left">
+          <!--third box-->
+          <div class="box">
+            <div class="delivery1">
+                <span class='marginRight'> If ordered item quantity more then </span>
+                <mat-form-field class="example-full-width materialInput">
+                  <input matInput #itemQuantity [value]="data.itemQuantity? data.itemQuantity: ''"
+                         (keypress)="IsEdit ? numberValidation($event): false"
+                         (input)="getInputValues('itemQuantity', itemQuantity.value)"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='marginRight marginLeft'> Delivery time will be </span>
+                <mat-form-field class="example-full-width marginLeft materialInput">
+                  <div class='clearIcon' (click)="IsEdit ? clearInput('deliveryTime'): false">
+                    x
+                  </div>
+                  <input matInput #deliveryTime [value]="data.deliveryTime? data.deliveryTime: ''"
+                         (keypress)="IsEdit ? numberValidation($event): false"
+                         (input)="getInputValues('deliveryTime', deliveryTime.value)"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+            </div>
+            <div class="delivery1">
+              <span class='marginRight'> Average Vehicle speed </span>
+              <span>
+                <mat-form-field class="example-full-width materialInput">
+                  <input matInput #vehicleSpeed [value]="data.vehicleSpeed? data.vehicleSpeed: ''"
+                         (keypress)="IsEdit ? floatValidation($event, 'vehicleSpeed'): false"
+                         (input)="getInputValues('vehicleSpeed', vehicleSpeed.value)"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='inputTitle'>
+                  km/h
+                </span>
+              </span>
+            </div>
+            <div class="delivery1">
+              <span class='marginRight'> Extra Buffer Time </span>
+              <span>
+                <mat-form-field class="example-full-width materialInput">
+                  <input matInput #bufferTime [value]="data.bufferTime? data.bufferTime: ''"
+                         (input)="getInputValues('bufferTime', bufferTime.value)"
+                         (keypress)="IsEdit ? numberValidation($event): false"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+                <span class='inputTitle'>
+                  min
+                </span>
+              </span>
+            </div>
+            <div class="delivery1">
+              <span class='marginRight'> Weight Multiplier </span>
+              <span>
+                <mat-form-field class="example-full-width marginLeft materialInput">
+                  <div class='clearIcon' (click)="IsEdit ? clearInput('weightMultiplier'): false">
+                    x
+                  </div>
+                  <input matInput #weightMultiplier [value]="data.weightMultiplier? data.weightMultiplier: ''"
+                         (keypress)="IsEdit ? numberValidation($event): false"
+                         (input)="getInputValues('weightMultiplier', weightMultiplier.value)"
+                         onselectstart="return false" onpaste="return false;"
+                         onDrag="return false" onDrop="return false" [readonly]="!IsEdit"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                </mat-form-field>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 buttonsContent">
+          <div class = 'buttonsToBottom'>
+            <button class = 'btn cancelButton' (click)="cancel()" [disabled]="!IsEdit">CANCEL</button>
+            <button class="btn btn-primary saveButton" (click) = 'save()' [disabled]="!IsEdit">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

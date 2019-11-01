@@ -1,0 +1,543 @@
+.b {
+  border: 1px solid red;
+}
+
+
+.campaign-navbar {
+  margin-top: 1rem;
+  color: white;
+
+  .partner-logo {
+    top: 20px;
+  }
+
+  ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: #1c333e !important;
+  }
+  .btn-partner {
+    background: #75B0CC;
+    padding: 5px 45px;
+  }
+
+  .part-btn {
+    bottom: 7px
+  }
+
+  .mat-button,
+  .mat-raised-button {
+    font-size: 20px;
+  }
+}
+
+nav button:focus {
+  background: #75B0CC;;
+}
+
+// drawer
+.drawer {
+  .nav-partner {
+    background: #455A64;
+
+    .sidenav-list {
+      color: white;
+      font-weight: 400;
+    }
+
+    i {
+      color: white;
+    }
+  }
+
+  .nav-btn {
+    line-height: 67px;
+    padding: 0 15px;
+    display: flex;
+
+    .sidenav-list {
+      font-size: 20px;
+    }
+
+    .mat-icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    &:hover {
+      background: #75B0CC;
+
+      .sidenav-list {
+        color: white;
+      }
+
+      i {
+        color: white;
+      }
+    }
+  }
+}
+
+
+
+
+// customer style.
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent;
+}
+
+mat-drawer-backdrop {
+  background-color: transparent;
+}
+
+.mat-list .mat-list-item {
+  height: 30px;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.percent-icon {
+  width: 20px;
+  height: 20px;
+  bottom: 5px;
+
+  .fa-percent {
+    font-size: 21px;
+  }
+}
+
+
+table.table-hover tbody tr:hover {
+  background-color: #CFD8DC;
+}
+
+//Change width Add filter & column
+::ng-deep .cdk-overlay-container .mat-menu-panel {
+  max-width: 300px;
+}
+
+// change tooltip text and background color
+::ng-deep .tooltip .tooltip-inner {
+  background-color: #CFD8DC;
+  color: #263238;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .tooltip-arrow {
+  background-color: unset;
+  border-bottom: 7px solid #CFD8DC;
+  font-size: 20px;
+}
+
+::ng-deep .tooltip .tooltip-inner::after {
+  border-color: transparent transparent transparent #CFD8DC;
+}
+
+.cursor {
+  cursor: pointer;
+  z-index: 5;
+}
+
+
+.newCampaignRow {
+  //top: 20px;
+  position: relative;
+}
+
+.buttonNav {
+  right: 100px;
+  position: absolute;
+}
+
+
+
+.sortButton {
+  position: absolute;
+  right: 0px;
+  top: 14px;
+  cursor: pointer;
+}
+
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+
+#calendar {
+  input {
+    //color: white;
+  }
+
+  input .mat-form-field-placeholder {
+    color: red;
+  }
+
+  .dummy-input-field .mat-input-placeholder {
+    color: red;
+  }
+
+}
+
+.calendarIcon {
+  //color: white;
+  transform: scale(1.4);
+  margin-bottom: 10px;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+
+.mat-drawer-container{
+  min-height: unset !important;
+}
+
+
+.newCampaignDiv {
+  height: 75vh;
+  background-color: white;
+  border-radius: 10px;
+}
+
+
+.justifyDisplayAlign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lang{
+  width: 27%;
+}
+
+.nameClass{
+  margin-right: 25px;
+  padding-top: 27px;
+  font-weight: 700;
+  margin-left: 50px;
+}
+
+.labelTextArea{
+  font-weight: 700;
+  border-radius: 10px;
+  //border-color: #455A64;
+  margin-left: 35px;
+  margin-top: 25px;
+}
+
+.textAreaStyle{
+  width: 92%;
+  margin-left: 35px;
+  height: 50px;
+  border-radius: 10px;
+  resize: none;
+}
+
+//calendar style
+.borderBottom{
+  border-bottom: 1px solid rgba(0,0,0,.42);
+}
+
+.backupRadiobuttonsContent{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.radiobuttonContent{
+  margin: 20px 40px 10px 0px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.radioButton{
+  width: 22px;
+  height: 22px;
+  border: solid 2px #607D8B;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noChecked{
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background-color: #607D8B;
+  transition-padding: width, height;
+  -webkit-transition-property: width, height;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.radiobuttonName{
+  font-weight: 400;
+}
+
+label{
+  color: #607D8B ;
+}
+.box {
+  //height: 410px;
+  background-color: white;
+  border-radius: 10px;
+  //margin-top: 30px;
+  //padding-top: 10px;
+}
+
+.padding-right {
+  padding-right: 2%;
+}
+
+
+.DateContent{
+  margin-left: 20px;
+  border: solid 3px #607D8B;
+  border-radius: 10px;
+  padding-left: 10px;
+  width: 500px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+mat-form-field{
+  width: 120px;
+  position: relative;
+}
+
+.dateInput{
+  display: inline-block;
+  width: 130px;
+}
+.timePicker{
+  display: inline-block;
+}
+
+.timeInput{
+  border: none;
+  width: 60px;
+  text-align: center;
+}
+.marginRightTime{
+  margin-right: 10px;
+}
+
+.borderContent{
+  display: flex;
+  justify-content: center;
+}
+.borderActive{
+  border-bottom: 2px solid #3f51b5;
+  margin-top: -1px;
+  width: 0%;
+  transition: width linear 200ms;
+  opacity: 0;
+}
+
+.timeInput:focus{
+  outline: none !important;
+}
+.line{
+  color: black;
+  font-size: 30px;
+  width: 40px;
+  text-align: center;
+}
+
+.checked{
+  width: 14px;
+  height: 14px;
+}
+
+.selectCampaignType{
+  width: 50%;
+  margin-left: 15px;
+}
+
+.matOption{
+  border-bottom: 1px solid;
+}
+
+
+
+.mat-select-content{
+  border-radius: 10px;
+}
+
+
+
+
+.popupButtonsContent {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkboxContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox {
+  width: 40px;
+  height: 20px;
+  background-color: #797E7A;
+  border-radius: 17px;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.checkboxActive {
+  background-color: rgba(89, 177, 13, 0.5);
+}
+
+.checkboxButton {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -1px;
+  top: -2px;
+  background-color: #87969c;
+  border-radius: 50%;
+  transition: left linear 100ms;
+}
+
+
+.checkboxButtonActive {
+  background-color: #59B10D;
+  left: 17px;
+}
+
+.checkboxText {
+  float: left;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.discard {
+  float: left;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10.5px 43px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.disabledButton {
+  cursor: no-drop !important;
+}
+
+.invite {
+  background-color: #2691BB !important;
+  padding: 10.5px 43px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+
+}
+
+//modalDivStyle
+.modalDiv {
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100000000;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+}
+
+.deletePopup {
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  //background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+}
+
+.deleteContent {
+  background-color: white;
+  text-align: center;
+  color: #607D8B;
+  font-weight: bold;
+  width: 350px;
+  padding-top: 20px;
+  border-radius: 10px;
+}
+
+.deleteButtonsContent {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.noButton, .yesButton {
+  display: inline-block;
+  font-size: 18px;
+  width: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 2px #ffffff;
+  transition: box-shadow linear 150ms;
+}
+.yesButton {
+  margin-left: 50px;
+}
+.yesButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+
+.noButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+.matError {
+  width: 80% !important;
+  float: left;
+}
+
+
+.hintSpan{
+  font-size: 75%;
+  margin-top: .66667em;
+  top: calc(100% - 0.5em);
+  margin-left: 40px;
+  font-weight: 500;
+}

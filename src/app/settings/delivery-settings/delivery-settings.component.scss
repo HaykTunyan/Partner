@@ -1,0 +1,242 @@
+.titleContent {
+  padding-left: 4%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.titleIcon {
+  color: white;
+  font-size: 28px;
+  font-weight: 100;
+}
+
+.titleText {
+  margin-top: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.box {
+  height: 410px;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 30px;
+  padding-top: 10px;
+}
+
+.padding-left {
+  padding-left: 2%;
+}
+
+.padding-right {
+  padding-right: 2%;
+}
+
+.inputAndTextContent {
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 0px 10px 20px 20px;
+  display: flex;
+  align-items: center;
+}
+.delivery{
+  margin: 31px 15px 12px 20px;
+  display: flex;
+  justify-content: start;
+  font-weight: bold;
+  color: #607D8B;
+}
+.delivery1{
+  margin: 21px 15px 12px 20px;
+  display: flex;
+  justify-content: start;
+  font-weight: bold;
+  color: #607D8B;
+}
+
+.deliveryText {
+  width: 280px;
+  margin-right: 30px;
+}
+.deliveryTextShort{
+  width: 100px;
+  margin-right: 30px;
+}
+.deliveryTextShort1{
+  width: 150px;
+  margin-right: 30px;
+}
+.marginLeft{
+  margin-left: 20px;
+}
+.inputContent{
+  width: 70%;
+  margin-top: -24px;
+}
+.noMargin{
+  margin: 0px
+}
+.inputTitle{
+  font-size: 10px;
+  font-weight: 400;
+}
+.example-full-width{
+  width: 100px;
+}
+.checkbox {
+  height: 16px;
+  border-radius: 17px;
+  background-color: rgba(207, 216, 220, 0.5);
+  width: 34px;
+  cursor: pointer;
+  position: relative;
+}
+
+.active {
+  background-color: rgba(89, 177, 13, 0.5);
+}
+
+.checkboxButton {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #CFD8DC;
+  left: 0px;
+  top: -2px;
+  transition: left linear 50ms;
+}
+
+.activeButton {
+  background-color: #59B10D;
+  left: 15px;
+  top: -2px;
+}
+
+.textDescription{
+  color: #607D8B;
+  font-size: 10px;
+  margin-left: 20px;
+  margin-top: -25px;
+}
+.DateContent{
+  margin-left: 20px;
+  border: solid 3px #607D8B;
+  border-radius: 10px;
+  padding-left: 10px;
+  width: 500px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+mat-form-field{
+  width: 120px;
+  position: relative;
+}
+.dateInput{
+  display: inline-block;
+  width: 130px;
+}
+.timePicker{
+  display: inline-block;
+}
+.timeInput{
+  border: none;
+  width: 60px;
+  text-align: center;
+}
+.marginRightTime{
+  margin-right: 10px;
+}
+.borderContent{
+  display: flex;
+  justify-content: center;
+}
+.borderBottom{
+  border-bottom: 1px solid rgba(0,0,0,.42);
+}
+.borderActive{
+  border-bottom: 2px solid #3f51b5;
+  margin-top: -1px;
+  width: 0%;
+  transition: width linear 200ms;
+  opacity: 0;
+}
+
+.inputActive{
+  opacity: 1;
+  width: 100%;
+}
+
+.timeInput:focus{
+  outline: none !important;
+}
+.errorBorder{
+  border-color: red;
+}
+.line{
+  color: black;
+  font-size: 30px;
+  width: 40px;
+  text-align: center;
+}
+.textAreaContent{
+  padding: 20px;
+}
+.messageText{
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 16px;
+}
+textarea {
+  resize: none;
+  border-radius: 10px;
+}
+
+.clearIcon{
+  cursor: pointer;
+  font-weight: 400;
+  position: absolute;
+  left: -13px;
+  top: 11px;
+  font-size: 18px;
+}
+.marginRight{
+  margin-right: 25px;
+}
+.buttonsContent{
+  position: relative;
+  height: 450px;
+}
+.buttonsToBottom{
+  position: absolute;
+  bottom: 0px;
+  display: inline-block;
+  right: 20px;
+}
+.cancelButton{
+  background-color: transparent;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: none;
+}
+.cancelButton:active{
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.saveButton{
+  border-radius: 5px;
+  background-color: #2691BB !important;
+  width: 140px;
+  font-weight: bold;
+}
+.materialInput{
+  margin-top: -19px;
+}
+.b {
+  border: solid 1px red;
+}

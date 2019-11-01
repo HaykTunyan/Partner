@@ -1,0 +1,275 @@
+// Add Partner Component Style.
+
+
+// sidenav content
+.sidenav-content {
+    display: flex;
+    padding: 0 15px;
+    min-height: 1000px;
+}
+
+// Partner Navbar
+.partner-navbar {
+    margin-top: 1rem;
+    color: white;
+    .btn-partner {
+        background: #75B0CC;
+        padding: 5px 45px;
+    }
+    .mat-button,
+    .mat-raised-button {
+        font-size: 20px;
+    }
+    .child-icon {
+       top: 5px;
+    }
+}
+
+// customer code style.
+.mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
+}
+
+mat-drawer {
+  position: fixed;
+}
+
+mat-drawer-backdrop {
+    background-color: transparent;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+.percent-icon {
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+    .fa-percent {
+        font-size: 21px;
+    }
+}
+
+.input-name {
+    top: 20px;
+}
+
+.input-close {
+    top: 40px;
+}
+
+.chips-field {
+    .mat-form-field-flex {
+        position: relative;
+        bottom: 20px;
+    }
+}
+
+.form-select {
+    height: auto;
+}
+
+.content-partner {
+    width: 920px;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #455A64;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #455A64;
+}
+
+.mat-card-header-text {
+    margin: 0;
+}
+
+.upload-btn {
+    padding: 7px 10px;
+    background: white;
+    color: black;
+    border: 1px solid #000000;
+    border-radius: 6px;
+}
+
+.card-header {
+    background: #ECEFF1;
+    border-bottom: none;
+}
+
+.card-footer {
+    background: transparent;
+}
+
+// google map style
+
+agm-map {
+    width: 100%;
+    height: 300px;
+}
+
+  input.mat-chip-input {
+    flex: 1 0 90px;
+  }
+  //mat-slide-toggle style
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb,
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar{
+  background: #59B10D;
+}
+//finansial styles
+.billing-cycle-day {
+  width: 55px;
+}
+.billing-cycle {
+  .mat-form-field {
+    bottom: 8px;
+  }
+  .content-field {
+    width: 110px;
+  }
+}
+.max-credit-limit {
+  .mat-form-field  {
+    width: 250px;
+  }
+}
+.icon-position {
+  position: relative;
+  bottom: 10px;
+}
+.order-payment {
+  .mat-form-field  {
+    width: 250px;
+  }
+}
+.date-picker {
+   .mat-form-field {
+    height: 20px;
+  }
+   .mat-form-field-suffix {
+    right: 184px;
+  }
+   .mat-datepicker-toggle {
+    svg {
+      display: none;
+    }
+  }
+   .mat-form-field-underline {
+    display: none;
+  }
+  .mat-input-element {
+    display: block;
+    padding-left: 43px;
+  }
+}
+.date-picker-btn {
+  bottom: 31px;
+  right: 14px;
+}
+.file-input {
+  display: none;
+}
+.upload-img {
+  width: 250px;
+  height: 80px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+//Delete checkboxes
+::ng-deep .mat-option .mat-pseudo-checkbox {
+  display: none;
+}
+//Contacts styles
+.contacts-content {
+  margin-top: 89px;
+  .contacts {
+    line-height: 70px;
+  }
+  .contacts-icon {
+    line-height: 60px;
+  }
+}
+
+//Delivery options styles
+.delivery-types {
+  line-height: 0px;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background: #C0D0D6;
+}
+.delete-button {
+  position: relative;
+  right: 33%;
+  top: 18px;
+  color: white;
+}
+.edit-partner {
+  ::ng-deep .chips-field.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 17px;
+  }
+}
+.change-email {
+  button {
+    width: 200px;
+  }
+}
+
+.active-inactive {
+  .mat-radio-button.mat-accent.mat-radio-checked:first-child .mat-radio-outer-circle {
+    border-color: #FF0000;
+  }
+
+  .mat-radio-button.mat-accent:first-child .mat-radio-inner-circle {
+    background-color: #FF0000;
+  }
+}
+.active-inactive {
+  .mat-radio-button.mat-accent.mat-radio-checked:last-child .mat-radio-outer-circle {
+    border-color: #59B10D;
+  }
+
+  .mat-radio-button.mat-accent:last-child .mat-radio-inner-circle {
+    background-color: #59B10D;
+  }
+}
+//Error mssage styles
+.error-massage {
+  color: #f44336;
+}
+.modal-size {
+  width: 450px;
+  padding: 60px;
+  border: 5px solid #607D8B;
+  i {
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+  }
+  .modal-text {
+    display: flex;
+    justify-content: center;
+    color: #263238;
+    font-weight: bold;
+    padding-top: 30px;
+  }
+  .button-content {
+    display: flex;
+    justify-content: center;
+    padding-top: 63px;
+    button {
+      width: 270px;
+      padding: 17px;
+      border-radius: 10px;
+    }
+  }
+}
+::ng-deep .error-text {
+  .mat-form-field-underline {
+    background-color: red;
+  }
+}
+

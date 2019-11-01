@@ -1,0 +1,54 @@
+<!-- Login Component -->
+
+<!-- main -->
+<main role="main" class="main">
+  <div class="container">
+    <div class="login">
+      <div class="login-page">
+        <!-- form -->
+        <form class="form" method="post" action="/auth" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <!-- Logo img -->
+          <div class="logo-png">
+            <img src="assets/img/logo-lg.png" alt="LOGO LG" class="logo-lg"/>
+            <img src="assets/img/logo-md.png" alt="LOGO MD" class="logo-md"/>
+          </div>
+          <div class="in-form">
+            <div class="login-input mt-1">
+              <!-- Email -->
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Email address" formControlName="email" minlength="8" type="email" name="email" id="email" required>
+                <mat-error *ngIf="isFieldInvalid('email')">
+                  Invalid email address
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mt-1">
+              <!-- Password -->
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Type your password" formControlName="password" type="password" name="password" id="password" required>
+                <mat-error *ngIf="isFieldInvalid('password')">
+                  Password is too short
+                </mat-error>
+              </mat-form-field>
+              <mat-error *ngIf="incorrectUser">
+                Incorrect email or password !
+              </mat-error>
+              <mat-error *ngIf="inactive">
+                Sorry, you have been deactivated !
+              </mat-error>
+              <mat-error *ngIf="serverError">
+                Something wrong with server !
+              </mat-error>
+            </div>
+          </div>
+          <button mat-raised-button type="button" routerLinkActive="action" (click)="onSubmit()" class="btn-block btn-large">
+            <span> {{ title }} </span>
+          </button>
+          <a routerLink = '/forgot-password' routerLinkActive="router-link-active"  class="forg-link"> {{ forgot }} </a>
+        </form>
+        </div>
+      </div>
+      <!-- login. -->
+    </div>
+</main>
+<!-- main. -->

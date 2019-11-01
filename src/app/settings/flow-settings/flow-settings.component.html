@@ -1,0 +1,239 @@
+<div class='contentForScroll' #scrollableContent
+     (scroll)='scroll(scrollableContent.scrollTop, allContent.clientHeight)'>
+  <mat-drawer-container class="sidenav-container partner-list">
+    <!-- mat-drawer -->
+    <mat-drawer class="drawer" mode="side" opened>
+      <sidenav></sidenav>
+    </mat-drawer>
+    <!-- mat sidenav -->
+    <mat-drawer-content>
+      <div class="container-fluid" #allContent>
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12 titleContent">
+                <mat-icon class="titleIcon">360</mat-icon>
+                <span class="titleText">Flow Settings</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 allPadding">
+                <div class="box">
+                  <div class="boxTitle">
+                    Flow Stop Conditions
+                  </div>
+                  <div class='box1Title'>
+                    System will sent alert when:
+                  </div>
+                  <div class='allTimeContent'>
+                    <div class='backupStartTimesContent'>
+                      <div class='stopContent'>
+                        <div class='inputContent'>
+                          <div class='inputTitle'>
+                            Order amount is higher or equal
+                          </div>
+                          <mat-form-field class="example-full-width stopInputs">
+                            <input matInput class='inputWhite' placeholder="Order amount" [readonly] = '!IsEdit'
+                                   [(ngModel)]='amountValue'
+                                   (focus) = 'leaveErrors()'
+                                   (keypress)="doubleInputKeypress($event)" [formControl]="amountFormControl"
+                                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                                   onDrop="return false" autocomplete="off">
+                            <mat-error></mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class='inputContent'>
+                          <div class='inputTitle'>
+                            Payment type
+                          </div>
+                          <div class='selectOptionContent'>
+                            <div *ngIf='isPaymentSelectOptionOpen' class='selectOption'
+                                 (mouseleave)='closeSelectOption("isPaymentSelectOptionOpen")'>
+                              <div class='optionContentStyle'>
+                                <div *ngFor='let payment of payments; let i = index'>
+                                  <div *ngIf='payment.active' class='option'
+                                       (mousedown)='selectOption(payment, i, "isPaymentSelectOptionOpen")'>
+                                    {{ payment.name }}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <mat-icon class="selectOptionButton"
+                                      (click)='IsEdit ? openSelectOption("isPaymentSelectOptionOpen"): false'>
+                              <i class="material-icons  white-text">arrow_drop_down</i>
+                            </mat-icon>
+                            <mat-form-field class="example-full-width stopInputs">
+                              <input matInput class='inputWhite' [(ngModel)]="paymentTypeValue"
+                                     [formControl]="paymentTypeFormControl" (keypress)="false"
+                                     (keydown)="clearSelectOption($event, 'paymentTypeValue')"
+                                     [readonly] = '!IsEdit'
+                                     onselectstart="return false" onpaste="return false;" onDrag="return false"
+                                     onDrop="return false" autocomplete="off">
+                              <mat-error></mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class='inputContent'>
+                          <div class='inputTitle'>
+                            User's order
+                          </div>
+                          <div class='selectOptionContent'>
+                            <div *ngIf='isOrdersSelectOptionOpen' class='selectOption'
+                                 (mouseleave)='closeSelectOption("isOrdersSelectOptionOpen")'>
+                              <div class='optionContentStyle'>
+                                <div *ngFor='let order of userOrderArray; let i = index'>
+                                  <div class='option'
+                                       (mousedown)='selectOption(order, i, "isOrdersSelectOptionOpen")'>
+                                    {{ order.name }}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <mat-icon class="selectOptionButton"
+                                      (click)='IsEdit? openSelectOption("isOrdersSelectOptionOpen"): false'>
+                              <i class="material-icons  white-text">arrow_drop_down</i>
+                            </mat-icon>
+                            <mat-form-field class="example-full-width stopInputs">
+                              <input matInput class='inputWhite' [(ngModel)]="orderValue"
+                                     (keypress)="false" [formControl]='orderFormControl'
+                                     (keydown)="clearSelectOption($event, 'orderValue')"
+                                     [readonly] = '!IsEdit'
+                                     onselectstart="return false" onpaste="return false;" onDrag="return false"
+                                     onDrop="return false" autocomplete="off">
+                              <mat-error></mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <mat-icon class='deleteIcon noselect' (click)='IsEdit ? clearNewStop(): false'>
+                          delete_forever
+                        </mat-icon>
+                      </div>
+                      <div *ngIf = 'IsEdit' class="addTimeButtonContent">
+                        <div class="addTimeButton" placement="right" mdbTooltip="Add Another"
+                             (click)='addFlowStop()'>
+                          <mat-icon class='addIcon noselect'>add</mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                    <div class='oldStopContent'>
+                      <div class='stopContent widthControl' *ngFor='let stop of flowStopData; let i = index'>
+                        <div class='inputContent'>
+                          <div class='inputTitle'>
+                            Order amount is higher or equal
+                          </div>
+                          <div class='likeInput'>
+                            {{ stop.orderAmount }}
+                          </div>
+                        </div>
+                        <div class='inputContent'>
+                          <div class='inputTitle'>
+                            Payment type
+                          </div>
+                          <div class='likeInput'>
+                            {{ stop.paymentSetting.name }}
+                          </div>
+                        </div>
+                        <div class='inputContent'>
+                          <div class='inputTitle'>
+                            User's order
+                          </div>
+                          <div class='likeInput'>
+                            {{ userOrdersName[stop.userOrder] }}
+                          </div>
+                        </div>
+                        <mat-icon class='deleteIcon noselect' (click)='deleteStop(i)'>
+                          delete_forever
+                        </mat-icon>
+                      </div>
+                      <div class='buttonsContent'>
+                        <button class='btn cancelButton' (click)="cancel()" [disabled]="!IsEdit">CANCEL</button>
+                        <button class="btn btn-primary saveButton" (click)='save()' [disabled]="!IsEdit">SAVE</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class='box'>
+                  <div class="inputAndTextContent">
+                    <span class='inputName'> Difference Planned/Estimated </span>
+                    <span class="inputContentAndText">
+                      <mat-form-field class="example-full-width smallInput">
+                        <input matInput #estimatedElem [value]="plannedDifference" [readonly] = '!IsEdit'
+                          onselectstart="return false" onpaste="return false;" onDrag="return false"
+                          onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                          (keypress)="numberValidation($event, 'plannedDifference')"
+                          (input)="getInputValues('plannedDifference', estimatedElem.value)">
+                      </mat-form-field>
+                      <span class='inputText'>
+                        min
+                      </span>
+                    </span>
+                  </div>
+                  <div class="checkboxsContent">
+                    <mat-checkbox class = 'checkbox' [disabled]="!IsEdit"
+                                  [(ngModel)]="generalAcceptableStatus.warningStatus"
+                      (change)="checkboxClick()">
+                  </mat-checkbox>
+                    <div class="inputAndTextContent noPadding">
+                      <span class='inputName'> Warning After </span>
+                      <span class="inputContentAndText">
+                          <mat-form-field class="example-full-width smallInput">
+                            <input matInput #warningTimeElem [value]="warningTime" [readonly] = '!IsEdit'
+                                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                                   onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                                   (keypress)="numberValidation($event, 'warningTime')"
+                                   (input)="getInputValues('warningTime', warningTimeElem.value)">
+                          </mat-form-field>
+                          <span class='inputText'>
+                            min
+                          </span>
+                        </span>
+                    </div>
+                    <mat-checkbox class = 'checkbox' [disabled]="!IsEdit"
+                                  [(ngModel)]="generalAcceptableStatus.alertStatus"
+                                  (change)="checkboxClick()"></mat-checkbox>
+                    <div class="inputAndTextContent noPadding">
+                      <span class='inputName'> Alert After </span>
+                      <span class="inputContentAndText">
+                          <mat-form-field class="example-full-width smallInput">
+                            <input matInput #alertTimeElem [value]="alertTime" [readonly] = '!IsEdit'
+                                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                                   onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                                   (keypress)="numberValidation($event, 'alertTime')"
+                                   (input)="getInputValues('alertTime', alertTimeElem.value)">
+                          </mat-form-field>
+                          <span class='inputText'>
+                            min
+                          </span>
+                        </span>
+                    </div>
+                    <mat-checkbox class = 'checkbox' [disabled]="!IsEdit"
+                                  [(ngModel)]="generalAcceptableStatus.cancelStatus"
+                                  (change)="checkboxClick()" ></mat-checkbox>
+                    <div class="inputAndTextContent noPadding">
+                      <span class='inputName'> Cancel After </span>
+                      <span class="inputContentAndText">
+                          <mat-form-field class="example-full-width smallInput">
+                            <input matInput #cancelTimeElem [value]="cancelTime" [readonly] = '!IsEdit'
+                                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                                   onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                                   (keypress)="numberValidation($event, 'cancelTime')"
+                                   (input)="getInputValues('cancelTime', cancelTimeElem.value)">
+                          </mat-form-field>
+                          <span class='inputText'>
+                            min
+                          </span>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="box backgroundColor">
+                  <app-flow-table [scrollData] = 'scrollData'></app-flow-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

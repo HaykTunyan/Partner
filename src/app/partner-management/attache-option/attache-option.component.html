@@ -1,0 +1,476 @@
+<mat-drawer-container *ngIf="showAttacheOption" class="d-flex justify-content-center ">
+  <div class="col-12" role="document">
+    <div class="row modal-attachOpt">
+
+      <mat-icon class="col-12 text-right closeIcon">close</mat-icon>
+      <mat-form-field class="col-12">
+        <span matPrefix><i class="px-2 material-icons fa fa-search md-light" aria-hidden="true"></i></span>
+        <input class="text-white" matInput placeholder="Search" autocomplete="off">
+      </mat-form-field>
+      <div class="col-6 mb-3 greenBlueCheckboxStyle" *ngFor="let item of attachs">
+        <div class="pl-4 pr-3 d-flex justify-content-between align-items-center"
+             style="background-color: white;-webkit-border-top-left-radius: 10px; border-top-right-radius: 10px;">
+          <p class="mt-1"><span class="boldTextColor">Name: </span>{{item.name}}</p>
+          <mat-checkbox class="mt-2" [disableRipple]="true" [checked]="item.checked"></mat-checkbox>
+        </div>
+        <div class="pl-4 pr-3 m-0"
+             style="background-color: #ECEFF1;-webkit-border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+          <p class="boldTextColor"> Options: </p>
+          <p *ngFor="let opt of item.options "> {{opt.name}} - {{opt.price}}  </p>
+        </div>
+      </div>
+
+      <div class="col-4 mb-3 ml-auto d-flex justify-content-end align-items-center">
+        <mat-icon class="addIconStyle waves-light right" mdbTooltip="Add New" placement="left" mdbWavesEffect
+                  (click)="showAddEditOptionFunc()">add
+        </mat-icon>
+        <button mat-flat-button class="ml-3 saveBtn">SAVE</button>
+      </div>
+
+    </div>
+  </div>
+</mat-drawer-container>
+
+<!--Add Menu Item-->
+<div class="modalDiv" *ngIf="showAddEditOption">
+  <!--White Div Content-->
+  <div class="row modal-addEditOption position-relative" #optName>
+    <div class="logoStyles" (click)="closeAddEditOptionFunc()">
+      <mat-icon>device_hub</mat-icon>
+    </div>
+
+    <div class="row col-11 mx-auto">
+      <div class="col-6 p-0 mt-4 mb-2">
+        <div class='checkboxContent m-0'
+             (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+          <div class='checkbox' [ngClass]='{"checkboxActive" : addOption.showOptName}' (click)='showOptNameOrNot()'>
+            <!--matTooltip="Visible to customer" matTooltipPosition="above"-->
+            <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" : addOption.showOptName}'>
+            </div>
+          </div>
+          <div class='checkboxText ml-2'>
+            Show Option Name
+          </div>
+        </div>
+      </div>
+
+      <!--Edit option content -->
+      <div class="col-12 d-flex mt-3 mb-2 p-0">
+        <strong class="p-0 d-flex align-items-center">
+          <span class="boldTextColor">Name</span>
+        </strong>
+        <div class="col-3 p-0 mx-auto mt-0 p-0 name-type">
+          <mat-form-field class="w-100" [ngClass]="{'error-text': addOption.optNameErr !== '' }">
+            <input matInput type="text" name="name" placeholder="ENG" [(ngModel)]="addOption.nameEng"
+                   autocomplete="off" (input)="changeOptName()">
+          </mat-form-field>
+          <ng-container *ngIf="addOption.optNameErr !== ''">
+            <div class="error-message">
+              {{ addOption.optNameErr }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="col-3 p-0 mx-auto mt-0 name-type">
+          <mat-form-field class="w-100">
+            <input matInput type="text" placeholder="РУС"
+                   [(ngModel)]="addOption.nameRus" autocomplete="off" (input)="changeOptName()">
+          </mat-form-field>
+        </div>
+        <div class="col-3 p-0 mx-auto mt-0  name-type">
+          <mat-form-field class="w-100">
+            <input matInput type="text" placeholder="ՀԱՅ"
+                   [(ngModel)]="addOption.nameArm" autocomplete="off" (input)="changeOptName()">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-9 ml-4 p-0 mr-auto d-flex justify-content-start align-items-center">
+        <div class="col-5 p-0">
+          <div class='checkboxContent m-0'
+               (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+            <div>
+              <strong class='checkboxText mr-2'>
+                <span>Multiple Choice</span>
+              </strong>
+            </div>
+            <div class='checkbox' [ngClass]='{"checkboxActive" : addOption.multipleChoice}'
+                 (click)='multipleChoiceOrNotFunc()'>
+              <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :  addOption.multipleChoice}'></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 p-0">
+          <div class='checkboxContent m-0'
+               (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+            <div class='checkbox' [ngClass]='{"checkboxActive" : addOption.price}'
+                 (click)='priceTrueOrFalseFunc()'>
+              <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" : addOption.price}'></div>
+            </div>
+            <strong class='checkboxText mr-2'>
+              <span>Price</span>
+            </strong>
+          </div>
+        </div>
+        <div class="col-4 p-0 d-flex align-items-center">
+          <strong class="p-0 boldTextColor">
+            <span>Quntity limit</span>
+          </strong>
+          <div class="ml-2 mt-0 p-0 w-25">
+            <mat-form-field class="w-100">
+              <input matInput (keypress)="numberValidation($event)" [(ngModel)]="addOption.quantityLimit"
+                     (input)="changeChoicesCount()">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 ml-4 p-0 mr-auto d-flex justify-content-start align-items-center">
+        <div class="col-6 p-0 d-flex align-items-center">
+          <strong class="p-0 boldTextColor">
+            <span>Max Number of Selections</span>
+          </strong>
+          <div class="mt-0 ml-2 col-2 p-0 w-100">
+            <mat-form-field class="w-100">
+              <input matInput (keypress)="numberValidation($event)" [(ngModel)]="addOption.maxNumOfSelection">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-6 p-0 d-flex align-items-center">
+          <strong class="p-0 boldTextColor">
+            <span>Min Number of Selections</span>
+          </strong>
+          <div class="mt-0 ml-2 col-2 p-0 w-100">
+            <mat-form-field class="w-100">
+              <input matInput (keypress)="numberValidation($event)" [(ngModel)]="addOption.minNumOfSelection">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 ml-4 p-0 mr-auto my-2">
+        <div class="col-12 p-0" *ngIf="selectionErr2 !== ''">
+          <div class="error-message">
+            {{selectionErr2}}
+          </div>
+        </div>
+        <div class="col-12 p-0" *ngIf="selectionErr1 !== ''">
+          <div class="error-message">
+            {{selectionErr1}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='w-50 p-0 my-4 popupButtonsContent'>
+    <div class="col-6">
+      <div class='checkboxContent'
+           (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+        <div class='checkbox' [ngClass]='{"checkboxActive" : addOption.disableNow}'
+             (click)='disableOrNotFunc()'>
+          <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" : addOption.disableNow}'></div>
+        </div>
+        <div class='checkboxText ml-2 disableNowStyle' *ngIf="addOption.disableNow; else notActive">
+          DISABLE NOW
+        </div>
+        <ng-template #notActive>
+          <div class='checkboxText ml-2 disableNowStyle'>
+            ENABLE NOW
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class='col-6 buttonContents' [ngClass]="{'visibilityHidden':showChoices}">
+      <div class='col-4 p-2 ml-auto cancel text-center'>
+        DISCARD
+      </div>
+      <div class="col-4 p-2 invite text-center" (click)="save()">SAVE</div>
+    </div>
+  </div>
+
+  <!--White Div Content-->
+  <div *ngFor="let item of addOption.choices; let ind=index" #choices>
+    <div *ngIf="showChoices" class="modal-addEditOption mt-3 " id="{{ind}}">
+      <div>
+        <p class="choiseHeader"> Choice {{ind + 1}} </p>
+      </div>
+      <div class="col-11 ml-auto d-flex p-0">
+        <strong class="pl-3 d-flex align-items-center">
+          <span class="boldTextColor">Name</span>
+        </strong>
+        <div class="col-3 p-0 mx-auto mt-0 p-0 name-type">
+          <mat-form-field class="w-100" [ngClass]="{'error-text': item.choiceNameErr !== '' }">
+            <input matInput type="text" name="name" placeholder="ENG" [(ngModel)]="item.nameEng" autocomplete="off"
+                   (input)="changeChoiceName(ind)">
+          </mat-form-field>
+          <ng-container *ngIf="item.choiceNameErr !== ''">
+            <div class="error-message">
+              {{item.choiceNameErr}}
+            </div>
+          </ng-container>
+        </div>
+        <div class="col-3 p-0 mx-auto mt-0 add-menu-item name-type">
+          <mat-form-field class="w-100">
+            <input matInput type="text" placeholder="РУС"
+                   [(ngModel)]="item.nameRus" autocomplete="off" (input)="changeChoiceName(ind)">
+          </mat-form-field>
+        </div>
+        <div class="col-3 p-0 mx-auto mt-0 add-menu-item name-type">
+          <mat-form-field class="w-100">
+            <input matInput type="text" placeholder="ՀԱՅ"
+                   [(ngModel)]="item.nameArm" autocomplete="off" (input)="changeChoiceName(ind)">
+          </mat-form-field>
+        </div>
+        <div (click)="deleteChoice(ind)">
+          <mat-icon class="text-right deleteIconStyle">delete_forever</mat-icon>
+        </div>
+      </div>
+      <!--Edit option content -->
+      <div class="row col-11 mx-auto">
+        <div class="col-5 d-flex">
+          <strong class="p-0 d-flex align-items-center">
+            <span class="boldTextColor">Choice</span>
+          </strong>
+          <div class="col-10 mt-0 p-2 w-100">
+            <mat-form-field class="w-100">
+              <mat-select [(value)]="item.selectedChoice" name="product">
+                <mat-option *ngFor="let choice of item.choice; let i=index"
+                            value="{{choice}}}"> {{choice}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-3 d-flex justify-content-start" [ngClass]="{'visibilityHidden': !addOption.price}">
+          <strong class="p-0 d-flex align-items-center boldTextColor">
+            <span>Price</span>
+          </strong>
+          <div class="col-5 mt-0 p-2 w-100">
+            <mat-form-field class="w-100">
+              <input matInput (keypress)="numberValidation($event)"
+                     [(ngModel)]="item.price">
+            </mat-form-field>
+          </div>
+          <strong class="p-0 d-flex align-items-center boldTextColor">
+            <span>AMD</span>
+          </strong>
+        </div>
+        <div class="col-4 p-0 d-flex justify-content-start">
+          <div class='checkboxContent m-0'
+               (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+            <div>
+              <strong class='checkboxText mr-2'>
+                <span>Checked By Default</span>
+              </strong>
+            </div>
+            <div class='checkbox' [ngClass]='{"checkboxActive" : item.checkedByDefault}'
+                 (click)='choiceCheckedByDefaultOrNot(ind)'>
+              <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" : item.checkedByDefault}'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 p-0 mb-2 ">
+        <div class="col-10 mx-auto p-0">
+          <strong class="d-flex">
+            <span class="mr-3 boldTextColor">Description</span>
+            <div class="mx-2 main-color small-text px-1" (click)="item.selectDescriptionEng = !item.selectDescriptionEng; item.selectDescriptionRus = false;
+             item.selectDescriptionArm = false; changedChoiceText(txt.value, ind)"
+                 [ngClass]="{'activeStyle':item.selectDescriptionEng, 'notActiveStyle':!item.selectDescriptionEng}">ENG
+            </div>
+            <div class="mx-2 main-color small-text px-1" (click)="item.selectDescriptionRus = !item.selectDescriptionRus; item.selectDescriptionEng = false;
+            item.selectDescriptionArm = false; changedChoiceText(txt.value, ind)"
+                 [ngClass]="{'activeStyle': item.selectDescriptionRus, 'notActiveStyle': !item.selectDescriptionRus}">
+              РУС
+            </div>
+            <div class="ml-2 mr-auto main-color small-text px-1" (click)="item.selectDescriptionArm = !item.selectDescriptionArm; item.selectDescriptionEng = false;
+             item.selectDescriptionRus = false; changedChoiceText(txt.value, ind)"
+                 [ngClass]="{'activeStyle': item.selectDescriptionArm, 'notActiveStyle': !item.selectDescriptionArm}">
+              ՀԱՅ
+            </div>
+          </strong>
+        </div>
+        <div class="col-11 ml-auto p-0 d-flex align-items-center mt-0 w-100">
+          <textarea name="name" rows="2" class="w-100 my-3" #txt
+                    (input)="changedChoiceText($event.target.value, ind)"></textarea>
+          <div class="ml-3 mr-2" (click)="showSubChoicesFunc(ind)"
+               [ngClass]="{'disabledbutton': item.subChoice.show}">
+            <mat-icon class="text-center addSubChoiceStyle waves-light right"
+                      mdbTooltip="Add SubChoice" placement="right"
+                      mdbWavesEffect>add
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showChoices" class='w-50 p-0 my-2 popupButtonsContent'>
+      <div class="col-6">
+        <div class='checkboxContent'
+             (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+          <div class='checkbox' [ngClass]='{"checkboxActive" : item.disableNow}'
+               (click)='choiceDisableOrNotFunc(ind)'>
+            <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" : item.disableNow}'></div>
+          </div>
+          <div class='checkboxText ml-2 disableNowStyle' *ngIf="item.disableNow; else notActive">
+            DISABLE NOW
+          </div>
+          <ng-template #notActive>
+            <div class='checkboxText ml-2 disableNowStyle'>
+              ENABLE NOW
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="xxxxx">
+      <div *ngIf="item.subChoice.show" class="modal-addSubChoice mt-3">
+        <div>
+          <p class="choiseHeader"> Sub Choice {{ind + 1}}</p>
+        </div>
+        <div class="col-11 ml-auto d-flex p-0">
+          <strong class="pl-3 d-flex align-items-center">
+            <span class="boldTextColor">Name</span>
+          </strong>
+          <div class="col-3 p-0 mx-auto mt-0 p-0 name-type">
+            <mat-form-field class="w-100" [ngClass]="{'error-text': item.subChoice.subChoiceNameErr !== '' }">
+              <input matInput type="text" name="name" placeholder="ENG" [(ngModel)]="item.subChoice.nameEng"
+                     autocomplete="off" (input)="changeSubChoiceName(ind)">
+            </mat-form-field>
+            <ng-container *ngIf="item.subChoice.subChoiceNameErr !== ''">
+              <div class="error-message">
+                {{item.subChoice.subChoiceNameErr}}
+              </div>
+            </ng-container>
+          </div>
+          <div class="col-3 p-0 mx-auto mt-0 add-menu-item name-type">
+            <mat-form-field class="w-100">
+              <input matInput type="text" placeholder="РУС"
+                     [(ngModel)]="item.subChoice.nameRus" autocomplete="off" (input)="changeSubChoiceName(ind)">
+            </mat-form-field>
+          </div>
+          <div class="col-3 p-0 mx-auto mt-0 add-menu-item name-type">
+            <mat-form-field class="w-100">
+              <input matInput type="text" placeholder="ՀԱՅ"
+                     [(ngModel)]="item.subChoice.nameArm" autocomplete="off" (input)="changeSubChoiceName(ind)">
+            </mat-form-field>
+          </div>
+          <div (click)="deleteSubChoiceFunc(ind)">
+            <mat-icon class="text-right deleteIconStyle">delete_forever</mat-icon>
+          </div>
+        </div>
+        <!--Edit option content -->
+        <div class="row col-11 mx-auto">
+          <div class="col-5 d-flex">
+            <strong class="p-0 d-flex align-items-center">
+              <span class="boldTextColor">Choice</span>
+            </strong>
+            <div class="col-10 mt-0 p-2 w-100">
+              <mat-form-field class="w-100">
+                <mat-select [(value)]="item.subChoice.selectedChoice" name="product">
+                  <mat-option *ngFor="let choice of item.subChoice.choice; let ind=index"
+                              value="{{choice}}"> {{choice}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-3 d-flex justify-content-start" [ngClass]="{'visibilityHidden': !priceTrueOrFalse}">
+            <strong class="p-0 d-flex align-items-center boldTextColor">
+              <span>Price</span>
+            </strong>
+            <div class="col-5 mt-0 p-2 w-100">
+              <mat-form-field class="w-100">
+                <input matInput (keypress)="numberValidation($event)"
+                       [(ngModel)]="item.subChoice.price">
+              </mat-form-field>
+            </div>
+            <strong class="p-0 d-flex align-items-center boldTextColor">
+              <span>AMD</span>
+            </strong>
+          </div>
+          <div class="col-4 p-0 d-flex justify-content-start">
+            <div class='checkboxContent m-0'
+                 (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+              <div>
+                <strong class='checkboxText mr-2'>
+                  <span>Checked By Default</span>
+                </strong>
+              </div>
+              <div class='checkbox' [ngClass]='{"checkboxActive" : item.subChoice.checkedByDefault}'
+                   (click)='subChoiceCheckedByDefaultOrNot(ind)'>
+                <div class='checkboxButton'
+                     [ngClass]='{"checkboxButtonActive" : item.subChoice.checkedByDefault}'></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 p-0 name-type">
+          <div class="col-10 mx-auto mb-2 p-0">
+            <strong class="d-flex">
+              <span class="mr-3 boldTextColor">Description</span>
+              <div class="mx-2 main-color small-text px-1" (click)="item.subChoice.selectDescriptionEng = !item.subChoice.selectDescriptionEng; item.subChoice.selectDescriptionRus = false;
+             item.subChoice.selectDescriptionArm = false; changedChoiceText(subTxt.value, ind)"
+                   [ngClass]="{'activeStyle':item.subChoice.selectDescriptionEng, 'notActiveStyle':!item.subChoice.selectDescriptionEng}">
+                ENG
+              </div>
+              <div class="mx-2 main-color small-text px-1" (click)="item.subChoice.selectDescriptionRus = !item.subChoice.selectDescriptionRus; item.subChoice.selectDescriptionEng = false;
+            item.subChoice.selectDescriptionArm = false; changedChoiceText(subTxt.value, ind)"
+                   [ngClass]="{'activeStyle': item.subChoice.selectDescriptionRus, 'notActiveStyle': !item.subChoice.selectDescriptionRus}">
+                РУС
+              </div>
+              <div class="ml-2 mr-auto main-color small-text px-1" (click)="item.subChoice.selectDescriptionArm = !item.subChoice.selectDescriptionArm; item.subChoice.selectDescriptionEng = false;
+             item.subChoice.selectDescriptionRus = false; changedChoiceText(subTxt.value, ind)"
+                   [ngClass]="{'activeStyle': item.subChoice.selectDescriptionArm, 'notActiveStyle': !item.subChoice.selectDescriptionArm}">
+                ՀԱՅ
+              </div>
+            </strong>
+          </div>
+          <div class="col-10 mx-auto p-0 d-flex align-items-center mt-0 w-100">
+          <textarea name="name" rows="2" class="w-100 my-3" #subTxt
+                    (input)="changedChoiceText($event.target.value, ind)"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="xxxxx">
+      <div *ngIf="item.subChoice.show" class='w-50 p-0 my-2 popupButtonsContent'>
+        <div class="col-6">
+          <div class='checkboxContent'
+               (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+            <div class='checkbox' [ngClass]='{"checkboxActive" : item.subChoice.disableNow}'
+                 (click)='subChoiceDisableOrNotFunc(ind)'>
+              <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :  item.subChoice.disableNow}'></div>
+            </div>
+            <div class='checkboxText ml-2 disableNowStyle' *ngIf=" item.subChoice.disableNow; else notActive">
+              DISABLE NOW
+            </div>
+            <ng-template #notActive>
+              <div class='checkboxText ml-2 disableNowStyle'>
+                ENABLE NOW
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="((showChoices && ind==addOption.choices.length-1) || (item.subChoice.show && ind==addOption.choices.length-1))"
+      class='w-50 p-0 my-4 popupButtonsContent'>
+      <div class='ml-auto col-6 buttonContents' style="margin-top: -40px;">
+        <div class='col-4 p-2 ml-auto cancel text-center'>
+          DISCARD
+        </div>
+        <div class="col-4 p-2 invite text-center" (click)="save()">SAVE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-50 p-0 my-4 d-flex justify-content-center" style="margin: 0 auto"
+       [ngClass]="{'disabledbutton': showChoices}">
+    <mat-icon class="text-center addIconStyle waves-light right" (click)="showChoicesFunc(); changeChoicesCount()"
+              mdbTooltip="Add New" placement="right" mdbWavesEffect>add
+    </mat-icon>
+  </div>
+
+
+</div>
+
+
+

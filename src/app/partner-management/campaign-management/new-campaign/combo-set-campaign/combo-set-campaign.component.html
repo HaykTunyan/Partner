@@ -1,0 +1,310 @@
+<mat-drawer-container class="sidenav-container partner-list">
+
+
+  <!-- Combo-set campaign-->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                  Combo-Set Campaign
+                </div>
+
+                <div class="row  mb-5">
+                  <div class="col-6 ">
+                    <!--Combo-set checkbox-->
+                    <div class="comboSetRadioButtonsContent">
+
+                      <div *ngFor='let radio of comboSetType; let i = index' class="radiobuttonContent mr-5">
+                        <div class="radioButton" (click)='comboSetRadioClick(i,comboSetType,"comboSetType")'>
+                          <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                        </div>
+                        <div class="radiobuttonName">
+                          {{ radio.name }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <label class="labelTextArea" for="selectAttachPartner">Attach Partner</label>
+                      <mat-form-field class="selectCampaignType" id="selectAttachPartner">
+                        <mat-select class="matSelect" [value]="partnerValue" (selectionChange)="changeValuePartner($event.value)">
+
+                          <mat-option *ngFor="let type of comboSetPartnerList" [value]="type"
+                                      class="matOption">
+                            <img [src]="type.partnerImage" alt="" class="logoPartner">
+                            {{type.partnerName}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-hint *ngIf="comboSetPartnerValidator">
+                          <span class="mat-error">Partner is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col">
+                      <label class="labelTextArea" for="discountRate">Discount Rate</label>
+                      <mat-form-field class="example-form-field lang " id="discountRate">
+                        <input matInput type="text" (keypress)="numberOnly($event)"
+                               [(ngModel)]="comboSet.discountRate" autocomplete="nope"
+                               (input)="getInputValue()">
+                      </mat-form-field>
+                      %
+                    </div>
+
+
+                    <div class="col ml-2">
+                      <label class="labelTextArea" for="deliveryFee">Delivery Fee</label>
+                      <mat-form-field class="example-form-field lang" id="deliveryFee">
+                        <input matInput type="text" (keypress)="numberOnly($event)"
+                               [(ngModel)]="comboSet.deliveryFee" autocomplete="nope"
+                               (input)="getInputValue()">
+
+                      </mat-form-field>
+                      AMD
+                    </div>
+
+                    <div class="col ml-5">
+                      <div class="row">
+                        <div class="col-4">
+                          <label class="labelTextArea" for="discountRateBonusPercent">Bonus</label>
+                          <mat-form-field class="example-form-field lang " id="discountRateBonusPercent">
+                            <input matInput type="text" (keypress)="numberOnly($event)" autocomplete="nope"
+                                   [(ngModel)]="comboSet.bonusWithPresent"  #bonusWithPercent
+                                   (input)="getInputValue()" (click)="bonusWithUnit.disabled = 'true'">
+                          </mat-form-field>
+                          %
+                        </div>
+                        <div class="col-6">
+                          <label class="labelTextArea" for="discountRateBonusUnit">Bonus</label>
+                          <mat-form-field class="example-form-field lang " id="discountRateBonusUnit">
+                            <input matInput type="text" (keypress)="numberOnly($event)" autocomplete="nope"
+                                   [(ngModel)]="comboSet.bonusWithUnit"  #bonusWithUnit
+                                   (input)="getInputValue()" (click)="bonusWithPercent.disabled = 'true'">
+
+                          </mat-form-field>
+                          unit
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-6 ">
+
+                    <div class="col matChipDiv">
+                      <label class="labelTextArea" for="attachMenu">Combo Set</label>
+                      <mat-form-field class="example-chip-list attachMenuItem" id="attachMenu">
+                        <mat-chip-list #chipList>
+                          <mat-chip
+                            *ngFor="let type of attachMenu"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(type.name)">
+                            {{type.name + '(' + type.menuName + ')'}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            matInput
+                            #comboSetSelectComboItem
+                            [formControl]="comboSetFormControl"
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="chipList"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                            (keypress)="$event.cancelBubble"
+                          >
+                          <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let type of attachMenuItem " [value]="type">
+                            <img [src]="type.menuItemImage" alt="" class="logoPartner">
+                            {{type.name + '(' + type.menuName + ')'}}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <mat-hint *ngIf="comboSetValidator">
+                          <span class="mat-error">Combo Set is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col ">
+                      <div class="row">
+                        <div class="combo  col-5">
+                          <label class="labelTextArea" for="name">Name</label>
+                          <mat-form-field class="example-form-field comboSetName " id="name">
+                            <input matInput type="text" autocomplete="nope"  [(ngModel)]="comboSet.name" (input)="getInputValue()">
+                          </mat-form-field>
+                        </div>
+
+
+                        <div class=" uploadImage col-5">
+                          <!-- Upload Image -->
+                          <div class="d-flex w-100 ">
+                            <div class=" justifyDisplayAlign">
+                              <strong class="mr-4 d-inline">
+                                <input type="file" class="file-input" [(ngModel)] = 'imageInput' (change)="onFileSelected($event)" #fileInput>
+                                <button mdbBtn type="button" class="upload-btn b" outline="true" mdbWavesEffect
+                                        (click)="fileInput.click()">
+                                  <mat-icon><i class="material-icons">attach_file</i></mat-icon>
+                                </button>
+                              </strong>
+                              <strong class="mr-4 d-inline">
+                                <span class="d-block main-color small-text font-weight-bold">Add Image</span>
+                                <span class="d-block main-color small-text">max 100 mb</span>
+                                <span class="d-block main-color small-text">250 x 250 px</span>
+                              </strong>
+                              <div *ngIf="true" class="upload-img justifyDisplayAlign"
+                                   [ngClass]="{'border3': !imageUrl}">
+                                <div *ngIf="!imageUrl" class="border1"></div>
+                                <div *ngIf="!imageUrl" class="border2"></div>
+                                <img [src]="partnerImageUrl" alt=""/>
+                                <button mat-icon-button *ngIf="imageUrl" placement="bottom" mdbTooltip="Delete"
+                                        (click)="deleteAttachImg()"
+                                        class="delete-button">
+                                  <mat-icon>
+                                    <i class="material-icons md-18">delete</i>
+                                  </mat-icon>
+                                </button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row comboDescription">
+                      <div class="col-10">
+                        <label class="labelTextArea" for="exampleFormControlTextarea1">Description</label>
+                        <textarea class="form-control textAreaStyle" id="exampleFormControlTextarea1"
+                                  [(ngModel)]="comboSet.description" autocomplete="nope"
+                                  (input)="getInputValue()"
+                                  rows="3"></textarea>
+                      </div>
+                      <div class="col-10 mt-3 ">
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <div class="commissionRate">
+                        <label class="labelTextArea" for="CommissionRateforAll">Commission Rate for All </label>
+                        <mat-form-field class="example-form-field lang " id="CommissionRateforAll">
+                          <input matInput type="text" (keypress)="numberOnly($event)" autocomplete="nope"
+                                 [(ngModel)]="comboSet.commissionRate" (input)="getInputValue()">
+                        </mat-form-field>
+                        %
+                      </div>
+                    </div>
+
+                  <!--  <div class='col checkboxContent '>
+                      <div class="commissionRatePerMenu"></div>
+                      <label class="labelTextArea" for="changeCommissionRateStatus">Commission Rate Per<br>
+                        Menu Item</label>
+                      <div class='checkbox' id="changeCommissionRateStatus"
+                           [ngClass]='{"checkboxActive" :changeDiscountRateStatusValue}'
+                           (click)='changeDiscountRateStatus()'>
+                        <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :changeDiscountRateStatusValue}'>
+                        </div>
+                      </div>
+
+                      <div class="containerItem  " *ngIf="changeDiscountRateStatusValue">
+                        <div class="comboCommissionRate">
+                          <div class="divComboContSpan">
+                            <div class="contSpan ">
+                            <span *ngFor="let item of attachMenu">
+                              {{item.value}},
+                            </span>
+                            </div>
+                            <div class="inputDivCombo">
+                              <mat-form-field class="example-form-field lang">
+                                <input class="inputAttach" matInput type="text" [(ngModel)]="discountRate">
+                                <button mat-button *ngIf="discountRate" matSuffix mat-icon-button aria-label="Clear"
+                                        (click)="discountRate=''">
+                                  <mat-icon>close</mat-icon>
+                                </button>
+                              </mat-form-field>
+                              %
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>-->
+
+
+                    <div class="col">
+                      <div id="timePeriod">
+                        <label class="labelTextArea" for="from">Time Period</label>
+                        <div class="timePeriod ">
+                          <label class="labelTextArea" for="from">from</label>
+                          <div class="timePicker" id="from">
+                            <input class="timeInput" #firstTimeElem [value]='firstTimeValue'
+                                   (focus)="focusFunction('firstTime')" (focusout)="focusOutFunction('firstTime')"
+                                   (keypress)="timeValidation($event, firstTimeElem.value, 'firstTimeValue')"
+                                   (keydown)="clearTimeDada($event, 'firstTimeValue')"
+                                   (input)="changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                                   autocomplete="off"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <div class='borderBottom'></div>
+                            <div class='borderContent'>
+                              <div class='borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+                            </div>
+                          </div>
+
+                          <label class="labelTextArea" for="to">to</label>
+                          <div class="timePicker" id="to">
+                            <input class="timeInput" #secondTimeElem [value]='secondTimeValue'
+                                   (focus)="focusFunction('secondTime')" (focusout)="focusOutFunction('secondTime')"
+                                   (keypress)="timeValidation($event, secondTimeElem.value, 'secondTimeValue')"
+                                   (keydown)="clearTimeDada($event, 'secondTimeValue')"
+                                   (input)="changeTimeFormat(secondTimeElem.value, 'secondTimeValue')"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <div class='borderBottom'></div>
+                            <div class='borderContent'>
+                              <div class='borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <div class="validForFirst">
+                        <label class="labelTextArea" for="validForFirst">Valid for First</label>
+                        <mat-form-field class="example-form-field lang" id="validForFirst">
+                          <input matInput type="text" (keypress)="numberOnly($event)" [(ngModel)]="comboSet.validOrders" (input)="getInputValue()">
+                        </mat-form-field>
+                        orders
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+  <mat-drawer-content>
+    <app-customers-list-selection></app-customers-list-selection>
+  </mat-drawer-content>
+
+
+</mat-drawer-container>
+

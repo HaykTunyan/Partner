@@ -1,0 +1,292 @@
+<mat-drawer-container class="sidenav-container partner-list">
+
+
+  <!-- Discount or Delivery fee campaign-->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                  Promo Code
+                </div>
+
+                <div class="row ">
+
+                  <div class="col-12 ">
+                    <div class="row">
+
+                      <span class="nameClass">Create Promo Code</span>
+                      <mat-form-field class="example-form-field promoCodeInput mr-5">
+                        <input matInput type="text" [(ngModel)]="promoCode.createPromoCode" autocomplete="nope" (input)="getInputValue()">
+                        <mat-hint *ngIf="promoCodeNameValidator">
+                          <span class="mat-error">Name is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+
+
+                  <div class="col-12">
+                    <div class='col checkboxContent '>
+
+                      <label class="labelTextArea" for="freeItemForPromoCode">Free Item<br> for Promo Code</label>
+                      <div class='checkbox bonusFromPromoCodeDiv' id="freeItemForPromoCode"
+                           [ngClass]='{"checkboxActive" :freeItemForPromoCodeStatusValue}'
+                           (click)='freeItemForPromoCode()'>
+                        <div class='checkboxButton'
+                             [ngClass]='{"checkboxButtonActive" :freeItemForPromoCodeStatusValue}'>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12  " *ngIf="freeItemForPromoCodeStatusValue">
+                    <div class="row">
+                      <div class="col-6">
+                        <!--promo code checkbox-->
+                        <div class="backupRadiobuttonsContent">
+                          <div *ngFor='let radio of discountType; let i = index' class="radiobuttonContent mr-5">
+                            <div class="radioButton" (click)='promoCodeRadioClick(i,discountType,"discountType")'>
+                              <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                            </div>
+                            <div class="radiobuttonName">
+                              {{ radio.name }}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col ">
+                          <label class="labelTextArea" for="selectAttachPartner">Attach Partner</label>
+                          <mat-form-field class="selectCampaignType" id="selectAttachPartner">
+                            <mat-select class="matSelect" [value]="partnerValue" (selectionChange)="changeValuePartner($event.value)">
+
+                              <mat-option *ngFor="let type of promoCodePartnerList" [value]="type"
+                                          class="matOption">
+                                <img [src]="type.partnerImage" alt="" class="logoPartner">
+                                {{type.partnerName}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col ">
+                          <div class="row ">
+                            <div class="backupRadiobuttonsContent">
+
+                              <div *ngFor='let radio of freeItemType; let i = index' class="radiobuttonContent mr-5">
+                                <div class="radioButton" (click)='promoCodeRadioClick(i,freeItemType,"freeItemType")'>
+                                  <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                                </div>
+                                <div class="radiobuttonName">
+                                  {{ radio.name }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="col" *ngIf="freeItemType[0].checked">
+                          <label class="labelTextArea" for="selectCampaignType">Free Item</label>
+                          <mat-form-field class="selectCampaignType" id="selectCampaignType">
+                            <mat-select class="matSelect" [value]="fromInventoryValue" (selectionChange)="changeValueCampaignType($event.value,'inventory')">
+                              <mat-option *ngFor="let type of freeItemList" [value]="type" class="matOption">
+                                {{type.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col" *ngIf="freeItemType[1].checked">
+                          <label class="labelTextArea" for="fromMenu">Free Item</label>
+                          <mat-form-field class="selectCampaignType" id="fromMenu">
+                            <mat-select class="matSelect" [value]="fromMenuValue" (selectionChange)="changeValueCampaignType($event.value,'fromMenu')">
+                              <mat-option *ngFor="let type of attachMenu" [value]="type" class="matOption">
+                                <img [src]="type.menuItemImage" alt="" class="logoPartner">
+                                {{type.name + '(' + type.menuName + ')'}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+
+                      </div>
+                      <div class="col-6 ">
+                        <div class="row  marginTopRow"></div>
+                        <div class="col matChipDiv">
+                          <label class="labelTextArea" for="attachMenu">Menu Item</label>
+                          <mat-form-field class="example-chip-list attachMenuItem" id="attachMenu">
+                            <mat-chip-list #chipList>
+                              <mat-chip
+                                *ngFor="let type of attachMenu"
+                                [selectable]="selectable"
+                                [removable]="removable"
+                                (removed)="remove(type.name)">
+                                {{type.name + '('+ type.menuName+')'}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                              </mat-chip>
+                              <input
+                                matInput
+                                #promoMenuItem
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="chipList"
+                                [matChipInputAddOnBlur]="addOnBlur"
+                                (keypress)="$event.cancelBubble"
+                              >
+                              <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+                            </mat-chip-list>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                              <mat-option *ngFor="let type of attachMenuItem " [value]="type">
+                                <img [src]="type.menuItemImage" alt="" class="logoPartner">
+                                {{type.name + '('+ type.menuName+')'}}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class='col checkboxContent '>
+                    <label class="labelTextArea" for="bonusFromPromoCode">Bonus for Promo Code</label>
+
+                      <div class='checkbox bonusFromPromoCodeDiv' id="bonusFromPromoCode"
+                           [ngClass]='{"checkboxActive" :bonusForPromoCodeStatusValue}'
+                           (click)='bonusForPromoCodeStatus()'>
+                        <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :bonusForPromoCodeStatusValue}'>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12" *ngIf="bonusForPromoCodeStatusValue">
+                    <div class="row">
+                      <div class="col ">
+                        <div class="row bonusRow mb-5">
+                          <div class="">
+                            <label class="labelTextArea" for="discountRateBonusPercent">Bonus Unit</label>
+                            <mat-form-field class="example-form-field lang " id="discountRateBonusPercent">
+                              <input matInput type="text" autocomplete="nope"
+                                     (keypress)="numberOnly($event)" #bonusWithUnit
+                                     (click)="bonusWithPercent.disabled = 'true'"
+                                     [(ngModel)]="promoCode.bonusWithUnit"
+                                     (input)="getInputValue()">
+
+                            </mat-form-field>
+
+                          </div>
+                          <div class="col-6">
+                            <label class="labelTextArea" for="discountRateBonusUnit">Bonus Percent</label>
+                            <mat-form-field class="example-form-field lang " id="discountRateBonusUnit">
+                              <input matInput type="text" autocomplete="nope"
+                                     (keypress)="numberOnly($event)" #bonusWithPercent
+                                     (click)="bonusWithUnit.disabled = 'true'"
+                                     [(ngModel)]="promoCode.bonusWithPercent"
+                                     (input)="getInputValue()">
+
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                 <!-- <div class="col-12">
+                    <div class='col checkboxContent '>
+
+                      <label class="labelTextArea" for="discountFromPromoCode">Discount for Promo Code</label>
+                      <div class='checkbox bonusFromPromoCodeDiv' id="discountFromPromoCode"
+                           [ngClass]='{"checkboxActive" :bonusForPromoCodeStatusValue}'
+                           (click)='bonusForPromoCodeStatus()'>
+                        <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :bonusForPromoCodeStatusValue}'>
+                        </div>
+                      </div>
+                    </div>
+                  </div>-->
+
+                  <!--<div class="col-12" *ngIf="discountForPromoCodeStatusValue">
+                    <div class="col-6 ">
+
+
+                      <div class="col ">
+                        <label class="labelTextArea" for="discountRate">Discount Rate</label>
+                        <mat-form-field class="example-form-field lang " id="discountRate">
+                          <input matInput type="text" [(ngModel)]="discountRate">
+                          <button mat-button *ngIf="discountRate" matSuffix mat-icon-button aria-label="Clear"
+                                  (click)="discountRate=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        %
+                      </div>
+
+                      <div class='col checkboxContent '>
+                        <label class="labelTextArea" for="changeDiscountRateStatus">Discount Rate Per<br> Menu
+                          Item</label>
+                        <div class='checkbox' id="changeDiscountRateStatus"
+                             [ngClass]='{"checkboxActive" :changeDiscountRateStatusValue}'
+                             (click)='changeDiscountRateStatus()'>
+                          <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :changeDiscountRateStatusValue}'>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col " *ngIf="changeDiscountRateStatusValue">
+                        <div class="containerItem ">
+                          <div *ngFor="let item of attachMenu">
+                            <div class="attachListDiv">
+                              <img [src]="item.logo" alt="" class="logoAttachListDiv">
+                              <span class="textAttachListDiv">{{item.viewValue}}</span>
+                              <div class="inputDiv">
+                                <mat-form-field class="example-form-field lang">
+                                  <input class="inputAttach" matInput type="text" [(ngModel)]="discountRate">
+                                  <button mat-button *ngIf="discountRate" matSuffix mat-icon-button aria-label="Clear"
+                                          (click)="discountRate=''">
+                                    <mat-icon>close</mat-icon>
+                                  </button>
+                                </mat-form-field>
+                                %
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col ">
+                        <label class="labelTextArea" for="deliveryFee">Delivery Fee</label>
+                        <mat-form-field class="example-form-field lang" id="deliveryFee">
+                          <input matInput type="text" [(ngModel)]="deliveryFee">
+                          <button mat-button *ngIf="deliveryFee" matSuffix mat-icon-button aria-label="Clear"
+                                  (click)="deliveryFee=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        AMD
+                      </div>
+
+                    </div>
+                  </div>-->
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+  <mat-drawer-content>
+    <app-customers-list-selection></app-customers-list-selection>
+  </mat-drawer-content>
+
+
+</mat-drawer-container>
+

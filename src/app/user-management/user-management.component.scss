@@ -1,0 +1,1139 @@
+// USer Management Style
+
+.navbar {
+  display: inline-block;
+}
+
+.table th, .table td {
+  vertical-align: inherit;
+}
+
+.scrollableContent {
+  overflow-y: auto;
+  width: 100vw;
+  height: 100vh;
+}
+
+.allContent {
+  background-color: #1C333E;
+  float: left;
+  width: 100%;
+  min-width: 1200px;
+  margin-bottom: 100px;
+}
+
+//header and header items style
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  width: 25%;
+  justify-content: center;
+}
+
+.userLogo {
+  margin-top: 1px;
+}
+
+.titleText {
+  margin-left: 10px;
+  color: white;
+  display: inline-block;
+}
+
+.buttonsContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding-right: 85px;
+}
+
+.createUser {
+  background-color: #2691BB !important;
+  padding: 10.5px 43px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.ringLogo {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.cursor {
+  cursor: pointer;
+  z-index: 5;
+}
+
+// table content and table content items style
+table {
+  width: 100%;
+}
+
+mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.tablesContent {
+  margin-top: 30px;
+  padding-left: 60px;
+  min-height: 99vh;
+}
+
+.column {
+  width: 100%;
+}
+
+.inputContent {
+  position: relative;
+  padding: 10px 5px;
+}
+
+.searchInputs {
+  background-color: transparent;
+  border: none;
+  color: white;
+  border-bottom: 1px solid white;
+  border-radius: 0px;
+  box-shadow: none;
+  font-size: 14px;
+  padding-left: 35px;
+  height: 25px;
+}
+
+.changePadding {
+  padding-left: 5px;
+}
+
+.searchInputs:active {
+  box-shadow: none;
+}
+
+.searchInputs::placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 14px;
+}
+
+.searchInputs:-ms-input-placeholder {
+  color: white;
+  font-size: 14px;
+}
+
+.searchInputs::-ms-input-placeholder {
+  color: white;
+  font-size: 14px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 8px;
+}
+
+.tableHeader {
+  position: relative;
+  margin: 15px 1px 7px 1px;
+  background-color: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: #607D8B;
+  font-size: 16px;
+  padding-left: 10px;
+  font-weight: bold;
+  min-width: 100px;
+}
+
+.toolsIcons {
+  padding-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 110px;
+}
+
+.addColumn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: white;
+  text-align: center;
+  padding-top: 3px;
+  font-size: 22px;
+  color: #607D8B;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.borderRadiusLeft {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.borderRadiusRight {
+  border-radius: 0px 10px 10px 0px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.toolsIconsContent {
+  height: 60px;
+  min-width: 160px;
+}
+
+.toolsIcons {
+  width: calc(100% - 60px);
+  float: left;
+}
+
+.rightSideContent {
+  width: 60px;
+  height: 100%;
+  float: left;
+}
+
+.toExcelButton {
+  margin-top: -5px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.toolsTitle {
+  height: 50px;
+  margin-top: 15px;
+  background-color: white;
+  border-radius: 10px;
+  margin-left: 8px;
+  margin-bottom: 7px;
+  color: #607D8B;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  min-width: 200px;
+  max-width: 250px;
+}
+
+.sortButton {
+  position: absolute;
+  right: 0px;
+  top: 14px;
+  cursor: pointer;
+}
+
+.selectOption {
+  color: white;
+  font-size: 14px;
+  border-bottom: solid 1px white;
+  padding-bottom: 3px;
+  padding-left: 3px;
+  position: relative;
+  width: 100%;
+}
+
+.selectOptionButton {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rolesSearch {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding-top: 30px;
+  width: 300px;
+  z-index: 10;
+}
+
+.role {
+  padding: 8px 0px 8px 40px;
+  border-bottom: 1px solid #607D8B;
+  color: #607D8B;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.role:hover {
+  background-color: #B4CAD8;
+}
+
+.forRolesContentStyle {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  padding: 15px 15px 25px 15px;
+}
+
+.userRole {
+  font-size: 12px;
+  background-color: #367B52;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 8px;
+  color: white;
+  min-width: 200px;
+  margin: 2px;
+}
+
+.roleStatus {
+  opacity: 0.49;
+  margin-left: 15px;
+}
+
+// create or change user popup style
+.popupContent {
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  z-index: 100;
+  padding-bottom: 50px;
+}
+
+.popupOpacity {
+  width: 860px;
+}
+
+.whiteContent {
+  background-color: white;
+  position: relative;
+  border-radius: 10px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  min-height: 210px;
+  margin-top: 200px;
+
+}
+
+.userIconContent {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  background-color: #2691BB;
+  border-radius: 50%;
+  top: -40px;
+  right: 40px;
+  display: flex;
+  justify-content: center;
+  padding-top: 13px;
+  z-index: 10;
+  box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+}
+
+.popupInputsContent {
+  width: 52%;
+  display: inline-block;
+  padding-bottom: 50px;
+}
+
+.popupInputContent {
+  text-align: end;
+  font-size: 16px;
+  color: #607D8B;
+  padding-top: 30px;
+  padding-right: 20px;
+  font-weight: bold;
+}
+
+.popupInput {
+  background-color: transparent;
+  border: none;
+  width: 250px;
+  border-bottom: solid 1px #607D8B;
+  outline: none;
+  margin-left: 5px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.popupInput:focus {
+  border-bottom: solid 1px black;
+}
+
+.inputClear {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.inputNoValid {
+  border-color: red !important;
+}
+
+.rolesContent {
+  width: 48%;
+  display: inline-block;
+  height: 100%;
+  margin-bottom: 10px;
+}
+
+.radiobuttonsContent {
+  padding-top: 35px;
+}
+
+.radiobuttonContent {
+  font-size: 14px;
+  color: #607D8B;
+  display: flex;
+  align-items: center;
+}
+
+.radioOut {
+  border: solid 3px #607D8B;
+  background-color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  margin-left: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rolesAndTextSpace {
+  margin-right: 5px;
+}
+
+.radioIn {
+  background-color: #607D8B;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+}
+
+.roles {
+  color: #607D8B;
+  font-size: 16px;
+  padding-left: 30px;
+  margin-top: 20px;
+  height: 60px;
+}
+
+.rolesText {
+  color: #607D8B;
+  font-size: 16px;
+  float: left;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.rolesSelectOption {
+  border-bottom: solid 1px #607D8B;
+  float: left;
+  margin-left: 10px;
+  min-height: 25px;
+  position: absolute;
+  left: -10px;
+  width: 100%;
+  z-index: 20;
+  top: 19px;
+  padding-top: 22px;
+
+}
+
+.rolesSelectOptionCreate {
+  border-bottom: solid 1px #607D8B;
+  float: left;
+  margin-left: 10px;
+  min-height: 25px;
+  position: relative;
+  left: -10px;
+  width: 80%;
+  z-index: 20;
+  padding-left: 5px;
+}
+
+.oldRoleContent {
+  padding-left: 30px;
+  min-height: 50px;
+  padding-top: 20px;
+}
+
+.openSelectOptionButton {
+  position: absolute;
+  right: 2px;
+  top: 3px;
+  cursor: pointer;
+}
+
+.addRolesContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+
+}
+
+.addRoles {
+  width: 35px;
+  height: 35px;
+  background-color: #607D8B;
+  color: white;
+  border-radius: 50%;
+  padding-top: 2px;
+  padding-left: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addRolesText {
+  color: #607D8B;
+  background-color: #C0D0D6;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 12px;
+  padding: 0px 5px 2px 5px;
+}
+
+.noValidRole {
+  border-color: red !important;
+}
+
+.tooltip {
+  border: 5px solid transparent;
+  border-left: 9px solid #C0D0D6;
+  margin-left: -2px;
+  margin-right: -5px;
+}
+
+.popupButtonsContent {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkbox {
+  width: 40px;
+  height: 20px;
+  background-color: #797E7A;
+  border-radius: 17px;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.checkboxButton {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -1px;
+  top: -2px;
+  background-color: #87969c;
+  border-radius: 50%;
+  transition: left linear 100ms;
+}
+
+.checkboxButtonT {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -1px;
+  top: -2px;
+  background-color: #CED1D6;
+  border-radius: 50%;
+  transition: left linear 100ms;
+}
+
+.checkboxActive {
+  background-color: rgba(89, 177, 13, 0.5);
+}
+
+.checkboxButtonActive {
+  background-color: #59B10D;
+  left: 17px;
+}
+
+.checkboxContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkboxText {
+  float: left;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+td {
+  padding: 0px;
+}
+
+.discard {
+  float: left;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10.5px 43px;
+  cursor: pointer;
+  margin-right: 4px;
+  margin-top: 6px;
+}
+
+.invite {
+  background-color: #2691BB !important;
+  padding: 10.5px 43px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+
+}
+
+//table style
+.dataTable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3px;
+  padding-left: 60px;
+
+}
+
+.tableBox {
+  background-color: white;
+  min-height: 30px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 3px;
+  padding-left: 8px;
+  font-size: 14px;
+}
+
+.fullName {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.tools {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  float: left;
+  margin-left: -9px;
+  min-height: 30px;
+}
+
+.deleteUserButton {
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.userRoles {
+  position: relative;
+  background-color: #CFD8DC;
+  border-radius: 5px;
+  border: solid 1px #75B0CC;
+  margin-right: 15%;
+  margin-top: 20px;
+}
+
+.roleCloseButton {
+  position: absolute;
+  color: #75B0CC;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  top: -14px;
+  left: -14px;
+  cursor: pointer;
+  border: solid 1px #75B0CC;
+  background-color: #CFD8DC;
+  padding-top: -4px;
+  padding-left: 8px;
+  font-size: 18px;
+}
+
+.rolesCloseX {
+  margin-top: -2px;
+}
+
+// delete popup
+.deletePopup {
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  padding-bottom: 50px;
+}
+
+
+.deleteContent {
+  background-color: white;
+  text-align: center;
+  color: #607D8B;
+  font-weight: bold;
+  width: 350px;
+  padding-top: 20px;
+  border-radius: 10px;
+}
+
+.deleteButtonsContent {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.singleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.noButton, .yesButton {
+  display: inline-block;
+  font-size: 18px;
+  width: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 2px #ffffff;
+  transition: box-shadow linear 150ms;
+}
+
+.noButton {
+  margin-right: 50px;
+}
+
+.yesButton {
+  margin-left: 50px;
+}
+
+.noMargin {
+  margin: 0px;
+}
+
+.noButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+
+.yesButton:hover {
+  box-shadow: 0px 0px 3px 2px #afafaf;
+}
+
+.mat-input-element {
+  padding-left: 20px;
+}
+
+.columnTitleContent {
+  position: relative;
+}
+
+.sortButton {
+  position: absolute;
+  top: 10px;
+}
+
+#calendar {
+  input {
+    color: white;
+  }
+
+  input .mat-form-field-placeholder {
+    color: red;
+  }
+
+  .dummy-input-field .mat-input-placeholder {
+    color: red;
+  }
+
+}
+
+.calendarIcon {
+  color: white;
+  transform: scale(1.4);
+  margin-bottom: 10px;
+}
+
+.bigText {
+  overflow-x: hidden;
+  max-width: 20vw;
+
+}
+
+.tableMaxWidth {
+  max-width: 100%;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// Data Table Component Style
+
+.data-table {
+  .menus-icon {
+    top: 35px;
+  }
+
+  .table thead th {
+    border-bottom: none;
+  }
+
+  .table {
+    ::ng-deep .mat-form-field-infix {
+      width: auto;
+    }
+
+    tbody td:not(:last-child) {
+      padding-left: 1rem;
+      padding-right: 10px;
+    }
+
+    tbody {
+      tr td:first-child {
+        ::ng-deep label {
+          margin-bottom: 0rem;
+        }
+      }
+    }
+  }
+
+  .table th, .table td {
+    border-top: 3px solid #1C333E;
+    border-left: 3px solid;
+    padding: 0px;
+    line-height: 1.5;
+  }
+
+  .table th {
+    line-height: 2.8;
+  }
+
+  .rolesSelectOptionButton {
+    position: absolute;
+    right: 0px;
+    bottom: 20px;
+    z-index: 5;
+
+  }
+
+  .roleFilter {
+    position: relative;
+  }
+
+  .roleInSelectOption {
+    min-height: 40px;
+    padding-top: 3px;
+  }
+
+  .head-custom {
+    border-radius: 20px;
+    background: white;
+
+    .table-tools {
+      border-left: 10px solid;
+    }
+
+    th {
+      padding: 0rem 1rem;
+      font-size: 16px;
+    }
+  }
+
+  .tbody-custom {
+    border-top: 5px solid;
+
+    th {
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .city-style {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    tr td:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .tools-btn {
+      position: relative;
+      border-radius: 28px;
+      border-left: 10px solid;
+      min-width: 120px;
+      width: 15% !important;
+    }
+  }
+
+  .thead-custom {
+    th:last-child {
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 28px;
+      border-bottom-left-radius: 28px;
+    }
+
+    th:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    
+    }
+
+    .auto-icon {
+      top: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .table-list {
+    padding-top: 30px;
+  }
+
+  .menus-icon {
+    top: 35px;
+  }
+
+  // table
+  .table thead th {
+    border-bottom: none;
+  }
+
+  .marginRightToll{
+    margin-right: 60px;
+  }
+
+  .table {
+    ::ng-deep .mat-form-field-infix {
+      width: auto;
+    }
+
+    tbody td:not(:last-child) {
+      padding-left: 1rem;
+    }
+
+    tbody {
+      tr td:first-child {
+        ::ng-deep label {
+          margin-bottom: 0rem;
+        }
+      }
+    }
+  }
+
+  .table th, .table td {
+    border-top: 3px solid #1C333E;
+    border-left: 3px solid;
+    padding: 0px;
+    line-height: 1.5;
+  }
+
+  .table th {
+    line-height: 2.8;
+  }
+
+  .head-custom {
+    border-radius: 20px;
+    background: white;
+
+    .table-tools {
+      border-left: 10px solid;
+      width: 15% !important;
+    }
+
+    th {
+      padding: 0rem 1rem;
+      font-size: 16px;
+    }
+  }
+
+  .tbody-custom {
+    border-top: 5px solid;
+
+    th {
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .city-style {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    tr td:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+  }
+
+  .thead-custom {
+    tr:first-child  th:last-child{
+      width: 5% !important;
+    }
+    th:last-child {
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    th:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .auto-icon {
+      top: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .table-list {
+    padding-top: 30px;
+  }
+
+  // customer style.
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
+  }
+
+  mat-drawer-backdrop {
+    background-color: transparent;
+  }
+
+  .mat-list .mat-list-item {
+    height: 30px;
+  }
+
+  .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+  }
+
+  .percent-icon {
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+
+    .fa-percent {
+      font-size: 21px;
+    }
+  }
+
+  .form-select {
+    height: auto;
+  }
+
+  table.table-hover tbody tr:hover {
+    background-color: #CFD8DC;
+  }
+
+  //Change width Add filter & column
+  ::ng-deep .cdk-overlay-container .mat-menu-panel {
+    max-width: 300px;
+  }
+}
+
+.inputPlace {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 15px !important;
+}
+
+.deleteUserContent {
+  background: #1C333E;
+}
+
+.deleteUserInnerContent {
+  padding-right: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.errorMassage {
+  margin: 15px 0px 0px 30px;
+  color: red;
+  font-size: 13px;
+}
+
+.disabledButton {
+  cursor: no-drop !important;
+}
+
+.resetPassword {
+  color: red;
+}
+
+.marginTop {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.marginBottom {
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+::ng-deep .tooltip .tooltip-inner {
+  background-color: #CFD8DC;
+  color: #263238;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .tooltip-arrow {
+  background-color: none;
+  border-bottom: 7px solid #CFD8DC;
+  font-size: 20px;
+}
+
+::ng-deep .tooltip .tooltip-inner::after {
+  border-color: transparent transparent transparent #CFD8DC;
+}
+
+.inActive {
+  background-color: #6D6D6D;
+}
+.border-radius{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}

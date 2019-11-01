@@ -1,0 +1,907 @@
+<!-- Delivery Fee Component -->
+<mat-drawer-container class="sidenav-container">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <!-- header -->
+    <header class="mt-3">
+      <div class="container-fluid">
+        <div class="delivery-navbar pl-3 pr-3 white-text">
+          <nav class="nav d-flex justify-content-between">
+            <div class="delivery-brand d-flex float-left">
+              <div class="delivery-logo position-relative">
+                <i class="material-icons mr-1 position-relative child-icon" placement="bottom"  mdbTooltip="Child Care">child_care</i>
+                <strong class="ml-1">
+                  <button mat-button routerLink="/partner-list" routerLinkActive="active" type="button">
+                    <span class="large-text">Partner List</span>
+                  </button>
+                </strong>
+                <strong><i class="material-icons position-relative child-icon"> keyboard_arrow_right </i></strong>
+                <strong class="ml-1">
+                  <button mat-button routerLink="delivery-fee" routerLinkActive="active" type="button">
+                    <span class="large-text"> {{ menusName }} </span>  
+                  </button>  
+                </strong>
+              </div>
+            </div>
+            <div class="button-navbar float-right">
+              <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+                <i class="material-icons md-36">notifications</i>
+              </button>
+              <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User" [matMenuTriggerFor]="menu">
+                <i class="material-icons md-36">person</i>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/login" routerLinkActive="active">Sign Out</button>
+              </mat-menu>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- delivery-fee -->
+    <div class="delivery-fee p-4">
+      <!-- ng container tab one -->
+      <ng-container class="container p-5">
+        <!-- mat tab group -->
+        <mat-tab-group dynamicHeight>
+          <mat-tab label="M - M">
+          <div class="large-box">
+            <!-- list M - M -->
+            <mat-list role="list" class="w-100">
+              <!-- show hide icon -->
+              <mat-list-item class="d-flex justify-content-end">
+                <button mat-icon-button (click)="showFirstGroup = !showFirstGroup">
+                  <mat-icon>
+                    <i class="material-icons md-18">keyboard_arrow_up</i>
+                  </mat-icon>
+                </button>
+              </mat-list-item>
+              <div *ngIf="showFirstGroup">
+                <!-- Per Zona -->
+                <mat-list-item role="listitem" class="w-100">
+                  <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Per Zona </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                      <mat-slide-toggle [(ngModel)]="showdeliveryMM" [checked]="checkedZona" (change)="onChangeZona($event)"></mat-slide-toggle>
+                  </div>
+                  <!-- delete icon -->
+                  <button mat-icon-button (click)="deleteCompletedField()" placement="bottom"  mdbTooltip="Delete">
+                    <mat-icon>
+                      <i class="material-icons md-18 md-error">delete_forever</i>
+                    </mat-icon>
+                  </button>
+                </mat-list-item>
+                <!-- Zona Area -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Zona/Area </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="w-100">
+                      <mat-select placeholder="">
+                        <mat-option *ngFor="let area of areaList; let i = index"  [value]="area">
+                          <mat-checkbox [checked]="selected === i" (change)="selected = i">{{area}}</mat-checkbox>
+                          <mat-divider></mat-divider>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> 
+                </mat-list-item>
+                <!-- Fixed Rate -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold"> Fixed Rate </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [checked]="checkedMM" (change)="onChangeFixRateMM($event)"></mat-slide-toggle>
+                    <mat-form-field class="form-field ml-3">
+                      <input matInput type="text" [(ngModel)]="value" (keypress)="numberValidation($event)">
+                      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                  </div>
+                </mat-list-item>
+                <!-- Per Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Per Distanse </span>
+                  </div>
+                  <div class="list-info ml-md-3">
+                      <mat-slide-toggle [checked]="checkedPerDistanseMM" (change)="onChangePerDistanseMM($event)"></mat-slide-toggle>
+                  </div>
+                  <div *ngIf="showPayDayMM" class="list-info ml-md-3">
+                    <mat-slide-toggle [checked]="checkedPerDistanseMM" (change)="onChangePerDistanseMM($event)"></mat-slide-toggle>
+                  </div>    
+                </mat-list-item>
+                <!-- Per Day Period -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold">Per Day Period</span>
+                  </div>
+                  <div class="list-info ml-md-3">
+                    <span>From</span>
+                    <!-- time 13:00 -->
+                    <mat-form-field class="ml-3">
+                    <input matInput value="13:00">
+                  </mat-form-field>
+                  <span class="ml-3">To</span>
+                  <!-- time 14:00  -->
+                  <mat-form-field class="ml-3">
+                    <input matInput value="14:00">
+                  </mat-form-field>
+                  </div>
+                  <div *ngIf="showPayDayMM" class="list-info ml-md-3">
+                  <span>From</span>
+                  <!-- time 13:00 -->
+                  <mat-form-field class="ml-3">
+                  <input matInput value="13:00">
+                  </mat-form-field>
+                  <span class="ml-3">To</span>
+                   <!-- time 14:00  -->
+                  <mat-form-field class="ml-3">
+                     <input matInput value="14:00">
+                   </mat-form-field>
+                 </div>
+                <!-- Add Pay Day -->
+                <button mat-icon-button (click)="showPayDayMM = !showPayDayMM" placement="right" mdbTooltip="Add Pay Day" color="primary" class="ml-5">
+                  <i class="material-icons md-36">add_circle</i>
+                </button>
+                </mat-list-item>
+                <!-- Fixed Rate -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                <div class="list-text w-25">
+                    <span class="float-right main-color font-weight-bold"> Fixed Rate </span>
+                </div>
+                <div class="list-info ml-md-3">
+                  <mat-slide-toggle [checked]="checkedMM" (change)="onChangeFixRateMM($event)"></mat-slide-toggle>
+                </div>
+                <div *ngIf="showPayDayMM" class="list-info ml-md-3">
+                  <mat-slide-toggle [checked]="checkedMM" (change)="onChangeFixRateMM($event)"></mat-slide-toggle>
+                </div>
+                </mat-list-item>
+                <!-- Per Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold"> Per Distanse </span>
+                </div>
+                <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [checked]="checkedPerDistanseMM" (change)="onChangePerDistanseMM($event)"></mat-slide-toggle>
+                    <span class="ml-3">Minimum</span>
+                    <mat-form-field class="form-field" class="ml-3">
+                      <input matInput type="text" [(ngModel)]="minValue" (keypress)="numberValidation($event)">
+                      <button mat-button *ngIf="minValue" matSuffix mat-icon-button aria-label="Clear" (click)="minValue=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <span class="money mr-3">AMD</span>
+                    <span>Per KM</span>
+                    <mat-form-field class="form-field ml-3">
+                      <input matInput type="text" [(ngModel)]="maxValue" (keypress)="numberValidation($event)">
+                      <button mat-button *ngIf="maxValue" matSuffix mat-icon-button aria-label="Clear" (click)="maxValue=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                </div>
+                </mat-list-item>
+                <!-- Aplay free delivery per for order over -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Aplay free delivery per for order over </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="form-field">
+                      <input matInput type="text" [(ngModel)]="freeOrderValue" (keypress)="numberValidation($event)">
+                      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="freeOrderValue=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                  </div>
+                </mat-list-item>
+                <!-- Button all -->
+                <mat-list-item role="listitem">
+                  <div class="button-row w-100">
+                    <button mat-raised-button class="btn-save btn-partner float-right">
+                      <strong class="white-text">SAVE</strong>
+                    </button>
+                    <button mat-button class="btn-cencel float-right mr-3">
+                      <strong class="main-color font-weight-bold">CANCEL</strong>
+                    </button>
+                  </div>
+                </mat-list-item>
+              </div>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="P - M">
+          <div class="large-box">
+            <!-- list P - M -->
+            <mat-list role="list" class="w-100">
+            <!-- show hide icon -->
+            <mat-list-item class="d-flex justify-content-end">
+              <button mat-icon-button (click)="showFirstGroup = !showFirstGroup">
+                <mat-icon>
+                  <i class="material-icons md-18">keyboard_arrow_up</i>
+                </mat-icon>
+              </button>
+            </mat-list-item>
+            <div *ngIf="showFirstGroup">
+              <!-- Per Zona -->
+              <mat-list-item role="listitem" class="w-100">
+                <div class="list-text w-25 float-right">
+                  <span class="float-right main-color font-weight-bold"> Per Zona </span>
+                </div>
+                <div class="list-info ml-md-3 w-75">
+                  <mat-slide-toggle [(ngModel)]="showdeliveryMM" [checked]="checkedZona" (change)="onChangeZona($event)"></mat-slide-toggle>
+                </div>
+                <!-- delete icon -->
+                <button mat-icon-button (click)="deleteCompletedField()" placement="bottom"  mdbTooltip="Delete">
+                  <mat-icon>
+                    <i class="material-icons md-18 md-error">delete_forever</i>
+                  </mat-icon>
+                </button> 
+              </mat-list-item>
+              <!-- Zona Area -->
+              <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold"> Zona/Area </span>
+                </div>
+                <div class="list-info ml-md-3 w-75">
+                  <mat-form-field class="w-100">
+                    <mat-select placeholder="">
+                      <mat-option *ngFor="let area of areaList; let i = index"  [value]="area">
+                        <mat-checkbox [checked]="selected === i" (change)="selected = i">{{area}}</mat-checkbox>
+                        <mat-divider></mat-divider>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div> 
+              </mat-list-item>
+                  <!-- Fixed Rate -->
+                  <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                    <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Fixed Rate </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                      <mat-slide-toggle [checked]="checkedPM" (change)="onChangeFixRatePM($event)"></mat-slide-toggle>
+                      <mat-form-field class="form-field ml-3">
+                        <input matInput type="text" [(ngModel)]="value" (keypress)="numberValidation($event)">
+                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <span class="money">AMD</span>
+                    </div>
+                  </mat-list-item>
+                  <!-- Per Distance -->
+                  <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                    <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Per Distanse </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                      <mat-slide-toggle [checked]="checkedPerDistansePM" (change)="onChangePerDistansePM($event)"></mat-slide-toggle>
+                    </div>    
+                  </mat-list-item>
+                  <!-- Per Day Period -->
+                  <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                    <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Per Day Period </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                      <span>From</span>
+                      <!-- time 13:00 -->
+                      <mat-form-field class="ml-3">
+                      <input matInput placeholder="" value="13:00">
+                    </mat-form-field>
+                    <span class="ml-3">To</span>
+                    <!-- time 14:00  -->
+                    <mat-form-field class="ml-3">
+                      <input matInput placeholder="" value="14:00">
+                    </mat-form-field>
+                    <!-- Add Pay Day -->
+                    <button mat-icon-button placement="right" mdbTooltip="Add Pay Day" color="primary" class="ml-5">
+                      <i class="material-icons md-36">add_circle</i>
+                    </button>
+                  </div>
+                 </mat-list-item>
+                 <!-- Fixed Rate -->
+                 <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25">
+                    <span class="float-right main-color font-weight-bold"> Fixed Rate </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [checked]="checkedPM" (change)="onChangeFixRatePM($event)"></mat-slide-toggle>
+                  </div>
+                 </mat-list-item>
+                 <!-- Per Distance -->
+                 <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold"> Per Distanse </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [checked]="checkedPerDistansePM" (change)="onChangePerDistansePM($event)"></mat-slide-toggle>
+                      <span class="ml-3">Minimum</span>
+                      <mat-form-field class="form-field" class="ml-3">
+                        <input matInput type="text" [(ngModel)]="minValue" (keypress)="numberValidation($event)">
+                        <button mat-button *ngIf="minValue" matSuffix mat-icon-button aria-label="Clear" (click)="minValue=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <span class="money mr-3">AMD</span>
+                      <span>Per KM</span>
+                      <mat-form-field class="form-field ml-3">
+                        <input matInput type="text" [(ngModel)]="maxValue" (keypress)="numberValidation($event)">
+                        <button mat-button *ngIf="maxValue" matSuffix mat-icon-button aria-label="Clear" (click)="maxValue=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <span class="money">AMD</span>
+                   </div>
+                 </mat-list-item>
+                 <!-- Aplay free delivery per for order over -->
+                 <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold"> Aplay free delivery per for order over </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="form-field">
+                      <input matInput type="text" [(ngModel)]="freeOrderValue" (keypress)="numberValidation($event)">
+                      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="freeOrderValue=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                 </div>
+                 </mat-list-item>
+                  <!-- Button all -->
+                  <mat-list-item role="listitem">
+                    <div class="button-row w-100">
+                      <button mat-raised-button class="btn-save btn-partner float-right">
+                        <strong class="white-text">SAVE</strong>
+                      </button>
+                      <button mat-button class="btn-cencel float-right mr-3">
+                        <strong class="main-color font-weight-bold">CANCEL</strong>
+                      </button>
+                    </div>
+                  </mat-list-item>
+                </div>
+              </mat-list>
+            </div>
+        </mat-tab>
+        <mat-tab label="M - P">
+          <div class="large-box">
+            <!-- list M - P -->
+            <mat-list role="list" class="w-100">
+              <!-- show hide icon -->
+              <mat-list-item class="d-flex justify-content-end">
+                <button mat-icon-button (click)="showFirstGroup = !showFirstGroup">
+                  <mat-icon><i class="material-icons md-18">keyboard_arrow_up</i></mat-icon>
+                </button>
+              </mat-list-item>
+              <div *ngIf="showFirstGroup">
+                <!-- Per Zona -->
+                <mat-list-item role="listitem" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold"> Per Zona </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [(ngModel)]="showdeliveryMM" [checked]="checkedZona" (change)="onChangeZona($event)"></mat-slide-toggle>
+                  </div>
+                  <!-- delete icon -->
+                  <button mat-icon-button (click)="deleteCompletedField()" placement="bottom"  mdbTooltip="Delete">
+                    <mat-icon><i class="material-icons md-18 md-error">delete_forever</i></mat-icon>
+                  </button> 
+                </mat-list-item>
+                <!-- Zona Area -->
+                <mat-list-item role="listitem" *ngIf = "checkedZona" class="w-100">
+                  <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Zona/Area </span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="w-100">
+                      <mat-select placeholder="">
+                        <mat-option *ngFor="let area of areaList; let i = index"  [value]="area">
+                          <mat-checkbox [checked]="selected === i" (change)="selected = i">{{area}}</mat-checkbox>
+                          <mat-divider></mat-divider>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> 
+                </mat-list-item>
+                  <!-- Fixed Rate -->
+                  <mat-list-item role="listitem" *ngIf = "showdeliveryMM" class="w-100">
+                    <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Fixed Rate </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                      <mat-slide-toggle [checked]="checkedMP" (change)="onChangeFixRateMP($event)"></mat-slide-toggle>
+                      <mat-form-field class="form-field ml-3">
+                        <input matInput type="text" [(ngModel)]="value" (keypress)="numberValidation($event)">
+                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <span class="money">AMD</span>
+                    </div>
+                  </mat-list-item>
+                  <!-- Per Distance -->
+                  <mat-list-item role="listitem" *ngIf = "showdeliveryMM" class="w-100">
+                    <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Per Distanse </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                      <mat-slide-toggle [checked]="checkedPerDistanseMP" (change)="onChangePerDistanseMP($event)"></mat-slide-toggle>
+                    </div>    
+                  </mat-list-item>
+                  <!-- Per Day Period -->
+                  <mat-list-item role="listitem" *ngIf = "showdeliveryMM" class="w-100">
+                    <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold"> Per Day Period </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                      <span>From</span>
+                      <!-- time 13:00 -->
+                      <mat-form-field class="ml-3">
+                        <input matInput placeholder="" value="13:00">
+                      </mat-form-field>
+                      <span class="ml-3">To</span>
+                      <!-- time 14:00  -->
+                      <mat-form-field class="ml-3">
+                        <input matInput placeholder="" value="14:00">
+                      </mat-form-field>
+                      <!-- Add Pay Day -->
+                      <button mat-icon-button placement="right" mdbTooltip="Add Pay Day" color="primary" class="ml-5">
+                        <i class="material-icons md-36">add_circle</i>
+                      </button>
+                    </div>
+                  </mat-list-item>
+                  <!-- Fixed Rate -->
+                  <mat-list-item role="listitem" *ngIf = "showdeliveryMM" class="w-100">
+                    <div class="list-text w-25">
+                      <span class="float-right main-color font-weight-bold"> Fixed Rate </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                        <mat-slide-toggle [checked]="checkedMP" (change)="onChangeFixRateMP($event)"></mat-slide-toggle>
+                    </div>
+                  </mat-list-item>
+                  <!-- Per Distance -->
+                  <mat-list-item role="listitem" *ngIf = "showdeliveryMM" class="w-100">
+                    <div class="list-text w-25 float-right">
+                        <span class="float-right main-color font-weight-bold"> Per Distanse </span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                        <mat-slide-toggle [checked]="checkedPerDistanseMP" (change)="onChangePerDistanseMP($event)"></mat-slide-toggle>
+                        <span class="ml-3">Minimum</span>
+                        <mat-form-field class="form-field" class="ml-3">
+                          <input matInput type="text" [(ngModel)]="minValue" (keypress)="numberValidation($event)">
+                          <button mat-button *ngIf="minValue" matSuffix mat-icon-button aria-label="Clear" (click)="minValue=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        <span class="money mr-3">AMD</span>
+                        <span>Per KM</span>
+                        <mat-form-field class="form-field ml-3">
+                          <input matInput type="text" [(ngModel)]="maxValue" (keypress)="numberValidation($event)">
+                          <button mat-button *ngIf="maxValue" matSuffix mat-icon-button aria-label="Clear" (click)="maxValue=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        <span class="money">AMD</span>
+                    </div>
+                    </mat-list-item>
+                    <!-- Aplay free delivery per for order over -->
+                    <mat-list-item role="listitem" *ngIf = "showdeliveryMM" class="w-100">
+                      <div class="list-text w-25 float-right">
+                          <span class="float-right main-color font-weight-bold"> Aplay free delivery per for order over </span>
+                      </div>
+                      <div class="list-info ml-md-3 w-75">
+                        <mat-form-field class="form-field">
+                          <input matInput type="text" [(ngModel)]="freeOrderValue" (keypress)="numberValidation($event)">
+                          <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="freeOrderValue=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        <span class="money">AMD</span>
+                      </div>
+                    </mat-list-item>
+                    <!-- Button all -->
+                    <mat-list-item role="listitem">
+                      <div class="button-row w-100">
+                        <button mat-raised-button class="btn-save btn-partner float-right">
+                          <strong class="white-text">SAVE</strong>
+                        </button>
+                        <button mat-button class="btn-cencel float-right mr-3">
+                          <strong class="main-color">CANCEL</strong>
+                        </button>
+                      </div>
+                    </mat-list-item>
+                  </div>
+            </mat-list>
+          </div>
+        </mat-tab>
+        </mat-tab-group> 
+        <!-- mat tab two group -->
+        <mat-tab-group dynamicHeight class="mt-5">
+        <mat-tab label="M - M">
+          <div class="large-box">
+            <!-- list M - M -->
+            <mat-list role="list" class="w-100">
+              <!-- show hide icon -->
+              <mat-list-item class="d-flex justify-content-end">
+                <button mat-icon-button (click)="showSecondGroup = !showSecondGroup">
+                  <mat-icon><i class="material-icons md-18">keyboard_arrow_up</i></mat-icon>
+                </button>
+              </mat-list-item>
+              <div *ngIf="showSecondGroup">
+                <!-- Per Distance -->
+                <mat-list-item role="listitem" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [(ngModel)]="showdistanceMM" [checked]="checkedDistance" (change)="onChangeDistance($event)"></mat-slide-toggle>
+                  </div>
+                  <!-- delete icon -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Delete">
+                    <mat-icon><i class="material-icons md-18 md-error">delete_forever</i></mat-icon>
+                  </button> 
+                </mat-list-item>
+                <!-- Minimum Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Minimum Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <!-- KM -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="5" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">KM</span>
+                    <!-- AMD -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="400" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                  </div> 
+                </mat-list-item>
+                <!-- Per KM -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per KM</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="ml-3">
+                      <input matInput value="100" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                  </div>
+                </mat-list-item>
+                <!-- Maximum Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Maximum Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="ml-3">
+                      <input matInput value="50" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">KM</span>
+                  </div>    
+                </mat-list-item>
+                <!-- Per Day Period -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per Day Period</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <span>From</span>
+                    <!-- time 13:00 -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="13:00">
+                    </mat-form-field>
+                    <span class="ml-3">To</span>
+                    <!-- time 14:00  -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="14:00">
+                    </mat-form-field>
+                  </div>
+                </mat-list-item>
+                <!-- Per Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                    <div class="list-text w-25 float-right">
+                      <span class="float-right main-color font-weight-bold">Per Distanse</span>
+                    </div>
+                    <div class="list-info ml-md-3 w-75">
+                      <span>Minimum</span>
+                      <mat-form-field class="form-field" class="ml-3">
+                        <input matInput type="text" [(ngModel)]="minValue" (keypress)="numberValidation($event)">
+                        <button mat-button *ngIf="minValue" matSuffix mat-icon-button aria-label="Clear" (click)="minValue=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <span class="money mr-3">AMD</span>
+                      <span>Per KM</span>
+                      <mat-form-field class="form-field ml-3">
+                        <input matInput type="text" [(ngModel)]="maxValue" (keypress)="numberValidation($event)">
+                        <button mat-button *ngIf="maxValue" matSuffix mat-icon-button aria-label="Clear" (click)="maxValue=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <span class="money">AMD</span>
+                    </div>
+                </mat-list-item>
+                <!-- Button all -->
+                <mat-list-item role="listitem">
+                    <div class="button-row w-100">
+                      <button mat-raised-button class="btn-save btn-partner float-right">
+                        <strong class="white-text">SAVE</strong>
+                      </button>
+                      <button mat-button class="btn-cencel float-right mr-3">
+                        <strong class="main-color">CANCEL</strong>
+                      </button>
+                    </div>
+                </mat-list-item>
+              </div>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="P - M">
+          <div class="large-box">
+            <!-- list M - M -->
+            <mat-list role="list" class="w-100">
+              <!-- show hide icon -->
+              <mat-list-item class="d-flex justify-content-end">
+                <button mat-icon-button (click)="showSecondGroup = !showSecondGroup">
+                  <mat-icon><i class="material-icons md-18">keyboard_arrow_up</i></mat-icon>
+                </button>
+              </mat-list-item>
+              <div *ngIf="showSecondGroup">
+                <!-- Per Distance -->
+                <mat-list-item role="listitem" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [(ngModel)]="showdistanceMM" [checked]="checkedDistance" (change)="onChangeDistance($event)"></mat-slide-toggle>
+                  </div>
+                  <!-- delete icon -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Delete">
+                    <mat-icon><i class="material-icons md-18 md-error">delete_forever</i></mat-icon>
+                  </button> 
+                </mat-list-item>
+                <!-- Minimum Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Minimum Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <!-- KM -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="5" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">KM</span>
+                    <!-- AMD -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="400" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                  </div> 
+                </mat-list-item>
+                <!-- Per KM -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per KM</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="ml-3">
+                      <input matInput value="100" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                  </div>
+                </mat-list-item>
+                <!-- Maximum Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Maximum Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-form-field class="ml-3">
+                      <input matInput value="50" (keypress)="numberValidation($event)">
+                    </mat-form-field>
+                    <span class="money">KM</span>
+                  </div>    
+                </mat-list-item>
+                <!-- Per Day Period -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per Day Period</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <span>From</span>
+                    <!-- time 13:00 -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="13:00">
+                    </mat-form-field>
+                    <span class="ml-3">To</span>
+                    <!-- time 14:00  -->
+                    <mat-form-field class="ml-3">
+                      <input matInput value="14:00">
+                    </mat-form-field>
+                  </div>
+                </mat-list-item>
+                <!-- Per Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per Distanse</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <span class="ml-3">Minimum</span>
+                    <mat-form-field class="form-field" class="ml-3">
+                      <input matInput type="text" [(ngModel)]="minValue" (keypress)="numberValidation($event)">
+                      <button mat-button *ngIf="minValue" matSuffix mat-icon-button aria-label="Clear" (click)="minValue=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <span class="money mr-3">AMD</span>
+                    <span>Per KM</span>
+                    <mat-form-field class="form-field ml-3">
+                      <input matInput type="text" [(ngModel)]="maxValue" (keypress)="numberValidation($event)">
+                      <button mat-button *ngIf="maxValue" matSuffix mat-icon-button aria-label="Clear" (click)="maxValue=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <span class="money">AMD</span>
+                  </div>
+                </mat-list-item>
+                <!-- Button all -->
+                <mat-list-item role="listitem">
+                  <div class="button-row w-100">
+                    <button mat-raised-button class="btn-save btn-partner float-right">
+                      <strong class="white-text">SAVE</strong>
+                    </button>
+                    <button mat-button class="btn-cencel float-right mr-3">
+                      <strong class="main-color">CANCEL</strong>
+                    </button>
+                  </div>
+                </mat-list-item>
+              </div>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="M - P">
+          <div class="large-box">
+            <!-- list M - P -->
+            <mat-list role="list" class="w-100">
+              <!-- show hide icon -->
+              <mat-list-item class="d-flex justify-content-end">
+                <button mat-icon-button (click)="showSecondGroup = !showSecondGroup">
+                  <mat-icon><i class="material-icons md-18">keyboard_arrow_up</i></mat-icon>
+                </button>
+              </mat-list-item>
+              <div *ngIf="showSecondGroup">
+                <!-- Per Distance -->
+                <mat-list-item role="listitem" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Per Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                    <mat-slide-toggle [(ngModel)]="showdistanceMM" [checked]="checkedDistance" (change)="onChangeDistance($event)"></mat-slide-toggle>
+                  </div>
+                  <!-- delete icon -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Delete">
+                    <mat-icon><i class="material-icons md-18 md-error">delete_forever</i></mat-icon>
+                  </button> 
+                </mat-list-item>
+                <!-- Minimum Distance -->
+                <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                  <div class="list-text w-25 float-right">
+                    <span class="float-right main-color font-weight-bold">Minimum Distance</span>
+                  </div>
+                  <div class="list-info ml-md-3 w-75">
+                  <!-- KM -->
+                  <mat-form-field class="ml-3">
+                    <input matInput value="5" (keypress)="numberValidation($event)">
+                  </mat-form-field>
+                  <span class="money">KM</span>
+                  <!-- AMD -->
+                  <mat-form-field class="ml-3">
+                    <input matInput value="400" (keypress)="numberValidation($event)">
+                  </mat-form-field>
+                  <span class="money">AMD</span>
+                </div> 
+              </mat-list-item>
+              <!-- Per KM -->
+              <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                <div class="list-text w-25 float-right">
+                  <span class="float-right main-color font-weight-bold">Per KM</span>
+                </div>
+                <div class="list-info ml-md-3 w-75">
+                  <mat-form-field class="ml-3">
+                    <input matInput value="100" (keypress)="numberValidation($event)">
+                  </mat-form-field>
+                  <span class="money">AMD</span>
+                </div>
+              </mat-list-item>
+              <!-- Maximum Distance -->
+              <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                <div class="list-text w-25 float-right">
+                  <span class="float-right main-color font-weight-bold">Maximum Distance</span>
+                </div>
+                <div class="list-info ml-md-3 w-75">
+                  <mat-form-field class="ml-3">
+                    <input matInput value="50" (keypress)="numberValidation($event)">
+                  </mat-form-field>
+                  <span class="money">KM</span>
+                </div>    
+              </mat-list-item>
+              <!-- Per Day Period -->
+              <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                <div class="list-text w-25 float-right">
+                  <span class="float-right main-color font-weight-bold">Per Day Period</span>
+                </div>
+                <div class="list-info ml-md-3 w-75">
+                  <span>From</span>
+                  <!-- time 13:00 -->
+                  <mat-form-field class="ml-3">
+                    <input matInput value="13:00">
+                  </mat-form-field>
+                  <span class="ml-3">To</span>
+                  <!-- time 14:00  -->
+                  <mat-form-field class="ml-3">
+                    <input matInput value="14:00">
+                  </mat-form-field>
+                </div>
+              </mat-list-item>
+              <!-- Per Distance -->
+              <mat-list-item role="listitem" *ngIf = "checkedDistance" class="w-100">
+                <div class="list-text w-25 float-right">
+                  <span class="float-right main-color font-weight-bold">Per Distanse</span>
+                </div>
+                <div class="list-info ml-md-3 w-75">
+                  <span class="ml-3">Minimum</span>
+                  <mat-form-field class="form-field" class="ml-3">
+                    <input matInput type="text" [(ngModel)]="minValue" (keypress)="numberValidation($event)">
+                    <button mat-button *ngIf="minValue" matSuffix mat-icon-button aria-label="Clear" (click)="minValue=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <span class="money mr-3">AMD</span>
+                  <span>Per KM</span>
+                  <mat-form-field class="form-field ml-3">
+                    <input matInput type="text" [(ngModel)]="maxValue" (keypress)="numberValidation($event)">
+                    <button mat-button *ngIf="maxValue" matSuffix mat-icon-button aria-label="Clear" (click)="maxValue=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                  <span class="money">AMD</span>
+                </div>
+              </mat-list-item>
+              <!-- Button all -->
+              <mat-list-item role="listitem">
+                <div class="button-row w-100">
+                  <button mat-raised-button class="btn-save btn-partner float-right">
+                    <strong class="white-text">SAVE</strong>
+                  </button>
+                  <button mat-button class="btn-cencel float-right mr-3">
+                    <strong class="main-color">CANCEL</strong>
+                  </button>
+                </div>
+              </mat-list-item>
+            </div>
+          </mat-list>
+        </div>
+      </mat-tab>
+        </mat-tab-group>
+      </ng-container>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+

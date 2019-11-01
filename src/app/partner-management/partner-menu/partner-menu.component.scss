@@ -1,0 +1,253 @@
+// Partner Menu Component Style
+
+.menus-navbar {
+    .child-icon {
+        top: 8px;
+    }
+}
+
+nav button:focus {
+  background: #75B0CC;
+}
+
+// sidenav content
+.sidenav-content {
+    display: flex;
+    padding: 0 5px;
+    overflow-y: auto;
+}
+
+// sidenav
+.sidenav {
+    padding: 20px;
+    left: 72px;
+    top: 123px;
+    border-radius: 8px;
+    .sidenav-list {
+        font-size: 16px;
+    }
+}
+
+// customer style.
+.mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
+}
+
+mat-drawer {
+    position: fixed;
+}
+
+// search table
+.search-thead {
+    background: transparent;
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        padding-left: 20px;
+    }
+}
+
+mat-drawer-backdrop {
+    background-color: transparent;
+}
+
+.mat-list .mat-list-item{
+    height: 30px;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+ 
+.menu-selector {
+    top: 41px;
+    width: inherit;
+}
+
+.menus-icon {
+    top: 36px;
+    color: white;
+}
+
+.search-icon {
+    top: 40px;
+    color: #949494;  
+  }
+
+::placeholder {
+    color: white;
+}
+
+.sidenav-manu {
+    top: 1.5rem;
+}
+
+.menus-search {
+    padding-left: 40px
+}
+
+.second-card {
+    width: 200px;
+    padding: 0 5px;
+    border-radius: 10px;
+}
+
+.table-section {
+    border-collapse:inherit;
+    margin-top: 20px;
+}
+
+.card-title {
+    font-size: 20px;
+}
+
+.section-tbody {
+    background: #CFD8DC;
+    border-radius: 10px;
+    .id-tbody {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border: 1px solid #CFD8DC;
+    }
+    .dectription-tbody{
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border: 1px solid #CFD8DC;
+    }
+    .tools-tbody {
+        border-radius: 10px;
+    }
+    .product-tbody,
+    .measurement-tbody,
+    .name-tbody,
+    .price-tbody,
+    .tools-tbody {
+        border: 1px solid #CFD8DC;
+    }
+    .slide-tbody {
+        top: 5px;
+    }
+}
+
+.section-head {
+    background: white;
+    .table th, .table td {
+        border-top: 1px solid #dee2e6;
+    }
+}
+
+.title-thead {
+    background: #CFD8DC;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.first-card {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+// change tooltip text and background color 
+::ng-deep .tooltip .tooltip-inner {
+    background-color: #CFD8DC;
+    color: #263238;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+::ng-deep .tooltip-arrow {
+    background-color: none;
+    border-bottom: 7px solid #CFD8DC;
+    font-size: 20px;
+}
+::ng-deep .tooltip .tooltip-inner::after {
+    border-color: transparent transparent transparent #CFD8DC;
+}
+
+.left-border {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.right-border {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.rborder-color {
+    border-right: 1px solid #CFD8DC;
+}
+
+.lborder-color {
+    border-left: 1px solid #CFD8DC;
+}
+
+.section-tbody td,
+.section-tbody th {
+    padding-top: 0.01rem;
+    padding-bottom: 0.01rem;  
+}
+
+.section-one mat-card,
+.section-two mat-card {
+    background: #CFD8DC;
+}
+
+thead th {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+
+.section-tbody {
+    .mat-icon-button {
+        height: 26px;
+        line-height: 23px;
+    }
+    .mat-icon-button .mat-icon, .mat-icon-button i {
+        line-height: 20px;
+    }
+    .mat-slide-toggle {
+        height: 16px;
+    }
+    tr:nth-child(2n+1) td,
+    tr:nth-child(2n+1) th {
+        background: white;
+    }
+
+    tr:nth-child(2n) td,
+    tr:nth-child(2n) th {
+        background: #ECEFF1;
+    }
+    //tr:nth-child(2n) td:hover,
+    //tr:nth-child(2n) th:hover,
+    //tr:nth-child(2n+1) td:hover,
+    //tr:nth-child(2n+1) th:hover {
+    //    background: #6D6D6D;
+    //}
+  tr:hover td, tr:hover th {
+    background: #6D6D6D;
+  }
+}
+
+// Modal Attach Menu
+.modal-attachmenu {
+   width: 920px;
+   background: #455A64;
+   .modal-header {
+       border-bottom: none;
+   }
+   .vertical-divider {
+       background: black;
+       width: 2px;
+   }
+}
+.pageName{
+    cursor: pointer;
+    
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+

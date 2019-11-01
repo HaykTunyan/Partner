@@ -1,0 +1,72 @@
+// Delivery Fee Component Style
+
+// sidenav content
+.sidenav-content {
+  display: flex;
+  min-height: 1000px;
+}
+
+// main style
+.delivery-navbar {
+  color: white;
+  .child-icon {
+      top: 8px;
+  }
+}
+
+.menus-navbar {
+  .child-icon {
+      top: 8px;
+  }
+}
+
+.delivery-fee {
+    min-height: 1000px;
+}
+
+.small-box, 
+.large-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+    border-radius: 8px;
+}
+  
+.large-box {
+    width: inherit;
+    ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+      background-color:#59B10D64;
+    }
+    ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+      background-color:#59B10D64;
+    }
+}
+
+.money {
+    font-size: small; 
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    width: 40px;
+}
+
+mat-drawer {
+  position: fixed;
+}
+  
+// change tooltip text and background color 
+::ng-deep .tooltip .tooltip-inner {
+  background-color: #CFD8DC;
+  color: #263238;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+::ng-deep .tooltip-arrow {
+  background-color: none;
+  border-bottom: 7px solid #CFD8DC;
+  font-size: 20px;
+}
+::ng-deep .tooltip .tooltip-inner::after {
+  border-color: transparent transparent transparent #CFD8DC;
+}
+

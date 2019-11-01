@@ -1,0 +1,466 @@
+<mat-drawer-container class="sidenav-container partner-list">
+
+
+  <!-- Discount or Delivery fee campaign-->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                 Bonus
+                </div>
+
+                <div class="row  mb-5">
+                  <div class="col-6 ">
+                    <!--bonus type  checkbox-->
+                    <div class="backupRadiobuttonsContent">
+
+                      <div *ngFor='let radio of discountType; let i = index' class="radiobuttonContent mr-5">
+                        <div class="radioButton" (click)='bonusRadioClick(i,discountType,"discountType")'>
+                          <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                        </div>
+                        <div class="radiobuttonName">
+                          {{ radio.name }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <label class="labelTextArea" for="selectAttachPartner">Attach Partner</label>
+                      <mat-form-field class="selectCampaignType" id="selectAttachPartner">
+                        <mat-select class="matSelect" [value]="partnerValue" (selectionChange)="changeValuePartner($event.value)">
+
+                          <mat-option *ngFor="let type of bonusAttachPartners" [value]="type"
+                                      class="matOption">
+                            <img [src]="type.partnerImage" alt="" class="logoPartner">
+                            {{type.partnerName}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-hint *ngIf="bonusPartnerValidator">
+                        <span class="mat-error">Partner is required</span>
+                      </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col ">
+                      <div class="row">
+                      <div class="col-4">
+                        <label class="labelTextArea" for="discountRateBonusPercent">Bonus</label>
+                        <mat-form-field class="example-form-field lang " id="discountRateBonusPercent">
+                          <input matInput type="text" #bonusWithPercent
+                                 (keypress)="numberOnly($event)"
+                                 [(ngModel)]="bonus.campaignBonus.bonusWithPercent"
+                                 (click)="bonusWithUnit.disabled = 'true'"
+                                 (input)="bonus.campaignBonus.bonusWithPercent = $event.target.value;getAndSetValueForInput()"
+                                 autocomplete="nope">
+                        </mat-form-field>
+                        %
+                      </div>
+                      <div class="col-6">
+                        <label class="labelTextArea" for="discountRateBonusUnit">Bonus</label>
+                        <mat-form-field class="example-form-field lang " id="discountRateBonusUnit">
+                          <input matInput type="text" #bonusWithUnit
+                                 (keypress)="numberOnly($event)"
+                                 (click)="bonusWithPercent.disabled = 'true'"
+                                 [(ngModel)]="bonus.campaignBonus.bonusWithUnit"
+                                 (input)="bonus.campaignBonus.bonusWithUnit = $event.target.value;getAndSetValueForInput()"
+                                 autocomplete="nope">
+
+                        </mat-form-field>
+                        unit
+                      </div>
+                    </div>
+                    </div>
+
+                    <div class='col checkboxContent '>
+                      <label class="labelTextArea" for="changeDiscountRateStatus">Discount Rate Per<br> Bonus
+                        Item</label>
+                      <div class='checkbox' id="changeDiscountRateStatus"
+                           [ngClass]='{"checkboxActive" :changeDiscountRateStatusValue}'
+                           (click)='changeDiscountRateStatus()'>
+                        <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :changeDiscountRateStatusValue}'>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="col justifyDisplayAlign " *ngIf="changeDiscountRateStatusValue">
+                      <div class="containerItem ">
+                        <div *ngFor="let item of attachMenu;let i = index" class="col-12">
+                          <div class="attachListDiv">
+                            <img [src]="item.menuItemImage" alt="" class="logoAttachListDiv">
+                            <span class="textAttachListDiv">{{item.name + '(' + item.menuName + ')'}}</span>
+                            <div class="inputDiv">
+                              <mat-form-field class="example-form-field lang">
+                                <input class="inputAttach" matInput type="text"
+                                       (keypress)="numberOnly($event)"
+                                       [value]="item.discountPercentage?item.discountPercentage:discountPercentage"
+                                       (input)="setInputValueEveryItem($event.target.value, item.id,'discountRate')">
+
+                              </mat-form-field>
+                              %
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col ">
+                      <label class="labelTextArea" for="deliveryFee">Delivery Fee</label>
+                      <mat-form-field class="example-form-field lang" id="deliveryFee">
+                        <input matInput type="text"
+                               (keypress)="numberOnly($event)"
+                               [(ngModel)]="bonus.campaignBonus.deliveryFee"
+                               (input)="bonus.campaignBonus.deliveryFee = $event.target.value;getAndSetValueForInput()"
+                               autocomplete="nope">
+
+                      </mat-form-field>
+                      Amd
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-6 ">
+
+                    <div class="col matChipDiv">
+                      <label class="labelTextArea" for="attachMenu">Attach Menu Item</label>
+                      <mat-form-field class="example-chip-list attachMenuItem" id="attachMenu">
+                        <mat-chip-list #chipList>
+                          <mat-chip
+                            *ngFor="let type of attachMenu"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(type.name)">
+                            {{type['name']+'('+type['menuName']+')'}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            matInput
+                            #bonusAttachMenuItem
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="chipList"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                            (keypress)="$event.cancelBubble"
+                          >
+                          <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let type of attachMenuItem " [value]="type">
+                            <img [src]="type.menuItemImage" alt="" class="logoPartner">
+                            {{type['name']+'('+type['menuName']+')'}}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <mat-hint *ngIf="bonusMenuItemValidator">
+                          <span class="mat-error">Menu Item is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div class="col ">
+                      <div class="quantity ">
+                        <label class="labelTextArea" for="Quantity">Quantity</label>
+                        <mat-form-field class="example-form-field lang " id="Quantity">
+                          <input matInput type="text"
+                                 (keypress)="numberOnly($event)"
+                                 [(ngModel)]="bonus.campaignBonus.quantity"
+                                 [defaultValue]="1" [value]="1"
+                                 (input)="getAndSetValueForInput()"
+                                 autocomplete="nope">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <div class="commissionRate">
+                        <label class="labelTextArea" for="CommissionRateforAll">Commission Rate for All </label>
+                        <mat-form-field class="example-form-field lang " id="CommissionRateforAll">
+                          <input matInput type="text" (keypress)="numberOnly($event)" #commissionRateForAll
+                                 [(ngModel)]="bonus.campaignBonus.commissionRate"
+                                 (input)="getAndSetValueForInput($event.target.value,'commissionRate')"
+                                 autocomplete="nope">
+                        </mat-form-field>
+                        %
+                      </div>
+                    </div>
+
+                    <div class='col checkboxContent'>
+                      <div class="commissionRatePerMenu"></div>
+                      <label class="labelTextArea" for="changeCommissionRateStatus">Commission Rate Per<br>Bonus Item</label>
+                      <div class='checkbox' id="changeCommissionRateStatus"
+                           [ngClass]='{"checkboxActive" :changeCommissionRateStatusValue}'
+                           (click)='commissionRateForAll.value = "";changeCommissionRateStatus()'>
+                        <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :changeCommissionRateStatusValue}'>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col  justifyDisplayAlign" *ngIf="changeCommissionRateStatusValue">
+                      <div class="containerItem ">
+                        <div *ngFor="let item of attachMenu; let i = index" class="col-12">
+                          <div class="attachListDiv">
+                            <img [src]="item.menuItemImage" alt="" class="logoAttachListDiv">
+                            <span class="textAttachListDiv">{{item.name + '(' + item.menuName + ')'}}</span>
+                            <div class="inputDiv">
+                              <mat-form-field class="example-form-field lang">
+                                <input class="inputAttach" matInput type="text"
+                                       (keypress)="numberOnly($event)"
+                                       [value]="item.commissionPercentage?item.commissionPercentage:commissionPercentage"
+                                       (input)="setInputValueEveryItem($event.target.value, item.id,'commissionRate')">
+
+                              </mat-form-field>
+                              %
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col">
+
+                      <div id="timePeriod">
+                        <label class="labelTextArea" for="from">Time Period</label>
+                        <div class="timePeriod ">
+                          <label class="labelTextArea" for="from">from</label>
+                          <div class="timePicker" id="from">
+                            <input class="timeInput" #firstTimeElem [value]='firstTimeValue'
+                                   (focus)="focusFunction('firstTime')" (focusout)="focusOutFunction('firstTime')"
+                                   (keypress)="timeValidation($event, firstTimeElem.value, 'firstTimeValue')"
+                                   (keydown)="clearTimeDada($event, 'firstTimeValue')"
+                                   (input)="changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                                   autocomplete="off"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <div class='borderBottom'></div>
+                            <div class='borderContent'>
+                              <div class='borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+                            </div>
+                          </div>
+
+                          <label class="labelTextArea" for="to">to</label>
+                          <div class="timePicker" id="to">
+                            <input class="timeInput" #secondTimeElem [value]='secondTimeValue'
+                                   (focus)="focusFunction('secondTime')" (focusout)="focusOutFunction('secondTime')"
+                                   (keypress)="timeValidation($event, secondTimeElem.value, 'secondTimeValue')"
+                                   (keydown)="clearTimeDada($event, 'secondTimeValue')"
+                                   (input)="changeTimeFormat(secondTimeElem.value, 'secondTimeValue')"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <div class='borderBottom'></div>
+                            <div class='borderContent'>
+                              <div class='borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <div class="validForFirst">
+                        <label class="labelTextArea" for="validForFirst">Valid for First</label>
+                        <mat-form-field class="example-form-field lang" id="validForFirst">
+                          <input matInput type="text"
+                                 (keypress)="numberOnly($event)"
+                                 [(ngModel)]="bonus.campaignBonus.validOrders"
+                                 (input)="bonus.campaignBonus.validOrders = $event.target.value;getAndSetValueForInput()"
+                                 autocomplete="nope">
+                          <button mat-button *ngIf="deliveryFee" matSuffix mat-icon-button aria-label="Clear"
+                                  (click)="deliveryFee=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        orders
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+
+  <!-- Order Fee -->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                  Order Fee
+                </div>
+
+                <div class="row orderFee">
+                      <div class="radiobuttonContent col-6 justify-content-center ">
+                      <div class="radioButton" (click)='bonusRadioClick(0,orderFee,"orderFee")' >
+                        <div class="noChecked" [ngClass]="{ 'checked':  orderFee[0].checked }"></div>
+                      </div>
+                      <div class="radiobuttonNameOrderFee">
+                        <span class="radiobuttonNameOrderFeeSpan">  {{ orderFee[0].name }}</span>
+                      </div>
+                      <div class="radiobuttonNameOrderFeeSpan marginRight" >
+                        <mat-form-field class="example-form-field orderFeeInput mr-3">
+                          <input matInput type="text" (keypress)="numberOnly($event)"
+                                 [(ngModel)]="bonus.campaignBonus.moreThanOrders"
+                                 [disabled]="!orderFee[0].checked"
+                                 (input)="bonus.campaignBonus.moreThanOrders = $event.target.value;getAndSetValueForInput()"
+                                 autocomplete="nope">
+                        </mat-form-field>
+                        <span class="radiobuttonNameOrderFeeSpan">  AMD</span>
+
+                      </div>
+                    </div>
+
+                      <div class="radiobuttonContent col-6 justify-content-center ">
+                        <div class="radioButton" (click)='bonusRadioClick(1,orderFee,"orderFee")' >
+                          <div class="noChecked" [ngClass]="{ 'checked': orderFee[1].checked }"></div>
+                        </div>
+                        <div class="radiobuttonNameOrderFee">
+                          <span class="radiobuttonNameOrderFeeSpan">  {{ orderFee[1].name }}</span>
+                        </div>
+                        <div class="radiobuttonNameOrderFeeSpan" >
+                          <mat-form-field class="example-form-field orderFeeInput mr-3">
+                            <input matInput type="text" (keypress)="numberOnly($event)"
+                                   [disabled]="!orderFee[1].checked"
+                                   [(ngModel)]="bonus.campaignBonus.everyOrders"
+                                   (input)="bonus.campaignBonus.everyOrders = $event.target.value;getAndSetValueForInput()"
+                                   autocomplete="nope">
+                          </mat-form-field>
+                          <span class="radiobuttonNameOrderFeeSpan">  AMD</span>
+                        </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+
+  <!--Personal Bonuses -->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                 Personal Bonuses
+                </div>
+
+                <div class="row orderFee">
+
+
+
+                      <div  class="radiobuttonContentPersonal col-4 justify-content-center">
+                          <div class='checkbox'
+                               [ngClass]='{"checkboxActive" :personalBonuses[0].active}'
+                               (click)='changepersonalBonusesStatus(0,personalBonuses)'>
+                            <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :personalBonuses[0].active}'>
+                            </div>
+                          </div>
+
+                        <div class="radiobuttonNameOrderFee">
+                          <span class="radiobuttonNameOrderFeeSpan">  {{ personalBonuses[0].name }}</span>
+                        </div>
+                        <div class="radiobuttonNameOrderFeeSpan" >
+                          <mat-form-field class="example-form-field orderFeeInput mr-3">
+                            <input matInput (keypress)="numberOnly($event)"
+                                   [value]="emailValue"
+                                   [disabled]="!personalBonuses[0].active"
+                                   type="text" (input)="getValueForInput($event.target.value,personalBonuses[0].name)"
+                                   autocomplete="nope">
+                          </mat-form-field>
+
+                        </div>
+                      </div>
+
+
+                      <div  class="radiobuttonContentPersonal justify-content-center col-4">
+                        <div class='checkbox'
+                             [ngClass]='{"checkboxActive" :personalBonuses[1].active}'
+                             (click)='changepersonalBonusesStatus(1,personalBonuses)'>
+                          <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :personalBonuses[1].active}'>
+                          </div>
+                        </div>
+
+                        <div class="radiobuttonNameOrderFee ">
+                          <span class="radiobuttonNameOrderFeeSpan">  {{ personalBonuses[1].name }}</span>
+                        </div>
+                        <div class="radiobuttonNameOrderFeeSpan" >
+                          <mat-form-field class="example-form-field orderFeeInput mr-3">
+                            <input matInput (keypress)="numberOnly($event)"
+                                   [value]="birthdayValue"
+                                   [disabled]="!personalBonuses[1].active"
+                                   type="text" (input)="getValueForInput($event.target.value,personalBonuses[1].name)"
+                                   autocomplete="nope">
+                          </mat-form-field>
+
+                        </div>
+                      </div>
+
+                      <div class="radiobuttonContentPersonal justify-content-center col-4 ">
+                        <div class='checkbox'
+                             [ngClass]='{"checkboxActive" :personalBonuses[2].active}'
+                             (click)='changepersonalBonusesStatus(2,personalBonuses)'>
+                          <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :personalBonuses[2].active}'>
+                          </div>
+                        </div>
+
+                        <div class="radiobuttonNameOrderFee">
+                          <span class="radiobuttonNameOrderFeeSpan">  {{ personalBonuses[2].name }}</span>
+                        </div>
+                        <div class="radiobuttonNameOrderFeeSpan" >
+                          <mat-form-field class="example-form-field orderFeeInput mr-3">
+                            <input matInput (keypress)="numberOnly($event)"
+                                   [value]="cardValue" [disabled]="!personalBonuses[2].active" type="text"
+                                   (input)="getValueForInput($event.target.value,personalBonuses[2].name)"
+                                   autocomplete="nope">
+                          </mat-form-field>
+
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </mat-drawer-content>
+
+  <mat-drawer-content>
+    <app-customers-list-selection ></app-customers-list-selection>
+  </mat-drawer-content>
+
+
+</mat-drawer-container>
+

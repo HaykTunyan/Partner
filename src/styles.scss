@@ -1,0 +1,1114 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Material Themes
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// Main Color for Project
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$candy-app-primary: mat-palette($mat-blue-gray, 700);
+$candy-app-accent:  mat-palette($mat-blue-gray, 700);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+
+
+$main: #1C333E;
+$admin: #2B2B43;
+$text: #FFFFFF;
+$btn: #75B0CC;
+$normalBtn: #2691BB;
+$headersText: #607D8B;
+$tableText: #424242;
+
+//  Style for View page.
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    min-width: 1200px;
+    height: 100%;
+    overflow-y: auto;
+    background: $main;
+
+}
+
+// Material Icons Style.
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-72 { font-size: 72px; }
+
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-light { color: white; }
+.material-icons.md-main { color: #607D8B };
+.material-icons.md-active { color: #2691BB };
+.material-icons.md-error { color: #FF0000 };
+.material-icons.md-green { color: #59B10D };
+
+// Placelholder Style.
+
+::placeholder {
+    color: white;
+}
+
+// Button Style.
+
+button:focus {
+    outline: 0 auto;
+}
+
+.button-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 5px;
+}
+
+// Color Style
+
+.btn-partner {
+    background: $btn;
+}
+
+.sidenav-list {
+    color: $main;
+}
+
+.main-color {
+    color: $main;
+}
+
+.normal-btn {
+  background: $normalBtn;
+}
+
+.table-text-color {
+  color: $tableText;
+}
+
+.table-custom {
+    background: $text;
+    color:  $main;
+}
+
+.headers-text-color {
+  color: $headersText;
+}
+
+.banner-color {
+    background: $text;
+}
+
+.form-calendar {
+    background: $text;
+    color: $main;
+}
+
+.transparanc-color {
+    background: $main;
+}
+
+.large-text {
+    font-size: 20px;
+}
+
+.medium-text {
+    font-size: 16px;
+}
+
+.small-text {
+    font-size: 14px;
+}
+
+.opacity-6 {
+    opacity: 0.6;
+}
+
+.mat-drawer-container {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: transparent;
+  min-height: 1000px;
+}
+
+.modal-open .modal {
+    overflow-y: auto;
+}
+
+
+// change tooltip text and background color
+.tooltip .tooltip-inner {
+    background-color: #CFD8DC;
+    color: #263238;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.tooltip-arrow {
+background-color: none;
+border-bottom: 7px solid #CFD8DC;
+font-size: 20px;
+}
+.tooltip .tooltip-inner::after {
+    border-color: transparent transparent transparent #CFD8DC;
+}
+
+// Login Page Component Style.
+
+.login {
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: $text;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background-color: $text;
+    }
+}
+
+// Partner List Page Component Table.
+
+.partner-list {
+    .sidenav-divider {
+        background: $text;
+        margin-left: 10px;
+        width: 1px;
+    }
+    .partner-table {
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            color: $text;
+            padding-left: 20px;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-underline {
+            background: $text;
+        }
+        .mat-select-value {
+            color: $text;
+        }
+        .mat-select-arrow {
+            color: $text;
+        }
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            padding-left: 20px;
+        }
+    }
+    .sidenav {
+        .mat-form-field-appearance-legacy .mat-form-field-label,
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            padding-left: 20px;
+        }
+    }
+    .mat-menu-panel {
+        min-width: initial;
+        max-width: inherit;
+    }
+}
+
+// Add Partner Page Component Style.
+
+.add-partner {
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+        border-color: #455A64;
+    }
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+        background-color: #455A64;
+    }
+    .mat-card-header-text {
+        margin: 0;
+    }
+    .name-type {
+        .mat-form-field-infix {
+            position: inherit;
+        }
+        .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+            width: 40px;
+            border: 1px solid #CFD8DC;
+            background: #CFD8DC;
+            border-radius: 10px;
+            text-align: center;
+            color: #607D8B;  
+        }
+        .mat-form-field.mat-focused .mat-form-field-label {
+            width: 48px;
+            height: 21px;
+            border: 1px solid #CFD8DC;
+            background: #CFD8DC;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #607D8B;  
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            width: 48px;
+            height: 21px;
+            border: 1px solid #CFD8DC;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #DB2323;  
+        }
+    }
+    input.mat-chip-input {
+        flex: 1 0 90px;
+        width: 90px; 
+    }
+}
+
+// Edit Partner Page Component Style.
+
+.edit-partner {
+    .mat-card-header-text {
+        margin: 0;
+    }
+    .name-type {
+        .mat-form-field-infix {
+            position: inherit;
+        }
+        .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+            width: 40px;
+            border: 1px solid #CFD8DC;
+            background: #CFD8DC;
+            border-radius: 10px;
+            text-align: center;
+            color: #607D8B;  
+        }
+        .mat-form-field.mat-focused .mat-form-field-label {
+            width: 40px;
+            border: 1px solid #CFD8DC;
+            background: #CFD8DC;
+            border-radius: 10px;
+            text-align: center;
+            color: #607D8B;  
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            width: 40px;
+            border: 1px solid #CFD8DC;
+            border-radius: 10px;
+            text-align: center;
+            color: #DB2323;  
+        }
+    }
+}
+
+// Partmer Menu Page Component Style.
+
+.partner-menu {
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: $text;
+        padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background: $text;
+    }
+    .mat-select-value {
+        color: $text;
+    }
+    .mat-select-arrow {
+        color: $text;
+    }
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+        padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label,
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+        padding-left: 20px;
+    }
+    .mat-form-field {
+        display: block;
+    }
+}
+
+.menu-list {
+    .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+     background-color: #59B10D;   
+    }
+    .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+        background-color: #59B10D;
+    }
+}
+
+// Legal Entity Style.
+
+.legal-entities {
+    .sidenav-divider {
+        background: $text;
+        margin-left: 10px;
+        width: 1px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: $text;
+        padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background: $text;
+    }
+    .mat-select-value {
+        color: $text;
+    }
+    .mat-select-arrow {
+        color: $text;
+    }
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+        padding-left: 20px;
+    }
+    .sidenav {
+        .mat-form-field-appearance-legacy .mat-form-field-label,
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            padding-left: 20px;
+        }
+    }
+    .mat-menu-panel {
+        min-width: initial;
+        max-width: inherit;
+    }
+}
+
+.menu-items {
+    .sidenav-divider {
+        background: $text;
+        margin-left: 10px;
+        width: 1px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: $text;
+        padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background: $text;
+    }
+    .mat-select-value {
+        color: $text;
+    }
+    .mat-select-arrow {
+        color: $text;
+    }
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+        padding-left: 20px;
+    }
+    .sidenav {
+        .mat-form-field-appearance-legacy .mat-form-field-label,
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            padding-left: 20px;
+        }
+    }
+    .mat-menu-panel {
+        min-width: initial;
+        max-width: inherit;
+    }
+}
+
+.option-list {
+    .sidenav-divider {
+        background: $text;
+        margin-left: 10px;
+        width: 1px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: $text;
+        padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background: $text;
+    }
+    .mat-select-value {
+        color: $text;
+    }
+    .mat-select-arrow {
+        color: $text;
+    }
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+        padding-left: 20px;
+    }
+    .sidenav {
+        .mat-form-field-appearance-legacy .mat-form-field-label,
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            padding-left: 20px;
+        }
+    }
+    .mat-menu-panel {
+        min-width: initial;
+        max-width: inherit;
+    }
+}
+
+// Section List Style.
+
+.section-list {
+    .sidenav-divider {
+        background: $text;
+        margin-left: 10px;
+        width: 1px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: $text;
+        padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background: $text;
+    }
+    .mat-select-value {
+        color: $text;
+    }
+    .mat-select-arrow {
+        color: $text;
+    }
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+        padding-left: 20px;
+    }
+    .sidenav {
+        .mat-form-field-appearance-legacy .mat-form-field-label,
+        .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+            padding-left: 20px;
+        }
+    }
+    .mat-menu-panel {
+        min-width: initial;
+        max-width: inherit;
+    }
+}
+
+// Menu All.
+
+.menu-all {
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: $text;
+    padding-left: 20px;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background: $text;
+  }
+  .mat-select-value {
+    color: $text;
+  }
+  .mat-select-arrow {
+    color: $text;
+  }
+  .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+    padding-left: 20px;
+  }
+}
+
+// Commission Rate Page Component Style.
+
+.commission-rate {
+    .mat-form-field-appearance-legacy .mat-form-field-infix {
+        width: 40px;
+    }
+    .mat-tab-label {
+        margin: 0;
+    }
+    .mat-tab-group-dynamic-height .mat-tab-body-content {
+        background: white;
+        border-radius: 10px;
+    }
+    .mat-tab-label {
+        width: 100%;
+        background: #75B0CC;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        margin: 0 5px;
+        opacity: 1;
+        &:active {
+            background: #75B0CC;
+            opacity: 1;
+        }
+    }
+    .mat-tab-label .mat-tab-label-content {
+        color: $text;
+    }
+    .mat-tab-label-active {
+        background: $text;
+        .mat-tab-label-content {
+            color: $main;
+        }
+    }
+}
+
+// Delivery Fee Page Component Style.
+
+.delivery-fee {
+    .mat-form-field-appearance-legacy .mat-form-field-infix {
+        width: 50px;
+    }
+    .mat-tab-label-active {
+        background: $text;
+        .mat-tab-label-content {
+            color: $main;
+        }
+    }
+    .mat-tab-label {
+        opacity: 1;
+    }
+}
+
+// Partner Details Style.
+
+.partner-details {
+    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+        border-color: #455A64;
+    }
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+        background-color: #455A64;
+    }
+    .mat-card-header-text {
+        margin: 0;
+    }
+    .name-type {
+        .mat-form-field-infix {
+            position: inherit;
+        }
+        .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+            width: 40px;
+            border: 1px solid #CFD8DC;
+            background: #CFD8DC;
+            border-radius: 10px;
+            text-align: center;
+            color: #607D8B;  
+        }
+        .mat-form-field.mat-focused .mat-form-field-label {
+            width: 40px;
+            border: 1px solid #CFD8DC;
+            background: #CFD8DC;
+            border-radius: 10px;
+            text-align: center;
+            color: #607D8B;  
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            width: 40px;
+            border: 1px solid #CFD8DC;
+            border-radius: 10px;
+            text-align: center;
+            color: #DB2323;  
+        }
+    }
+}
+
+
+// Log Hystory Page Component Style.
+
+.log-hystory {
+    .mat-header-cell {
+        font-size: 18px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+       color: $text;
+       padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background-color: $text;
+    }
+}
+
+/* Customer Class Style for Project. */
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+    top: 228px;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
+}
+
+.mat-tab-group-dynamic-height .mat-tab-body-content {
+    background: white;
+    border-radius: 10px;
+}
+
+.mat-tab-label {
+    width: -webkit-fill-available;
+    background: #75B0CC;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    &:active {
+        background: white;
+        opacity: 1;
+    }
+}
+
+::ng-deep mat-drawer {
+    position: fixed;
+}
+
+// modal style
+
+.modal-backdrop {
+    display: none;
+}
+
+.modal-dialog {
+    width: inherit;
+}
+
+.modal.fade.in {
+    background: #00000045;
+}
+
+.menu-list {
+    .sidenav {
+        .mat-form-field-appearance-legacy .mat-form-field-underline {
+            background-color: transparent;
+        }
+    }
+    .sidenav-container {
+        .mat-select-arrow {
+            color: white;
+        }
+        .mat-form-field-type-mat-select .mat-form-field-label {
+            color: white;
+
+        }
+        .mat-select-value-text {
+            color: white;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            padding-left: 20px;
+            color: $text;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-underline {
+            background-color: $text;
+        }
+    }
+}
+// reset password.
+.whiteMathInputs{
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: $text;
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background: $text;
+      }
+      .mat-select-value {
+        color: $text;
+      }
+      .mat-select-arrow {
+        color: $text;
+      }
+}
+
+// User Management
+.scrollableContent{
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      color: $text;
+      padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background: $text;
+    }
+    .mat-select-value {
+      color: $text;
+    }
+    .mat-select-arrow {
+      color: $text;
+    }
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+      padding-left: 20px;
+    }
+  .sidenav {
+    .mat-form-field-appearance-legacy .mat-form-field-label,
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+      padding-left: 20px;
+    }
+  }
+  .mat-menu-panel {
+    min-width: initial;
+    max-width: inherit;
+  }
+}
+
+// Reset Password
+
+.resetPassword {
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background: $text;
+  }
+
+  .mat-select-value {
+    color: $text;
+  }
+
+  .mat-select-arrow {
+    color: $text;
+  }
+
+  .mat-menu-panel {
+    min-width: initial;
+    max-width: inherit;
+  }
+}
+
+// Backup Table
+
+.backupTable{
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: $text;
+    padding-left: 20px;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background: $text;
+  }
+  .mat-select-value {
+    color: $text;
+  }
+  .mat-select-arrow {
+    color: $text;
+  }
+  .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+    padding-left: 20px;
+  }
+  .sidenav {
+    .mat-form-field-appearance-legacy .mat-form-field-label,
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+      padding-left: 20px;
+    }
+  }
+  .mat-menu-panel {
+    min-width: initial;
+    max-width: inherit;
+  }
+}
+
+
+// Flow Settings
+
+
+
+//zone-constructor start
+.leaflet-control {
+  display: none !important;
+}
+.leaflet-div-icon {
+  background: #47e797 !important;
+  border: 3px solid #317e62 !important;
+  border-radius: 50%;
+}
+
+/* .leaflet-interactive {
+   stroke : #47e797 !important;
+   fill-opacity : 0 !important;
+
+ }*/
+.leaflet-mouse-marker {
+  background-color: #4968ff;
+  cursor: url('assets/img/mark.png') 0 0, auto !important;
+  border:  1px solid red !important;
+}
+
+.leaflet-draw-guide-dash {
+  font-size: 1%;
+  opacity: 1;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background-color: #284a4a !important;
+}
+
+
+
+.leaflet-draw-tooltip-single{
+  display: none !important;
+}
+//zone-constructor end
+// flow settings
+
+.stopContent{
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: $text;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background: $text;
+  }
+  .mat-select-value {
+    color: $text;
+  }
+  .mat-select-arrow {
+    color: $text;
+  }
+  .mat-menu-panel {
+    min-width: initial;
+    max-width: inherit;
+  }
+}
+
+app-flow-table {
+  .main-color {
+    color: #C0D0D6;
+  }
+  .table-custom {
+    background: $text;
+    color: #C0D0D6;
+  }
+}
+
+.leaflet-control {
+    display: none !important;
+  }
+  .leaflet-div-icon {
+    background: #47e797 !important;
+    border: 3px solid #317e62 !important;
+    border-radius: 50%;
+  }
+  
+  .leaflet-mouse-marker {
+    background-color: #4968ff;
+    cursor: url('assets/img/mark.png') 0 0, auto !important;
+    border:  1px solid red !important;
+  }
+  
+.leaflet-draw-guide-dash {
+    font-size: 1%;
+    opacity: 1;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background-color: #284a4a !important;
+}
+  
+.leaflet-draw-tooltip-single{
+    display: none !important;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: fit-content;
+        margin: 1.75rem auto;
+    }
+}
+
+// Media for larg version
+@media (min-width: 1200px) {
+    .container {
+        max-width: auto;
+        width: auto;
+    }
+    .modal-lg {
+        max-width: inherit;
+        width: 1000px;
+    }
+    /* main style. */
+    .main {
+        padding: 1rem;
+    }
+}
+
+//campaign style
+.newCampaign {
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    width: 40px !important;
+    border: 1px solid #CFD8DC;
+    border-radius: 10px;
+    text-align: center;
+    color: #DB2323 !important;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: rgba(0, 0, 0, 0.42);
+  }
+
+
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #455A64;
+  }
+
+  .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #455A64;
+  }
+
+  .mat-card-header-text {
+    margin: 0;
+  }
+
+  .name-type {
+    .mat-form-field-infix {
+      position: inherit;
+    }
+
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      width: 40px;
+      border: 1px solid #CFD8DC;
+      background: #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #607D8B;
+    }
+
+    .mat-form-field.mat-focused .mat-form-field-label {
+      width: 40px;
+      border: 1px solid #CFD8DC;
+      background: #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #607D8B;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      width: 40px;
+      border: 1px solid #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #DB2323 !important;
+    }
+  }
+}
+
+// Gifts List Page Component Table.
+.gifts-list {
+  .sidenav-divider {
+    background: white;
+    margin-left: 10px;
+    width: 1px;
+  }
+  .gifts-table {
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      color: $text;
+      padding-left: 20px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background: $text;
+    }
+    .mat-select-value {
+      color: white;
+    }
+    .mat-select-arrow {
+      color: white;
+    }
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+      padding-left: 20px;
+    }
+  }
+  .sidenav {
+    .mat-form-field-appearance-legacy .mat-form-field-label,
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+      padding-left: 20px;
+    }
+  }
+  .mat-menu-panel {
+    min-width: initial;
+    max-width: inherit;
+  }
+}
+
+// Edit Menu List Page Component Table.
+
+.edit-menu {
+  .sidenav-divider {
+    background: $text;
+    margin-left: 10px;
+    width: 1px;
+  }
+
+  .edit-menu-table {
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      color: $text;
+      padding-left: 20px;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background: $text;
+    }
+
+    .mat-select-value {
+      color: $text;
+    }
+
+    .mat-select-arrow {
+      color: $text;
+    }
+
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+      padding-left: 20px;
+    }
+  }
+
+  .sidenav {
+    .mat-form-field-appearance-legacy .mat-form-field-label,
+    .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+      padding-left: 20px;
+    }
+  }
+
+  .mat-menu-panel {
+    min-width: initial;
+    max-width: inherit;
+  }
+
+}
+
+//----------------------------------------------------------------ng2-dragula
+/* in-flight clone */
+.gu-mirror:not(#header) {
+  position: fixed !important;
+  display: inline-table !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 10%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
+  pointer-events: none;
+}
+
+/* high-performance display:none; helper */
+.gu-hide:not(#header) {
+  left: -9999px !important;
+}
+
+/* added to mirrorContainer (default = body) while dragging */
+.gu-unselectable:not(#header) {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* added to the source element while its mirror is dragged */
+.gu-transit:not(#header) {
+  opacity: 20 !important;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+.greenBlueCheckboxStyle {
+  .mat-checkbox-frame {
+    border: 1px solid #A1C9DC;
+  }
+
+  .mat-checkbox-background, .mat-checkbox-frame {
+    border: 1px solid #A1C9DC;
+  }
+
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: white;
+  }
+
+  .mat-checkbox-checkmark-path {
+    stroke: #61B518 !important;
+  }
+}

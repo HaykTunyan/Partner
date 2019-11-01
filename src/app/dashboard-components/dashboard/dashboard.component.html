@@ -1,0 +1,28 @@
+<!-- Dashboard Component -->
+
+<!-- header admin -->
+<header-admin></header-admin>
+<!-- main -->
+<main role="main" class="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let item of dashboardData">
+        <!-- Card -->
+        <mat-card class="card d-flex">
+          <mat-card-content class="card-square d-flex">
+            <i class="material-icons card-icon float-left"> {{item.icon}} </i>
+            <div class="card-banneri">
+              <span class="banneri-title"> {{item.name}} </span>
+              <button mat-raised-button
+                      color="primary"  [disabled] = '!roleNames[item.role]'
+                      class="forg-link d-flex"
+                      routerLink="{{item.routerLink}}">
+                Go To Platform
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</main>

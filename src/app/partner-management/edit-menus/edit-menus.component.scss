@@ -1,0 +1,633 @@
+nav button:focus {
+  background: #75B0CC;;
+}
+
+// sidenav content
+
+.sidenav-content {
+  display: flex;
+  padding: 0 15px;
+  min-height: 1000px;
+}
+
+// sidenav
+
+.sidenav {
+  padding: 20px;
+  border-radius: 10px;
+
+  .sidenav-list {
+    font-size: 16px;
+  }
+
+  .menus-icon {
+    top: 40px;
+    color: #949494;
+  }
+}
+
+// table
+
+.table thead th {
+  border-bottom: none;
+  //min-width: 145px;
+}
+
+.table .tbody-custom th label {
+  color: #607D8B !important;
+  font-weight: bold !important;
+}
+
+.table {
+  border-spacing: 2px;
+
+  ::ng-deep .mat-form-field-infix {
+    width: auto;
+  }
+
+  tbody td:not(:last-child) {
+    padding-left: 1rem;
+  }
+
+  tbody {
+    tr td:first-child {
+      ::ng-deep label {
+        margin-bottom: 0rem;
+      }
+    }
+  }
+
+  th, td {
+    border-top: 3px solid #1C333E;
+    border-left: 3px solid;
+    padding: 0px;
+    line-height: 2.5;
+  }
+
+  th {
+    line-height: 2.8;
+  }
+}
+
+
+.head-custom {
+  border-radius: 20px;
+  background: white;
+
+  .table-tools {
+    border-left: 10px solid;
+    border-right: 10px solid;
+  }
+
+  th {
+    padding: 0rem 0rem 0rem 1rem;
+    font-size: 16px;
+  }
+
+}
+
+.tbody-custom {
+  tr td {
+    background-color: white;
+  }
+
+  //border-top: 5px solid;
+  th:first-child {
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  th:last-child {
+    border-radius: 20px;
+  }
+
+  tr td:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .city-style {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .tools-btn {
+    border-radius: 20px;
+    border-left: 10px solid;
+    border-right: 10px solid;
+    width: 20% !important;
+
+    .button-row {
+      min-width: 311px;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+
+      button {
+        width: 30px;
+        height: 30px;
+        line-height: 0px;
+      }
+    }
+  }
+}
+
+.thead-custom {
+  th:last-child {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  th:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .auto-icon {
+    top: 35px;
+    cursor: pointer;
+  }
+
+  .sn-size {
+    width: 90px;
+  }
+}
+
+.table-list {
+  padding-top: 30px;
+}
+
+// customer style.
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent;
+}
+
+mat-drawer-backdrop {
+  background-color: transparent;
+}
+
+.mat-list .mat-list-item {
+  height: 35px;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+// edit menu navbar
+
+.menu-edit-navbar {
+  margin-top: 1rem;
+  color: white;
+
+  .menu-edit-logo {
+    top: 20px;
+  }
+
+  .btn-edit-menu {
+    background: #2691BB;
+    padding: 10px 45px;
+  }
+
+  .menu-btn {
+    bottom: 7px
+  }
+
+  .mat-button,
+  .mat-raised-button {
+    font-size: 20px;
+  }
+}
+
+.input-name {
+  top: 15px;
+}
+
+.chips-field {
+  .mat-form-field-flex {
+    position: relative;
+    bottom: 20px;
+  }
+}
+
+.form-select {
+  height: auto;
+}
+
+//Change width Add filter & column
+
+::ng-deep .cdk-overlay-container .mat-menu-panel {
+  max-width: 300px;
+  min-width: 275px;
+}
+
+mat-drawer {
+  position: fixed;
+}
+
+.search-results {
+  height: 850px;
+  overflow: scroll;
+}
+
+.edit-menu-table {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  display: block;
+
+  .menus-icon {
+    top: 35px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #CFD8DC;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+}
+
+.center-aligned-header > .mat-content {
+  justify-content: center;
+}
+
+mat-expansion-panel {
+  background-color: #C0D0D6;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}
+
+[data-toggle="toggle"] {
+  display: none;
+}
+
+.hideSectionContent {
+  display: none;
+}
+
+.blackBackground {
+  background-color: black;
+}
+
+.cards {
+  border-radius: 10px;
+  background-color: #CFD8DC;
+}
+
+.table-hover tbody tr:hover {
+  background-color: white !important;
+}
+
+table.table-striped tbody tr:not(:nth-child(1)):not(:nth-child(2)):nth-child(odd) > td,
+table.table-striped tbody tr:not(:nth-child(1)):not(:nth-child(2)):nth-child(odd) > th {
+  background-color: #ECEFF1; // Choose your own color here
+}
+
+table.table-hover tbody tr:not(:nth-child(1)):not(:nth-child(2)):hover td,
+table.table-hover tbody tr:not(:nth-child(1)):not(:nth-child(2)):hover th {
+  background-color: #CFD8DC !important;
+}
+
+
+// Add menu item
+.modal-attachmenu {
+  overflow: visible !important;
+  width: 50%;
+  min-height: 65vh;
+  background: white;
+  margin: 0 auto;
+  overflow-y: scroll;
+  border-radius: 10px;
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .vertical-divider {
+    background: black;
+    width: 2px;
+  }
+}
+
+//modal big div styles
+.modalDiv {
+  width: 100%;
+  padding-top: 5%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 1);
+  overflow-y: scroll;
+  //z-index: 100000000;
+}
+
+.mt-25 {
+  margin-top: -15px;
+}
+
+textarea {
+  resize: none !important;
+  border: 1px solid #607D8B;;
+  border-radius: 10px;
+  outline: none !important;
+
+  :focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+//Error mssage styles
+.error-message {
+  color: #f44336;
+  margin-top: -15px;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+// Add add-menu-item modal Name, Description fields Styles.
+::ng-deep .add-menu-item {
+  .name-type {
+    .mat-form-field-infix {
+      position: inherit;
+      //padding-bottom: 40px;
+    }
+
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      width: 50px;
+      border: 1px solid #CFD8DC;
+      background: #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #607D8B;
+      padding: 4px;
+    }
+
+    .mat-form-field.mat-focused .mat-form-field-label {
+      width: 50px;
+      border: 1px solid #CFD8DC;
+      background: #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #607D8B;
+      padding: 4px;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      width: 50px;
+      border: 1px solid #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #DB2323;
+      padding: 4px;
+    }
+  }
+
+  //input.mat-chip-input {
+  //  flex: 1 0 90px;
+  //  width: 90px;
+  //}
+}
+
+.activeStyle {
+  width: 50px;
+  border: 1px solid #CFD8DC;
+  background: #CFD8DC;
+  border-radius: 10px;
+  text-align: center;
+  color: #607D8B;
+  padding: 4px;
+}
+
+.notActiveStyle {
+  width: 50px;
+  border: 1px solid #CFD8DC;
+  border-radius: 10px;
+  text-align: center;
+  color: #DB2323;
+  padding: 4px;
+}
+
+//Upload images
+.file-input {
+  display: none;
+}
+
+.upload-btn {
+  padding: 7px 10px;
+  background: white;
+  color: black;
+  border: 1px solid #000000;
+  border-radius: 6px;
+}
+
+.upload-img {
+  width: 80px;
+  height: 80px;
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.delete-button {
+  position: absolute;
+  //right: 33%;
+  //top: 18px;
+  color: white;
+}
+
+
+.border1 {
+  width: 110px;
+  border: 1px solid #6D6D6D;
+  position: absolute;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 39px;
+  right: 50px;
+}
+
+.border2 {
+  width: 110px;
+  /* height: 80px; */
+  border: 1px solid #6D6D6D;
+  position: absolute;
+  transform: rotate(135deg);
+  top: 39px;
+  right: 50px;
+}
+
+.border3 {
+  border: 1px solid #6D6D6D;
+}
+
+.uploadImage img {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #C0D0D6;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.nameContent {
+  ::ng-deep .mat-form-field-infix {
+    padding-bottom: 5px;
+    margin-top: 0;
+  }
+}
+
+.add-menu-item {
+  span {
+    font-size: 16px !important;
+    color: #607D8B;
+    font-weight: bold !important;
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    margin-top: 0;
+  }
+
+  .logoStyles {
+    position: absolute;
+    top: -50px;
+    right: 90px;
+
+    img {
+      width: 100px;
+      height: 100px;
+      padding: 20px;
+      -webkit-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      background-color: #2691BB
+    }
+  }
+
+  .popupButtonsContent {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .checkbox {
+    width: 40px;
+    height: 20px;
+    background-color: #797E7A;
+    border-radius: 17px;
+    float: left;
+    margin-right: 10px;
+    position: relative;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+
+  .checkboxButton {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: -1px;
+    top: -2px;
+    background-color: #87969c;
+    border-radius: 50%;
+    transition: left linear 100ms;
+  }
+
+  .checkboxButtonT {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: -1px;
+    top: -2px;
+    background-color: #CED1D6;
+    border-radius: 50%;
+    transition: left linear 100ms;
+  }
+
+  .checkboxActive {
+    background-color: rgba(89, 177, 13, 0.5);
+  }
+
+  .checkboxButtonActive {
+    background-color: #59B10D;
+    left: 17px;
+  }
+
+  .checkboxContent {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .checkboxText {
+    float: left;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .buttonContents {
+    display: flex;
+    justify-content: end;
+
+    .cancel {
+      background-color: transparent;
+      color: white;
+      font-weight: bold;
+    }
+
+    .invite {
+      background-color: #2691BB;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 12px;
+
+      :hover {
+        background-color: #75B0CC;
+      }
+
+      :visited {
+        background-color: #75B0CC;
+      }
+
+      :active {
+        background-color: #75B0CC;
+      }
+    }
+  }
+}
+
+.text-black {
+  color: black;
+}
+
+.table-custom {
+  background-color: transparent;
+}
+
+

@@ -1,0 +1,54 @@
+// Header Component Style
+
+.admin-user {
+    top: 45px;
+}
+
+.flag-radius {
+    border: 10px solid #2b2b43;
+    border-radius: 50%;
+}
+.admin-flag {
+    border: 10px solid #40B8B7;
+    border-radius: 50%;
+    width: 65px;
+}
+
+.admin-info {
+
+    p {
+        top: 1.5rem;
+        opacity: 0.6;
+    }
+}
+
+// nav a hover
+.nav a.white-text {
+    // border-bottom: 2px solid transparent; 
+    &:hover {
+        color: #e0e0e0!important;
+        border-bottom: 2px solid #40B8B7;
+        text-decoration: none;
+    }
+    &:active {
+        color: #e0e0e0!important;
+        border-bottom: 2px solid #40B8B7;
+        text-decoration: none;
+    }
+ }
+
+ .active-link {
+    color: #e0e0e0!important;
+    border-bottom: 2px solid #40B8B7;
+    text-decoration: none;
+ }
+
+
+ @media (min-width: 992px) {
+     .admin-flag {
+         width: 100%;
+     }
+     .flag-radius {
+         bottom: 15px;
+     }
+ }

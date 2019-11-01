@@ -1,0 +1,254 @@
+.contentForScroll{
+  overflow-y: scroll;
+  height: 100vh;
+  padding-bottom: 200px;
+}
+.titleContent {
+  padding-left: 6%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.titleIcon {
+  color: white;
+  font-size: 28px;
+  font-weight: 100;
+}
+
+.titleText {
+  margin-top: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.allPadding{
+  padding-right: 40px;
+  padding-left: 45px;
+}
+.box{
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.boxTitle{
+  height: 65px;
+  display: flex;
+  background-color: #C0D0D6;
+  justify-content: center;
+  align-items: center;
+  color:#607D8B;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.allTimeContent{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.backupStartTimesContent{
+  padding: 10px 10px 10px 20px;
+  display:flex;
+  justify-content: start;
+  position: relative;
+}
+.buttonsContent{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.cancelButton{
+  background-color: transparent;
+  box-shadow: none;
+  color: #424242;
+  font-size: 16px;
+  border-radius: 10px;
+}
+.saveButton{
+  border-radius: 5px;
+  background-color: #2691BB !important;
+  width: 160px;
+  font-size: 16px;
+}
+.backupSetTimesEndDateContent{
+  padding-top: 20px;
+}
+
+.box1Title{
+  color: #607D8B;
+  font-weight: bold;
+  padding-left: 20px;
+  margin-top: 35px;
+}
+
+.stopContent{
+  background-color: #607D8B;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px 0px 10px;
+}
+.inputContent{
+  width: 170px;
+  padding: 5px 25px 0px 5px;
+}
+.inputTitle{
+  font-size: 10px;
+  color: white;
+}
+.stopInputs{
+  width: 100%;
+}
+.inputWhite{
+  color: white;
+}
+.deleteIcon{
+  color: #CFD8DC;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.selectOptionContent{
+  position: relative;
+}
+.selectOption{
+  float: left;
+  margin-left: 10px;
+  min-height: 25px;
+  position: absolute;
+  left: -10px;
+  width: 100%;
+  z-index: 20;
+  top: 28px;
+  padding-top: 19px;
+}
+.optionContentStyle{
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  padding: 15px 15px 25px 15px;
+}
+.option{
+  padding: 10px 0px 11px 18px;
+  border-bottom: 1px solid #607D8B;
+  color: #607D8B;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 40px;
+}
+.selectOptionButton {
+  position: absolute;
+  right: 0px;
+  bottom: 20px;
+  z-index: 5;
+  cursor: pointer;
+}
+.addTimeButtonContent{
+  float: left;
+  padding-left: 25px;
+  padding-top: 28px;
+}
+.addTimeButton{
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #607D8B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.addIcon{
+  color: white;
+}
+::ng-deep .tooltip .tooltip-inner {
+  background-color: #CFD8DC;
+  color: #263238;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .tooltip-arrow {
+  background-color: none;
+  border-bottom: 7px solid #CFD8DC;
+  font-size: 20px;
+}
+
+::ng-deep .tooltip .tooltip-inner::after {
+  border-color: transparent transparent transparent #CFD8DC;
+}
+.oldStopContent{
+  position: relative;
+  padding: 0px 10px 10px 20px;
+  margin-bottom: 25px;
+}
+.likeInput{
+  border-bottom: 1px solid white;
+  color: white;
+  padding-bottom: 3px;
+  margin: 16px 0px 20px 0px;
+  height: 28px;
+  font-weight: 400;
+}
+.widthControl{
+  width: 563px;
+  margin-top: 20px;
+}
+
+.inputAndTextContent {
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0px 10px 20px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.inputName {
+  margin-right: 10px;
+}
+.inputContentAndText{
+  width: 70%;
+}
+.smallInput{
+  width: 50px;
+  padding: 0px !important;
+}
+.inputText{
+  font-size: 10px;
+  font-weight: 400;
+}
+.checkboxsContent{
+  margin-top: -15px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.checkbox{
+  margin-left: 20px;
+}
+.noPadding{
+  padding: 0px 0px 0px 5px;
+  width: 200px;
+  display: inline-block;
+}
+.backgroundColor{
+  background-color: #C0D0D6;
+  padding: 0px 10px 1px 10px;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.b{
+  border: solid 1px red;
+}

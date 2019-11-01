@@ -1,0 +1,413 @@
+<!-- Menu Items List Component View -->
+
+<!-- mat sidenav container -->
+<mat-drawer-container class="sidenav-container">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content class="menu-items">
+    <!-- header -->
+    <header>
+      <div class="container-fluid">
+        <div class="legal-navbar">
+          <nav class="nav d-flex justify-content-between">
+            <div class="legal-brand d-flex float-left">
+              <div class="legal-logo position-relative ml-3">
+                <i class="material-icons position-relative child-icon white-text">store</i>
+                <strong class="position-relative part-btn">
+                  <button mat-button routerLink="/menu" routerLinkActive="active" type="button">
+                    Menu
+                  </button>
+                </strong>
+                <strong class="position-relative child-icon"><i class="material-icons">keyboard_arrow_right</i></strong>
+                <strong class="position-relative part-btn">
+                  <button mat-button routerLink="/menu-items" routerLinkActive="active" type="button">
+                    All Items List
+                  </button>
+                </strong>
+              </div>
+            </div>
+            <div class="button-navbar float-right">
+              <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom"
+                      mdbTooltip="Notifications">
+                <i class="material-icons md-36">notifications</i>
+              </button>
+              <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User"
+                      [matMenuTriggerFor]="menu">
+                <i class="material-icons md-36">person</i>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/login">Sign Out</button>
+              </mat-menu>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- sidenav content -->
+    <div class="sidenav-content">
+      <!-- menu items -->
+      <div class="container-fluid mt-4">
+        <div class="data-table w-100">
+          <table mdbTable *ngIf="this.selectedOne && this.selectedOne.length !== 0 || selectedAll">
+            <thead class="main-color thead-custom">
+            <!-- button thead -->
+            <tr>
+              <!-- button row -->
+              <th scope="col">
+                <div class="button-row">
+                  <!-- Create -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Edit List">
+                    <mat-icon><i class="material-icons md-light">create</i></mat-icon>
+                  </button>
+                  <!-- Contacts -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Partner Menu">
+                    <mat-icon><i class="material-icons md-light">restaurant</i></mat-icon>
+                  </button>
+                  <!-- Percent -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Commission Rate">
+                    <mat-icon class="percent-icon position-relative"><i class="material-icons md-light">widgets</i>
+                    </mat-icon>
+                  </button>
+                  <!-- Money -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Transition">
+                    <mat-icon><i class="material-icons md-light">monetization_on</i></mat-icon>
+                  </button>
+                  <!-- Date -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Working Time">
+                    <mat-icon><i class="material-icons md-light">date_range</i></mat-icon>
+                  </button>
+                </div>
+              </th>
+            </tr>
+            </thead>
+          </table>
+          <!-- legal entity table and filter -->
+          <table mdbTable striped="true" hover="true">
+            <thead class="main-color thead-custom" id="header">
+            <!-- search thead -->
+            <tr>
+              <!-- S/N. -->
+              <th scope="col" class="sn-size" *ngIf="menuListElements[0].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="S/N" class="white-text" type="text"
+                         (keypress)="numberValidation($event)">
+                </mat-form-field>
+              </th>
+              <!-- Product. -->
+              <th scope="col" *ngIf="menuListElements[1].checked">
+                <mat-icon class="float-right auto-icon position-relative"><i
+                  class="material-icons  white-text">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Product" aria-label="Number" matInput
+                         [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let product of products" [value]="product">
+                      {{product}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!-- Status. -->
+              <th scope="col" *ngIf="menuListElements[2].checked">
+                <mat-icon class="float-right auto-icon position-relative"><i
+                  class="material-icons  white-text">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Status" aria-label="Number" matInput
+                         [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let status of statuses" [value]="status">
+                      {{status}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!-- Serch by Product Name. -->
+              <th scope="col" *ngIf="menuListElements[3].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Serch by Product Name">
+                </mat-form-field>
+              </th>
+              <!-- Delivery Condition. -->
+              <th scope="col" *ngIf="menuListElements[4].checked">
+                <mat-icon class="float-right auto-icon position-relative"><i
+                  class="material-icons  white-text">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Delivery Condition" aria-label="Number" matInput
+                         [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let condition of conditions" [value]="condition">
+                      {{condition}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!-- Measurement. -->
+              <th scope="col" *ngIf="menuListElements[5].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Measurement">
+                </mat-form-field>
+              </th>
+              <!-- Price. -->
+              <th scope="col" *ngIf="menuListElements[6].checked">
+                <mat-icon class="float-right auto-icon position-relative"><i
+                  class="material-icons  white-text">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Price" aria-label="Number" matInput
+                         [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let price of prices" [value]="price">
+                      {{price}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+
+              <!-- Serch by partner Name. -->
+              <th scope="col" *ngIf="menuListElements[7].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Serch by Partner Name">
+                </mat-form-field>
+              </th>
+              <!-- Section -->
+              <th scope="col" *ngIf="menuListElements[8].checked">
+                <mat-icon class="float-right auto-icon position-relative"><i
+                  class="material-icons  white-text">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Sections" aria-label="Number" matInput
+                         [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let section of sections" [value]="section">
+                      {{section}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!-- Serch by Additional Delivery Amout. -->
+              <th scope="col" *ngIf="menuListElements[9].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Serch by Additional Delivery Amout">
+                </mat-form-field>
+              </th>
+              <!-- Cateory -->
+              <th scope="col" *ngIf="menuListElements[10].checked">
+                <mat-icon class="float-right auto-icon position-relative"><i
+                  class="material-icons  white-text">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Category" aria-label="Number" matInput
+                         [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let category of categories" [value]="category">
+                      {{category}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!-- Serch by Commision Category. -->
+              <th scope="col" *ngIf="menuListElements[11].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Serch by Commision Category">
+                </mat-form-field>
+              </th>
+              <!-- Keywords -->
+              <th scope="col" *ngIf="menuListElements[12].checked">
+                <mat-icon class="float-right auto-icon position-relative"><i
+                  class="material-icons  white-text">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Keywords" aria-label="Number" matInput
+                         [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let keyword of keywords" [value]="keyword">
+                      {{keyword}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!-- Serch by to be ordered previously.-->
+              <th scope="col" *ngIf="menuListElements[13].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Serch by to be ordered previously">
+                </mat-form-field>
+              </th>
+              <!-- Serch by preparation time.-->
+              <th scope="col" *ngIf="menuListElements[14].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Serch by preparation time">
+                </mat-form-field>
+              </th>
+              <!-- Description. -->
+              <th scope="col" *ngIf="menuListElements[15].checked" style="visibility: hidden">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Description">
+                </mat-form-field>
+              </th>
+
+              <!-- Table column btn and download -->
+              <th scope="col" class="tools-btn">
+                <div class="d-flex pb-3 justify-content-end align-items-center">
+                  <!-- Add filter and collumn -->
+                  <button mat-icon-button [matMenuTriggerFor]="collummenu"
+                          placement="bottom"
+                          mdbTooltip="Add Filter & Column" class="mr-1">
+                    <i class="material-icons md-light md-36">add_circle</i>
+                  </button>
+                  <mat-menu #collummenu="matMenu" class="p-3">
+                    <ng-container>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <div class="table-list">
+                        <mat-list (click)="$event.stopPropagation()">>
+                          <mat-list-item *ngFor="let menuList of menuListElements">
+                            <mat-checkbox [(ngModel)]="menuList.checked">{{menuList.name}}</mat-checkbox>
+                            <mat-divider></mat-divider>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+                      <!-- lsit for collums and filters -->
+                    </ng-container>
+                  </mat-menu>
+                  <!-- Down to Excel -->
+                  <button mat-icon-button
+                          placement="bottom"
+                          mdbTooltip="Download Table">
+                    <i class="material-icons md-light md-36">archive</i>
+                  </button>
+                  <!-- Down to Excel -->
+                  <button mat-icon-button
+                          placement="bottom"
+                          mdbTooltip="Download Table">
+                    <i class="material-icons md-light md-36">unarchive</i>
+                  </button>
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody class="banner-color table-custom tbody-custom">
+            <tr class="head-custom stripedTable">
+              <th scope="col" class="font-weight-bold header-name" *ngIf="menuListElements[0].checked">
+                <mat-checkbox [(ngModel)]="selectedAll"
+                              [indeterminate]="this.selectedOne && this.selectedOne.length !== 0 && !selectedAll"
+                              (change)="selectAll();"><span class="headers-text-color">S/N</span>
+                </mat-checkbox>
+              </th>
+              <ng-container *ngFor="let menuList of menuListElements; let i=index">
+                <th scope="col" *ngIf="menuList.checked && i !== 0" scope="col"
+                    class="font-weight-bold header-name">
+                  <span class="headers-text-color">{{menuList.name}}</span>
+                </th>
+              </ng-container>
+              <th scope="col" class="table-tools font-weight-bold text-center city-style" style="width: 150px !important;">
+                <span class="headers-text-color">Tools</span>
+              </th>
+            </tr>
+
+            <tr mdbTableCol *ngFor="let item of menus; let itemInd=index">
+              <!-- id -->
+              <td *ngIf="menuListElements[0].checked">
+                <mat-checkbox [(ngModel)]="item.checked" (change)="checkIfAllSelected(); checkIfOneSelected()">
+                  {{item.id}}
+                </mat-checkbox>
+              </td>
+              <!-- product -->
+              <td *ngIf="menuListElements[1].checked">{{item.product}}</td>
+              <!-- status -->
+              <td *ngIf="menuListElements[2].checked">{{item.status}}</td>
+              <!-- name -->
+              <td *ngIf="menuListElements[3].checked">{{item.name}}</td>
+              <!-- delivery Condition -->
+              <td *ngIf="menuListElements[4].checked">{{item.deliveryCondition}}</td>
+              <!-- measurement -->
+              <td *ngIf="menuListElements[5].checked">{{item.measurement}}</td>
+              <!-- price -->
+              <td *ngIf="menuListElements[6].checked">{{item.price}}</td>
+              <!-- partner -->
+              <td *ngIf="menuListElements[7].checked">{{item.partner}}</td>
+              <!-- section -->
+              <td *ngIf="menuListElements[8].checked">{{item.section}}</td>
+              <!-- additional delivery amount -->
+              <td *ngIf="menuListElements[9].checked">{{item.deliveryAmount}}</td>
+              <!-- category -->
+              <td *ngIf="menuListElements[10].checked">{{item.category}}</td>
+              <!-- commision category -->
+              <td *ngIf="menuListElements[11].checked">{{item.commisionCategory}}</td>
+              <!-- keywords -->
+              <td *ngIf="menuListElements[12].checked">{{item.keywords}}</td>
+              <!--to be ordered previously-->
+              <td *ngIf="menuListElements[13].checked">{{item.previouslyOrderedDays}}</td>
+              <!-- preparation time -->
+              <td *ngIf="menuListElements[14].checked">{{item.preparationTime}}</td>
+              <!-- description -->
+              <td *ngIf="menuListElements[15].checked">{{item.description}}</td>
+
+              <!-- tools -->
+              <td class="tools-btn" style="width: 150px !important;">
+                <div class="button-row text-center">
+                  <!-- Edit Partner -->
+                  <button mat-icon-button (click)="edit(ind, itemInd)" routerLinkActive="active"
+                          placement="bottom"
+                          mdbTooltip="Update Partner">
+                    <mat-icon><i class="material-icons md-main">create</i></mat-icon>
+                  </button>
+                  <!-- Attache option -->
+                  <button mat-icon-button (click)="tool='attacheOption'" routerLinkActive="active"
+                          placement="bottom"
+                          mdbTooltip="Attache option">
+                    <mat-icon><i class="material-icons md-main">
+                      <mat-icon>device_hub</mat-icon>
+                    </i></mat-icon>
+                  </button>
+                  <!-- Partner Details -->
+                  <button mat-icon-button (click)="tool='createEdit'" routerLinkActive="active"
+                          placement="bottom"
+                          mdbTooltip="Partner Details">
+                    <mat-icon><i class="material-icons md-main">description</i></mat-icon>
+                  </button>
+                  <!-- Log History -->
+                  <button mat-icon-button routerLink="/log-history" routerLinkActive="active" placement="bottom"
+                          mdbTooltip="Log History">
+                    <mat-icon><i class="material-icons md-main">history</i></mat-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- /table data -->
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

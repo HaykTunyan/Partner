@@ -1,0 +1,94 @@
+// Order Type Component Style
+
+.allPadding {
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+.pageTitle {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding-left: 40px;
+  padding-top: 30px;
+  margin-bottom: 30px;
+}
+
+.publicIcon {
+  margin-right: 10px;
+  font-size: 28px;
+}
+
+.box {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 400px;
+}
+
+.boxTitleContent {
+  background-color: #B4CAD8;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #607D8B;
+  font-weight: bold;
+}
+
+.content {
+  padding: 20px;
+}
+
+.checkboxContent {
+  border-bottom: 1px solid #C0D0D6;
+  display: flex;
+  min-height: 45px;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.checkboxTitle {
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.checkbox {
+  height: 16px;
+  border-radius: 17px;
+  background-color: rgba(207, 216, 220, 0.5);
+  width: 34px;
+  cursor: pointer;
+  position: relative;
+}
+
+.active {
+  background-color: rgba(89, 177, 13, 0.5);
+}
+
+.checkboxButton {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #CFD8DC;
+  left: 0px;
+  top: -2px;
+  transition: left linear 50ms;
+}
+
+.activeButton {
+  background-color: #59B10D;
+  left: 15px;
+  top: -2px;
+}
+
+.b {
+  border: solid 1px red;
+}

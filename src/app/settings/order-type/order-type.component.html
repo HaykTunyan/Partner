@@ -1,0 +1,85 @@
+<mat-drawer-container class="sidenav-container partner-list">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12 pageTitle">
+              <mat-icon class="publicIcon">receipt</mat-icon>
+              Order Type
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class='box'>
+                <div class="boxTitleContent">
+                <span>
+                   Delivery Types
+                </span>
+                </div>
+                <div class='content'>
+                  <div *ngFor='let delivery of deliveryData; let i = index' class="checkboxContent">
+                  <span class="checkboxTitle">
+                    {{ delivery.name }}
+                  </span>
+                    <span>
+                    <div class='checkbox' [ngClass]="{ 'active': delivery.active }"
+                         (click)="IsEdit ? activateDelivery(delivery, i): false">
+                      <span class='checkboxButton' [ngClass]="{ 'activeButton': delivery.active }"></span>
+                    </div>
+                  </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class='box'>
+                <div class="boxTitleContent">
+                  Order Groups
+                </div>
+                <div class='content'>
+                  <div *ngFor='let orderGroup of orderGroupsData; let i = index' class="checkboxContent">
+                  <span class="checkboxTitle">
+                    {{ orderGroup.name }}
+                  </span>
+                    <span>
+                    <div class='checkbox' [ngClass]="{ 'active': orderGroup.active }"
+                         (click)="IsEdit ? activateOrderGroups(orderGroup, i): false">
+                      <span class='checkboxButton' [ngClass]="{ 'activeButton': orderGroup.active }"></span>
+                    </div>
+                  </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class='box'>
+                <div class="boxTitleContent">
+                  Modules
+                </div>
+                <div class='content'>
+                  <div *ngFor='let module of modulesData; let i = index' class="checkboxContent">
+                  <span class="checkboxTitle">
+                    {{ module.name }}
+                  </span>
+                    <span>
+                      <div class='checkbox' [ngClass]="{ 'active': module.active }"
+                           (click)="IsEdit ? activateModules(module, i): false">
+                        <span class='checkboxButton' [ngClass]="{ 'activeButton': module.active }"></span>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

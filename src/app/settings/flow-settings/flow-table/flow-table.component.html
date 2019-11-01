@@ -1,0 +1,255 @@
+<div class="boxTitle">
+  Acceptable Status Delay
+  <button class = 'btn btn-partner btn-md addButton' (click) = 'create()' [disabled]="!IsEdit">
+    ADD ANOTHER STATUS
+  </button>
+</div>
+<div class='tablesContent backupTable'>
+  <div class="data-table w-100">
+
+    <!-- users table and filter -->
+    <table mdbTable striped="true" hover="true">
+      <thead class="main-color thead-custom">
+      <!-- search thead -->
+      <tr>
+        <!-- Search by name. -->
+        <th scope="col" class=''>
+          <div class='inputPlace'>
+            <i class="fa fa-search menus-icon white-text searchIcon" aria-hidden="true"></i>
+            <mat-form-field class="w-100 white-text">
+              <input matInput placeholder="Search by Status Name" class="inputPadding" #filterName
+                     (input)="writeInFilterInputs(filterName.value)" autocomplete="off">
+            </mat-form-field>
+          </div>
+        </th>
+        <!--Date-->
+        <th scope="col">
+        </th>
+        <!-- Time. -->
+        <th scope="col" class='inputPlace'>
+        </th>
+        <!--Type-->
+        <th scope="col">
+        </th>
+        <!-- Table column btn and download -->
+        <th class="tools-btn">
+        </th>
+      </tr>
+      <!-- head custom -->
+      <tr class="head-custom">
+        <ng-container *ngFor="let column of listElements; let i = index">
+          <th scope="col" class="font-weight-bold columnTitleContent">
+            <span class="headers-text-color">{{column.name}}</span>
+            <mat-icon *ngIf='!column.sort.status'
+                      class="cursor sortButton noselect" (click)="sortButton(i)">
+              unfold_more
+            </mat-icon>
+            <mat-icon *ngIf='column.sort.status == "asc"'
+                      class="cursor sortButton noselect" (click)="sortButton(i)">
+              expand_less
+            </mat-icon>
+            <mat-icon *ngIf='column.sort.status == "desc"'
+                      class="cursor sortButton marginTop noselect" (click)="sortButton(i)">
+              expand_more
+            </mat-icon>
+          </th>
+        </ng-container>
+        <th scope="col" class="table-tools font-weight-bold text-center city-style">
+          <span class="headers-text-color">Tools</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody *ngIf="dataList" class="banner-color table-custom tbody-custom tableMaxWidth">
+      <tr mdbTableCol *ngFor="let data of dataList; let j = index">
+        <!-- user name -->
+        <td class="bigText">
+          <div class='tableText'>
+           <span>
+             {{ data.acceptableStatus.name }}
+           </span>
+          </div>
+        </td>
+        <td class="bigText">
+          <div class='tableText'>
+            {{ +data.warningTime + ' min' }}
+          </div>
+        </td>
+        <td class="bigText">
+          <div class='tableText'>
+            {{ +data.alertTime + ' min' }}
+          </div>
+        </td>
+        <td class="bigText">
+          <div class='tableText'>
+            {{ +data.cancelTime + ' min'}}
+          </div>
+        </td>
+        <!-- tools -->
+        <td class="tools-btn">
+          <div class='tools' align='center'>
+            <mat-icon (click) = 'IsEdit ? change(j): false' class='cursor noselect editIcon'>
+              create
+            </mat-icon>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /table data -->
+  </div>
+</div>
+<div class='popupContent' *ngIf = 'popupStatus' (click) = 'clickOutsidePopup()'>
+  <div class='popup' (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+    <div class="selectOption">
+      <div class="selectTitle">
+        Choose Status
+      </div>
+      <div class="selectOptionContent">
+        <mat-form-field class="example-full-width option">
+          <input class = 'statusInput' matInput [value]="statusesString" (keyup)="false"
+                 (keypress)="false" (keydown)="false" onselectstart="return false"
+                 onpaste="return false;" onDrag="return false" onDrop="return false" autocomplete="off"
+                 autocapitalize="off" autocorrect="off">
+        </mat-form-field>
+        <mat-icon class = 'selectOpenIcon' (click) = 'openSelectOption()'>keyboard_arrow_down</mat-icon>
+        <mat-icon class = 'clearButton' (click) = 'clearStatuses()'>close</mat-icon>
+        <div class = 'statusesContent' [ngClass]="{'openContent': isSelectOpen}" >
+          <span *ngIf = " popupStatus === 'change'">
+              <div *ngFor = 'let status of statuses; let i = index' class = 'statusContent'
+                   [ngClass]="{'statusContentBorder': i !== statuses.length-1}">
+                <mat-checkbox class = 'status' [checked] = 'statusChecked[i]'
+                          (click) = 'statusChecked[i] ? false: true'
+                          (change)= 'clickToCheckboxStatus(i, status.id, status.name)'>{{ status.name }}
+                </mat-checkbox>
+              </div>
+          </span>
+          <span *ngIf = "popupStatus === 'create'">
+              <div *ngFor = 'let status of statuses; let i = index' class = 'statusContent'
+                      [ngClass]="{'statusContentBorder': i !== statuses.length-1}">
+                  <mat-checkbox class = 'status' [(ngModel)] =  'statusChecked[i]'
+                          (change)= 'clickToCheckboxStatus(i, status.id, status.name)'>{{ status.name }}
+                  </mat-checkbox>
+              </div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="checkboxsContent" *ngIf = " popupStatus === 'create'">
+      <mat-checkbox class='checkbox'
+                    [(ngModel)]="creatableData.warningStatus">
+      </mat-checkbox>
+      <div class="inputAndTextContent noPadding">
+        <span class='inputName'> Warning After </span>
+        <span class="inputContentAndText">
+          <mat-form-field class="example-full-width smallInput">
+           <input class = 'noPadding' matInput [(ngModel)]="creatableData.warningTime"
+                  onselectstart="return false" onpaste="return false;" onDrag="return false"
+                  onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                  (keypress)="numberValidation($event, 'warningTime')">
+          </mat-form-field>
+          <span class='inputText'>
+           min
+          </span>
+        </span>
+      </div>
+      <mat-checkbox class='checkbox'
+                    [(ngModel)]="creatableData.alertStatus">
+      </mat-checkbox>
+      <div class="inputAndTextContent noPadding">
+        <span class='inputName'> Alert After </span>
+        <span class="inputContentAndText">
+          <mat-form-field class="example-full-width smallInput">
+            <input class = 'noPadding' matInput
+                   [(ngModel)]="creatableData.alertTime"
+                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                   onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                   (keypress)="numberValidation($event, 'alertTime')">
+          </mat-form-field>
+          <span class='inputText'>
+            min
+          </span>
+        </span>
+      </div>
+      <mat-checkbox class='checkbox'
+                    [(ngModel)]="creatableData.cancelStatus">
+      </mat-checkbox>
+      <div class="inputAndTextContent noPadding">
+        <span class='inputName'> Cancel After </span>
+        <span class="inputContentAndText">
+          <mat-form-field class="example-full-width smallInput">
+            <input class = 'noPadding' matInput [(ngModel)]="creatableData.cancelTime"
+                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                   onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                   (keypress)="numberValidation($event, 'cancelTime')">
+          </mat-form-field>
+          <span class='inputText'>
+            min
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="checkboxsContent" *ngIf = " popupStatus === 'change'">
+      <mat-checkbox class='checkbox'
+       [(ngModel)]="changeableData.warningStatus">
+      </mat-checkbox>
+      <div class="inputAndTextContent noPadding">
+        <span class='inputName'> Warning After </span>
+        <span class="inputContentAndText">
+          <mat-form-field class="example-full-width smallInput">
+           <input class = 'noPadding' matInput [(ngModel)]="changeableData.warningTime"
+             onselectstart="return false" onpaste="return false;" onDrag="return false"
+             onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+             (keypress)="numberValidation($event, 'warningTime')">
+          </mat-form-field>
+          <span class='inputText'>
+           min
+          </span>
+        </span>
+      </div>
+      <mat-checkbox class='checkbox'
+         [(ngModel)]="changeableData.alertStatus">
+      </mat-checkbox>
+      <div class="inputAndTextContent noPadding">
+        <span class='inputName'> Alert After </span>
+        <span class="inputContentAndText">
+          <mat-form-field class="example-full-width smallInput">
+            <input class = 'noPadding' matInput
+                   [(ngModel)]="changeableData.alertTime"
+                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                   onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                   (keypress)="numberValidation($event, 'alertTime')">
+          </mat-form-field>
+          <span class='inputText'>
+            min
+          </span>
+        </span>
+      </div>
+      <mat-checkbox class='checkbox'
+                    [(ngModel)]="changeableData.cancelStatus">
+      </mat-checkbox>
+      <div class="inputAndTextContent noPadding">
+        <span class='inputName'> Cancel After </span>
+        <span class="inputContentAndText">
+          <mat-form-field class="example-full-width smallInput">
+            <input class = 'noPadding' matInput [(ngModel)]="changeableData.cancelTime"
+                   onselectstart="return false" onpaste="return false;" onDrag="return false"
+                   onDrop="return false" autocomplete="off" autocapitalize="off" autocorrect="off"
+                   (keypress)="numberValidation($event, 'cancelTime')">
+          </mat-form-field>
+          <span class='inputText'>
+            min
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class='buttonsContent'>
+      <button class='btn btn-sm cancelButton'>CANCEL</button>
+      <span class = 'saveButtonContent'  (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+      <button class="btn btn-primary btn-sm saveButton" (click)='save()'
+            [disabled]="!creatableData.statuses[0] && !(popupStatus === 'change')">SAVE</button>
+      </span>
+    </div>
+  </div>
+</div>

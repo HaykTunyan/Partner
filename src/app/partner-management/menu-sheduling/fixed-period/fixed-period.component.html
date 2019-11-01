@@ -1,0 +1,82 @@
+<div class = 'block'>
+  <div class = 'inputsContent'>
+    <label class="labelTextArea" for="calendar">Deactivate for Fixed Period of Time</label>
+    <div class="box" id="calendar">
+      <div class='DateContent'>
+        <div class="dateInput">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker1" [formControl]="date1" [value]="startDate"
+                   (dateInput)="getDate($event, 'startDate')"
+                   (keypress)="false"
+                   (keydown)="keyDownDateInput($event, 1)"
+                   onselectstart="return false"
+                   onpaste="return false;"
+                   onDrag="return false"
+                   onDrop="return false"
+                   autocomplete="off" autocapitalize="off" autocorrect="off">
+            <mat-datepicker-toggle matSuffix [for]="picker1">
+              <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="timePicker">
+          <input class="timeInput" #firstTimeElem [value]='firstTimeValue'
+                 (focus)="focusFunction('firstTime')" (focusout)="focusOutFunction('firstTime')"
+                 (keypress)="timeValidation($event, firstTimeElem.value, 'firstTimeValue')"
+                 (keydown)="clearTimeDada($event, 'firstTimeValue')"
+                 (input)="changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                 autocomplete="off"
+                 onselectstart="return false"
+                 onpaste="return false;"
+                 onDrag="return false"
+                 onDrop="return false"
+                 autocomplete="off" autocapitalize="off" autocorrect="off">
+          <div class='borderBottom'></div>
+          <div class='borderContent'>
+            <div class='borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+          </div>
+        </div>
+        <div class="line">
+          -
+        </div>
+        <div class="timePicker marginRightTime">
+          <input class="timeInput" #secondTimeElem [value]='secondTimeValue'
+                 (focus)="focusFunction('secondTime')" (focusout)="focusOutFunction('secondTime')"
+                 (keypress)="timeValidation($event, secondTimeElem.value, 'secondTimeValue')"
+                 (keydown)="clearTimeDada($event, 'secondTimeValue')"
+                 (input)="changeTimeFormat(secondTimeElem.value, 'secondTimeValue')"
+                 onselectstart="return false"
+                 onpaste="return false;"
+                 onDrag="return false"
+                 onDrop="return false"
+                 autocomplete="off" autocapitalize="off" autocorrect="off">
+          <div class='borderBottom'></div>
+          <div class='borderContent'>
+            <div class='borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+          </div>
+        </div>
+        <div class='dateInput'>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" [formControl]="date2" [value]="endDate"
+                   (dateInput)="getDate($event, 'endDate')" (keypress)="false"
+                   (keydown)="keyDownDateInput($event, 2)"
+                   onselectstart="return false"
+                   onpaste="return false;"
+                   onDrag="return false"
+                   onDrop="return false"
+                   autocomplete="off" autocapitalize="off" autocorrect="off">
+            <mat-datepicker-toggle matSuffix [for]="picker2">
+              <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>      
+  <div class = 'calendarButtonsContent'>
+    <button class = 'btn cancelButton'>CANCEL</button>
+    <button class = 'btn btn-primary saveButton'>DEACTIVATE</button>
+  </div>
+</div>

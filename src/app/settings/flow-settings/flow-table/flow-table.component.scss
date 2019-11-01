@@ -1,0 +1,642 @@
+.boxTitle{
+  height: 65px;
+  display: flex;
+  background-color: #C0D0D6;
+  justify-content: center;
+  align-items: center;
+  color:#607D8B;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px 10px 0px 0px;
+  position: relative;
+}
+.addButton{
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: #2691BB;
+  font-size: 16px;
+}
+.backupTable{
+  min-height: 300px;
+}
+table {
+  width: 100%;
+}
+
+mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+td {
+  padding: 0px;
+}
+.example-full-width{
+  width: 100%;
+}
+.mat-input-element {
+  padding-left: 20px;
+}
+.columnTitleContent {
+  position: relative;
+}
+.sortButton {
+  position: absolute;
+  right: 0px;
+  top: 11px;
+  color: #1C333E;
+}
+.mat-input-element {
+  padding-left: 20px;
+}
+
+.columnTitleContent {
+  position: relative;
+}
+
+
+#calendar {
+  input {
+    color: white;
+  }
+
+  input .mat-form-field-placeholder {
+    color: red;
+  }
+
+  .dummy-input-field .mat-input-placeholder {
+    color: red;
+  }
+
+}
+
+.calendarIcon {
+  color: white;
+  transform: scale(1.4);
+  margin-bottom: 10px;
+}
+
+.bigText {
+  overflow-x: hidden;
+  max-width: 20vw;
+}
+.tableText{
+  margin: 6px 0px 6px 0px;
+  color: #1C333E;
+}
+.tableMaxWidth {
+  max-width: 100%;
+}
+.tools {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  float: left;
+}
+.editIcon{
+  margin-right: 10px;
+  margin-top: 4px;
+  font-size: 25px;
+  color: #607D8B;
+}
+.refreshIcon{
+  margin-left: 10px;
+  margin-top: 4px;
+  font-size: 25px;
+  color: #607D8B;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.cursor {
+  cursor: pointer;
+  z-index: 5;
+}
+
+
+.data-table {
+  .menus-icon {
+    top: 35px;
+  }
+
+  .table thead th {
+    border-bottom: none;
+  }
+
+  .table {
+    ::ng-deep .mat-form-field-infix {
+      width: auto;
+    }
+
+    tbody td:not(:last-child) {
+      padding-left: 1rem;
+    }
+
+    tbody {
+      tr td:first-child {
+        ::ng-deep label {
+          margin-bottom: 0rem;
+        }
+      }
+    }
+  }
+
+  .table th, .table td {
+    border-top: 3px solid #C0D0D6;
+    border-left: 3px solid;
+    padding: 0px;
+    line-height: 1.5;
+  }
+
+  .table th {
+    line-height: 2.8;
+  }
+
+  .rolesSelectOption {
+    border-bottom: solid 1px #607D8B;
+    float: left;
+    margin-left: 10px;
+    min-height: 25px;
+    position: absolute;
+    left: -10px;
+    width: 100%;
+    z-index: 20;
+    top: 42px;
+  }
+  .role {
+    padding: 8px 0px 8px 40px;
+    border-bottom: 1px solid #607D8B;
+    color: #607D8B;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .roleInSelectOption {
+    min-height: 40px;
+    padding-top: 3px;
+  }
+
+  .role:hover {
+    background-color: #B4CAD8;
+  }
+
+  .forRolesContentStyle {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    padding: 15px 15px 25px 15px;
+  }
+
+  .rolesSelectOptionButton {
+    position: absolute;
+    right: 0px;
+    bottom: 20px;
+    z-index: 5;
+
+  }
+
+  .roleFilter {
+    position: relative;
+  }
+
+  .roleInSelectOption {
+    min-height: 40px;
+    padding-top: 3px;
+  }
+
+  .head-custom {
+    border-radius: 20px;
+    background: white;
+
+    .table-tools {
+      border-left: 10px solid;
+    }
+
+    th {
+      padding: 0rem 1rem;
+      font-size: 16px;
+    }
+  }
+
+  .tbody-custom {
+    border-top: 5px solid;
+
+    th {
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .city-style {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    tr td:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .tools-btn {
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-left: 10px solid;
+      vertical-align: middle;
+    }
+  }
+
+  .thead-custom {
+    th:last-child {
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    th:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .auto-icon {
+      top: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .table-list {
+    padding-top: 30px;
+  }
+
+  .menus-icon {
+    top: 35px;
+  }
+
+  // table
+  .table thead th {
+    border-bottom: none;
+  }
+
+  .marginRightToll{
+    margin-right: 60px;
+  }
+
+  .table {
+    ::ng-deep .mat-form-field-infix {
+      width: auto;
+    }
+
+    tbody td:not(:last-child) {
+      padding-left: 1rem;
+    }
+
+    tbody {
+      tr td:first-child {
+        ::ng-deep label {
+          margin-bottom: 0rem;
+        }
+      }
+    }
+  }
+
+  .table th, .table td {
+    border-top: 3px solid #C0D0D6;
+    border-left: 3px solid;
+    padding: 0px;
+    line-height: 1.5;
+  }
+
+  .table th {
+    line-height: 2.8;
+  }
+
+  .head-custom {
+    border-radius: 20px;
+    background: white;
+
+    .table-tools {
+      border-left: 10px solid;
+    }
+
+    th {
+      padding: 0rem 1rem;
+      font-size: 16px;
+    }
+  }
+
+  .tbody-custom {
+    border-top: 5px solid;
+
+    th {
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .city-style {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    tr td:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+  }
+
+  .thead-custom {
+    th:last-child {
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    th:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .auto-icon {
+      top: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .table-list {
+    padding-top: 30px;
+  }
+
+  // customer style.
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
+  }
+
+  mat-drawer-backdrop {
+    background-color: transparent;
+  }
+
+  .mat-list .mat-list-item {
+    height: 30px;
+  }
+
+  .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+  }
+
+  .percent-icon {
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+
+    .fa-percent {
+      font-size: 21px;
+    }
+  }
+
+  .form-select {
+    height: auto;
+  }
+
+  table.table-hover tbody tr:hover {
+    background-color: #CFD8DC;
+  }
+
+  //Change width Add filter & column
+  ::ng-deep .cdk-overlay-container .mat-menu-panel {
+    max-width: 300px;
+  }
+}
+.tools-btn {
+  width: 50px !important;
+}
+.inputPlace {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 15px !important;
+}
+
+.deleteUserContent {
+  background: #C0D0D6;
+}
+
+.deleteUserInnerContent {
+  padding-right: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.errorMassage {
+  margin: 15px 0px 0px 30px;
+  color: red;
+  font-size: 13px;
+}
+
+.disabledButton {
+  cursor: no-drop !important;
+}
+
+.resetPassword {
+  color: red;
+}
+
+.marginTop {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.marginBottom {
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+::ng-deep .tooltip .tooltip-inner {
+  background-color: #CFD8DC;
+  color: #263238;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .tooltip-arrow {
+  background-color: none;
+  border-bottom: 7px solid #CFD8DC;
+  font-size: 20px;
+}
+
+::ng-deep .tooltip .tooltip-inner::after {
+  border-color: transparent transparent transparent #CFD8DC;
+}
+
+.inActive {
+  background-color: #6D6D6D;
+}
+// popup
+.popupContent{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0, 0.6);
+  text-align: center;
+  z-index: 10;
+  padding-top: 100px;
+  overflow-y: auto;
+}
+.popup{
+  width: 800px;
+  background-color: white;
+  border-radius: 10px;
+  display: inline-block;
+  padding-top: 33px;
+}
+.checkboxsContent{
+  margin-top: -15px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.checkbox{
+  margin-left: 20px;
+}
+.inputAndTextContent {
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0px 10px 20px 20px;
+  display: flex;
+  align-items: center;
+}
+.noPadding{
+  padding: 0px 0px 0px 5px;
+  width: 200px;
+  display: inline-block;
+}
+.inputName {
+  margin-right: 10px;
+}
+.inputContentAndText{
+  width: 70%;
+}
+.smallInput{
+  width: 50px;
+}
+.noPadding{
+  padding: 0px;
+}
+.inputText{
+  font-size: 10px;
+  font-weight: 400;
+}
+.buttonsContent{
+  width: 800px;
+  display: inline-block;
+  text-align: end;
+}
+.cancelButton{
+  background-color: transparent;
+  box-shadow: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+.saveButton{
+  border-radius: 5px;
+  background-color: #2691BB;
+  width: 140px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.selectOption{
+  display: flex;
+  justify-content: start;
+}
+.selectTitle{
+  width: 200px;
+  font-weight: 500;
+  color: #607D8B;
+}
+.selectOptionContent{
+  position: relative;
+  width: 100%;
+  padding: 0px 75px 10px 0px;
+}
+.option{
+  width: 100%;
+  margin-top: -20px;
+}
+.selectOpenIcon{
+  position: absolute;
+  top: 1px;
+  right: 75px;
+  color: #382626;
+  opacity: .15;
+  cursor: pointer;
+}
+.clearButton{
+  position: absolute;
+  top: 1px;
+  right: 50px;
+  cursor: pointer;
+  opacity: .54;
+  color: #382626;
+}
+.statusesContent{
+  width: 100%;
+  margin-top: -16px;
+  height: 0px;
+  color: white;
+  box-shadow: 0px 0px 12px -5px black;
+  border-radius: 10px;
+  transition: height linear 1000ms;
+  overflow: hidden;
+  text-align: start;
+  display: none;
+  padding: 10px 15px 15px 15px;
+  margin-bottom: 25px;
+}
+.openContent{
+  height: auto;
+  display: block;
+}
+.statusContent{
+  height: 38px;
+  padding-top: 12px;
+}
+.statusContentBorder{
+  border-bottom: solid 1px #707070;
+}
+.status{
+  color: #263238;
+  font-size: 14px;
+  font-weight: 400;
+}
+.status:hover{
+  color: #59B10D;
+}
+.statusChecked{
+  color: #59B10D;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: #1c333e !important;
+}
+.statusInput{
+  padding-left: 0px !important;
+}
+.saveButtonContent{
+  padding: 12px 0px;
+}
+.b{
+  border: solid 1px red;
+}

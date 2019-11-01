@@ -1,0 +1,236 @@
+// Sidenav Component Style.
+
+.partner-table {
+  .menus-icon {
+    top: 35px;
+  }
+}
+
+.active-sub-item {
+  i {
+    color: #75B0CC;
+  }
+}
+
+.active-item {
+  background: #1C333E;
+  i {
+    color: #FFFFFF;
+  }
+}
+
+.nav-partner {
+
+    background: #75B0CC;
+&:hover {
+  background: #1C333E
+}
+  .sidenav-list {
+    color: white;
+    font-weight: 400;
+    padding-left: 1rem;
+  }
+  i {
+    color: #FFFFFF;
+  }
+}
+
+.sidenav-list {
+  padding-left: 1rem;
+}
+
+.nav-btn {
+  line-height: 50px;
+  padding: 0 10px;
+  display: flex;
+  .sidenav-list {
+    font-size: 20px;
+}
+
+.mat-icon {
+  width: 30px;
+  height: 30px;
+}
+&:hover {
+  background: #fff;
+    .sidenav-list {
+      color: white;
+    }
+    i {
+      color: #75B0CC;
+    }
+  .sidenav-list {
+    color: #75B0CC;
+  }
+  }
+}
+
+// sidenav content
+
+.sidenav-content {
+  display: flex;
+  padding: 0 15px;
+  min-height: 1000px;
+  height: 100%;
+}
+
+// sidenav
+
+.sidenav {
+  padding: 20px;
+  border-radius: 10px;
+  .sidenav-list {
+    font-size: 16px;
+  }
+  .menus-icon {
+    top: 40px;
+    color: #949494;
+  }
+}
+
+//change nav width
+
+.nav-width {
+  width: 50px;
+  transition: width 0.4s;
+}
+
+.nav-size {
+  width: 360px;
+  transition: width 0.4s;
+}
+
+.button-style {
+  background: #1C333E;
+  border-bottom: 5px solid #2691BB;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 106%;
+    left: 28%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #2691BB transparent transparent transparent;
+  }
+  i {
+    color: #FFFFFF;
+  }
+  &:hover {
+    background: #1C333E;
+    i {
+      color: #FFFFFF;
+    }
+  }
+}
+
+
+.button-style-campaign {
+  background: #1C333E;
+  border-bottom: 5px solid #2691BB;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 28%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #2691BB transparent transparent transparent;
+  }
+  i {
+    color: #FFFFFF;
+  }
+  &:hover {
+    background: #1C333E;
+    i {
+      color: #FFFFFF;
+    }
+  }
+}
+
+//Side menu slide to down
+
+.slide-transition {
+  transition: height 1s;
+  height: 565px;
+}
+
+.slide-hide {
+ height: 0px;
+}
+
+//search icon style
+
+.fa-search {
+  left: 10px;
+}
+
+//search input style
+
+.search-input {
+  padding-left: 12px;
+  color: #455A64;
+}
+
+// modal style
+
+.btn-modal {
+  background: #2691BB;
+  border-radius: 5px;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-product {
+  .thead-input {
+    width: 420px;
+  }
+  .modal-search {
+    width: 480px;
+  }
+  ::ng-deep .mat-form-field-empty.mat-form-field-label {
+    padding-left: 30px;
+    font-size: 14px;
+  }
+  .vertical-divider {
+    border-left: 1px solid;
+  } 
+}
+
+.endButton {
+  height: 40px;
+}
+.whiteColor{
+  background-color: white;
+}
+.whiteColor:hover{
+  background-color: white !important;
+}
+.endButton:hover{
+  background-color: white !important;
+}
+
+
+// change tooltip text and background color
+::ng-deep .tooltip {
+  z-index: 20000;
+}
+::ng-deep .tooltip .tooltip-inner {
+    background-color: #CFD8DC;
+    color: #263238;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    z-index: 20000;
+}
+::ng-deep .tooltip-arrow {
+    background-color: none;
+    border-bottom: 7px solid #CFD8DC;
+    font-size: 20px;
+    z-index: 20000;
+}
+::ng-deep .tooltip .tooltip-inner::after {
+    border-color: transparent transparent transparent #CFD8DC;
+    z-index: 20000;
+}

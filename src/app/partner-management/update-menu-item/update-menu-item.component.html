@@ -1,0 +1,350 @@
+<!--Add Menu Item-->
+<div class="modalDiv add-menu-item">
+  <!--White Div Content-->
+  <div class="row modal-attachmenu position-relative pb-5">
+    <div class="logoStyles" (click)="close.emit('close')">
+      <img src="../../../assets/img/agenda.png">
+    </div>
+    <!-- card content -->
+    <div class="col-6 d-flex mt-5 mb-2 p-0 nameContent" >
+      <strong class="col-4 pl-0 d-flex justify-content-end align-items-center">
+        <span class="main-color">Name</span>
+      </strong>
+      <div class="col-7 mt-0 p-0 name-type add-menu-item">
+        <mat-form-field class="w-100" [ngClass]="{'error-text': allNamesError !== '' }">
+          <input matInput type="text" name="name" placeholder="ENG" (input)="changedName($event.target.value)"
+                 [(ngModel)]="item.engName" autocomplete="off">
+        </mat-form-field>
+        <ng-container *ngIf="allNamesError !== ''">
+          <div class="error-message">
+            {{allNamesError}}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-6 mt-5 mb-2 nameContent">
+      <div class="row">
+        <div class="col-6 pl-0 mt-0 add-menu-item name-type">
+          <mat-form-field class="w-100">
+            <input matInput type="text" placeholder="РУС" (input)="changedName($event.target.value)"
+                   [(ngModel)]="item.rusName" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div class="col-6 mt-0 add-menu-item name-type">
+          <mat-form-field class="w-100">
+            <input matInput type="text" placeholder="ՀԱՅ" (input)="changedName($event.target.value)"
+                   [(ngModel)]="item.armName" autocomplete="off">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!-- Product required-->
+    <div class="col-6 d-flex mt-25">
+      <strong class="col-4 pl-0 d-flex flex-column justify-content-start align-items-end input-name">
+        <span class="main-color small-text">Product</span>
+      </strong>
+      <div class="mt-0 w-100">
+        <mat-form-field class="w-100">
+          <mat-select [(value)]="item.productSelected" name="product"
+                      (selectionChange)="changedProduct(item.productSelected)">
+            <mat-option *ngFor="let option of item.products" value="{{option.id}}"> {{option.name}} </mat-option>
+          </mat-select>
+          <ng-container *ngIf="productSelectedError !== '' ">
+            <div class="error-message">
+              Product is required.
+            </div>
+          </ng-container>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!--To be ordered previously-->
+    <div class="col-6 d-flex mt-25">
+      <strong class="col-6 d-flex flex-column justify-content-start align-items-end input-name">
+        <span>To be Ordered Previously</span>
+      </strong>
+      <div class="mt-0 col-2 p-0 w-100">
+        <mat-form-field class="w-100">
+          <input matInput (keypress)="numberValidation($event)" [(ngModel)]="item.previouslyOrderedDays">
+        </mat-form-field>
+      </div>
+      <div class="col-1 p-0 mr-auto input-name">
+        <strong><span>day</span></strong>
+      </div>
+    </div>
+    <!-- Section -->
+    <div class="col-6 d-flex mt-25">
+      <strong class="col-4 pl-0 d-flex flex-column justify-content-start align-items-end input-name">
+        <span class="main-color small-text">Section</span>
+      </strong>
+      <div class="mt-0 w-100">
+        <mat-form-field class="w-100">
+          <mat-select multiple [(ngModel)]="item.sectionSelected">
+            <mat-option *ngFor="let option of item.sections" value="{{option.id}}"> {{option.name}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <!--Preparation time-->
+    <div class="col-6 d-flex mt-25">
+      <strong class="col-6 d-flex flex-column justify-content-start align-items-end input-name">
+        <span>Preparation Time</span>
+      </strong>
+      <div class="mt-0 col-2 p-0 w-100">
+        <mat-form-field class="w-100">
+          <input matInput (keypress)="numberValidation($event)" [(ngModel)]="item.preparationTime">
+        </mat-form-field>
+      </div>
+      <div class="col-1 p-0 mr-auto input-name">
+        <strong><span>minute</span></strong>
+      </div>
+    </div>
+    <!--Price, Measurement, Delivery amount,Delivery condition, Category, Commission category, Keywords-->
+    <div class="col-6 p-0">
+      <div class="col-12 d-flex justify-content-start mt-25">
+        <strong class="col-4 pl-0 d-flex flex-column justify-content-start align-items-end input-name">
+          <span>Price</span>
+        </strong>
+        <div class="mt-0 col-5 p-0 w-100">
+          <mat-form-field class="w-100">
+            <input matInput (keypress)="numberValidation($event)" (input)="changedPrice($event.target.value)"
+                   [(ngModel)]="item.price">
+            <ng-container class="col-12 my-1" *ngIf="priceError !== ''">
+              <div class="error-message text-left">
+                Price is required.
+              </div>
+            </ng-container>
+          </mat-form-field>
+        </div>
+        <div class="col-1 p-0 mr-auto input-name">
+          <strong class="text-black">AMD</strong>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex mt-25">
+        <strong class="col-4 pl-0 d-flex flex-column justify-content-start align-items-end input-name">
+          <span>Measurement</span>
+        </strong>
+        <div class="mt-0 col-2 p-0 w-100">
+          <mat-form-field class="w-100">
+            <input matInput (keypress)="numberValidation($event)" [(ngModel)]="item.measurement">
+          </mat-form-field>
+        </div>
+        <div class="col-4 ml-3 d-flex jusify-content-center p-0 w-100">
+          <mat-form-field class="w-100">
+            <mat-select [(value)]="item.literSelected">
+              <mat-option *ngFor="let option of item.liters" value="{{option.id}}"> {{option['name']}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-center align-items-start mt-25">
+        <strong class="col-4 pl-0 d-flex flex-column justify-content-start align-items-end input-name">
+          <span>Additional</span>
+          <span>Delivery Amount</span>
+        </strong>
+        <div class="mt-0 col-4 p-0 w-100">
+          <mat-form-field class="w-100">
+            <input matInput (keypress)="numberValidation($event)" [(ngModel)]="item.deliveryAmount">
+          </mat-form-field>
+        </div>
+        <div class="col-1 p-0 mr-auto input-name">
+          <strong class="text-black">AMD</strong>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-center align-items-center py-2">
+        <strong class="col-4 pl-0 d-flex flex-column justify-content-center align-items-end">
+          <span>Special</span>
+          <span>Delivery Condition</span>
+        </strong>
+        <div class="w-100 greenBlueCheckboxStyle">
+          <section class="w-100">
+            <mat-checkbox class="mr-2"
+                          [checked]="checked[0]"
+                          value="{{item.deliveryConditions[0].id}}">{{item.deliveryConditions[0].value}}</mat-checkbox>
+            <mat-checkbox class="mr-2"
+                          [checked]="checked[1]"
+                          value="{{item.deliveryConditions[1].id}}">{{item.deliveryConditions[1].value}}</mat-checkbox>
+            <mat-checkbox class="mr-2"
+                          [checked]="checked[2]"
+                          value="{{item.deliveryConditions[2].id}}">{{item.deliveryConditions[2].value}}</mat-checkbox>
+          </section>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex mt-25">
+        <strong class="col-4 pl-0 d-flex flex-column justify-content-start align-items-end input-name">
+          <span>Category</span>
+        </strong>
+
+        <div class="col-7 d-flex jusify-content-center p-0 w-100">
+          <mat-form-field class="w-100">
+            <mat-select multiple [(value)]="item.categorySelected">
+              <mat-option *ngFor="let option of item.categories" value="{{option.id}}"> {{option['name']}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-center mt-25 pt-2">
+        <strong class="col-4 pl-0 d-flex flex-column justify-content-center align-items-end">
+          <span>Commission</span>
+          <span>Category</span>
+        </strong>
+        <div class="col-7 d-flex jusify-content-center p-0 w-100">
+          <mat-form-field class="w-100">
+            <mat-select [(value)]="item.commissionCategorySelected">
+              <mat-option *ngFor="let option of item.commissionCategories"
+                          value="{{option.id}}"> {{option['name']}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Keywords -->
+      <div class="col-12 d-flex flex-row justify-content-center" >
+        <strong class="col-4 pl-0 d-flex flex-column justify-content-start align-items-end input-name">
+          <span class="main-color small-text">Keywords</span>
+        </strong>
+        <!-- Chips for Key -->
+        <div class="mt-0 w-100" style="max-height: 100px; overflow: scroll" #keywords>
+          <mat-form-field class="w-100">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let keyword of item.keywords" [selectable]="selectable" [removable]="removable"
+                        (removed)="remove(keyword)">
+                {{keyword.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <!--<mat-form-field class="w-100" [ngClass]="{'error-text': keywordsLengthError !== '' }">-->
+              <input [disabled]="keywordsLengthError !== ''" [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+              <!--</mat-form-field>-->
+              <ng-container *ngIf="keywordsLengthError !== ''">
+                <div class="m-2 error-message text-left">
+                  {{keywordsLengthError}}
+                </div>
+              </ng-container>
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </div>
+    <!--Description-->
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 name-type">
+          <div class="col-12 mb-2">
+            <strong class="d-flex">
+              <span class="col-4 main-color">Description</span>
+              <div class="col-2 mr-auto main-color small-text px-1" (click)="selectDescriptionEng = !selectDescriptionEng; selectDescriptionRus = false;
+             selectDescriptionArm = false"
+                   [ngClass]="{'activeStyle':selectDescriptionEng, 'notActiveStyle':!selectDescriptionEng}">ENG
+              </div>
+            </strong>
+          </div>
+          <div class="mt-0 w-100">
+            <textarea (click)="selectDescriptionEng = true; selectDescriptionRus = false;
+             selectDescriptionArm = false" name="name" rows="2" class="w-100" [(ngModel)]="item.engDescription"></textarea>
+          </div>
+          <div class="mt-0 w-100">
+            <strong class="d-flex mb-2">
+              <span class="col-4"></span>
+              <div class="col-2 mr-auto main-color small-text px-1" (click)="selectDescriptionRus = !selectDescriptionRus; selectDescriptionEng = false;
+            selectDescriptionArm = false"
+                   [ngClass]="{'activeStyle': selectDescriptionRus, 'notActiveStyle': !selectDescriptionRus}">РУС
+              </div>
+            </strong>
+            <textarea (click)="selectDescriptionRus = true; selectDescriptionEng = false;
+            selectDescriptionArm = false" rows="2" name="name" class="w-100"
+                      [(ngModel)]="item.rusDescription"></textarea>
+          </div>
+          <div class="mt-0 w-100">
+            <strong class="d-flex mb-2">
+              <span class="col-4"></span>
+              <div class="col-2 mr-auto main-color small-text px-1" (click)="selectDescriptionArm = !selectDescriptionArm; selectDescriptionEng = false;
+             selectDescriptionRus = false"
+                   [ngClass]="{'activeStyle': selectDescriptionArm, 'notActiveStyle': !selectDescriptionArm}">ՀԱՅ
+              </div>
+            </strong>
+            <textarea (click)="selectDescriptionArm = true; selectDescriptionEng = false;
+             selectDescriptionRus = false" rows="2" name="name" class="w-100"
+                      [(ngModel)]="item.armDescription"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Images upload-->
+    <div class="uploadImage col-6 mr-auto mb-3">
+      <!-- Upload Image -->
+      <div class="d-flex justify-content-center align-items-center">
+        <strong class="col-2 p-0 d-flex justify-content-end align-items-end">
+          <input type="file" class="file-input" (change)="onFileSelected($event)" #fileInput>
+          <button mdbBtn type="button" class="upload-btn" outline="true" mdbWavesEffect
+                  (click)="fileInput.click()">
+            <mat-icon><i class="material-icons">attach_file</i></mat-icon>
+          </button>
+        </strong>
+        <strong class="col-3 p-0 pl-2 d-flex flex-column justify-content-start align-items-start">
+          <span class="d-block main-color small-text">Upload Image</span>
+          <span class="d-block text-black small-text">max 100 mb</span>
+          <span class="d-block text-black small-text">250 x 80 px</span>
+        </strong>
+        <!--<div *ngIf="imageUrl" class="upload-img justifyDisplayAlign"-->
+        <!--[ngClass]="{'border3': !imageUrl}">-->
+        <!--<div *ngIf="!imageUrl" class="border1"></div>-->
+        <!--<div *ngIf="!imageUrl" class="border2"></div>-->
+        <div class="col-7 p-0 d-flex">
+          <div class="col-5 p-0 mx-auto d-flex container" *ngFor="let imgUrl of item.imgs; let ind=index">
+            <div class="image">
+              <img src="http://smartonlinesuccess.com/wp-content/uploads/2013/01/Pinterest-square-logo.jpg" alt=""/>
+            </div>
+            <div class=" overlay d-flex justify-content-center align-items-center" (click)="deleteAttachImg(ind)">
+              <mat-icon>
+                <i class="material-icons md-18 md-light">delete</i>
+              </mat-icon>
+            </div>
+          </div>
+        </div>
+
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+  <!--Popup buttons content-->
+  <div class="col-12 p-0" style="width: 50%; margin: 0 auto">
+    <div class='popupButtonsContent'>
+      <div class="col-6">
+        <div class='checkboxContent'
+             (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+          <div class='checkbox' [ngClass]='{"checkboxActive" : item.menuItemActive}'
+               (click)='activateNewOrChangeableUser()'>
+            <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" : item.menuItemActive}'>
+
+            </div>
+          </div>
+          <div class='checkboxText' *ngIf="item.menuItemActive; else notActive">
+            ENABLE NOW
+          </div>
+          <ng-template #notActive>
+            <div class='checkboxText'>
+              DISABLE NOW
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class='col-6 buttonContents'>
+        <div class='col-4 p-2 ml-auto cancel text-center' (click)="close.emit('close')">
+          CANCEL
+        </div>
+
+        <div class="col-3 invite text-center" (click)="saveAddMenuItem()">SAVE</div>
+      </div>
+    </div>
+  </div>
+</div>
+

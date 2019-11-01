@@ -1,0 +1,408 @@
+<!-- Section List Component View -->
+<div #scrollableContent class='scrollable-content' (scroll)="scrollEvent(scrollableContent.scrollTop)">
+  <!-- mat sidenav container -->
+  <mat-drawer-container  class="sidenav-container section-list1">
+    <!-- mat-drawer -->
+    <mat-drawer class="drawer" mode="side" opened>
+      <sidenav></sidenav>
+    </mat-drawer>
+    <!-- mat sidenav -->
+    <mat-drawer-content>
+      <!-- header -->
+      <div #allContent>
+      <header>
+        <div class="container-fluid">
+          <div class="legal-navbar">
+            <nav class="nav d-flex justify-content-between">
+              <div class="legal-brand d-flex float-left">
+                <div class="legal-logo position-relative ml-3">
+                  <i class="material-icons position-relative child-icon white-text">fastfood</i>
+                  <strong class="position-relative part-btn">
+                    <button mat-button routerLink="/section-list" routerLinkActive="active" type="button" class="partner-btn">
+                      Sections List
+                    </button>
+                  </strong>
+                </div>
+              </div>
+              <div class="button-navbar float-right">
+                <button mat-raised-button type="button" class="btn-partner ml-2" placement="bottom"
+                        mdbTooltip="Add LEGAL ENTITY" (click) = 'openCreateSection()'>
+                  <strong class="button-text">CREATE SECTION</strong>
+                </button>
+                <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom"
+                        mdbTooltip="Notifications">
+                  <i class="material-icons md-36">notifications</i>
+                </button>
+                <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User"
+                        [matMenuTriggerFor]="menu">
+                  <i class="material-icons md-36">person</i>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item routerLink="/login">Sign Out</button>
+                </mat-menu>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <!-- sidenav content -->
+      <div class="sidenav-content section-list">
+        <!-- aside menu -->
+        <div class="container-fluid">
+          <div class="data-table w-100">
+            <div class="button-row ollTools">
+              <div *ngIf="this.selectedOne && this.selectedOne.length !== 0 || selectedAll">
+                <!-- Edit -->
+                <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                  <mat-icon><i class="material-icons md-light">create</i></mat-icon>
+                </button>
+                <!-- Delete -->
+                <button mat-icon-button placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons md-error">delete_forever</i></mat-icon>
+                </button>
+              </div>
+            </div>
+            <!-- section list table and filter -->
+            <table mdbTable striped="true" hover="true">
+              <thead class="main-color thead-custom">
+              <!-- search thead -->
+              <tr>
+                <!-- checkbox all -->
+                <th scope="col"></th>
+                <!-- S/N. -->
+                <th scope="col" class = 'SN'>
+                  <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                  <mat-form-field class="w-100 white-text">
+                    <input matInput placeholder="S/N" class="white-text" type="text" [(ngModel)] = 'filter.id'
+                    (input) = 'typeInFilterInput()'>
+                  </mat-form-field>
+                </th>
+                <!-- Service Type. -->
+                <th scope="col" *ngIf="partnerListElements[0].checked">
+                  <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                  <mat-form-field class="w-100 white-text">
+                    <input matInput placeholder="Search by name" [(ngModel)] = 'filter.name'
+                     (input) = 'typeInFilterInput()'>
+                  </mat-form-field>
+                </th>
+                <!-- Section Category. -->
+                <th scope="col" *ngIf="partnerListElements[1].checked">
+                  <div class = 'categories'>
+                    <div *ngIf='isCategoryFilterSelectOptionOpen' class='categorySelectOption'
+                         (mouseleave)='closeCreatCategory("isCategoryFilterSelectOptionOpen")'>
+                      <div class='forCategoryContentStyle'>
+                        <div *ngFor='let category of categories; let i = index'>
+                          <div class='category categoryInSelectOption'
+                          (mousedown)='selectCategoryCreate(category.name, i, "isCategoryFilterSelectOptionOpen")'>
+                            {{ category.name }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-icon class="categorySelectOptionButton cursor"
+                    (click)='openCategorySelectOption("isCategoryFilterSelectOptionOpen")'>
+                      <i class="material-icons  white-text">arrow_drop_down</i>
+                    </mat-icon>
+                    <mat-form-field class="w-100 form-select">
+                      <input type="text" placeholder="Category" aria-label="Number" matInput
+                             class="white-text" (keypress)="false"
+                             [value]='categoryFilterInputValue' autocomplete="nope"
+                             onselectstart="return false" onpaste="return false;"
+                             onDrag="return false" onDrop="return false"
+                             (keydown)="keyDownCategoryInput($event, 'categoryFilterInputValue')">
+                    </mat-form-field>
+                  </div>
+                </th>
+                <!-- Table column btn and download -->
+                <th class="tools-btn">
+                  <div class="button-row float-right pb-3">
+                    <!-- Add filter and collumn -->
+                    <button mat-icon-button [matMenuTriggerFor]="collummenu"
+                            placement="bottom" mdbTooltip="Add Filter & Column" class="mr-1">
+                      <i class="material-icons md-light md-36">add_circle</i>
+                    </button>
+                    <mat-menu #collummenu="matMenu" class="p-3">
+                      <ng-container>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="table-list">
+                          <mat-list (click)="$event.stopPropagation()">
+                            <mat-list-item *ngFor="let partnerList of partnerListElements">
+                              <mat-checkbox [(ngModel)]="partnerList.checked">{{partnerList.name}}</mat-checkbox>
+                            </mat-list-item>
+                          </mat-list>
+                        </div>
+                        <!-- lsit for collums and filters -->
+                      </ng-container>
+                    </mat-menu>
+                    <!-- Down to Excel -->
+                    <button mat-icon-button placement="bottom" mdbTooltip="Download Table">
+                      <i class="material-icons md-light md-36">present_to_all</i>
+                    </button>
+                  </div>
+                </th>
+              </tr>
+              <!-- head custom -->
+              <tr class="head-custom">
+                <!-- checkbox all -->
+                <th scope="col" class="font-weight-bold">
+                  <mat-checkbox [(ngModel)]="selectedAll"
+                                [indeterminate]="this.selectedOne && this.selectedOne.length !== 0 && !selectedAll"
+                                (change)="selectAll();">
+                  </mat-checkbox>
+                </th>
+                <!-- S/N -->
+                <th scope="col" class="font-weight-bold SN columnTitleContent">
+                  <span class="headers-text-color">S/N</span>
+                    <mat-icon *ngIf='!sortId[0].sort.status'
+                    class="cursor sortButton noselect" (click)="sortButton('sortId', 0)">
+                      unfold_more
+                     </mat-icon>
+                    <mat-icon *ngIf='sortId[0].sort.status == "asc"'
+                    class="cursor sortButton noselect" (click)="sortButton('sortId', 0)">
+                      expand_less
+                    </mat-icon>
+                    <mat-icon *ngIf='sortId[0].sort.status == "desc"'
+                    class="cursor sortButton marginTop noselect" (click)="sortButton('sortId', 0)">
+                      expand_more
+                    </mat-icon>
+                </th>
+                <ng-container *ngFor="let partnerList of partnerListElements; let i = index">
+                  <th *ngIf="partnerList.checked" scope="col" class="font-weight-bold columnTitleContent">
+                    <span class="headers-text-color">{{partnerList.name}}</span>
+                    <mat-icon *ngIf='!partnerList.sort.status'
+                    class="cursor sortButton noselect" (click)="sortButton('partnerListElements', i)">
+                      unfold_more
+                     </mat-icon>
+                    <mat-icon *ngIf='partnerList.sort.status == "asc"'
+                    class="cursor sortButton noselect" (click)="sortButton('partnerListElements', i)">
+                      expand_less
+                    </mat-icon>
+                    <mat-icon *ngIf='partnerList.sort.status == "desc"'
+                    class="cursor sortButton marginTop noselect"
+                    (click)="sortButton('partnerListElements', i)">
+                      expand_more
+                    </mat-icon>
+                  </th>
+                </ng-container>
+                <th scope="col" class="table-tools font-weight-bold text-center city-style columnTitleContent">
+                  <span class="headers-text-color">Tools</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody class="banner-color table-custom tbody-custom">
+              <tr mdbTableCol *ngFor="let partner of sections">
+                <!-- checkbox all  -->
+                <td>
+                  <mat-checkbox [(ngModel)]="partner.checked" (change)="checkIfAllSelected(); checkIfOneSelected()"></mat-checkbox>
+                </td>
+                <!-- id -->
+                <td>
+                  {{partner.id}}
+                </td>
+                <!-- partner name -->
+                <td *ngIf="partnerListElements[0].checked">{{partner.name}}</td>
+                <!-- partner area -->
+                <td *ngIf="partnerListElements[1].checked">{{partner.category.name}}</td>
+                <!-- tools -->
+                <td class="tools-btn">
+                  <div class="button-row text-center">
+                    <!-- Edit Partner -->
+                    <button mat-icon-button  placement="bottom" mdbTooltip="Edit"
+                     (click) = 'changeSection(partner)'>
+                      <mat-icon><i class="material-icons md-main">create</i></mat-icon>
+                    </button>
+                    <!-- Partner Details -->
+                    <button mat-icon-button placement="bottom" mdbTooltip="Details"
+                    (click) = 'deleteSection(partner.id)'>
+                      <mat-icon><i class="material-icons md-error">delete_forever</i></mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- /table data -->
+          </div>
+        </div>
+      </div>
+      <!--create or change popup-->
+      <div *ngIf='isPopupActive' class='popupContent' (click) = 'clickOutsidePopup()'>
+        <div class='popupOpacity' (click) = 'clickOutsidePopup()'>
+          <div class='whiteContent' (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+            <div class='userIconContent'>
+              <i class="material-icons md-light md-48 userLogo">
+                fastfood
+              </i>
+            </div>
+            <p class = 'popupTitle'>Create Section</p>
+            <div class = 'nameInputsContent'>
+              <span class = 'nameText'>Name</span>
+              <div class = 'nameInputContent'>
+                <div class = 'inputContent'>
+                    <div class="inputWhitBorder">
+                      <div class = 'placeHolder'>
+                        <span class = 'placeHolderText noselect'
+                          [ngClass] = '{"activePlaceholder": englishNamePlaceholder}'
+                          (click) = 'englishNameElem.focus(inputFocus("englishName", "englishNamePlaceholder"))'>
+                          <div class = 'language'  [ngClass] = '{"activePlaceholder": englishNamePlaceholder}'>ENG</div>
+                        </span>
+                      </div>
+                        <input class="nameInput" #englishNameElem [value] = 'newSection.name'
+                          (focus)="IsEdit ? inputFocus('englishName', 'englishNamePlaceholder'): false"
+                          (focusout) = "IsEdit ? inputFocusOut('englishName', 'englishNamePlaceholder', englishNameElem.value): false"
+                          (input) = "getNameInputValue(englishNameElem.value, 'name')"
+                          autocomplete="off" [readonly]="!IsEdit"
+                          autocomplete="off" autocapitalize="off" autocorrect="off">
+                        <div class = 'borderBottom'
+                        [ngClass]="{'errorBorderBottom': repeatName || emptyNameField}"></div>
+                        <div class = 'borderContent'>
+                          <div class = 'borderActive'
+                          [ngClass]="{'errorBorder': repeatName || emptyNameField, 'inputActive': englishName}">
+                        </div>
+                        </div>
+                    </div>
+                    <div class = 'errorMassageContent' >
+                      <span class = 'errorMassage' [ngClass] = "{'showError': emptyNameField}">
+                          Required name!
+                      </span>
+                      <span class = 'errorMassage' [ngClass] = "{'showError': repeatName}">
+                         This name is already exist!
+                      </span>
+                    </div>
+                  </div>
+              </div>
+              <div class = 'nameInputContent'>
+                <div class="inputWhitBorder">
+                    <div class = 'placeHolder'>
+                      <span class = 'placeHolderText noselect'
+                        [ngClass] = '{"activePlaceholder": russianNamePlaceholder}'
+                        (click) = 'russianNameElem.focus(inputFocus("russianName", "russianNamePlaceholder"))'>
+                        <div class = 'language'  [ngClass] = '{"activePlaceholder": russianNamePlaceholder}'>РУ</div>
+                      </span>
+                    </div>
+                      <input class="nameInput" #russianNameElem [value] = 'newSection.ru'
+                        (focus)="IsEdit ? inputFocus('russianName', 'russianNamePlaceholder'): false"
+                        (focusout) = "IsEdit ? inputFocusOut('russianName', 'russianNamePlaceholder', russianNameElem.value): false"
+                        (input) = "getNameInputValue(russianNameElem.value, 'ru')"
+                        autocomplete="off" [readonly]="!IsEdit"
+                        autocomplete="off" autocapitalize="off" autocorrect="off">
+                      <div class = 'borderBottom'></div>
+                      <div class = 'borderContent'>
+                        <div class = 'borderActive' [ngClass]="{'inputActive': russianName}"></div>
+                      </div>
+                  </div>
+              </div>
+              <div class = 'nameInputContent'>
+                <div class="inputWhitBorder">
+                    <div class = 'placeHolder'>
+                      <span class = 'placeHolderText noselect'
+                        [ngClass] = '{"activePlaceholder": armenianNamePlaceholder}'
+                        (click) = 'armenianNameElem.focus(inputFocus("armenianName", "armenianNamePlaceholder"))'>
+                        <div class = 'language'  [ngClass] = '{"activePlaceholder": armenianNamePlaceholder}'>ՀԱՅ</div>
+                      </span>
+                    </div>
+                      <input class="nameInput" #armenianNameElem [value] = 'newSection.arm'
+                        (focus)="IsEdit ? inputFocus('armenianName', 'armenianNamePlaceholder'): false"
+                        (focusout) = "IsEdit ? inputFocusOut('armenianName', 'armenianNamePlaceholder', armenianNameElem.value): false"
+                        (input) = "getNameInputValue(armenianNameElem.value, 'arm')"
+                        autocomplete="off" [readonly]="!IsEdit"
+                        autocomplete="off" autocapitalize="off" autocorrect="off">
+                      <div class = 'borderBottom' ></div>
+                      <div class = 'borderContent'>
+                        <div class = 'borderActive' [ngClass]="{'inputActive': armenianName}"></div>
+                      </div>
+                  </div>
+              </div>
+              <mat-icon class = 'clearButton noselect' (click) = 'clearNameInputs()'>clear</mat-icon>
+            </div>
+            <div class = 'selectionCategory'>
+              <span class="selectionCategoryName nameText">
+                Selection Category
+              </span>
+              <div class = 'selectionCategoryInput'>
+                <div class = 'categories'>
+                  <div *ngIf='isCategoryPopupSelectOptionOpen' class='categorySelectOption'
+                       (mouseleave)='closeCreatCategory("isCategoryPopupSelectOptionOpen")'>
+                    <div class='forCategoryContentStyle'>
+                      <div *ngFor='let category of categories; let i = index'>
+                        <div class='category categoryInSelectOption'
+                        (mousedown)='selectCategoryCreate(category.name, i, "isCategoryPopupSelectOptionOpen")'>
+                          {{ category.name }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <mat-icon class="categorySelectOptionButton cursor"
+                  (click)='openCategorySelectOption("isCategoryPopupSelectOptionOpen")'>
+                    <i class="material-icons black-text-popup">arrow_drop_down</i>
+                  </mat-icon>
+                  <mat-form-field class="w-100 form-select">
+                    <input type="text" placeholder="Category" aria-label="Number" matInput
+                          [formControl]="categoryFormControl"
+                          class = 'input-text'
+                           autocomplete="nope" onselectstart="return false"
+                           onpaste="return false;" onDrag="return false"
+                           onDrop="return false" (keypress)="false"
+                           (keydown)="keyDownCategoryInput($event, 'categoryFormControl')">
+                           <mat-error class = 'matError'>Select a category</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <mat-icon class = 'clearButton noselect' (click) = 'clearCategoryInput()'>clear</mat-icon>
+            </div>
+            <div class = 'imageUpload'>
+              <input #upload type="file" class = 'hidden' [(ngModel)] = 'imageInput' (input) = 'uploadImage($event)' accept="image/*">
+              <div class = 'uploadImageIconContent' (click) = 'upload.click()'>
+                <mat-icon class = 'uploadImageIcon noselect'>attachment</mat-icon>
+              </div>
+              <div class = 'uploadImageText'>
+                <p class = 'uploadImageTitle'>Upload Image</p>
+                <p class = 'uploadImageSize'>max 100 mb</p>
+                <p class = 'uploadImageSize'>250 x 250</p>
+              </div>
+              <div class = 'imageContent'>
+                <img class = 'uploadImage' [src] = 'newSection.items[0]' >
+                <div class = 'deleteImage'>
+                  <mat-icon *ngIf = 'newSection.items[0]' (click) = 'deleteImage()'>delete_forever</mat-icon>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+          <div class='popupButtonsContent'>
+              <span>
+                <div class='checkboxContent'
+                     (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+                  <div class='checkbox' [ngClass]='{"checkboxActive" : newSection.isDisable}'
+                       (click)='activateNewOrChangeableSelection()'>
+                    <div class='checkboxButton'
+                    [ngClass]='{"checkboxButtonActive" : newSection.isDisable}'>
+                    </div>
+                  </div>
+                  <div  class='checkboxText noselect' *ngIf="newSection.isDisable; else notActive"  >
+                     ENABLE NOW
+                  </div>
+                  <ng-template #notActive>
+                   <div  class='checkboxText noselect' >
+                       DISABLE NOW
+                   </div>
+                    </ng-template>
+                </div>
+              </span>
+            <div class='buttonContents' (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+              <div class='discard noselect' (click)='cancelNewSelection()'>
+                CANCEL
+              </div>
+              <button class="btn btn-primary invite" (click)='getNewSelectionData()'>
+                SAVE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

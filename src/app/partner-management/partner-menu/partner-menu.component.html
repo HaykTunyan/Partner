@@ -1,0 +1,499 @@
+<!-- Partner Menu Component View -->
+
+<!-- mat sidenav container -->
+<mat-drawer-container class="sidenav-container  ">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- drawer content -->
+  <mat-drawer-content>
+    <!-- header -->
+    <header class="mt-3">
+    <div class="container-fluid">
+    <div class="menus-navbar pl-3 pr-3 white-text">
+      <nav class="nav d-flex justify-content-between">
+        <div class="menus-brand d-flex float-left">
+          <div class="menus-logo position-relative mt-3">
+            <i class="material-icons mr-1 position-relative child-icon" placement="bottom" mdbTooltip="Child Car">child_care</i>
+              <strong class="ml-1">
+                <button mat-button routerLink="/partner-list" routerLinkActive="active" type="button">
+                  <span class="large-text"> {{ partnersName }} </span>
+                </button>
+              </strong>
+              <strong><i class="material-icons position-relative child-icon">keyboard_arrow_right</i></strong>
+                <span class="large-text noselect pageName"><strong class="ml-1">{{ menusName }}</strong> </span>
+            </div>
+          </div>
+          <div class="button-navbar float-right">
+            <button type="button" class="btn mr-3 btn-partner">
+              <span class="font-weight-bold button-text">ATTACH CORPORATE MENU</span>
+            </button>
+            <button type="button" class="btn mr-3 btn-partner" (click)="attachmenuModal.show()">
+              <span class="font-weight-bold button-text">ATTACH MENU</span>
+            </button>                  
+            <button mat-icon-button type="button" class="btn-notifications" placement="bottom"  mdbTooltip="Notifications">
+              <i class="material-icons md-36">notifications</i>
+            </button>
+            <button mat-icon-button type="button" class="btn-notifications" placement="bottom"  mdbTooltip="Person">
+              <i class="material-icons md-36">person</i>
+            </button>
+          </div>
+        </nav>
+        </div>
+      </div>
+    </header>
+    <!-- sidenav-content -->
+    <div class="sidenav-content partner-menu">
+      <!-- section-menu -->
+      <div class="section-menu container-fluid">
+        <div class="container-fluid mt-5 mb-5">
+          <!-- search menu partner -->
+          <div class="search-menu row">
+          <!-- S/N -->
+          <div class="col-1">
+            <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+            <mat-form-field class="w-100 white-text">
+              <input matInput placeholder="S/N" class="white-text pl-4" type="text">
+            </mat-form-field>
+          </div>
+          <!-- Product -->
+          <div class="col-2">
+            <mat-icon class="float-right menus-icon position-relative">
+              <i class="material-icons  white-text">arrow_drop_down</i>
+            </mat-icon>
+            <mat-form-field class="w-100">
+              <input type="text" placeholder="Product" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" class="pl-4 white-text">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>  
+          </div>
+          <!-- Measurement -->
+          <div class="col-2">
+            <mat-icon class="float-right menus-icon position-relative">
+              <i class="material-icons white-text">arrow_drop_down</i>
+            </mat-icon>
+            <mat-form-field class="full-width">
+              <input type="text" placeholder="Measurement" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" class="pl-4 white-text">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>    
+          </div>
+          <!-- Search by name -->
+          <div class="col-3">
+            <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>    
+            <mat-form-field class="full-width white-text">
+              <input matInput placeholder="Search by name" type="text" class="pl-4">
+            </mat-form-field>
+          </div>
+          <!-- Price -->
+          <div class="col-1">
+            <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+            <mat-form-field class="full-width white-text">
+              <input matInput placeholder="Price" type="text" class="pl-4">
+            </mat-form-field>
+          </div>
+          </div>
+          <!-- menus banneri corporate -->
+          <div class="menus-banneri d-flex mt-2">
+            <!-- cards -->
+            <mat-card class="w-100 mr-2 first-card mat-elevation-z4">
+              <mat-card-header>
+                <strong class="pt-2 font-weight-bold headers-text-color">Burger King Menu 1 (corporate)</strong>
+                <span class="spacer"></span>
+                <button mat-icon-button type="button" (click)="showSectionscorporate = !showSectionscorporate">
+                  <mat-icon *ngIf="!showSectionscorporate"><i class="material-icons md-main">keyboard_arrow_right</i></mat-icon>
+                  <mat-icon *ngIf="showSectionscorporate"><i class="material-icons md-main">keyboard_arrow_down</i></mat-icon>
+                </button>
+              </mat-card-header>
+            </mat-card>
+            <mat-card class="second-card mat-elevation-z8">
+              <div class="button-row pt-2">
+                <button mat-icon-button type="button" placement="bottom" mdbTooltip="Create">
+                  <mat-icon><i class="material-icons md-36 md-main">create</i></mat-icon>
+                </button>
+                <button mat-icon-button type="button" placement="bottom" mdbTooltip="Print">
+                  <mat-icon><i class="material-icons md-36 md-main">print</i></mat-icon>
+                </button>
+                <button mat-icon-button type="button" placement="bottom" mdbTooltip="Unarchive">
+                  <mat-icon><i class="material-icons md-36 md-main">unarchive</i></mat-icon>
+                </button>
+                <button mat-icon-button type="button" color="warn" placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons">delete</i></mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>
+          <div *ngIf="showSectionscorporate" class="menu-table mt-5 mb-5">
+            <!-- Section One -->
+            <div class="section-one">
+              <mat-card class="w-100 first-card">
+                <mat-card-header class="d-flex justify-content-between">
+                  <strong class="pt-2 font-weight-bold text-center card-title headers-text-color"> {{ sectionOne }} </strong>
+                  <button mat-icon-button (click)="showSectionscorporateOne = !showSectionscorporateOne" type="button" type="button">
+                    <mat-icon *ngIf="!showSectionscorporateOne"><i class="material-icons md-main">keyboard_arrow_up</i></mat-icon>
+                    <mat-icon *ngIf="showSectionscorporateOne"><i class="material-icons md-main">keyboard_arrow_down</i></mat-icon>
+                  </button>
+                </mat-card-header>
+                <mat-card-content class="mt-2">
+                  <!-- teable-section -->
+                  <table mdbTable *ngIf = "showSectionscorporateOne" matSort (matSortChange)="sortData($event)" striped="true" class="table-section">
+                    <!-- section one -->  
+                    <thead>
+                      <!-- section-head -->
+                      <tr class="section-head">
+                      <!-- S/N -->
+                      <th scope="col" class="font-weight-bold headers-text-color left-border rborder-color lborder-color">
+                        S/N
+                      </th>
+                      <!-- Product -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Product
+                      </th>
+                      <!-- Measurement -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Measurement
+                      </th>
+                      <!-- Name -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Name
+                      </th>
+                      <!-- Price -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Price
+                      </th>
+                      <!-- Description -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color right-border">
+                        Description
+                      </th>
+                      <!-- Tools -->
+                      <th scope="col" class="font-weight-bold headers-text-color text-center lborder-color rborder-color left-border right-border">
+                        Tools
+                      </th>
+                    </tr>
+                  </thead>
+                  <!-- tbody -->
+                  <tbody class="section-tbody" *ngIf = "showSectionscorporateOne">
+                    <tr *ngFor="let elem of elems">
+                      <th scope="row" class="id-tbody table-text-color"> {{elem.id}} </th>
+                      <td class="product-tbody table-text-color"> {{elem.product}} </td>
+                      <td class="measurement-tbody table-text-color"> {{elem.measurement}} </td>
+                      <td class="name-tbody table-text-color"> {{elem.name}} </td>
+                      <td class="price-tbody table-text-color"> {{elem.price}} </td>
+                      <td class="dectription-tbody table-text-color"> {{elem.dectription}} </td>
+                      <td class="tools-tbody">
+                        <div class="button-row d-flex">
+                          <!-- Switch -->
+                          <mat-slide-toggle color="primary" [checked]="true" class="slide-tbody position-relative"></mat-slide-toggle>
+                          <span class="spacer"></span>
+                          <button mat-icon-button placement="bottom" mdbTooltip="Data Range" routerLink="/menu-sheduling" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">date_range</i> </mat-icon>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <!-- Section Two -->
+            <div class="section-two mt-5">
+              <mat-card class="w-100 first-card">
+              <mat-card-header class="d-flex justify-content-between">
+                <strong class="pt-2 font-weight-bold text-center card-title headers-text-color"> {{ sectionTwo }} </strong>
+                <button mat-icon-button (click)="showSectionscorporateTwo = !showSectionscorporateTwo" type="button">
+                  <mat-icon *ngIf="!showSectionscorporateTwo"><i class="material-icons md-main">keyboard_arrow_up</i></mat-icon>
+                  <mat-icon *ngIf="showSectionscorporateTwo"><i class="material-icons md-main">keyboard_arrow_down</i></mat-icon>
+                </button>
+              </mat-card-header>
+              <mat-card-content class="mt-2">
+                <!-- teable-section -->
+                <table mdbTable *ngIf = "showSectionscorporateTwo" class="table-section">
+                  <!-- section two -->  
+                  <thead>
+                    <!-- section-head -->
+                    <tr class="section-head">
+                      <!-- S/N -->
+                      <th scope="col" class="font-weight-bold headers-text-color left-border rborder-color lborder-color">
+                        S/N
+                      </th>
+                      <!-- Product -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Product
+                      </th>
+                      <!-- Measurement -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Measurement
+                      </th>
+                      <!-- Name -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Name
+                      </th>
+                      <!-- Price -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                        Price
+                      </th>
+                      <!-- Description -->
+                      <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color right-border">
+                        Description
+                      </th>
+                      <!-- Tools -->
+                      <th scope="col" class="font-weight-bold headers-text-color text-center lborder-color rborder-color left-border right-border">
+                        Tools
+                      </th>
+                    </tr>
+                  </thead>
+                  <!-- tbody -->
+                  <tbody class="section-tbody" *ngIf = "showSectionscorporateTwo">
+                    <tr *ngFor="let elem of elems">
+                      <th scope="row" class="id-tbody table-text-color"> {{elem.id}} </th>
+                      <td class="product-tbody table-text-color"> {{elem.product}} </td>
+                      <td class="measurement-tbody table-text-color"> {{elem.measurement}} </td>
+                      <td class="name-tbody table-text-color"> {{elem.name}} </td>
+                      <td class="price-tbody table-text-color"> {{elem.price}} </td>
+                      <td class="dectription-tbody table-text-color"> {{elem.dectription}} </td>
+                      <td class="tools-tbody">
+                        <div class="button-row d-flex">
+                          <!-- Switch -->
+                          <mat-slide-toggle color="primary" [checked]="true" class="slide-tbody position-relative"></mat-slide-toggle>
+                          <span class="spacer"></span>
+                          <button mat-icon-button placement="bottom" mdbTooltip="Data Range">
+                            <mat-icon><i class="material-icons">date_range</i> </mat-icon>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+          <!-- menus banneri -->
+          <div class="menus-banneri d-flex mt-2">
+            <!-- cards -->
+            <mat-card class="w-100 mr-2 first-card mat-elevation-z8">
+              <mat-card-header>
+                <strong class="pt-2 font-weight-bold headers-text-color">Burger King Menu 1</strong>
+                 <span class="spacer"></span>
+                <button mat-icon-button type="button" (click)="showSections = !showSections">
+                    <mat-icon *ngIf="!showSections"><i class="material-icons md-main">keyboard_arrow_right</i></mat-icon>
+                    <mat-icon *ngIf="showSections"><i class="material-icons md-main">keyboard_arrow_down</i></mat-icon>
+                </button>
+              </mat-card-header>
+            </mat-card>
+            <mat-card class="second-card mat-elevation-z8">
+              <div class="button-row pt-2">
+              <button mat-icon-button type="button" placement="bottom" mdbTooltip="Create">
+                <mat-icon><i class="material-icons md-36 md-main">create</i></mat-icon>
+              </button>
+              <button mat-icon-button type="button" placement="bottom" mdbTooltip="Print">
+                <mat-icon><i class="material-icons md-36 md-main">print</i></mat-icon>
+              </button>
+              <button mat-icon-button type="button" placement="bottom" mdbTooltip="Unarchive">
+                <mat-icon><i class="material-icons md-36 md-main">unarchive</i></mat-icon>
+              </button>
+              <button mat-icon-button type="button" disabled placement="bottom" mdbTooltip="Delete">
+                <mat-icon><i class="material-icons">delete</i></mat-icon>
+              </button>
+              </div>
+            </mat-card>
+          </div>
+          <div *ngIf="showSections" class="menu-table mt-5 mb-5">
+            <!-- Section One -->
+            <div class="section-one">
+            <mat-card class="w-100 first-card">
+              <mat-card-header class="d-flex justify-content-between">
+                <strong class="pt-2 font-weight-bold text-center card-title headers-text-color"> {{ sectionOne }} </strong>
+                <button mat-icon-button (click)="showSectionOne = !showSectionOne" type="button" type="button">
+                  <mat-icon *ngIf="!showSectionOne"><i class="material-icons md-main">keyboard_arrow_up</i></mat-icon>
+                  <mat-icon *ngIf="showSectionOne"><i class="material-icons md-main">keyboard_arrow_down</i></mat-icon>
+                </button>
+              </mat-card-header>
+              <mat-card-content class="mt-2">
+                <!-- teable-section -->
+                <table mdbTable *ngIf = "showSectionOne" matSort (matSortChange)="sortData($event)" striped="true" class="table-section">
+                  <!-- section one -->  
+                  <thead>
+                    <!-- section-head -->
+                    <tr class="section-head">
+                    <!-- S/N -->
+                    <th scope="col" class="font-weight-bold headers-text-color left-border rborder-color lborder-color">
+                      S/N
+                    </th>
+                    <!-- Product -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Product
+                    </th>
+                    <!-- Measurement -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Measurement
+                    </th>
+                    <!-- Name -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Name
+                    </th>
+                    <!-- Price -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Price
+                    </th>
+                    <!-- Description -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color right-border">
+                      Description
+                    </th>
+                    <!-- Tools -->
+                    <th scope="col" class="font-weight-bold headers-text-color text-center lborder-color rborder-color left-border right-border">
+                      Tools
+                    </th>
+                  </tr>
+                  </thead>
+                  <!-- tbody -->
+                  <tbody class="section-tbody" *ngIf = "showSectionOne">
+                  <tr *ngFor="let elem of elems">
+                    <th scope="row" class="id-tbody table-text-color"> {{elem.id}} </th>
+                    <td class="product-tbody table-text-color"> {{elem.product}} </td>
+                    <td class="measurement-tbody table-text-color"> {{elem.measurement}} </td>
+                    <td class="name-tbody table-text-color"> {{elem.name}} </td>
+                    <td class="price-tbody table-text-color"> {{elem.price}} </td>
+                    <td class="dectription-tbody table-text-color"> {{elem.dectription}} </td>
+                    <td class="tools-tbody">
+                      <div class="button-row d-flex">
+                        <!-- Switch -->
+                        <mat-slide-toggle color="primary" [checked]="true" class="slide-tbody position-relative"></mat-slide-toggle>
+                        <span class="spacer"></span>
+                        <button mat-icon-button placement="bottom" mdbTooltip="Data Range" routerLink="/menu-sheduling" routerLinkActive="active">
+                          <mat-icon><i class="material-icons">date_range</i> </mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </mat-card-content>
+            </mat-card>
+            </div>
+            <!-- Section Two -->
+            <div class="section-two mt-5">
+            <mat-card class="w-100 first-card">
+            <mat-card-header class="d-flex justify-content-between">
+              <strong class="pt-2 font-weight-bold text-center card-title headers-text-color"> {{ sectionTwo }} </strong>
+              <button mat-icon-button (click)="showSectionTwo = !showSectionTwo" type="button">
+                <mat-icon *ngIf="!showSectionTwo"><i class="material-icons md-main">keyboard_arrow_up</i></mat-icon>
+                <mat-icon *ngIf="showSectionTwo"><i class="material-icons md-main">keyboard_arrow_down</i></mat-icon>
+              </button>
+            </mat-card-header>
+            <mat-card-content class="mt-2">
+              <!-- teable-section -->
+              <table mdbTable *ngIf = "showSectionTwo" class="table-section">
+                <!-- section two -->  
+                <thead>
+                  <!-- section-head -->
+                  <tr class="section-head">
+                    <!-- S/N -->
+                    <th scope="col" class="font-weight-bold headers-text-color left-border rborder-color lborder-color">
+                      S/N
+                    </th>
+                    <!-- Product -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Product
+                    </th>
+                    <!-- Measurement -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Measurement
+                    </th>
+                    <!-- Name -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Name
+                    </th>
+                    <!-- Price -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color">
+                      Price
+                    </th>
+                    <!-- Description -->
+                    <th scope="col" class="font-weight-bold headers-text-color rborder-color lborder-color right-border">
+                      Description
+                    </th>
+                    <!-- Tools -->
+                    <th scope="col" class="font-weight-bold headers-text-color text-center lborder-color rborder-color left-border right-border">
+                      Tools
+                    </th>
+                  </tr>
+                </thead>
+                <!-- tbody -->
+                <tbody class="section-tbody" *ngIf = "showSectionTwo">
+                  <tr *ngFor="let elem of elems">
+                    <th scope="row" class="id-tbody table-text-color"> {{elem.id}} </th>
+                    <td class="product-tbody table-text-color"> {{elem.product}} </td>
+                    <td class="measurement-tbody table-text-color"> {{elem.measurement}} </td>
+                    <td class="name-tbody table-text-color"> {{elem.name}} </td>
+                    <td class="price-tbody table-text-color"> {{elem.price}} </td>
+                    <td class="dectription-tbody table-text-color"> {{elem.dectription}} </td>
+                    <td class="tools-tbody">
+                      <div class="button-row d-flex">
+                        <!-- Switch -->
+                        <mat-slide-toggle color="primary" [checked]="true" class="slide-tbody position-relative"></mat-slide-toggle>
+                        <span class="spacer"></span>
+                        <button mat-icon-button placement="bottom" mdbTooltip="Data Range">
+                          <mat-icon><i class="material-icons">date_range</i> </mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-card-content>
+            </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </mat-drawer-content>
+  <div mdbModal #attachmenuModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="attachmenuModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content  modal-attachmenu">
+      <div class="modal-header">
+        <mat-form-field class="modal-search w-100">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search">
+        </mat-form-field>
+      </div>
+      <div class="modal-body">
+        <div class="menus-banneri d-flex mt-2 w-100" *ngFor="let attach of attachs">
+          <!-- cards -->
+          <mat-card class="w-100 mr-2 first-card mat-elevation-z4">
+            <mat-card-header class="w-100">
+              <strong class="pt-2 mr-3 font-weight-bold headers-text-color">
+                {{ attach.id }} 
+              </strong>
+              <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+              <div class="button-row pt-2 pl-5 w-100">
+                <strong class="pt-2 font-weight-bold headers-text-color">
+                  {{ attach.name }}
+                </strong>
+              </div>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</mat-drawer-container>
+
+
+
+
+
+
+
+
+
+

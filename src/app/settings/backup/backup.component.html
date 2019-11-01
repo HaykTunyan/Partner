@@ -1,0 +1,228 @@
+<div class='contentForScroll' #scrollableContent
+     (scroll)='scroll(scrollableContent.scrollTop, allContent.clientHeight)'>
+  <mat-drawer-container class="sidenav-container partner-list">
+    <!-- mat-drawer -->
+    <mat-drawer class="drawer" mode="side" opened>
+      <sidenav></sidenav>
+    </mat-drawer>
+    <!-- mat sidenav -->
+    <mat-drawer-content>
+      <div class="container-fluid" #allContent>
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12 titleContent">
+                <mat-icon class="titleIcon">backup</mat-icon>
+                <span class="titleText">Backup</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 allPadding">
+                <div class="box">
+                  <div class="boxTitle">
+                    Backup
+                  </div>
+                  <!--backup period checkbox-->
+                  <div class="backupRadiobuttonsContent">
+                    <div *ngFor='let radio of backupRepeatArray; let i = index' class="radiobuttonContent">
+                      <div class="radioButton" (click)='IsEdit ? backupRadioClick(i): false'>
+                        <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                      </div>
+                      <div class="radiobuttonName">
+                        {{ radio.name }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class='allTimeContent'>
+                    <!--backup time list-->
+                    <div class='backupStartTimesContent'>
+                      <div *ngFor='let date of oldBackupTimesArray; let i = index' class='backupStartTimeContent'>
+                        <div class='deleteTimeButton noselect' (click)="IsEdit ? deleteBackupTime(i): false">
+                          x
+                        </div>
+                        <div class='backupSort'>
+                          <div class="radioButton">
+                            <div class="noChecked checked"></div>
+                          </div>
+                          <div class="radiobuttonName">
+                            {{ backupTimeSortNames[date.backupTimePeriod] }}
+                          </div>
+                        </div>
+                        <div class='timeAndDateContent'>
+                          <div class='dateContent'>
+                            <div class="backupTimeTitle">
+                              Start Date and Time
+                            </div>
+                            <div class='dateFixedInputContent'>
+                              <div class='dateFixedInput'>
+                                {{ date.startDateTime | date: 'MMM dd, yyy' }}
+                              </div>
+                              <div class='timeFixedInput'>
+                                {{ date.startDateTime | date: 'HH:mm' }}
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf='date.backupTimePeriod == "HOURLY"' class='hourContent'>
+                            <div class="backupTimeTitle">
+                              Backup Every...
+                            </div>
+                            <div class='hourAndMinuteContent backColor'>
+                              <div class='hourFixed'>
+                                {{ date.hour }}
+                              </div>
+                              <div class='minuteFixed'>
+                                {{ date.minute }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class='zipContent'>
+                          <div class="radiobuttonContent">
+                            <div class="radioButton">
+                              <div *ngIf='date.backupPackaging == "ZIP"' class="noChecked checked"></div>
+                            </div>
+                            <div class="radiobuttonName">
+                              Zip
+                            </div>
+                          </div>
+                          <div class="radiobuttonContent">
+                            <div class="radioButton">
+                              <div class="noChecked checked" *ngIf='date.backupPackaging == "NON_ZIP"'></div>
+                            </div>
+                            <div class="radiobuttonName">
+                              Non Zip
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--add backup time and date -->
+                    <div class="backupSetTimesEndDateContent">
+                      <div class="setBackupTime">
+                        <div class="backupTime">
+                          <div class="backupTimeTitle">
+                            Start Date and Time
+                          </div>
+                          <div class="dateAndTimeContent">
+                            <mat-form-field>
+                              <input matInput [matDatepicker]="picker1" [formControl]="date" [value]="startDate"
+                                     (dateInput)="getDate($event, 'startDate')" (keypress)="false"
+                                     (keydown)="keyDownDateInput($event, 'startDate')" [readonly]="!IsEdit"
+                                     onselectstart="return false"
+                                     onpaste="return false;"
+                                     onDrag="return false"
+                                     onDrop="return false"
+                                     autocomplete="off" autocapitalize="off" autocorrect="off">
+                              <mat-datepicker-toggle *ngIf = 'IsEdit' matSuffix [for]="picker1">
+                                <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                              </mat-datepicker-toggle>
+                              <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                            <div class="timePicker">
+                              <input #timeElement class="timeInput" [value]='timeValue'
+                                     (focus)="IsEdit ? focusFunction('time'): false"
+                                     (focusout)="IsEdit ? focusOutFunction('time'): false"
+                                     (keypress)="timeValidation($event, timeElement.value)"
+                                     (keydown)="clearTimeDada($event)" [readonly]="!IsEdit"
+                                     (input)="changeTimeFormat(timeElement.value )"
+                                     onselectstart="return false"
+                                     onpaste="return false;"
+                                     onDrag="return false"
+                                     onDrop="return false"
+                                     autocomplete="off" autocapitalize="off" autocorrect="off">
+                              <div class='borderBottom'></div>
+                              <div class='borderContent'>
+                                <div class='borderActive' [ngClass]="{'inputActive': time}"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class='setHourContent' *ngIf='hourlyBlock'>
+                          <div class="backupHourTitle">
+                            Backup Every...
+                          </div>
+                          <div class="hourAndMinuteContent">
+                            <div class="hourPicker">
+                              <input class="timeInput hourOrMinute" #hourElem [value]='hourValue' placeholder="Hour"
+                                     (focus)="IsEdit ? focusFunction('hour'): false"
+                                     (focusout)="IsEdit ? focusOutFunction('hour'): false"
+                                     (keypress)="hourEndMinuteKeypressValidation($event, 'hourValue', hourElem.value)"
+                                     (keydown)="clearMinuteOrHour($event, 'hourValue')" [readonly]="!IsEdit"
+                                     (input)="changeMinuteOrHourForm('hourValue', hourElem.value)"
+                                     onselectstart="return false"
+                                     onpaste="return false;"
+                                     onDrag="return false"
+                                     onDrop="return false"
+                                     autocomplete="off" autocapitalize="off" autocorrect="off">
+                              <div class='borderBottom'></div>
+                              <div class='borderContent'>
+                                <div class='borderActive' [ngClass]="{'inputActive': hour}"></div>
+                              </div>
+                            </div>
+                            <div class="minutePicker">
+                              <input class="timeInput hourOrMinute" #minuteElem [value]='minuteValue'
+                                     placeholder="Minute"
+                                     (focus)="IsEdit ? focusFunction('minute'): false"
+                                     (focusout)="IsEdit ? focusOutFunction('minute'): false"
+                                     (keypress)="hourEndMinuteKeypressValidation($event, 'minuteValue',  minuteElem.value)"
+                                     (keydown)="clearMinuteOrHour($event, 'minuteValue')" [readonly]="!IsEdit"
+                                     (input)="changeMinuteOrHourForm('minuteValue',  minuteElem.value)"
+                                     onselectstart="return false"
+                                     onpaste="return false;"
+                                     onDrag="return false"
+                                     onDrop="return false"
+                                     autocomplete="off" autocapitalize="off" autocorrect="off">
+                              <div class='borderBottom'></div>
+                              <div class='borderContent'>
+                                <div class='borderActive' [ngClass]="{'inputActive': minute}"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="addTimeButtonContent">
+                          <div class="addTimeButton" *ngIf = 'IsEdit' placement="top" mdbTooltip="Add Another Time"
+                               (click)='addBackupTime()'>
+                            <mat-icon class='addIcon noselect'>add</mat-icon>
+                          </div>
+                        </div>
+                      </div>
+                      <div class='zipRadiobuttonContent'>
+                        <div *ngFor='let radio of zipRadiobuttonArray; let i = index' class="radiobuttonContent">
+                          <div class="radioButton" (click)='IsEdit ? zipRadioClick(i) : false'>
+                            <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                          </div>
+                          <div class="radiobuttonName">
+                            {{ radio.name }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class='saveOrCancelButtonsContent'>
+                      <button class='btn cancelButton' (click)="IsEdit ? cancel(): false" [disabled]="!IsEdit">
+                        CANCEL
+                      </button>
+                      <button class="btn btn-primary saveButton" (click)='IsEdit ? save(): false' [disabled]="!IsEdit">
+                        SAVE
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 backupButtonContent">
+              <button class="btn btn-primary saveButton  backupButton" (click)='backupNow()' [disabled]="!IsEdit">
+                BACKUP NOW
+              </button>
+            </div>
+            <!--Table component-->
+            <div class="row">
+              <div class="col-12">
+                <app-backup-table [scrollData]='scrollData'></app-backup-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

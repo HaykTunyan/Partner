@@ -1,0 +1,1162 @@
+<!-- Add Partner Component View -->
+<!-- mat sidenav container -->
+<mat-drawer-container class="sidenav-container add-partner">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content>
+    <!-- header -->
+    <header>
+      <div class="container-fluid">
+        <div class="partner-navbar">
+          <nav class="nav d-flex justify-content-between">
+            <div class="partner-brand d-flex float-left">
+              <div class="partner-logo position-relative ml-3">
+                <strong class="position-relative part-btn">
+                  <i class="material-icons position-relative child-icon white-text">store</i>
+                  <button mat-button routerLink="/partner-list" routerLinkActive="active" type="button" class="partner-btn">
+                    Partner List
+                  </button>
+                </strong>
+                <strong class="position-relative child-icon"><i class="material-icons">keyboard_arrow_right</i></strong>
+                <strong class="position-relative part-btn">
+                  <button mat-button routerLink="/add-partner" routerLinkActive="active" type="button" class="partner-btn">
+                    Add Partner
+                  </button>
+                </strong>
+              </div>
+            </div>
+            <div class="button-navbar float-right">
+              <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+                <i class="material-icons md-36">notifications</i>
+              </button>
+              <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User" [matMenuTriggerFor]="menu">
+                <i class="material-icons md-36">person</i>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/login" routerLinkActive="active">Sign Out</button>
+              </mat-menu>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- sidenav content -->
+    <div class="sidenav-content">
+      <div class="content-partner mt-4">
+        <!-- ng-container -->
+        <ng-container>
+          <!-- card one Header -->
+          <mat-card class="card z-depth-5 pt-5">
+            <!-- card header -->
+            <mat-card-header class="pt-5">
+              <div class="d-flex d-block w-100">
+                <div class="w-50 d-flex ">
+                  <strong class="mr-4 ml-4 d-inline radiobuttonsTextCenter">
+                    <span class="d-block main-color small-text">Partner</span>
+                    <span class="d-block main-color small-text">Type</span>
+                  </strong>
+                  <mat-radio-group class="d-inline align-middle">
+                    <mat-radio-button [checked]="checkedRestaurant" (change)="onChangeChecked($event)" value="1" class="mr-3 align-middle main-color small-text">
+                      Restaurant
+                    </mat-radio-button>
+                    <mat-radio-button [checked]="checkedShop" value="2" (change)="onChangeChecked($event)" class="align-middle main-color small-text">
+                      Shop
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div class="w-50 d-flex justify-content-end">
+                  <strong class="mr-4 d-inline align-middle radiobuttonsTextCenter">
+                    <span class="d-block medium-text main-color small-text">Order Acceptence</span>
+                    <span class="d-block medium-text main-color small-text">Method</span>
+                  </strong>
+                  <mat-radio-group class="d-inline align-middle">
+                    <mat-radio-button [checked]="checkedPrinter" value="3" (change)="onChangeChecked($event)" class="mr-3 align-middle small-text">
+                      Printer
+                    </mat-radio-button>
+                    <mat-radio-button [checked]="checkedMobileApp" value="4" (change)="onChangeChecked($event)" class="mr-3 align-middle small-text">
+                      Mobile App
+                    </mat-radio-button>
+                    <mat-radio-button [checked]="checkedPhone" value="5" (change)="onChangeChecked($event)" class="align-middle small-text">
+                      Phone
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </mat-card-header>
+            <!-- card content -->
+            <mat-card-content class="mt-5">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-end p-0">
+                  <div class = 'd-flex justify-content-between name-type'>
+                      <div class = 'd-flex'>
+                          <div class="mr-md-3 mr-5">
+                            <strong class="d-flex flex-column position-relative input-name">
+                              <span class="main-color small-text">Name</span>
+                            </strong>
+                          </div>
+                          <div class="mt-0 mr-3">
+                            <mat-form-field class = 'nameInput' [ngClass]="{'error-text': errorStatus == 422 || errorStatus == 400}">
+                              <input matInput type="text" name="name" placeholder="ENG" [(ngModel)]="data.name" #name="ngModel" required (change)="errorStatus = null">
+                            </mat-form-field>
+                            <ng-container *ngIf="name.invalid && (name.dirty || name.touched) || name.invalid && errorStatus == 422">
+                              <div class="error-massage">
+                                Name is required.
+                              </div>
+                            </ng-container>
+                            <ng-container *ngIf="errorStatus == 400">
+                              <div class="error-massage">
+                                The Partner already exists.
+                              </div>
+                            </ng-container>
+                          </div>
+                        </div>
+                        <div class="mt-0 mr-3">
+                          <mat-form-field class = 'nameInput'>
+                            <input matInput type="text" placeholder="РУС" 
+                            [(ngModel)]="translationDataRus.name">
+                          </mat-form-field>
+                        </div>
+                        <div class="mt-0 mr-3">
+                          <mat-form-field class = 'nameInput'>
+                            <input matInput type="text" placeholder="ՀԱՅ" 
+                            [(ngModel)]="translationDataArm.name">
+                          </mat-form-field>
+                          <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                          (click)="data.name=''; translationDataRus.name=''; translationDataArm.name=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <!-- row -->
+              <div class="row mt-3">
+                <!-- Brand -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">Brand</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0">
+                    <mat-form-field class = 'inputWeidth'>
+                      <mat-select [(value)]="brandSelected">
+                        <mat-option *ngFor="let option of brands" 
+                        value="{{option.id}}"> 
+                        {{option.name}} 
+                      </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 left-input-space">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="brandSelected=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Service Category -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text text-width">Service Category</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0">
+                    <mat-form-field class = 'inputWeidth'>
+                      <mat-select [(value)]="selectedPartnerServiceCategory" multiple>
+                        <mat-option *ngFor="let option of serviceCategories" 
+                        value="{{option.id}}"> {{option.name}} </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="selectedPartnerServiceCategory=[]">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Partner Category -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative">
+                      <span class="main-color small-text text-width">Partner</span>
+                      <span class="main-color small-text text-width">Category</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0">
+                    <mat-form-field class = 'inputWeidth'>
+                      <mat-select [(value)]="selectedPartnerCategory" multiple>
+                        <mat-option *ngFor="let option of partnerCategory" 
+                        value="{{option.id}}"> {{option.name}} </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 left-input-space">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="selectedPartnerCategory=[]">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Service Type -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text text-width">Service Type</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0">
+                    <mat-form-field class = 'inputWeidth'>
+                      <mat-select [(value)]="selectedServiceType" multiple>
+                        <mat-option *ngFor="let option of serviceTypes" value="{{option.id}}"> 
+                          {{option.name}} 
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="selectedServiceType=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Keywords -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">Keywords</span>
+                    </strong>
+                  </div>
+                  <!-- Chips for Key -->
+                  <div class="mt-0">
+                    <mat-form-field class="content-field position-relative chips-field inputWeidth">
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let keyword of keywords" [selectable]="selectable" 
+                        [removable]="removable" (removed)="remove(keyword)">
+                          {{keyword.name}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input [matChipInputFor]="chipList" 
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+                        [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                      </mat-chip-list>
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 left-input-space">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="keywords=[]">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Minimum order Amount -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative">
+                      <span class="main-color small-text text-width">Minimum</span>
+                      <span class="main-color small-text text-width">order Amount</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0">
+                    <mat-form-field class="content-field position-relative inputWeidth">
+                      <input matInput type="number" [(ngModel)]="minOrderAmount" >
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="minOrderAmount=null">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Legal Entities -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">Legal Entity</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0">
+                    <mat-form-field class = 'inputWeidth'>
+                      <mat-select [(value)]="legalEntity">
+                        <mat-option *ngFor="let option of legalEntities" 
+                        value="{{option.id}}">
+                        {{option.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 left-input-space">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="legalEntity=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Contract Number -->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class="d-flex mr-3">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text text-width">Contract Number</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0">
+                    <mat-form-field class="content-field position-relative inputWeidth">
+                      <input matInput [(ngModel)]="data.contractNumber">
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0">
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="data.contractNumber=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex pl-0 w-100 mr-5">
+                    <strong class="d-flex flex-column position-relative input-name-update ">
+                      <span class="main-color small-text d-flex justify-content-end">Automated</span>
+                      <span class="main-color small-text">Menu Update</span>
+                    </strong>
+                  </div>
+                  <div class="d-block mt-2 white-text automat-active">
+                    <mat-slide-toggle [(ngModel)]="activeData ">ACTIVATE</mat-slide-toggle>
+                  </div>
+                    <div class="mt-2 col-md-5 d-flex justify-content-center">
+                      <strong><span>Every</span></strong>
+                      <mat-form-field class="billing-cycle-day everyInput">
+                        <input matInput (keypress)="numberValidation($event)" [(ngModel)]="everyHour" >
+                      </mat-form-field>
+                      <strong><span>hour</span></strong>
+                    </div>
+                    <div class = 'col-md-2'></div>
+                </div>
+                <div class="col-6 d-flex flex-row">
+                  <div class="col-md-6 d-flex hour-input">
+                    <strong class = 'delayTimeTitle'>
+                      <span>Delay Time</span>
+                    </strong>
+                    <mat-form-field class="delayTimeInput">
+                      <input matInput (keypress)="numberValidation($event)" [(ngModel)]="delayTime" >
+                    </mat-form-field>
+                    <strong><span>min</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex w-100 link-margin col-1">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">Link</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0 col-8">
+                    <mat-form-field class="content-field position-relative inputWeidth">
+                      <input matInput type="text" [(ngModel)]="minOrderAmount" >
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!--Perferable Pick-up Method-->
+                <div class="col-6 d-flex flex-row justify-content-end">
+                  <div class=" d-flex flex-row">
+                    <div class="d-flex mr-3">
+                      <strong class="d-flex flex-column position-relative">
+                        <span class="main-color small-text text-width">Perferable Pick-up</span>
+                        <span class="main-color small-text text-width">Method</span>
+                      </strong>
+                    </div>
+                    <div class="mt-0">
+                      <mat-form-field class = 'inputWeidth'>
+                        <mat-select [(value)]="perferableSelected" >
+                          <mat-option *ngFor="let option of brands" value="{{option.id}}"> 
+                            {{option.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="mt-0">
+                      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="perferableSelected=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <!-- card action -->
+            <mat-card-actions>
+              <!-- Upload Image -->
+              <div class="d-flex w-100 col-12">
+                <div class="d-block d-flex">
+                  <strong class="mr-2 d-inline">
+                    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileInput>
+                    <button mdbBtn type="button" class="upload-btn" outline="true" mdbWavesEffect (click)="fileInput.click()">
+                      <mat-icon><i class="material-icons">attach_file</i></mat-icon>
+                    </button>
+                  </strong>
+                  <strong class="mr-2 d-inline">
+                    <span class="d-block main-color small-text">Upload Image</span>
+                    <span class="d-block main-color small-text">max 100 mb</span>
+                    <span class="d-block main-color small-text">250 x 80 px</span>
+                  </strong>
+                  <div *ngIf="imageUrl" class="upload-img">
+                    <img [src]="partnerImageUrl" alt=""/>{{partnerImageUrl}}
+                  </div>
+                  <button mat-icon-button *ngIf="imageUrl" placement="bottom" mdbTooltip="Delete" class="delete-button" (click)="deleteImage()">
+                    <mat-icon><i class="material-icons md-18">delete</i></mat-icon>
+                  </button>
+                </div>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+          <!-- card two Contact Information -->
+          <mat-card class="card z-depth-5 p-0 mt-4">
+            <!-- card header -->
+            <mat-card-header class="card-header">
+              <h3 class="text-center font-weight-bold main-color medium-text d-flex justify-content-center w-100">
+                Contact Information
+              </h3>
+            </mat-card-header>
+            <!-- card content -->
+            <mat-card-content class="mt-5 p-4">
+              <!-- row -->
+              <div class="row mt-3">
+                <!-- Country -->
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex w-100 pr-1 mr-0 justify-content-end">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">Country</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0 pl-2 col-8 pr-0">
+                    <mat-form-field class="content-field position-relative inputWeidth">
+                      <input matInput [(ngModel)]="data.address.country.name">
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 pl-1 col-2">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="data.address.country.name ='' ">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- ZIP -->
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex col-3 pr-1 mr-0 justify-content-end">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">ZIP</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0 pl-1 col-8 pr-0">
+                    <mat-form-field class="content-field position-relative inputWeidth">
+                      <input matInput [(ngModel)]="data.address.zip">
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 pl-1 col-2">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="data.address.zip=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- City -->
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex w-100 mr-0 pr-1 justify-content-end">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">City</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0 pl-2 col-8 pr-0">
+                    <mat-form-field class="content-field position-relative inputWeidth">
+                      <input matInput [(ngModel)]="data.address.city.name" (change)="changeCityName($event)">
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 pl-1 col-2">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="data.address.city.name=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Street -->
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex col-3 pr-1 mr-0 justify-content-end">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">Street</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0 pl-1 col-8 pr-0">
+                    <mat-form-field class="inputWeidth">
+                      <input matInput [(ngModel)]="data.address.street.name" (change)="changeStreetName($event)">
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 pl-1 col-2">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="data.address.street.name=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Contact Person Name -->
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex col-2 pr-1 mr-0 justify-content-end">
+                    <strong class="d-flex flex-column position-relative">
+                      <span class="main-color small-text text-width">Contact</span>
+                      <span class="main-color small-text text-width">Person Name</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0 pl-2 col-8 pr-0">
+                    <mat-form-field class="content-field position-relative inputWeidth">
+                      <input matInput [(ngModel)]="data.contactPersonName">
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 pl-1 col-2">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="data.contactPersonName=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- Building Number -->
+                <div class="col-6 d-flex flex-row">
+                  <div class="d-flex col-3 pl-0 pr-1 mr-0 justify-content-end">
+                    <strong class="d-flex flex-column position-relative input-name">
+                      <span class="main-color small-text">Building Number</span>
+                    </strong>
+                  </div>
+                  <div class="mt-0 pl-1 col-8 pr-0">
+                    <mat-form-field class="content-field inputWeidth position-relative">
+                      <input matInput [(ngModel)]="data.address.buildingNumber" (change)="changeBuildingNumber($event)">
+                    </mat-form-field>
+                  </div>
+                  <div class="mt-0 pl-1 col-2">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="data.address.buildingNumber=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--contacts-->
+              <div class="row contacts-content">
+                <div class="col-12 d-flex flex-row">
+                  <div class="d-flex d-inline col-1">
+                    <strong class="mr-3">
+                      <span class="main-color small-text contacts">Contacts</span>
+                    </strong>
+                  </div>
+                  <div class="col-9">
+                    <div class="row">
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="Choose contact type" [(value)]="contactTypeSelected">
+                            <mat-option *ngFor="let option of contactType" value="{{option.name}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1">
+                        <mat-icon><i class="material-icons contacts-icon opacity-6 align-text-top">keyboard_arrow_right</i></mat-icon>
+                      </div>
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="For what" [(value)]="typesSelected">
+                            <mat-option *ngFor="let option of contactTypes" value="{{option.key}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1 d-flex d-inline">
+                        <mat-divider [vertical]="true"></mat-divider>
+                      </div>
+                      <div class="col-2">
+                        <mat-form-field class="example-chip-list">
+                          <mat-chip-list #contact1>
+                            <mat-chip  *ngFor="let contact of contactValue" [selectable]="selectable"
+                                     [removable]="removable" (removed)="remuveContact(contact, 'contactValue')">
+                              <div class = 'chip'> {{contact.name}} </div>
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="New fruit..."
+                                   [matChipInputFor]="contact1"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="addContact($event, 'contactValue')">
+                          </mat-chip-list>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Contacts-1 -->
+              <div class="row" *ngIf="contactTypeSelected">
+                <div class="col-12 d-flex flex-row">
+                  <div class="d-flex d-inline col-1">
+                    <strong class="mr-3">
+                      <span class="main-color small-text contacts"></span>
+                    </strong>
+                  </div>
+                  <!--</div>-->
+                  <div class="col-9">
+                    <div class="row">
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="Choose contact type" [(value)]="contactTypeSelectedOne">
+                            <mat-option *ngFor="let option of contactType" value="{{option.name}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1">
+                        <mat-icon><i class="material-icons contacts-icon opacity-6 align-text-top">keyboard_arrow_right</i></mat-icon>
+                      </div>
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="For what" [(value)]="typesSelectedOne">
+                            <mat-option *ngFor="let option of contactTypes" value="{{option.key}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1 d-flex d-inline">
+                        <mat-divider [vertical]="true"></mat-divider>
+                      </div>
+                      <div class="col-2">
+                        <mat-form-field class="example-chip-list">
+                          <mat-chip-list #contact1>
+                            <mat-chip *ngFor="let contact of contactValueOne" [selectable]="selectable"
+                                     [removable]="removable" (removed)="remuveContact(contact, 'contactValueOne')">
+                              {{contact.name}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="New fruit..."
+                                   [matChipInputFor]="contact1"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="addContact($event, 'contactValueOne')">
+                          </mat-chip-list>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Contacts-2-->
+              <div class="row" *ngIf="contactTypeSelectedOne">
+                <div class="col-12 d-flex flex-row">
+                  <div class="d-flex d-inline col-1">
+                    <strong class="mr-3">
+                      <span class="main-color small-text contacts"></span>
+                    </strong>
+                  </div>
+                  <div class="col-9">
+                    <div class="row">
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="Choose contact type" [(value)]="contactTypeSelectedTwo">
+                            <mat-option *ngFor="let option of contactType" value="{{option.name}}">
+                                <div class = 'chip'> {{contact.name}} </div>
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1">
+                        <mat-icon><i
+                          class="material-icons contacts-icon opacity-6 align-text-top">keyboard_arrow_right</i>
+                        </mat-icon>
+                      </div>
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="For what" [(value)]="typesSelectedTwo">
+                            <mat-option *ngFor="let option of contactTypes" value="{{option.key}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1 d-flex d-inline">
+                        <mat-divider [vertical]="true"></mat-divider>
+                      </div>
+                      <div class="col-2">
+                        <mat-form-field class="example-chip-list">
+                          <mat-chip-list #contact1>
+                            <mat-chip *ngFor="let contact of contactValueTwo" 
+                            [selectable]="selectable" [removable]="removable" 
+                                     (removed)="remuveContact(contact, 'contactValueTwo')">
+                              <div class = 'chip'> {{contact.name}} </div>
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="New fruit..."
+                                   [matChipInputFor]="contact1"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="addContact($event, 'contactValueTwo')">
+                          </mat-chip-list>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Contacts-3 -->
+              <div class="row" *ngIf="contactTypeSelectedTwo">
+                <div class="col-12 d-flex flex-row">
+                  <div class="d-flex d-inline col-1">
+                    <strong class="mr-3">
+                      <span class="main-color small-text contacts"></span>
+                    </strong>
+                  </div>
+                  <div class="col-9">
+                    <div class="row">
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="Choose contact type" [(value)]="contactTypeSelectedThree">
+                            <mat-option *ngFor="let option of contactType" value="{{option.name}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1">
+                        <mat-icon><i class="material-icons contacts-icon opacity-6 align-text-top">keyboard_arrow_right</i></mat-icon>
+                      </div>
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="For what" [(value)]="typesSelectedThree">
+                            <mat-option *ngFor="let option of contactTypes" value="{{option.key}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1 d-flex d-inline">
+                        <mat-divider [vertical]="true"></mat-divider>
+                      </div>
+                      <div class="col-2">
+                        <mat-form-field class="example-chip-list">
+                          <mat-chip-list #contact1>
+                            <mat-chip *ngFor="let contact of contactValueThree" [selectable]="selectable"
+                                     [removable]="removable" (removed)="remuveContact(contact, 'contactValueThree')">
+                              {{contact.name}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="New fruit..."
+                                   [matChipInputFor]="contact1"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="addContact($event, 'contactValueThree')">
+                          </mat-chip-list>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Contacts-4-->
+              <div class="row" *ngIf="contactTypeSelectedThree">
+                <div class="col-12 d-flex flex-row">
+                  <div class="d-flex d-inline col-1">
+                    <strong class="mr-3">
+                      <span class="main-color small-text contacts"></span>
+                    </strong>
+                  </div>
+                  <div class="col-9">
+                    <div class="row">
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="Choose contact type" [(value)]="contactTypeSelectedFour">
+                            <mat-option *ngFor="let option of contactType" value="{{option.name}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1">
+                        <mat-icon><i class="material-icons contacts-icon opacity-6 align-text-top">keyboard_arrow_right</i></mat-icon>
+                      </div>
+                      <div class="col-4">
+                        <mat-form-field>
+                          <mat-select placeholder="For what" [(value)]="typesSelectedFour">
+                            <mat-option *ngFor="let option of contactTypes" value="{{option.key}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-1 d-flex d-inline">
+                        <mat-divider [vertical]="true"></mat-divider>
+                      </div>
+                      <div class="col-2">
+                        <mat-form-field class="example-chip-list">
+                          <mat-chip-list #contact1>
+                            <mat-chip *ngFor="let contact of contactValueFour" [selectable]="selectable"
+                                     [removable]="removable" (removed)="remuveContact(contact, 'contactValueFour')">
+                              {{contact.name}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="New fruit..."
+                                   [matChipInputFor]="contact1"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="addContact($event, 'contactValueFour')">
+                          </mat-chip-list>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <app-street-map></app-street-map>
+            <!-- card action -->
+            <!--<mat-card-actions class="p-4">-->
+              <!--<div class=" d-flex justify-content-center main-color"> {{ title }}</div>-->
+              <!--<div class="d-flex w-100 mt-3">-->
+                <!--&lt;!&ndash; google map &ndash;&gt;-->
+                <!--<agm-map [latitude]="lat" [longitude]="lng" class="w-100">-->
+                  <!--<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>-->
+                <!--</agm-map>-->
+                <!--&lt;!&ndash; google map &ndash;&gt;-->
+              <!--</div>-->
+            <!--</mat-card-actions>-->
+          </mat-card>
+          <!-- card three Delivery options -->
+          <mat-card class="card z-depth-5 p-0 mt-4">
+            <!-- card header -->
+            <mat-card-header class="card-header">
+              <h3 class="text-center font-weight-bold main-color medium-text d-flex justify-content-center w-100">
+                Delivery options</h3>
+            </mat-card-header>
+            <!-- card content -->
+            <mat-card-content class="mt-3 p-4">
+              <!-- row -->
+              <div class="row mt-0">
+                <div class="col-6">
+                  <div class="col-12">
+                    <strong class="d-flex">
+                      <span class="main-color small-text">Driver Instruction</span>
+                    </strong>
+                  </div>
+                  <div class="form-group col-12">
+                    <textarea class="form-control rounded-0" [(ngModel)]="data.driverInstructions" rows="3"></textarea>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="col-12">
+                    <strong class="d-flex">
+                      <span class="main-color small-text">Call Center Instruction</span>
+                    </strong>
+                  </div>
+                  <div class="form-group col-12">
+                    <textarea class="form-control rounded-0" [(ngModel)]="data.callCenterInstruction" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+              <!-- row -->
+              <div class="row">
+                <div class="d-flex d-block col-12">
+                  <div class="col-2">
+                    <strong class="mr-2 d-inline">
+                      <span class="d-block main-color small-text delivery-types">Delivery Types</span>
+                    </strong>
+                  </div>
+                  <div class="col-10 d-flex">
+                    <div class="d-inline d-flex col-4">
+                      <div class="col-1 checkboxChenter">
+                        <mat-checkbox [checked]="checkedMM" value="6" (change)="onChangeChecked($event)" class="small-text"></mat-checkbox>
+                      </div>
+                      <div class="col-11">
+                        <span>Menugroup Order Taking-Menugroup Delivery</span>
+                      </div>
+                    </div>
+                    <div class="d-inline d-flex col-4">
+                      <div class="col-1 checkboxChenter">
+                        <mat-checkbox [checked]="checkedPM" value="7" (change)="onChangeChecked($event)" class="small-text"></mat-checkbox>
+                      </div>
+                      <div class="col-11">
+                        <span>Restaurant Order Taking-Menugroup Delivery</span>
+                      </div>
+                    </div>
+                    <div class="d-inline d-flex col-4">
+                      <div class="col-1 checkboxChenter">
+                        <mat-checkbox [checked]="checkedMP" value="8" (change)="onChangeChecked($event)" class="small-text"></mat-checkbox>
+                      </div>
+                      <div class="col-11">
+                        <span>Menugroup Order Taking-Restaurant Delivery</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <!-- card four Account -->
+          <mat-card class="card z-depth-5 p-0 mt-4">
+            <!-- card header -->
+            <mat-card-header class="card-header">
+              <h3 class="text-center font-weight-bold main-color medium-text d-flex justify-content-center w-100">
+                Account
+              </h3>
+            </mat-card-header>
+            <!-- card content -->
+            <mat-card-content class="mt-5">
+              <!-- row -->
+              <div class="row">
+                <div class="col-6 d-flex  flex-row">
+                  <strong class="d-flex userName justify-content-end">
+                    <span class="main-color small-text ">User Name</span>
+                  </strong>
+                  <mat-form-field class = 'userInputs'>
+                    <input matInput type="text" placeholder="User Name" [(ngModel)]="accountData.name">
+                  </mat-form-field>
+                  <button class = 'userClear' mat-button matSuffix mat-icon-button aria-label="Clear" (click)="accountData.name=''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+                <div class="col-6 d-flex flex-row">
+                  <strong class="d-flex userEmail justify-content-end">
+                    <span class="main-color small-text">Email</span>
+                  </strong>
+                  <mat-form-field class = 'userInputs'>
+                    <input matInput type="text" placeholder="Email" [(ngModel)]="accountData.email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                      Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                      Email is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <button class = 'userClear' mat-button matSuffix mat-icon-button aria-label="Clear" (click)="accountData.email=''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+                <div class="col-6 d-flex flex-row roles">
+                    <strong class="d-flex userName justify-content-end">
+                      <span class="main-color small-text">Roles</span>
+                    </strong>
+                    <mat-form-field class = 'userInputs'>
+                      <mat-select [(value)]="role">
+                        <mat-option *ngFor="let option of roles" 
+                        value="{{option.role}}"> 
+                        {{option.role}} 
+                      </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <button class = 'userClear' mat-button matSuffix mat-icon-button aria-label="Clear" 
+                    (click)="role =''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <!-- card fiwe Financial -->
+          <mat-card class="card z-depth-5 p-0 mt-4">
+            <!-- card header -->
+            <mat-card-header class="card-header">
+              <h3 class="text-center font-weight-bold main-color medium-text d-flex justify-content-center w-100">
+                Financial
+              </h3>
+            </mat-card-header>
+            <!-- Financial -->
+            <mat-card-content class="mt-5 financial-content">
+              <div class="col-md-12">
+                <div class="row mt-3">
+                  <div class="col-md-6 billing-cycle">
+                    <div class="row">
+                      <div class="col-md-3 d-flex justify-content-end">
+                        <strong>
+                          <span>Billing cycle</span>
+                        </strong>
+                      </div>
+                      <div class="col-md-2">
+                        <mat-form-field class="billing-cycle-day">
+                          <input matInput (keypress)="numberValidation($event)" [(ngModel)]="billingCycle">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-5">
+                        <mat-form-field class = 'billingInput'>
+                          <mat-select [(value)]="billingCycleType">
+                            <mat-option *ngFor="let option of dateType" value="{{option.key}}"> 
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2">
+                        <button 
+                        mat-button matSuffix mat-icon-button aria-label="Clear" 
+                        (click)="billingCycleType=null; billingCycle = null">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-md-12 max-credit-limit">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <strong class = 'toTop'>
+                              <div class = 'inputTitles'>Max Credit</div>
+                              <div class = 'inputTitles'>Limit</div>
+                            </strong>
+                          </div>
+                          <div class="col-md-7">
+                            <mat-form-field>
+                              <input matInput [(ngModel)]="maxCreditLimit">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-2">
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="maxCreditLimit=null">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 order-payment">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <strong><span>Order Payment</span></strong>
+                          </div>
+                          <div class="col-md-7">
+                            <mat-form-field >
+                              <mat-select placeholder="Choose contact type" [(value)]="orderPayment">
+                                <mat-option *ngFor="let option of orderPaymentType" value="{{option.key}}">
+                                  {{option.name}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-2">
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="orderPayment=''">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 billing-cycle">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <strong>
+                             <div class = 'inputTitles'>
+                               Billing cycle
+                              </div>
+                            </strong>
+                          </div>
+                          <div class="col-md-7 date-picker">
+                            <mat-form-field>
+                              <input matInput [matDatepicker]="picker" placeholder="" [(ngModel)]="billingCycleStartDate">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                              <button mat-icon-button class="date-picker-btn" placement="bottom" mdbTooltip="Working Time">
+                                <mat-icon><i class="material-icons md-main">date_range</i></mat-icon>
+                              </button>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-2">
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="billingCycleStartDate=''">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <strong>
+                          <div class = 'inputTitles'>
+                            Grace Period
+                          </div>
+                        </strong>
+                      </div>
+                      <div class="col-md-2">
+                        <mat-form-field class="billing-cycle-day">
+                          <input matInput (keypress)="numberValidation($event)" [(ngModel)]="gracePeriod">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-5">
+                        <mat-form-field class = 'billingInput'>
+                          <mat-select  [(value)]="gracePeriodType">
+                            <mat-option *ngFor="let option of dateType" value="{{option.key}}">
+                              {{option.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2">
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" 
+                        (click)="gracePeriodType=null; gracePeriod = null">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-md-12 order-payment">
+                        <div class="row">
+                          <div class="col-md-3 pl-0">
+                            <strong class = 'toTop'>
+                              <div class = 'inputTitles'>Partner Payment</div>
+                              <div class = 'inputTitles'>Method</div>
+                            </strong>
+                          </div>
+                          <div class="col-md-7">
+                            <mat-form-field>
+                              <mat-select placeholder="Choose contact type" [(value)]="partnerPaymentMethod">
+                                <mat-option *ngFor="let option of partnerPaymentType" value="{{option.key}}">
+                                  {{option.name}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-2">
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="partnerPaymentMethod">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <!-- card action -->
+            <mat-card-actions class="p-4">
+              <div class="d-flex w-100 col-12">
+                <div class="d-block d-flex"></div>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+          <!-- card six Footer -->
+          <mat-card class="card-footer z-depth-0 mt-4 mb-5">
+            <div class="d-flex justify-content-end">
+              <div class="d-block float-right">
+                <button mat-button class="white-text medium-text" routerLink="/partner-list">CANCEL</button>
+                <button mat-raised-button class="normal-btn  button-text save-partner" (click)="addPartner(); errorModal.show()">
+                  SAVE
+                </button>
+              </div>
+            </div>
+          </mat-card>
+        </ng-container>
+      </div>
+    </div>
+    <!--Error modal-->
+    <div mdbModal #errorModal="mdbModal" class="modal fade modal-product" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modal-size">
+          <i class="material-icons md-error">
+            warning
+          </i>
+          <div class="modal-text large-text">
+            {{errorText}}
+          </div>
+          <div class="button-content">
+            <button mat-raised-button class="normal-btn  button-text save-partner" (click)="errorModal.hide(); topPage()">
+              GO BACK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

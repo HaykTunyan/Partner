@@ -1,0 +1,419 @@
+<!-- Partner Details Component View -->
+
+<!-- mat sidenav container -->
+<mat-drawer-container class="sidenav-container partner-details ">
+        <!-- mat-drawer -->
+        <mat-drawer class="drawer" mode="side" opened>
+        <sidenav></sidenav>
+        </mat-drawer>
+        <!-- mat sidenav -->
+      <mat-drawer-content>
+        <!-- header -->
+        <header>
+          <div class="container-fluid">
+            <div class="partner-navbar">
+              <nav class="nav d-flex justify-content-between">
+                <div class="partner-brand d-flex float-left">
+                  <div class="partner-logo position-relative ml-3">
+                    <strong class="position-relative part-btn">
+                      <button mat-button routerLink="/partner-list" routerLinkActive="active" type="button" class="partner-btn">
+                        Partner List
+                      </button>
+                    </strong>
+                    <strong class="position-relative child-icon"><i class="material-icons"> keyboard_arrow_right </i></strong>
+                    <strong class="position-relative part-btn">
+                      <button mat-button routerLink="/partner-details" routerLinkActive="active" type="button" class="partner-btn">
+                        Partner Details
+                      </button>
+                    </strong>
+                  </div>
+                </div>
+                <div class="button-navbar float-right">
+                  <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+                    <i class="material-icons md-36">notifications</i>
+                  </button>
+                  <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User" [matMenuTriggerFor]="menu">
+                    <i class="material-icons md-36">person</i>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLink="/login">Sign Out</button>
+                  </mat-menu>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </header>
+        <!-- sidenav content -->
+        <div class="sidenav-content">
+          <div class="content-partner mt-4">
+            <!-- ng-container -->
+              <ng-container>
+                <!-- card one Header -->
+                <mat-card class="card z-depth-5 pt-5">
+                  <!-- card header -->
+                  <mat-card-header class="pt-5">
+                    <div class="d-flex d-block w-100">
+                      <div class="w-50 d-flex">
+                        <strong class="mr-2 d-inline">
+                          <span class="d-block main-color small-text headers-text-color">Partner </span>
+                          <span class="d-block main-color small-text headers-text-color"> Type</span>
+                        </strong>
+                        <strong class="mr-2 d-inline">
+                          <span class="d-block main-color small-text">{{partner?.partnerType ? partner?.partnerType : ''}}</span>
+                        </strong>
+                      </div>
+                      <div class="w-50 d-flex">
+                        <strong class="mr-2 d-inline align-middle">
+                          <span class="d-block medium-text main-color small-text headers-text-color">Order Acceptence</span>
+                          <span class="d-block medium-text main-color small-text headers-text-color">Method</span>
+                        </strong>
+                        <strong class="mr-2 d-inline align-middle">
+                          <span class="d-block medium-text main-color small-text">{{partner?.mobileAcceptanceMethod ? partner?.mobileAcceptanceMethod : ''}}</span>
+                        </strong>
+                      </div>
+                    </div>
+                  </mat-card-header>
+                  <!-- card content -->
+                  <mat-card-content class="mt-5">
+                    <!-- row -->
+                    <div class="row mt-3">
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="main-color small-text headers-text-color">Brand: </span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=" main-color small-text"> {{partner?.brand?.name}} </span>
+                        </strong>
+                      </div>
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="headers-text-color"> Name</span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=""> {{partner?.name ? partner?.name : ''}} </span>
+                        </strong>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="main-color small-text headers-text-color">Partner Category: </span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=" main-color small-text"> Restaurant </span>
+                        </strong>
+                      </div>
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="headers-text-color"> Contact Person Name</span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=""> {{partner?.contactPersonName}} </span>
+                        </strong>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="main-color small-text headers-text-color ">Events </span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=" main-color small-text"> Etc </span>
+                            </strong>
+                          </div>
+                          <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="headers-text-color"> Campaigns</span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=""> Etc </span>
+                            </strong>
+                          </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="main-color small-text headers-text-color">Keywords </span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=" main-color small-text" *ngFor="let keyword of keywordArray"> {{keyword}}, </span>
+                            </strong>
+                          </div>
+                          <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="headers-text-color"> Minimum order Amount</span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=""> {{partner?.minOrderAmount}} </span>
+                            </strong>
+                          </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="main-color small-text headers-text-color">Legal Enitity </span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=" main-color small-text"> {{partner?.legalEntity?.name}} </span>
+                            </strong>
+                        </div>
+                        <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="headers-text-color"> Contract Number</span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=""> {{partner?.contractNumber}} </span>
+                            </strong>
+                        </div>
+                    </div>
+              
+                  </mat-card-content>
+                  <!-- card action -->
+                  <mat-card-actions>
+                      <div class="d-flex w-100 col-12 mt-5 mb-5">
+                        <div class=" d-block d-flex">
+                          <strong class="mr-2 d-inline">
+                            <span class="d-block main-color small-text headers-text-color"> Images </span>
+                          </strong>
+                          <div class="img-style">
+                            <img [src]="partner?.images[0]?.img" alt=""/>
+                          </div>
+                          <strong class="mr-2 d-inline">
+                            
+                            </strong>
+                        </div>
+                      </div>
+                  </mat-card-actions>
+                </mat-card>
+                <!-- card two Contact Information -->
+                <mat-card class="card z-depth-5 p-0 mt-4">
+                  <!-- card header -->
+                  <mat-card-header class="card-header">
+                    <h3 class="text-center font-weight-bold main-color medium-text d-flex justify-content-center w-100 headers-text-color"> Contact Information </h3>
+                  </mat-card-header>
+                  <!-- card content -->
+                  <mat-card-content class="mt-5 p-4">
+                   <!-- row -->
+                   <div class="row mt-3">
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="main-color small-text headers-text-color">Zone/Area: </span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=" main-color small-text"> Arabkir </span>
+                        </strong>
+                      </div>
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="headers-text-color"> ZIP: </span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=""> {{partner?.address?.zip}} </span>
+                        </strong>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="main-color small-text headers-text-color"> Country: </span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=" main-color small-text"> {{partner?.address?.country?.name}} </span>
+                        </strong>
+                      </div>
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="headers-text-color"> GPS coordinates (link to online map):</span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=""> https//:maps.google/…. </span>
+                        </strong>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="main-color small-text headers-text-color">City: </span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=" main-color small-text"> {{partner?.address?.city?.name}} </span>
+                        </strong>
+                      </div>
+                      <div class="col-6 d-flex flex-row">
+                        <strong class="d-flex mr-2">
+                          <span class="headers-text-color"> Street: </span>
+                        </strong>
+                        <strong class="d-flex mr-2">
+                          <span class=""> {{partner?.address?.street?.name}} </span>
+                        </strong>
+                      </div>
+                    </div>
+                    <!-- row -->
+                    <div class="row mt-3">
+                        <div class="col-12 d-flex flex-row">
+                          <strong class="d-flex mr-2">
+                            <span class="main-color small-text headers-text-color">Contacts: </span>
+                          </strong>
+                          <div class="col-12">
+                            <div class="col-12 contacts" *ngFor="let item of partner?.partnerContact">
+                                <span class="main-color small-text" [innerHtml]="item?.phoneNumber ? 'Phone Number' : 'Email'"> </span>
+                                <span class="main-color small-text"> {{item?.type}} </span> <span class="divider"></span>
+                                <span class="main-color small-text" [innerHtml]="item?.phoneNumber ? item?.phoneNumber : item?.email"> </span>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+                <!-- card three Delivery options -->
+                <mat-card class="card z-depth-5 p-0 mt-4">
+                  <!-- card header -->
+                  <mat-card-header class="card-header">
+                    <h3 class="text-center font-weight-bold main-color medium-text d-flex justify-content-center w-100 headers-text-color"> Delivery options </h3>
+                  </mat-card-header>
+                    <!-- card content -->
+                    <mat-card-content class="mt-5 p-4">
+                      <!-- row -->
+                      <div class="row mt-3">
+                        <div class="col-6 d-flex flex-row">
+                          <strong class="d-flex mr-2">
+                            <span class="main-color small-text headers-text-color">Driver Instruction </span>
+                          </strong>
+                        </div>
+                        <div class="col-6 d-flex flex-row">
+                          <strong class="d-flex mr-2">
+                            <span class="headers-text-color"> Call Center Instruction</span>
+                          </strong>
+                        </div>
+                        <div class="col-6 d-flex flex-row">
+                          <strong class="d-flex mr-2">
+                            <span class="main-color small-text ">{{partner?.driverInstructions}}</span>
+                          </strong>
+                        </div>
+                        <div class="col-6 d-flex flex-row">
+                          <strong class="d-flex mr-2">
+                            <span class=""> {{partner?.callCenterInstruction}}</span>
+                          </strong>
+                        </div>
+                        </div>
+                      <!-- row -->
+                      <div class="row mt-3">
+                          <div class="d-flex d-block w-100">
+                              <div class="w-100 d-flex justify-content-between">
+                                <strong class="mr-2 d-inline">
+                                  <span class="d-block main-color small-text headers-text-color"> Delivery Types</span>
+                                </strong>
+                                <div class="d-inline">
+                                    <mat-checkbox [checked]="partner?.deliveryType === 'MM'" value="1" class=" small-text"></mat-checkbox>
+                                    <span>Menugroup Order Taking-Menugroup Delivery</span>
+                                </div>
+                                <div class="d-inline">
+                                    <mat-checkbox [checked]="partner?.deliveryType === 'PM'" value="2" class=" small-text"></mat-checkbox>
+                                    <span>Restaurant Order Taking-Menugroup Delivery</span>  
+                                </div>
+                                <div class="d-inline">
+                                    <mat-checkbox [checked]="partner?.deliveryType === 'MP'" value="3" class=" small-text"></mat-checkbox>
+                                    <span>Menugroup Order Taking-Restaurant Delivery</span>  
+                                </div>
+                              </div>
+                            </div>
+                      </div>
+                    </mat-card-content>
+                </mat-card>
+                <!-- card four Account -->
+                <mat-card class="card z-depth-5 mt-4">
+                  <!-- card header -->
+                  <mat-card-header class="card-header">
+                    <h3 class="text-center font-weight-bold main-color medium-text d-flex justify-content-center w-100 headers-text-color"> Account </h3>
+                  </mat-card-header>
+                  <!-- card content -->
+                  <mat-card-content class="mt-5">
+                      <div class="row mt-3">
+                          <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="main-color small-text headers-text-color ">Billing cycle </span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=" main-color small-text"> {{partner?.billingCycle}} </span>
+                            </strong>
+                          </div>
+                          <div class="col-6 d-flex flex-row">
+                            <strong class="d-flex mr-2">
+                              <span class="headers-text-color"> Billing cycle Start Date </span>
+                            </strong>
+                            <strong class="d-flex mr-2">
+                              <span class=""> {{partner?.billingCycleStartDate}} </span>
+                            </strong>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6 d-flex flex-row">
+                              <strong class="d-flex mr-2">
+                                <span class="main-color small-text headers-text-color">Max Credit Limit </span>
+                              </strong>
+                              <strong class="d-flex mr-2">
+                                <span class=" main-color small-text"> {{partner?.maxCreditLimit}} </span>
+                              </strong>
+                            </div>
+                            <div class="col-6 d-flex flex-row">
+                              <strong class="d-flex mr-2">
+                                <span class=""> Grace Period </span>
+                              </strong>
+                              <strong class="d-flex mr-2">
+                                <span class=""> {{partner?.gracePeriod}} </span>
+                              </strong>
+                            </div>
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-6 d-flex flex-row">
+                                <strong class="d-flex mr-2">
+                                  <span class="main-color small-text headers-text-color">Order Payment </span>
+                                </strong>
+                                <strong class="d-flex mr-2">
+                                  <span class=" main-color small-text"> {{partner?.orderPayment}} </span>
+                                </strong>
+                              </div>
+                              <div class="col-6 d-flex flex-row">
+                                <strong class="d-flex mr-2">
+                                  <span class="headers-text-color"> Minimum Order Amount </span>
+                                </strong>
+                                <strong class="d-flex mr-2">
+                                  <span class=""> {{partner?.minOrderAmount}} </span>
+                                </strong>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6 d-flex flex-row">
+                                  <strong class="d-flex mr-2">
+                                    <span class="main-color small-text "> </span>
+                                  </strong>
+                                  <strong class="d-flex mr-2">
+                                    <span class=" main-color small-text">  </span>
+                                  </strong>
+                                </div>
+                                <div class="col-6 d-flex flex-row">
+                                  <strong class="d-flex mr-2">
+                                    <span class="headers-text-color"> Partner Payment Method </span>
+                                  </strong>
+                                  <strong class="d-flex mr-2">
+                                    <span class=""> {{partner?.partnerPaymentMethod}} </span>
+                                  </strong>
+                                </div>
+                              </div>
+                    </mat-card-content>
+                </mat-card>
+                <!-- card five Footer -->
+                <mat-card class="card-footer z-depth-0 mt-4 mb-5">
+                  <div class="d-flex justify-content-end">
+                    <div class="d-block float-right">
+                        <button mat-raised-button class="white-text large-text btn-partner  print-partner"> PRINT </button>
+                    </div>
+                  </div>
+                </mat-card>
+              </ng-container>         
+          </div>
+        </div>
+      </mat-drawer-content>
+      
+</mat-drawer-container>
+      

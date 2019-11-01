@@ -1,0 +1,111 @@
+<!-- Log Hystory Component View -->
+<mat-drawer-container class="sidenav-container">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+      <div class="log-hystory">
+          <!-- header -->
+          <header class="mt-3">
+            <div class="container-fluid">
+              <div class="hystory-navbar">
+                <nav class="nav d-flex justify-content-between">
+                  <div class="hystory-brand d-flex float-left">
+                      <div class="partner-logo position-relative ml-3 d-flex">
+                        <i class="material-icons md-light mr-1 position-relative child-icon">child_care</i>
+                        <button mat-button routerLink="/partner-list" routerLinkActive="active" type="button" class="partner-btn">
+                          <strong class="position-relative part-btn ml-1 white-text partnerList">
+                            Partner List
+                          </strong>
+                        </button>
+                          <strong> <i class="material-icons md-light position-relative child-icon"> keyboard_arrow_right </i> </strong>
+                          <div class = 'logHistory'>
+                            Log History 
+                          </div>
+                      </div>
+                    </div>
+                    <div class="button-navbar float-right">
+                      <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+                        <i class="material-icons md-light md-36">notifications</i>
+                      </button>
+                      <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User">
+                        <i class="material-icons md-light md-36">person</i>
+                      </button>
+                    </div>
+                  </nav>
+                </div>
+            </div>
+          </header>
+          <main role="main" class="p-3">
+            <div class="hystory-table w-100">
+              <table mdbTable striped="true" hover="true" class="hystory-table">
+                <thead>
+                  <tr>
+                    <!-- Date -->
+                    <th>
+                      <mat-icon class="float-right auto-icon position-relative"><i class="material-icons white-text">arrow_drop_down</i></mat-icon>
+                      <mat-form-field class="w-100 form-select"> 
+                        <input type="text" placeholder="Data" aria-label="Number" matInput [formControl]="TypeControl" [matAutocomplete]="auto" class="white-text">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let partnertype of filteredPartnertypes | async" [value]="partnertype">
+                            {{partnertype}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </th>
+                    <!-- Time -->
+                    <th>
+                      <mat-icon class="float-right auto-icon position-relative"><i class="material-icons white-text">arrow_drop_down</i></mat-icon>
+                        <mat-form-field class="w-100 form-select"> 
+                        <input type="text" placeholder="Time" aria-label="Number" matInput [formControl]="TypeControl" [matAutocomplete]="auto" class="white-text">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let partnertype of filteredPartnertypes | async" [value]="partnertype">
+                            {{partnertype}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </th>
+                    <!-- Name -->
+                    <th>
+                      <i class="fa fa-search menus-icon position-relative" aria-hidden="true"></i>
+                      <mat-form-field class="w-100 white-text">
+                        <input matInput placeholder="Name" type="text">
+                      </mat-form-field>
+                    </th>
+                    <!-- Filter by Field -->
+                    <th>
+                      <mat-icon class="float-right auto-icon position-relative"><i class="material-icons  white-text">arrow_drop_down</i> </mat-icon>
+                      <mat-form-field class="w-100 form-select"> 
+                        <input type="text" placeholder="Filter by Field" aria-label="text" matInput [formControl]="TypeControl" [matAutocomplete]="auto" class="white-text">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let partnertype of filteredPartnertypes | async" [value]="partnertype">
+                            {{partnertype}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </th>
+                  </tr>
+                  <!-- hystory thead -->
+                  <tr class="hystory-thead">
+                    <th scope="col" class="left-border font-weight-bold main-color data-col"> Data </th>
+                    <th scope="col" class="left-border font-weight-bold main-color"> Time </th>
+                    <th scope="col" class="left-border font-weight-bold main-color"> Changer Name </th>
+                    <th scope="col" class="left-border font-weight-bold main-color description-col"> Description </th>
+                  </tr>
+                </thead>
+                <!-- tbody -->
+                <tbody class="hystory-tbody">
+                  <tr mdbTableCol *ngFor="let hystory of hystorys" class="hystory-col">
+                    <th scope="row" class="left-border data-col"> {{hystory.date}} </th>
+                    <td class="left-border"> {{hystory.time}} </td>
+                    <td class="left-border"> {{hystory.name}} </td>
+                    <td class="left-border description-col"> {{hystory.description}} </td>
+                  </tr>
+                </tbody>
+              </table>    
+            </div> 
+          </main>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

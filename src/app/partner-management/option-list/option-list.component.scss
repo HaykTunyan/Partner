@@ -1,0 +1,412 @@
+// Option List Component Style.
+
+.legal-navbar {
+  margin-top: 1rem;
+  color: white;
+
+  .partner-logo {
+    top: 20px;
+  }
+
+  .btn-partner {
+    background: #2691BB;
+    padding: 15px 45px;
+  }
+
+  .part-btn {
+    bottom: 7px
+  }
+
+  .mat-button,
+  .mat-raised-button {
+    font-size: 20px;
+  }
+}
+
+
+.data-table {
+  .menus-icon {
+    top: 35px;
+  }
+
+  .table thead th {
+    border-bottom: none;
+  }
+
+  .table {
+    ::ng-deep .mat-form-field-infix {
+      width: auto;
+    }
+
+    tbody td:not(:last-child) {
+      padding-left: 1rem;
+    }
+
+    tbody {
+      tr td:first-child {
+        ::ng-deep label {
+          margin-bottom: 0rem;
+        }
+      }
+    }
+  }
+
+  .table th, .table td {
+    border-top: 3px solid #1C333E;
+    border-left: 3px solid;
+    padding: 0px;
+    line-height: 1.5;
+  }
+
+  .table th {
+    line-height: 2.8;
+  }
+
+  .head-custom {
+    border-radius: 20px;
+    background: white;
+
+    .table-tools {
+      border-left: 10px solid;
+    }
+
+    th {
+      padding: 0rem 1rem;
+      font-size: 16px;
+    }
+  }
+
+  .tbody-custom {
+    border-top: 5px solid;
+    color: black;
+    font-weight: bolder;
+
+    th {
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .city-style {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    tr td:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .tools-btn {
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-left: 10px solid;
+      width: 200px;
+
+      .button-row {
+        width: 200px;
+
+        button {
+          width: 30px;
+          height: 30px;
+          line-height: 0px;
+        }
+      }
+    }
+  }
+
+  .thead-custom {
+    th:last-child {
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    th:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .auto-icon {
+      top: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .table-list {
+    padding-top: 30px;
+  }
+
+  .menus-icon {
+    top: 35px;
+  }
+
+  // table
+  .table thead th {
+    border-bottom: none;
+  }
+
+  .table {
+    ::ng-deep .mat-form-field-infix {
+      width: auto;
+    }
+
+    tbody td:not(:last-child) {
+      padding-left: 1rem;
+    }
+
+    tbody {
+      tr td:first-child {
+        ::ng-deep label {
+          margin-bottom: 0rem;
+        }
+      }
+    }
+    td {
+      font-size: 1rem !important;
+    }
+  }
+
+  .table th, .table td {
+    border-top: 3px solid #1C333E;
+    border-left: 3px solid;
+    padding: 0px;
+    line-height: 1.5;
+  }
+
+  .table th {
+    line-height: 2.8;
+  }
+
+  .head-custom {
+    border-radius: 20px;
+    background: white;
+
+    .table-tools {
+      border-left: 10px solid;
+    }
+
+    th {
+      padding: 1rem;
+      font-size: 16px;
+      font-weight: border;
+    }
+  }
+
+  .tbody-custom {
+    border-top: 5px solid;
+
+    th {
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .city-style {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    tr td:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .tools-btn {
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-left: 10px solid;
+      width: 200px;
+
+      .button-row {
+        width: 200px;
+
+        button {
+          width: 30px;
+          height: 30px;
+          line-height: 0px;
+        }
+      }
+    }
+  }
+
+  .thead-custom {
+    th:last-child {
+      border-bottom-right-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    th:first-child {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .auto-icon {
+      top: 35px;
+      cursor: pointer;
+    }
+  }
+
+  .table-list {
+    padding-top: 30px;
+  }
+
+  // customer style.
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
+  }
+
+  mat-drawer-backdrop {
+    background-color: transparent;
+  }
+
+  .mat-list .mat-list-item {
+    height: 30px;
+  }
+
+  .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+  }
+
+  .percent-icon {
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+
+    .fa-percent {
+      font-size: 21px;
+    }
+  }
+
+  .form-select {
+    height: auto;
+  }
+
+  table.table-hover tbody tr:hover {
+    background-color: #CFD8DC;
+  }
+
+  //Change width Add filter & column
+  ::ng-deep .cdk-overlay-container .mat-menu-panel {
+    max-width: 300px;
+  }
+
+  // change tooltip text and background color
+  ::ng-deep .tooltip .tooltip-inner {
+    background-color: #CFD8DC;
+    color: #263238;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  ::ng-deep .tooltip-arrow {
+    background-color: none;
+    border-bottom: 7px solid #CFD8DC;
+    font-size: 20px;
+  }
+
+  ::ng-deep .tooltip .tooltip-inner::after {
+    border-color: transparent transparent transparent #CFD8DC;
+  }
+
+}
+
+mat-drawer {
+  position: fixed;
+}
+
+.sortIconStyles {
+  color: #607D8B;
+  font-size: 30px;
+  padding: 5px;
+}
+
+
+//Description(details) modal styles
+
+.menus-text-color {
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.modalDiv {
+  width: 100%;
+  padding-top: 4%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 1);
+  overflow-y: scroll;
+}
+
+.modal-menuItemDescriptionLogo {
+  overflow: visible;
+  width: 50%;
+  background: white;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.modal-menuItemDescription {
+  width: 50%;
+  background: white;
+  border-radius: 10px;
+  margin: 0 auto;
+  max-height: 60vh;
+  overflow-y: scroll;
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .vertical-divider {
+    background: black;
+    width: 2px;
+  }
+
+  ::ng-deep .mat-input-element {
+    caret-color: black !important;
+  }
+
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: black !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #A2ACB1 !important;
+    height: 2px;
+  }
+
+  ::ng-deep .mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #A2ACB1 !important;
+  }
+
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: black;
+    padding-left: 10px;
+  }
+
+}
+
+.logoStyles {
+  position: absolute;
+  top: -15px;
+  right: 90px;
+  color: white;
+  z-index: 1;
+
+  mat-icon {
+    width: 90px;
+    height: 90px;
+    padding: 18px;
+    -webkit-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    background-color: #2691BB;
+    font-size: 55px;
+  }
+}
+
+.grayBackground {
+  background-color: #ECEFF1;
+}
+

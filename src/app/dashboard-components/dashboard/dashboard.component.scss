@@ -1,0 +1,41 @@
+// Dashboard Component style.
+
+// Card style.
+.card {
+    box-shadow: none;
+    background-color: transparent;
+    color: white;
+    .card-icon {
+        border: 2px solid #FFFFFF;
+        padding: 2rem;
+        border-radius: 2rem;
+        margin-right: 2rem;
+        font-size: 45px;
+    }
+    .card-content {
+        padding-bottom: 0;
+        text-align: -webkit-center;
+        margin-bottom: 0;
+    }
+    .banneri-title {
+        font-size: 1rem;
+    }
+    .forg-link {
+        background: #2691BB;
+    }
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+@media (min-width: 1440px) {
+    .card-icon {
+        font-size: 60px;
+    }
+    .banneri-title {
+        font-size: 1.4rem;
+    }
+}
+
+

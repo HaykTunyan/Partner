@@ -1,0 +1,244 @@
+<!-- Menu Component View -->
+
+<mat-drawer-container class="sidenav-container" *ngIf="!showDescription"
+                      (click)="clickBodyOrNot?openWriteNameModal($event):clickBodyOrNot = false">
+  <!-- Side Menu-->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <mat-drawer-content class="position-relative">
+    <div>
+      <!--header-->
+      <header class="mt-3">
+        <div class="container-fluid">
+          <div class="menus-navbar pl-3 pr-3 white-text">
+            <nav class="nav d-flex justify-content-between">
+              <div class="menus-brand d-flex float-left ">
+                <div class="menus-logo position-relative mt-3">
+                  <mat-icon><i class="material-icons">restaurant</i></mat-icon>
+                  <strong>
+                    <span class="medium-text">{{ menusName}}</span>
+                  </strong>
+                </div>
+              </div>
+              <div class="button-navbar float-right">
+                <button type="button" class="btn mr-3 btn-menu" *ngIf="!clickBodyOrNot; else disableButton1"
+                        routerLink="/menu-items" routerLinkActive="active">
+                  <span class="button-text">MENU ITEM LIST</span>
+                </button>
+                <ng-template #disableButton1>
+                  <button type="button" class="btn mr-3 btn-menu">
+                    <span class="button-text">MENU ITEM LIST</span>
+                  </button>
+                </ng-template>
+                <button type="button" class="btn mr-3 btn-menu" *ngIf="!clickBodyOrNot; else disableButton2"
+                        routerLink="/option-list" routerLinkActive="active">
+                  <span class="button-text">OPTION/CHOICE LIST</span>
+                </button>
+                <ng-template #disableButton2>
+                  <button type="button" class="btn mr-3 btn-menu">
+                    <span class="button-text">OPTION/CHOICE LIST</span>
+                  </button>
+                </ng-template>
+                <button type="button" class="btn mr-3 btn-menu" id="createMenu1"
+                        *ngIf="!clickBodyOrNot; else disableButton3" (click)="createMenu()">
+                  <span class="button-text" id="createMenu2">CREATE MENU</span>
+                </button>
+                <ng-template #disableButton3>
+                  <button type="button" class="btn mr-3 btn-menu">
+                    <span class="button-text">CREATE MENU</span>
+                  </button>
+                </ng-template>
+                <button mat-icon-button type="left" class="btn-notifications" placement="bottom"
+                        mdbTooltip="Notifications">
+                  <i class="material-icons md-36">notifications</i>
+                </button>
+                <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="Person">
+                  <i class="material-icons md-36">person</i>
+                </button>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <!--filters-->
+      <div class="col-md-12 filter-content menu-all">
+        <div class="row">
+          <div class="filter-item">
+            <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+            <mat-form-field class="white-text first-filter">
+              <input matInput placeholder="S/N" class="white-text" type="text" [(ngModel)]="id"
+                     (ngModelChange)="getFilterMenuById()">
+            </mat-form-field>
+          </div>
+          <div class="col-md-10">
+            <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+            <mat-form-field class="white-text second-filter">
+              <input matInput class="white-text" placeholder="Search by Menu Name" [(ngModel)]="name"
+                     (ngModelChange)="getFilterMenuByName()">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <!-- Table-->
+      <div class="col-md-12">
+
+        <mat-card-content>
+          <div class="table-wrapper menu-content">
+            <table mdbTable class="col-12">
+              <tbody class="row col-12">
+              <tr mdbTableCol class="w-45 d-flex align-items-center" *ngFor="let item of menuList; let ind=index"
+                  [ngClass]="{'even':ind%2===0, 'odd': ind%2 === 1}">
+                <td scope="row">{{item.id}}</td>
+                <td *ngIf="item.name !== ''" class="menus-text-color">{{item.name}}
+                  ({{item.partners.length}})
+                </td>
+                <td class="createMenuInputStyles" *ngIf="item.name === ''">
+                  <mat-form-field>
+                    <input matInput placeholder="Write name" id="createdMenuName{{ind}}" name="createMenu"
+                           (change)="changedName($event.target.value, ind)" (click)="clickBodyOrNot=true">
+                  </mat-form-field>
+                </td>
+
+                <td class="ml-auto">
+                  <button mat-icon-button routerLinkActive="active"
+                          placement="bottom" mdbTooltip="Edit Name" class="mx-2"
+                          *ngIf="!clickBodyOrNot; else disableIcon1">
+                    <mat-icon><i class="material-icons md-main md-36" [routerLink]="['/update-menu', item.id]">edit</i>
+                    </mat-icon>
+                  </button>
+                  <ng-template #disableIcon1>
+                    <button mat-icon-button routerLinkActive="active"
+                            placement="bottom" mdbTooltip="Edit Name" class="mx-2">
+                      <mat-icon><i class="material-icons md-main md-36">edit</i>
+                      </mat-icon>
+                    </button>
+                  </ng-template>
+                  <button mat-icon-button routerLinkActive="active"
+                          placement="bottom" mdbTooltip="Copy Menu" class="mx-2"
+                          *ngIf="!clickBodyOrNot; else disableIcon2">
+                    <mat-icon><i class="material-icons md-main md-36"
+                                 (click)="copyAndCreateMenu(ind)">file_copy</i></mat-icon>
+                  </button>
+                  <ng-template #disableIcon2>
+                    <button mat-icon-button routerLinkActive="active"
+                            placement="bottom" mdbTooltip="Copy Menu" class="mx-2">
+                      <mat-icon><i class="material-icons md-main md-36">file_copy</i></mat-icon>
+                    </button>
+                  </ng-template>
+                  <button mat-icon-button routerLinkActive="active"
+                          placement="bottom" mdbTooltip="Details" class="mx-2" (click)="showDescriptionFunc(ind)"
+                          *ngIf="!clickBodyOrNot; else disableIcon3">
+                    <mat-icon><i class="material-icons md-main md-36">description</i></mat-icon>
+                  </button>
+                  <ng-template #disableIcon3>
+                    <button mat-icon-button routerLinkActive="active"
+                            placement="bottom" mdbTooltip="Details" class="mx-2" (click)="showDescriptionFunc(ind)">
+                      <mat-icon><i class="material-icons md-main md-36">description</i></mat-icon>
+                    </button>
+                  </ng-template>
+                  <button mat-icon-button routerLinkActive="active"
+                          placement="bottom" mdbTooltip="Options" class="mx-2" [routerLink]="['/option-list', item.id]"
+                          *ngIf="!clickBodyOrNot; else disableIcon4">
+                    <mat-icon><i class="material-icons md-main md-36">device_hub</i></mat-icon>
+                  </button>
+                  <ng-template #disableIcon4>
+                    <button mat-icon-button routerLinkActive="active"
+                            placement="bottom" mdbTooltip="Options" class="mx-2">
+                      <mat-icon><i class="material-icons md-main md-36">device_hub</i></mat-icon>
+                    </button>
+                  </ng-template>
+                  <!-- Delete-->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Delete" class="mx-2"
+                          *ngIf="!clickBodyOrNot; else disableIcon5">
+                    <mat-icon class="delete-item">
+                      <i class="material-icons md-error md-24">delete_forever</i>
+                    </mat-icon>
+                  </button>
+                  <ng-template #disableIcon5>
+                    <button mat-icon-button placement="bottom" mdbTooltip="Delete" class="mx-2">
+                      <mat-icon class="delete-item">
+                        <i class="material-icons md-error md-24">delete_forever</i>
+                      </mat-icon>
+                    </button>
+                  </ng-template>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </mat-card-content>
+      </div>
+      <!--Pagination-->
+      <div class="col-md-12 pagination-style" *ngIf="pageCount">
+        <div class="row">
+          <div class="col-md-6">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pg-blue pagination-sm">
+                <li class="page-item" (click)="previus()">
+                  <a class="page-link" aria-label="pageNumber">
+                    <span aria-hidden="true"><</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item" *ngFor="let i of pages" [ngClass]="{'active': pageNumber === i}"
+                    (click)="setPage(i)"><a class="page-link">{{i + 1}}</a></li>
+                <li class="page-item" (click)="next()">
+                  <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">> </span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal -->
+    <div *ngIf="showModal" class="modal" >
+      <div class="modal-createOrCopy">
+        <p class="col-10 mx-auto mt-5">Write name field must be filled or delete it pressing delete button.</p>
+        <div class="row">
+          <button type="button" class="col-3 ml-auto btn btn-delete" id='okBtn' (click)="deleteModal()" >DELETE</button>
+          <button type="button" class="col-3 mr-auto btn btn-ok" id="deleteBtn" (click)="closeModal()">OK</button>
+        </div>
+      </div>
+    </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+<div *ngIf="showDescription" class="modalDiv ">
+  <div class="modal-menuItemDescriptionLogo position-relative">
+    <div class="logoStyles">
+      <mat-icon>description</mat-icon>
+    </div>
+  </div>
+  <div class="modal-menuItemDescription mt-4">
+    <div class="my-4">
+      <div class="col-12 menus-text-color ">
+        <p>{{menuItemDetails.name}}</p>
+        <p class="m-0">Attached Partners {{menuItemDetails.partners.length}}</p>
+      </div>
+      <mat-form-field class="col-12">
+        <span matPrefix><i class="px-2 material-icons fa fa-search md-dark" aria-hidden="true"></i></span>
+        <input matInput placeholder="Search" autocomplete="off">
+      </mat-form-field>
+      <div class="col-12">
+        <p class="py-3 px-5 m-0" *ngFor="let partner of partners; let ind=index"
+           [ngClass]="{'grayBackground':ind%2===1}" style="font-weight: bolder;">{{partner}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

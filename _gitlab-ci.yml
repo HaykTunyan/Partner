@@ -1,0 +1,35 @@
+stages:
+- build-dep
+
+application-build-deploy-dev:
+  stage: build-dep 
+  tags:
+    - dev
+  script:
+    - rm -rf node_modules/
+    - npm install
+    - ng build
+    - sudo docker container rm mgca -f &> /dev/null
+    - sudo docker-compose build
+    - sudo docker image prune -f
+    - sudo docker run -p 9000:80 --name mgca -d mgca
+  only:
+    - development
+
+application-build-deploy-test:
+  stage: build-dep 
+  tags:
+    - test
+  script:
+    - rm -rf node_modules/
+    - /usr/bin/npm install
+    - /usr/bin/ng config -g cli.warnings.versionMismatch false
+    - /usr/bin/ng build --prod
+    - sudo docker container rm mgca -f &> /dev/null
+    - sudo docker-compose build
+    - sudo docker image prune -f
+    - sudo docker run -p 9000:80 --name mgca -d mgca
+  only:
+    - master
+
+ 

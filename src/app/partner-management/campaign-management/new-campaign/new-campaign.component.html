@@ -1,0 +1,304 @@
+<!-- Campaign Management Component View -->
+
+<!-- mat-drawer-container -->
+<mat-drawer-container class="sidenav-container  newCampaign">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat-drawer-content -->
+  <mat-drawer-content>
+    <header>
+      <div class="container-fluid newCampaign">
+        <div class="campaign-navbar">
+          <nav class="nav d-flex justify-content-between">
+            <div class="partner-brand d-flex float-left">
+              <div class="partner-logo position-relative ml-5">
+                <i class="material-icons position-relative child-icon white-text md-24 mr-2">cake</i>
+                <strong class=" position-relative part-btn">
+                  <span mat-button routerLink="/campaign-management/campaign" routerLinkActive="active" type="button"
+                        class="partner-btn" style="cursor: pointer">
+                   Campaign
+                  </span>
+                  <span mat-button> > New Campaign</span>
+                </strong>
+              </div>
+            </div>
+            <div class="button-navbar float-right buttonNav">
+              <button mat-raised-button type="button" class="btn-partner ml-2 "
+                      routerLink="/campaign-management/new-campaign"
+                      routerLinkActive="active" placement="bottom" mdbTooltip="Add Partner">
+                <strong class="button-text">NEW CAMPAIGN</strong>
+              </button>
+              <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom"
+                      mdbTooltip="Notifications">
+                <i class="material-icons md-36">notifications</i>
+              </button>
+              <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User"
+                      [matMenuTriggerFor]="menu">
+                <i class="material-icons md-36">person</i>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/login">Sign Out</button>
+              </mat-menu>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="row newCampaignRow justifyDisplayAlign mb-5 ">
+
+      <div class="col-11 newCampaignDiv mt-5 ">
+        <div class="row mt-5">
+
+          <label class="nameClass">Name</label>
+          <mat-form-field class="example-form-field lang mr-5">
+
+
+            <input matInput type="text" placeholder="ENG"
+                   (input)="getInputValue()" [(ngModel)]="campaignDto.campaign.name">
+            <!--<mat-error class="matError" *ngIf="true">Name is <strong>Requared</strong></mat-error>-->
+            <button mat-button *ngIf="campaignDto.campaign.name" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="campaignDto.campaign.name=''">
+              <mat-icon>close</mat-icon>
+            </button>
+
+            <mat-hint *ngIf="engNameValidator">
+              <span class="mat-error">Name is requared</span>
+            </mat-hint>
+
+          </mat-form-field>
+
+          <mat-form-field class="example-form-field lang mr-5">
+            <input matInput type="text" placeholder="РУС" (input)="getInputValue($event.target.value,'ru')" [(ngModel)]="rusValue">
+            <button mat-button *ngIf="rusValue" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="campaign.ru_name=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field class="example-form-field lang">
+            <input matInput type="text" placeholder="ՀԱՅ" (input)="getInputValue($event.target.value,'arm')" [(ngModel)]="armValue">
+            <button mat-button *ngIf="armValue" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="campaign.arm_name=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row ">
+          <div class="col-12">
+            <label class="labelTextArea" for="exampleFormControlTextarea1">Description</label>
+            <textarea (input)="getInputValue()" [(ngModel)]="campaignDto.campaign.description" class="form-control textAreaStyle"
+                      id="exampleFormControlTextarea1" rows="3">
+
+            </textarea>
+            <mat-hint *ngIf="descriptionValidator">
+              <span class="mat-error hintSpan">Description is required</span>
+            </mat-hint>
+          </div>
+
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-6 ">
+            <!--backup period checkbox-->
+            <div class="backupRadiobuttonsContent" id="checkbox">
+              <label class="labelTextArea" for="checkbox">Event</label>
+              <div *ngFor='let radio of newCampaignEventTypeArray; let i = index' class="radiobuttonContent">
+                <div class="radioButton" (click)='newCampaignSetEvent(i,newCampaignEventTypeArray)'>
+                  <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                </div>
+                <div class="radiobuttonName">
+                  {{ radio.name }}
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <label class="labelTextArea" for="selectCampaignType">Campaign Type</label>
+              <mat-form-field class="selectCampaignType" id="selectCampaignType">
+                <mat-select  class="matSelect" [(value)]="selectedCampaignType"
+                           (selectionChange)="changeValueCampaignType($event.value)">
+                  <mat-option *ngFor="let type of campaignType" [value]="type.value "  class="matOption">
+                    {{type.viewValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint *ngIf="campaignTypeValidator">
+                  <span class="mat-error">Campaign Type is required</span>
+                </mat-hint>
+              </mat-form-field>
+
+
+            </div>
+          </div>
+
+
+          <div class="col-6 padding-right">
+            <!--second box-->
+            <label class="labelTextArea" for="calendar">Start/End Date</label>
+            <div class="box" id="calendar">
+              <div class='DateContent'>
+                <div class="dateInput">
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker1" [formControl]="date1" [value]="startDate"
+                           (dateInput)="getDate($event, 'startDate')"
+                           (keypress)="false"
+                           (keydown)="keyDownDateInput($event, 1)"
+                           onselectstart="return false"
+                           onpaste="return false;"
+                           onDrag="return false"
+                           onDrop="return false"
+                           autocomplete="off" autocapitalize="off" autocorrect="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                      <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-hint *ngIf="calendarValidator">
+                      <span class="mat-error">Time is required</span>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="timePicker">
+                  <input class="timeInput" #firstTimeElem [value]='firstTimeValue'
+                         (focus)="focusFunction('firstTime')" (focusout)="focusOutFunction('firstTime')"
+                         (keypress)="timeValidation($event, firstTimeElem.value, 'firstTimeValue')"
+                         (keydown)="clearTimeDada($event, 'firstTimeValue')"
+                         (input)="changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                         autocomplete="off"
+                         onselectstart="return false"
+                         onpaste="return false;"
+                         onDrag="return false"
+                         onDrop="return false"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                  <div class='borderBottom'></div>
+                  <div class='borderContent'>
+                    <div class='borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+                  </div>
+                </div>
+                <div class="line">
+                  -
+                </div>
+                <div class="timePicker marginRightTime">
+                  <input class="timeInput" #secondTimeElem [value]='secondTimeValue'
+                         (focus)="focusFunction('secondTime')" (focusout)="focusOutFunction('secondTime')"
+                         (keypress)="timeValidation($event, secondTimeElem.value, 'secondTimeValue')"
+                         (keydown)="clearTimeDada($event, 'secondTimeValue')"
+                         (input)="changeTimeFormat(secondTimeElem.value, 'secondTimeValue')"
+                         onselectstart="return false"
+                         onpaste="return false;"
+                         onDrag="return false"
+                         onDrop="return false"
+                         autocomplete="off" autocapitalize="off" autocorrect="off">
+                  <div class='borderBottom'></div>
+                  <div class='borderContent'>
+                    <div class='borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+                  </div>
+                </div>
+                <div class='dateInput'>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker2" [formControl]="date2" [value]="endDate"
+                           (dateInput)="getDate($event, 'endDate')" (keypress)="false"
+                           (keydown)="keyDownDateInput($event, 2)"
+                           onselectstart="return false"
+                           onpaste="return false;"
+                           onDrag="return false"
+                           onDrop="return false"
+                           autocomplete="off" autocapitalize="off" autocorrect="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker2">
+                      <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <app-discount-or-delivery-fee-campaign *ngIf="selectedCampaignType === 'DISCOUNT'"
+                                           [discoundOrDelivery]=valueGetCampaignById></app-discount-or-delivery-fee-campaign>
+    <!--<app-discount-or-delivery-fee-campaign ></app-discount-or-delivery-fee-campaign>-->
+    <app-combo-set-campaign *ngIf="selectedCampaignType === 'COMBO_SET'"
+                            [comboSet]=valueGetCampaignById></app-combo-set-campaign>
+    <!--<app-combo-set-campaign ></app-combo-set-campaign>-->
+    <app-bonus [bonus]=valueGetCampaignById *ngIf="selectedCampaignType === 'BONUS'"></app-bonus>
+    <!--<app-bonus ></app-bonus>-->
+    <app-free-item *ngIf="selectedCampaignType === 'FREE_ITEM'" [freeItem]=valueGetCampaignById></app-free-item>
+    <!--<app-free-item ></app-free-item>-->
+    <app-sponsored-partner-items *ngIf="selectedCampaignType === 'SPONSORED_PARTNER_ITEMS'"
+                                 [sponsoredPartner]=valueGetCampaignById></app-sponsored-partner-items>
+    <!--<app-sponsored-partner-items ></app-sponsored-partner-items>-->
+    <app-voucher *ngIf="selectedCampaignType === 'VOUCHER'" [voucher]=valueGetCampaignById></app-voucher>
+    <!--<app-voucher ></app-voucher>-->
+    <app-out-of-schedule-items *ngIf="selectedCampaignType === 'OUT_OF_SCHEDULE'"
+                               [outOfSchedule]=valueGetCampaignById></app-out-of-schedule-items>
+    <!--<app-out-of-schedule-items ></app-out-of-schedule-items>-->
+    <app-promo-code *ngIf="selectedCampaignType === 'PROMO_CODE'" [promoCode]=valueGetCampaignById></app-promo-code>
+    <!--<app-promo-code ></app-promo-code>-->
+
+
+    <!--button SaveDiscard -->
+    <div class="row newCampaignRow justifyDisplayAlign">
+      <div class="col-11">
+        <div class='popupButtonsContent '>
+            <span>
+              <div class='checkboxContent'>
+                <div class='checkbox' [ngClass]='{"checkboxActive" :statusCampaign}'
+                     (click)='activateNewOrChangeableCampaign()'>
+                  <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :statusCampaign}'>
+
+                  </div>
+                </div>
+                <div class='checkboxText'>
+                  DISABLE NOW
+                </div>
+              </div>
+            </span>
+          <div class='buttonContents'>
+            <div class='discard noselect' (click)='cancelAddCampaign()'>
+              CANCEL
+            </div>
+            <button [ngClass]="{'disabledButton': false}" (click)=" valid()"
+                    class="btn btn-primary invite"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+<!--modal div confirm remove zone section start-->
+<div class="modalDiv   d-flex justify-content-center align-items-center"
+     *ngIf="modalDivConfirmStatus">
+  <div class='deletePopup'>
+    <div class='deleteContent'>
+      <span>Are you sure you want to change the Campaign type?</span>
+      <div class="deleteButtonsContent">
+        <div class='noButton noselect cursor' (click)="closeRemoveConfirmModal('no')">
+          NO
+        </div>
+        <div class='yesButton noselect cursor'
+             (click)="closeRemoveConfirmModal('yes')">
+          YES
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--modal div section end-->
+

@@ -1,0 +1,158 @@
+<mat-drawer-container class="sidenav-container partner-list">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12 pageTitle">
+              <mat-icon class="publicIcon">public</mat-icon>
+              Country
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 paddingRight">
+              <div class="box">
+                <div class="header">
+                  General info
+                </div>
+                <div class="content">
+                  <div *ngIf='generalInfo'>
+                    <div class='info'>
+                      <span class="infoName">Country: </span> {{ generalInfo.country }}
+                    </div>
+                    <div class='info'>
+                      <span class="infoName"> Currency: </span> {{ generalInfo.currency }}
+                    </div>
+                    <div class='info'>
+                      <span class="infoName"> Country code: </span> {{ generalInfo.countryCode }}
+                    </div>
+                    <div class='info'>
+                      <span class="infoName"> Official Language: </span> {{ generalInfo.officialLanguage }}
+                    </div>
+                    <div class='info'>
+                      <span class="infoName"> Additional Language: </span> {{ generalInfo.additionalLanguage }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 paddingLeft">
+              <div class="box">
+                <div class="header">
+                  Payments
+                </div>
+                <div class="content">
+                  <div>
+                    <div *ngFor='let payment of payments; let i = index' class='payment'>
+                      <span>{{ payment.name }}</span>
+                      <div class='checkbox' [ngClass]='{"checkboxActive" :payment.active}'
+                           (click)='IsEdit ? activatePayment(i): false'>
+                        <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :payment.active}'>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header">
+                  Mail Management
+                </div>
+                <div class="emailContent">
+                  <div class='emailTextAndInput'>
+                    <div class="emailText">
+                      E-mail Address for Content Management
+                    </div>
+                    <form class="example-form">
+                      <mat-form-field class="example-full-width">
+                        <input matInput #cManagement [formControl]="contentManagementMail"
+                               [value]='mailInputs.contentManagementMail'
+                               [errorStateMatcher]="matcher" [readonly]="!IsEdit"
+                               (keypress)="IsEdit? true : false"
+                               (input)="inputEvent(cManagement.value, 'contentManagementMail')"
+                               autocomplete="off" autocapitalize="off" autocorrect="off">
+                        <mat-error *ngIf="contentManagementMail.hasError('email')">
+                          Please enter a valid email address
+                        </mat-error>
+                      </mat-form-field>
+                    </form>
+                    <mat-icon class='clearIcon' (click)="clearInputValue('contentManagementMail')">clear</mat-icon>
+                  </div>
+                  <div class='emailTextAndInput'>
+                    <div class="emailText">
+                      E-mail Address for Logistic Management
+                    </div>
+                    <form class="example-form">
+                      <mat-form-field class="example-full-width">
+                        <input #lManagement matInput [formControl]="logisticManagementMail"
+                               [errorStateMatcher]="matcher" [readonly]="!IsEdit"
+                               (keypress)="IsEdit? true : false"
+                               [value]='mailInputs.logisticManagementMail'
+                               (input)="inputEvent(lManagement.value, 'logisticManagementMail')"
+                               autocomplete="off" autocapitalize="off" autocorrect="off">
+                        <mat-error *ngIf="logisticManagementMail.hasError('email')">
+                          Please enter a valid email address
+                        </mat-error>
+                      </mat-form-field>
+                    </form>
+                    <mat-icon class='clearIcon' (click)="clearInputValue('logisticManagementMail')">clear</mat-icon>
+                  </div>
+                  <div class='emailTextAndInput'>
+                    <div class="emailText">
+                      E-mail Address for Marketing Department
+                    </div>
+                    <form class="example-form">
+                      <mat-form-field class="example-full-width">
+                        <input #department matInput [formControl]="marketingDepartmentMail"
+                               [value]='mailInputs.marketingDepartmentMail'
+                               [errorStateMatcher]="matcher" [readonly]="!IsEdit"
+                               (keypress)="IsEdit? true : false"
+                               (input)="inputEvent(department.value, 'marketingDepartmentMail')"
+                               autocomplete="off" autocapitalize="off" autocorrect="off">
+                        <mat-error *ngIf="marketingDepartmentMail.hasError('email')">
+                          Please enter a valid email address
+                        </mat-error>
+                      </mat-form-field>
+                    </form>
+                    <mat-icon class='clearIcon' (click)="clearInputValue('marketingDepartmentMail')">clear</mat-icon>
+                  </div>
+                  <div class='emailTextAndInput'>
+                    <div class="emailText">
+                      E-mail Address for Product Management
+                    </div>
+                    <form class="example-form">
+                      <mat-form-field class="example-full-width">
+                        <input #pManagement matInput [formControl]="productManagementMail"
+                               [value]='mailInputs.productManagementMail'
+                               [errorStateMatcher]="matcher" [readonly]="!IsEdit"
+                               (keypress)="IsEdit? true : false"
+                               (input)="inputEvent(pManagement.value, 'productManagementMail')"
+                               autocomplete="off" autocapitalize="off" autocorrect="off">
+                        <mat-error *ngIf="productManagementMail.hasError('email')">
+                          Please enter a valid email address
+                        </mat-error>
+                      </mat-form-field>
+                    </form>
+                    <mat-icon class='clearIcon' (click)="IsEdit ? clearInputValue('productManagementMail'): false">
+                      clear
+                    </mat-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

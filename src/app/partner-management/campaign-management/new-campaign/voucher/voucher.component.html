@@ -1,0 +1,99 @@
+<mat-drawer-container class="sidenav-container partner-list">
+
+
+
+  <!-- Order Fee -->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                  Voucher
+                </div>
+
+                <div class="row orderFee">
+
+
+                  <div class="col-5  padd d-flex" *ngFor="let item of voucher.voucherItemSet;let i = index  ">
+
+                    <div class="orderFeeChachBoxDiv"  [ngClass]="{'borderBackground' :  voucher.voucherItemSet.length - 1 > i || updateStatus}">
+                      <div class='deleteTimeButton noselect' *ngIf=" voucher.voucherItemSet.length - 1 > i || updateStatus" (click)="removeVoucher(i)">
+                        x
+                      </div>
+                      <div class='col checkboxContent ' [ngClass]='{"disabledDiv" :voucher.voucherItemSet.length - 1 > i || updateStatus}'>
+                        <div class='checkbox'
+                             [ngClass]='{"checkboxActive" :voucherStatus[i].changeDiscountRateStatusValue}'
+                             (click)='voucherSliderChange(i)'>
+                          <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :voucherStatus[i].changeDiscountRateStatusValue || item.isActive}'>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div  class="radiobuttonContent " [ngClass]='{"disabledDiv" :voucher.voucherItemSet.length - 1 > i || updateStatus}'>
+                        <div class="radiobuttonNameOrderFee">
+                          <span class="radiobuttonNameOrderFeeSpan">Voucher Price</span>
+                        </div>
+                        <div class="radiobuttonNameOrderFeeSpan marginRight" >
+                          <mat-form-field class="example-form-field orderFeeInput">
+                            <input matInput type="text" (keypress)="numberOnly($event)" autocomplete="nope"
+                                   [value]="valueGetCampaignById?item['voucherPrice']:''"
+                                   (input)="getInputValue($event.target.value,'voucherPrice',i)"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                            >
+                          </mat-form-field>
+                          <span class="radiobuttonNameOrderFeeSpan">  AMD</span>
+
+                        </div>
+                      </div>
+
+                      <div  class="radiobuttonContent " [ngClass]='{"disabledDiv" :voucher.voucherItemSet.length - 1 > i || updateStatus}'>
+                        <div class="radiobuttonNameOrderFee">
+                          <span class="radiobuttonNameOrderFeeSpan"> Bonus for Buying</span>
+                        </div>
+                        <div class="radiobuttonNameOrderFeeSpan">
+                          <mat-form-field class="example-form-field orderFeeInput">
+                            <input matInput type="text" (keypress)="numberOnly($event)" autocomplete="nope"
+                                   [value]="valueGetCampaignById?item['buyingBonus']:''"
+                                   (input)="getInputValue($event.target.value,'buyingBonus',i)"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                            >
+                          </mat-form-field>
+                          <span class="radiobuttonNameOrderFeeSpan">  AMD</span>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="addTimeButtonContent">
+                    <div class="addTimeButton" [ngClass]="{'disabledDiv':statusAddButton}" placement="top" mdbTooltip="Add Other Voucher"
+                         (click)='addNewVoucher()'>
+                      <mat-icon class='addIcon noselect'>add</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+
+
+
+  <mat-drawer-content>
+    <app-customers-list-selection ></app-customers-list-selection>
+  </mat-drawer-content>
+
+
+</mat-drawer-container>
+

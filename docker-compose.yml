@@ -1,0 +1,11 @@
+version: '2.3'
+
+services:
+  mgca:
+    hostname: localhost
+    container_name: mgpa
+    image: mgca
+    build: .
+    ports:
+      - 9000:80
+        

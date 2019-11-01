@@ -1,0 +1,118 @@
+// Log Hystory
+
+// sidenav content
+.sidenav-content {
+    display: flex;
+    min-height: 1000px;
+}
+
+.partner-logo {
+    top: 20px;
+}
+
+.child-icon {
+    top: 9px;
+}
+
+.child-name {
+    bottom: 5px;
+}
+.logHistory{
+    padding-top: 9px;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 10px;
+}
+.partnerList{
+    font-size: 17px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif !important;
+}
+.right-border {
+    border-right: 2px solid #455A64;
+}
+
+.top-border {
+    border-top: 4px solid #455A64;
+    border-radius: 10px;
+}
+
+.bottomhead-border {
+    border-bottom: 8px solid #455A64;
+    border-radius: 10px;
+}
+
+.hystory-tbody{
+    background: white;
+}
+
+.hystory-col {
+    border-radius: 10px;
+}
+
+.hystory-thead {
+    line-height: 40px;
+    background: white;
+    border-radius: 10px;
+    th {
+        font-size: 16px;
+    }   
+}
+
+.menus-icon {
+    top: 35px;
+    color: white;
+}
+
+.auto-icon {
+    top: 35px;
+    cursor: pointer;
+}
+
+table tr {
+    border-radius: 10px;
+}
+
+.left-border {
+    border-left: 1px solid #455A64;
+}
+
+.table thead th {
+    border-bottom: none;
+}
+
+.description-col {
+    border-right: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.data-col {
+    border-left: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.hystory-table {
+    border-collapse: inherit;
+} 
+
+mat-drawer {
+    position: fixed;
+}
+
+// custom code for ng deep
+::ng-deep .tooltip .tooltip-inner {
+    background-color: #CFD8DC;
+    color: #263238;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+::ng-deep .tooltip-arrow {
+    background-color: none;
+    border-bottom: 7px solid #CFD8DC;
+    font-size: 20px;
+}
+::ng-deep .tooltip .tooltip-inner::after {
+    border-color: transparent transparent transparent #CFD8DC;
+}

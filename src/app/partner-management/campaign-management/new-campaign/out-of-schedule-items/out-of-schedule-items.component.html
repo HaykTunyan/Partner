@@ -1,0 +1,154 @@
+<mat-drawer-container class="sidenav-container partner-list">
+
+
+  <!-- Discount or Delivery fee campaign-->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                  Out of Schedule Items
+                </div>
+
+                <div class="row  ">
+                  <div class="col-6 ">
+                    <!--backup period checkbox-->
+                    <div class="backupRadiobuttonsContent">
+
+                      <div *ngFor='let radio of discountType; let i = index' class="radiobuttonContent mr-5">
+                        <div class="radioButton" (click)='outOfScheduleItemsRadioClick(i,discountType,"discountType")'>
+                          <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                        </div>
+                        <div class="radiobuttonName">
+                          {{ radio.name }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <label class="labelTextArea" for="selectAttachPartner">Attach Partner</label>
+                      <mat-form-field class="selectCampaignType" id="selectAttachPartner">
+                        <mat-select class="matSelect" [value]="partnerValue" (selectionChange)="changeValuePartner($event.value)">
+
+                          <mat-option *ngFor="let type of outOfScheduleItemsPartnerList" [value]="type"
+                                      class="matOption">
+                            <img [src]="type.partnerImage" alt="" class="logoPartner">
+                            {{type.partnerName}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-hint *ngIf="outOfSchedulePartnerValidator">
+                          <span class="mat-error">Partner is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+
+                  <div class="col-6 ">
+
+                    <div class="col matChipDiv">
+                      <label class="labelTextArea" for="attachMenu">Attach Menu Item</label>
+                      <mat-form-field class="example-chip-list attachMenuItem" id="attachMenu">
+                        <mat-chip-list #chipList>
+                          <mat-chip
+                            *ngFor="let type of attachMenu"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(type.name)">
+                            {{type.name+ '(' + type.menuName +')'}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            matInput
+                            #outOfScheduleAttachMenu
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="chipList"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                            (keypress)="$event.cancelBubble"
+                          >
+                          <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let type of attachMenuItem " [value]="type">
+                            <img [src]="type.menuItemImage" alt="" class="logoPartner">
+                            {{type.name+ '(' + type.menuName +')'}}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <mat-hint *ngIf="outOfScheduleMenuItemValidator">
+                          <span class="mat-error">Menu Item is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="row ">
+                      <div class="col-4 ml-5 pl-5 mb-5">
+                        <!--second box-->
+                        <label class="labelTextArea" for="calendar">Possible Order Time</label>
+                        <div class="calendarBox ml-4" id="calendar">
+                          <div class='DateContent'>
+                            <div class="timePicker">
+                              <input class="timeInput" #firstTimeElem [value]='firstTimeValue'
+                                     (focus)="focusFunction('firstTime')" (focusout)="focusOutFunction('firstTime')"
+                                     (keypress)="timeValidation($event, firstTimeElem.value, 'firstTimeValue')"
+                                     (keydown)="clearTimeDada($event, 'firstTimeValue')"
+                                     (input)="changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                                     autocomplete="off"
+                                     onselectstart="return false"
+                                     onpaste="return false;"
+                                     onDrag="return false"
+                                     onDrop="return false"
+                                     autocomplete="off" autocapitalize="off" autocorrect="off">
+                              <div class='borderBottom'></div>
+                              <div class='borderContent'>
+                                <div class='borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+                              </div>
+                            </div>
+                            <div class="line">
+                              -
+                            </div>
+                            <div class="timePicker marginRightTime">
+                              <input class="timeInput" #secondTimeElem [value]='secondTimeValue'
+                                     (focus)="focusFunction('secondTime')" (focusout)="focusOutFunction('secondTime')"
+                                     (keypress)="timeValidation($event, secondTimeElem.value, 'secondTimeValue')"
+                                     (keydown)="clearTimeDada($event, 'secondTimeValue')"
+                                     (input)="changeTimeFormat(secondTimeElem.value, 'secondTimeValue')"
+                                     onselectstart="return false"
+                                     onpaste="return false;"
+                                     onDrag="return false"
+                                     onDrop="return false"
+                                     autocomplete="off" autocapitalize="off" autocorrect="off">
+                              <div class='borderBottom'></div>
+                              <div class='borderContent'>
+                                <div class='borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+  <mat-drawer-content>
+    <app-customers-list-selection ></app-customers-list-selection>
+  </mat-drawer-content>
+
+
+</mat-drawer-container>
+

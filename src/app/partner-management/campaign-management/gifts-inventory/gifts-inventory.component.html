@@ -1,0 +1,207 @@
+<div class='contentForScroll ' #scrollableContent
+     (scroll)='scroll(scrollableContent.scrollTop, allContent.clientHeight)'>
+
+  <mat-drawer-container class="sidenav-container gifts-list scrollableContent">
+    <!-- mat-drawer -->
+    <mat-drawer class="drawer" mode="side" opened>
+      <sidenav></sidenav>
+    </mat-drawer>
+    <!-- mat sidenav -->
+    <mat-drawer-content>
+      <!-- header -->
+      <div class="container-fluid" #allContent>
+        <header>
+          <div class="container-fluid">
+            <div class="gifts-navbar">
+              <nav class="nav d-flex justify-content-between">
+                <div class="gifts-brand d-flex float-left">
+                  <div class="gifts-logo position-relative ml-3">
+                    <mat-icon>card_giftcard</mat-icon>
+                    <strong class=" position-relative part-btn">
+
+                        Gift Inventory
+
+                    </strong>
+                  </div>
+                </div>
+                <div class="button-navbar float-right">
+                  <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom"
+                          mdbTooltip="Notifications">
+                    <i class="material-icons md-36">notifications</i>
+                  </button>
+                  <button mat-icon-button type="button" class="btn-notifications" placement="bottom"
+                          mdbTooltip="User" [matMenuTriggerFor]="menu">
+                    <i class="material-icons md-36">person</i>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLink="/login">Sign Out</button>
+                  </mat-menu>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </header>
+        <!-- sidenav content -->
+        <div class="sidenav-content">
+          <!-- aside menu -->
+          <div class="container-fluid mt-4">
+            <div class="gifts-table w-100">
+              <!-- gifts table and filter -->
+              <table mdbTable striped="true" hover="true" mdbTableScroll scrollY="true" scrollX="true">
+                <thead class="main-color thead-custom">
+                <!-- search thead -->
+                <tr>
+                  <!-- S/N. -->
+                  <th scope="col">
+                    <i class="fa fa-search menus-icon position-relative white-text"
+                       aria-hidden="true"
+                       style="display: flex; justify-content: start; align-items: center"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="S/N" class="white-text" type="text"
+                             #giftSNIdFilter
+                             (input)="writeInFilterInputs('giftSNIdFilter',giftSNIdFilter.value)">
+                    </mat-form-field>
+                  </th>
+                  <!-- Search by gift name. -->
+                  <th scope="col">
+                    <i class="fa fa-search menus-icon position-relative white-text"
+                       aria-hidden="true"
+                       style="display: flex;  justify-content: start; align-items: center"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Search by gift name" #filterGiftsName
+                             (input)="writeInFilterInputs('giftNameFilter',filterGiftsName.value)"
+                      >
+                    </mat-form-field>
+                  </th>
+                  <!-- Item condition. -->
+                  <th scope="col" colspan="2">
+                    <i class="fa fa-search menus-icon position-relative white-text"
+                       aria-hidden="true"
+                       style="display: flex;  justify-content: start; align-items: center"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Item Condition" #giftConditionFilter
+                             (input)="writeInFilterInputs('giftConditionFilter',giftConditionFilter.value)"
+                      >
+                    </mat-form-field>
+                  </th>
+                  <!-- Date -->
+                  <th scope="col">
+                    <mat-form-field id='calendar' class="w-100 example-full-width white-text">
+                      <input matDatepickerToggleIcon matInput [matDatepicker]="picker" [formControl]="date1"
+                             placeholder="Date"
+                             (dateChange)='getDate($event, "startDateFilter")'
+                             onselectstart="return false"
+                             onpaste="return false;"
+                             onDrag="return false"
+                             onDrop="return false"
+                             (keypress)="false" (keydown)="deleteDate($event)" autocomplete="nope"
+                             [value]="date1.value">
+                      <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon class='calendarIcon'>keyboard_arrow_down
+                        </mat-icon>
+                      </mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </th>
+                  <!-- Quantity. -->
+                  <th scope="col" style="position: relative">
+                    <div class="w-75 pt-auto">
+                      <i class="fa fa-search menus-icon position-relative white-text"
+                         aria-hidden="true"
+                         style="display: flex; justify-content: start; align-items: center"></i>
+                      <mat-form-field class="w-100 white-text">
+                        <input matInput placeholder="Quantity" #giftQuantityFilter
+                               (input)="writeInFilterInputs('giftQuantityFilter',giftQuantityFilter.value)">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="button-row w-25 unarchiveBtn ">
+                      <!-- Down to Excel -->
+                      <button mat-icon-button
+                              placement="bottom"
+                              mdbTooltip="Download Table">
+                        <i class="material-icons md-light md-36">unarchive</i>
+                      </button>
+                    </div>
+                  </th>
+
+                </tr>
+                <!-- head custom -->
+                <tr class="head-custom">
+                  <th scope="col" class="font-weight-bold header-name">
+                    <mat-checkbox [(ngModel)]="selectedAll"
+                                  [indeterminate]="this.selectedOne && this.selectedOne.length !== 0 && !selectedAll"
+                                  (change)="selectAll();">
+                    </mat-checkbox>
+                    <span class="headers-text-color">S/N</span>
+                    <mat-icon *ngIf='!giftListElements[0].sort.status'
+                              class="cursor sortButton noselect" (click)="sortButton(0)"
+                              style="float: right; padding-top: 10px;">
+                      unfold_more
+                    </mat-icon>
+                    <mat-icon *ngIf='giftListElements[0].sort.status == "asc"'
+                              class="cursor sortButton noselect" (click)="sortButton(0)"
+                              style="float: right; padding-top: 10px;">
+                      expand_less
+                    </mat-icon>
+                    <mat-icon *ngIf='giftListElements[0].sort.status == "desc"'
+                              class="cursor sortButton marginTop noselect" (click)="sortButton(0)"
+                              style="float: right; padding-top: 10px;">
+                      expand_more
+                    </mat-icon>
+                  </th>
+                  <ng-container *ngFor="let giftList of giftListElements; let i = index">
+                    <th *ngIf="giftList.checked && i!==0" scope="col"
+                        class="font-weight-bold header-name">
+                      <span class="headers-text-color">{{giftList.name}}</span>
+                      <mat-icon *ngIf='!giftList.sort.status'
+                                class="cursor sortButton noselect" (click)="sortButton(i)"
+                                style="float: right; padding-top: 10px;">
+                        unfold_more
+                      </mat-icon>
+                      <mat-icon *ngIf='giftList.sort.status == "asc"'
+                                class="cursor sortButton noselect" (click)="sortButton(i)"
+                                style="float: right; padding-top: 10px;">
+                        expand_less
+                      </mat-icon>
+                      <mat-icon *ngIf='giftList.sort.status == "desc"'
+                                class="cursor sortButton marginTop noselect" (click)="sortButton(i)"
+                                style="float: right; padding-top: 10px;">
+                        expand_more
+                      </mat-icon>
+                    </th>
+                  </ng-container>
+                </tr>
+                </thead>
+                <tbody class="banner-color table-custom tbody-custom">
+                <tr mdbTableCol *ngFor="let gift of gifts">
+                  <!-- id -->
+                  <td>
+                    <mat-checkbox [(ngModel)]="gift.checked" (change)="checkIfAllSelected(); checkIfOneSelected()">
+                    </mat-checkbox>
+                    <span>{{gift.id}}</span></td>
+                  <!-- gift name -->
+                  <td>{{gift.name}}</td>
+                  <!-- item condition-->
+                  <td>{{gift.itemCondition}}</td>
+                  <!-- used gifts -->
+                  <td>{{gift.used}}</td>
+                  <!-- date -->
+                  <td>{{gift.creationDate | date: 'MM/dd/yyy'}}</td>
+                  <!-- gifts quantity-->
+                  <td>{{gift.quantity}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /table gifts -->
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+
+
+  </mat-drawer-container>
+
+
+</div>

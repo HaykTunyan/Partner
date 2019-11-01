@@ -1,0 +1,414 @@
+<!-- User Management Component -->
+<!-- scrollable content-->
+<div #scrollableContent class='scrollableContent' (scroll)="scrollEvent(scrollableContent)">
+  <mat-drawer-container class="sidenav-container partner-list">
+    <!-- mat-drawer -->
+    <mat-drawer class="drawer" mode="side" opened>
+      <sidenav></sidenav>
+    </mat-drawer>
+    <!-- mat sidenav -->
+    <mat-drawer-content>
+      <div #content class="allContent">
+        <!-- <app-sidenav></app-sidenav> -->
+        <!-- The items above the table -->
+        <div class="header">
+          <div class="title">
+            <div class="logo">
+              <i class="material-icons md-light md-24 userLogo">
+                person_outline
+              </i>
+            </div>
+            <div class="titleText">
+              User Management
+            </div>
+          </div>
+          <div class='buttonsContent'>
+            <button class='btn btn-primary createUser' (click)='createUser()' [disabled]="!IsEdit">
+              CREATE USER
+            </button>
+            <i class="material-icons md-light md-48 cursor ringLogo">
+              notifications
+            </i>
+            <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User" [matMenuTriggerFor]="menu">
+              <i class="material-icons md-light md-48 ringLogo">person</i>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click) = "logout()">Sign Out</button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class='tablesContent'>
+          <div class="data-table w-100">
+
+            <!-- users table and filter -->
+            <table mdbTable striped="true" hover="true">
+              <thead class="main-color thead-custom">
+              <!-- search thead -->
+              <tr>
+                <!-- Search by user name. -->
+                <th scope="col" class='' *ngIf="userListElements[0].checked">
+                  <div class='inputPlace'>
+                    <i class="fa fa-search menus-icon white-text searchIcon" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Search by Name" class="inputPadding" #filterName
+                             (input)="writeInFilterInputs('name',filterName.value)" autocomplete="nope">
+                    </mat-form-field>
+                  </div>
+                </th>
+                <th scope="col" class='inputPlace' *ngIf="userListElements[1].checked">
+                  <div class='inputPlace'>
+                    <i class="fa fa-search menus-icon searchIcon white-text" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Email Address" #filterEmail
+                             (input)="writeInFilterInputs('email',filterEmail.value)" autocomplete="nope">
+                    </mat-form-field>
+                  </div>
+                </th>
+                <!--Reg Date-->
+                <th scope="col" *ngIf="userListElements[2].checked">
+                  <mat-form-field id='calendar' class="example-full-width white-text">
+                    <input matDatepickerToggleIcon matInput #filterDate [value]='date'
+                          [matDatepicker]="picker" placeholder="Reg Date"
+                          (dateChange)='getDate(filterDate.value)' onselectstart="return false"
+                          onpaste="return false;" onDrag="return false" onDrop="return false"
+                          (keypress)="false" (keydown)="deleteDate($event)" autocomplete="nope">
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                      <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </th>
+                <!-- Phone Number. -->
+                <th scope="col" class='inputPlace' *ngIf="userListElements[3].checked">
+                  <div class='inputPlace'>
+                    <i class="fa fa-search menus-icon searchIcon white-text" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input class='white-text' #filterPhone matInput placeholder="Phone Number"
+                             (input)="writeInFilterInputs('phoneNumber',filterPhone.value)" autocomplete="nope">
+                    </mat-form-field>
+                  </div>
+                </th>
+                <!--Roles-->
+                <th scope="col" *ngIf="userListElements[4].checked">
+                  <div class='roleFilter'>
+                    <div *ngIf='isRoleFilterSelectOptionOpen' class='rolesSelectOption'
+                         (mouseleave)='closeCreatRoles("filter")'>
+                      <div class='forRolesContentStyle'>
+                        <div *ngFor='let role of rolesArray; let i = index'>
+                          <div class='role roleInSelectOption' (mousedown)='selectRoleCreate(role, "filter", i)'>
+                            {{ role.role }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-icon class="rolesSelectOptionButton cursor" (click)='openRoleSelectOption("filter")'>
+                      <i class="material-icons  white-text">arrow_drop_down</i>
+                    </mat-icon>
+                    <mat-form-field class="w-100 form-select">
+                      <input type="text" placeholder="Roles" aria-label="Number" matInput
+                             class="white-text"
+                             [value]='roleFilterInputValue'
+                             autocomplete="nope"
+                             onselectstart="return false"
+                             onpaste="return false;"
+                             onDrag="return false"
+                             onDrop="return false"
+                             (keypress)="false" (keydown)="keyDownRoleInput($event)">
+                    </mat-form-field>
+                  </div>
+                </th>
+                <!-- Table column btn and download -->
+                <th class="tools-btn">
+                  <div class="button-row float-right pb-3 ">
+                    <!-- Add filter and column -->
+                    <button mat-icon-button [matMenuTriggerFor]="columnMenu"
+                            placement="bottom"
+                            mdbTooltip="Add Filter & Column" class="mr-1">
+                      <i class="material-icons md-light md-36">add_circle</i>
+                    </button>
+                    <mat-menu #columnMenu="matMenu" class="p-3">
+                      <ng-container>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="table-list" *ngFor="let user of userListElements">
+                          <mat-list *ngIf="user.name!=='Email Address'" (click)="$event.stopPropagation()">
+                            <mat-list-item >
+                                <mat-checkbox [(ngModel)]="user.checked">{{user.name}}</mat-checkbox>
+                            </mat-list-item>
+                          </mat-list>
+                        </div>
+                        <!-- list for columns and filters -->
+                      </ng-container>
+                    </mat-menu>
+                    <!-- Download to Excel -->
+                    <a href = '{{ DOMEIN }}'>
+                      <button mat-icon-button
+                            placement="bottom"
+                            mdbTooltip="Download Table">
+                        <i class="material-icons md-light md-36">present_to_all</i>
+                      </button>    
+                    </a>
+                  </div>
+                </th>
+                <th>
+                  <div class = 'marginRightToll'></div>
+                </th>
+              </tr>
+              <!-- head custom -->
+              <tr class="head-custom">
+                <ng-container *ngFor="let column of userListElements; let i = index">
+                  <th *ngIf="column.checked" scope="col" class="font-weight-bold columnTitleContent" 
+                  [ngClass] = "{'border-radius': arrayBorderRadius[i]}">
+                    <span class="headers-text-color">{{column.name}}</span>
+                    <mat-icon *ngIf='!column.sort.status'
+                              class="cursor sortButton noselect" (click)="sortButton(i)">
+                      unfold_more
+                    </mat-icon>
+                    <mat-icon *ngIf='column.sort.status == "asc"'
+                              class="cursor sortButton noselect" (click)="sortButton(i)">
+                      expand_less
+                    </mat-icon>
+                    <mat-icon *ngIf='column.sort.status == "desc"'
+                              class="cursor sortButton marginTop noselect" (click)="sortButton(i)">
+                      expand_more
+                    </mat-icon>
+                  </th>
+                </ng-container>
+                <th scope="col" class="table-tools font-weight-bold text-center city-style">
+                  <span class="headers-text-color">Tools</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody *ngIf="rolesArray" class="banner-color table-custom tbody-custom tableMaxWidth">
+              <tr mdbTableCol *ngFor="let user of users; let i = index">
+                <!-- user name -->
+                <td class="bigText" *ngIf="userListElements[0].checked" [ngClass]="{'inActive': !user.active}">
+                  {{ user.name}}
+                </td>
+                <td class="bigText" *ngIf="userListElements[1].checked" [ngClass]="{'inActive': !user.active}">
+                  {{ user.email}}
+                </td>
+                <td class="bigText" *ngIf="userListElements[2].checked" [ngClass]="{'inActive': !user.active}">
+                  {{user.createDate | date: 'MM/dd/yyy' }}
+                </td>
+                <td class="bigText" *ngIf="userListElements[3].checked" [ngClass]="{'inActive': !user.active}">
+                  {{user.phoneNumber}}
+                </td>
+                <td class="border-radius" *ngIf="userListElements[4].checked" [ngClass]="{'inActive': !user.active}">
+                  <div *ngFor='let role of user.roleDtos' [id]='role.id' class='userRole'
+                       [ngStyle]="{'background-color': roleColors[role.name]}">
+                    <span *ngIf='rolesArray'>{{ role.name }}</span>
+                    <span class='roleStatus'>{{role.action == "EDIT" ? 'view & edit' : 'only view'}}</span>
+                  </div>
+                </td>
+                <!-- tools -->
+                <td class="tools-btn" [ngClass]="{'inActive': !user.active }">
+                  <div class='tools' align = 'center'>
+                    <i class="material-icons cursor" (click)='IsEdit? editUser(user.id, i): false'>
+                      create
+                    </i>
+                    <mat-icon class='cursor ' [ngClass]="{'resetPassword': !user.hasPassword}"
+                              (click)="IsEdit? resetPasswordOrInvitation(user, i): false"
+                              [mdbTooltip]="user.hasPassword? 'Reset Password':'Resend Invitation'">
+                      lock_open
+                    </mat-icon>
+                    <div (click)='IsEdit? activateUser(user.id, i): false' class='checkbox '
+                         [ngClass]='{"checkboxActive" :user.active}'>
+                      <div class='checkboxButtonT' [ngClass]='{"checkboxButtonActive" :user.active}'>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class='deleteUserContent'>
+                  <div class='deleteUserInnerContent'>
+                    <i class="material-icons  md-light md-24 cursor" (click)='IsEdit ? openDeletePopup(i): IsEdit'>
+                      delete_forever
+                    </i>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <!-- /table data -->
+          </div>
+        </div>
+      </div>
+      <!-- create or change user popup -->
+      <div *ngIf='isUserPopupActive' class='popupContent' (click) = 'clickOutsidePopup("addUser")'>
+        <div class='popupOpacity' (click) = 'clickOutsidePopup($event)'>
+          <div class='whiteContent' (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+            <div class='userIconContent'>
+              <i class="material-icons md-light md-48 userLogo">
+                person_outline
+              </i>
+            </div>
+            <div class='popupInputsContent'>
+              <div class='errorMassage' *ngIf="serverError">
+                {{ errorMassage }}
+              </div>
+              <div class='popupInputContent'>
+                Full Name
+                <input #fulName type="text" class='popupInput' [value]='changeableUser.name'
+                       (input)='nameInput("name", fulName.value)'
+                       autocomplete="nope" autocapitalize="off" autocorrect="off">
+                <i class="material-icons inputClear" (click)="clearInput('name')">
+                  clear
+                </i>
+              </div>
+              <div class='popupInputContent'>
+                Email
+                <input #email type="email" class='popupInput' [value]='changeableUser.email'
+                       [ngClass]='{ "inputNoValid": !mailInputValidation }'
+                       (input)='nameInput("email", email.value)'
+                       autocomplete="nope" autocapitalize="off" autocorrect="off">
+                <i class="material-icons inputClear" (click)="clearInput('email')">
+                  clear
+                </i>
+              </div>
+              <div class='popupInputContent'>
+                Phone Number
+                <input #phone type="text" class='popupInput' [value]='changeableUser.phoneNumber'
+                       (input)='nameInput("phoneNumber", phone.value)'
+                       autocomplete="nope" autocapitalize="off" autocorrect="off">
+                <i class="material-icons inputClear" (click)="clearInput('phoneNumber')">
+                  clear
+                </i>
+              </div>
+            </div>
+            <!--Roles change-->
+            <div class='rolesContent'>
+              <div *ngFor='let userRole of changeableUser.roleDtos; let n = index'>
+                <div *ngIf='userRole.roleId' class='userRoles'>
+                  <div class='oldRoleContent'>
+                    <div class='rolesText rolesAndTextSpace'>Roles</div>
+                    <div [id]='userRole.roleId' class='userRole'
+                         [ngStyle]="{'background-color': roleColors[getRolNameById(userRole.roleId)]}">
+                      <span>
+                        {{  getRolNameById(userRole.roleId) }}
+                      </span>
+                      <span class='roleStatus'>{{userRole.action == "EDIT" ? 'view & edit' : 'only view'}}</span>
+                    </div>
+                  </div>
+                  <div class='roleCloseButton noselect' (click)='closeAndDeleteRole(n)'>
+                    <div class='rolesCloseX'>
+                      x
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='radiobuttonsContent'>
+              <span class='radiobuttonContent'>
+                  <span class='radioOut' id='VIEW' (click)='setRoleAction($event.target.id)'>
+                      <span class='radioIn'
+                            *ngIf='selectedAction == "VIEW"'>
+                      </span>
+                  </span>
+                  Only View
+                  <span class='radioOut' id='EDIT' (click)='setRoleAction($event.target.id)'>
+                      <span class='radioIn'
+                            *ngIf='selectedAction == "EDIT"'>
+                       </span>
+                  </span>
+                  View & Edit
+              </span>
+              </div>
+              <div class='roles'>
+                <div class='rolesText'>Roles</div>
+                <div class='rolesSelectOptionCreate' (click)='openRoleSelectOption("create")'
+                     [ngClass]="{'noValidRole': !isRoleSelected}">
+                <span *ngIf='rolesArray[selectedRoleId]'>
+                      {{ rolesArray[selectedRoleId].role }}
+                </span>
+                  <i class="material-icons openSelectOptionButton">
+                    keyboard_arrow_down
+                  </i>
+                  <div *ngIf='rolesCreateSelect' class='rolesSearch' (mouseleave)='closeCreatRoles("create")'>
+                    <div class='forRolesContentStyle'>
+                      <div *ngFor='let role of createRolesArray'>
+                        <div class='role' (mousedown)='selectRoleCreate(role, "create", null)'>
+                          {{ role.role }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='addRolesContent'>
+                <div class='addRoles noselect' mdbTooltip='Add Another Role' placement="left" (click)='addRole()'>
+                  +
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='popupButtonsContent'>
+            <span>
+              <div class='checkboxContent'
+                   (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+                <div class='checkbox' [ngClass]='{"checkboxActive" :changeableUser.active}'
+                     (click)='activateNewOrChangeableUser()'>
+                  <div class='checkboxButton' [ngClass]='{"checkboxButtonActive" :changeableUser.active}'>
+
+                  </div>
+                </div>
+                <div  class='checkboxText noselect' *ngIf="changeableUser.active; else notActive"  >
+                   ENABLE NOW
+                </div>
+                <ng-template #notActive>
+                 <div  class='checkboxText noselect' >
+                     DISABLE NOW
+                 </div>
+                  </ng-template>
+              </div>
+            </span>
+            <div class='buttonContents' (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+              <div class='discard noselect' (click)='cancelNewUser()'>
+                CANCEL
+              </div>
+              <button [disabled]="!popupSubmitDisabled" [ngClass]="{'disabledButton': !popupSubmitDisabled}"
+                      class="btn btn-primary invite" (click)='getNewUserData()'>
+                <span *ngIf="createOrChangeStatus === 'create' || !createOrChangeStatus ">
+                  INVITE
+                </span>
+                <span *ngIf="createOrChangeStatus === 'edit'">
+                  UPDATE
+                </span>
+                <span *ngIf="noServer">
+                  UPDATE
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='deletePopup' *ngIf='isDeletePopupActive' (click) = 'clickOutsidePopup("delete")'>
+        <div class='deleteContent' (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+          Are you sure you want to delete this account?
+          <div class="deleteButtonsContent">
+            <div class='noButton noselect cursor' (click)="closeDeletePopup(null)">
+              NO
+            </div>
+            <div class='yesButton noselect cursor' (click)="closeDeletePopup('yes')">
+              YES
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='deletePopup' *ngIf='resetPasswordPopup' (click) = 'clickOutsidePopup("rest")'>
+        <div class='deleteContent' (mouseenter)="dontClosePopup()" (mouseleave)="closePopup()">
+          <span *ngIf='invitationOrResend'>
+             Reset password mail was successfully sent.
+          </span>
+          <span *ngIf='!invitationOrResend'>
+            Invitation mail was successfully  sent.
+         </span>
+          <div class="deleteButtonsContent singleButton">
+            <div class='yesButton noselect cursor noMargin' (click)="closeResetPasswordPopup()">
+              Close
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

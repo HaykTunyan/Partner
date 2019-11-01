@@ -1,0 +1,363 @@
+<!-- Data Table Component View -->
+
+<div class="data-table w-100">
+  <table mdbTable *ngIf="this.selectedOne && this.selectedOne.length !== 0 || selectedAll">
+    <thead class="main-color thead-custom">
+    <!-- button thead -->
+    <tr>
+      <!-- button row -->
+      <th scope="col">
+          <div class="button-row">
+            <!-- Create -->
+            <button mat-icon-button placement="bottom" mdbTooltip="Edit List">
+              <mat-icon><i class="material-icons md-light">create</i></mat-icon>
+            </button>
+            <!-- Contacts -->
+            <button mat-icon-button placement="bottom" mdbTooltip="Partner Menu">
+              <mat-icon><i class="material-icons md-light">restaurant</i></mat-icon>
+            </button>
+            <!-- Percent -->
+            <button mat-icon-button placement="bottom" mdbTooltip="Commission Rate">
+              <mat-icon class="percent-icon position-relative"><i class="material-icons md-light">widgets</i>
+              </mat-icon>
+            </button>
+            <!-- Money -->
+            <button mat-icon-button placement="bottom" mdbTooltip="Transition">
+              <mat-icon><i class="material-icons md-light">monetization_on</i></mat-icon>
+            </button>
+            <!-- Date -->
+            <button mat-icon-button placement="bottom" mdbTooltip="Working Time">
+              <mat-icon><i class="material-icons md-light">date_range</i></mat-icon>
+            </button>
+          </div>
+        </th>
+      </thead>
+    </table>
+    <!-- partner table and filter -->
+    <table mdbTable striped="true" hover="true">
+      <thead class="main-color thead-custom">
+      <!-- search thead -->
+      <tr>
+        <!-- S/N. -->
+        <th scope="col">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="S/N" class="white-text" type="text">
+          </mat-form-field>
+        </th>
+        <!-- Search by partner name. -->
+        <th scope="col" *ngIf="partnerListElements[0].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Search by partner name" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Area. -->
+        <th scope="col" *ngIf="partnerListElements[1].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Area" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Zona. -->
+        <th scope="col" *ngIf="partnerListElements[2].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Zona" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Phone Number. -->
+        <th scope="col" *ngIf="partnerListElements[3].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Area" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Order Acceptance. -->
+        <th scope="col" *ngIf="partnerListElements[4].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Order Acceptance" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Partner Type. -->
+        <th scope="col" *ngIf="partnerListElements[5].checked">
+          <mat-icon class="float-right auto-icon position-relative"><i class="material-icons  white-text">arrow_drop_down</i>
+          </mat-icon>
+          <mat-form-field class="w-100 form-select">
+            <input type="text" placeholder="Partner Type" aria-label="Number" matInput [formControl]="TypeControl"
+                   [matAutocomplete]="auto" class="white-text">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let partnertype of filteredPartnertypes | async" [value]="partnertype">
+                {{partnertype}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+        <!-- Brand. -->
+        <th scope="col" *ngIf="partnerListElements[6].checked">
+          <mat-icon class="float-right auto-icon position-relative"><i class="material-icons white-text">arrow_drop_down</i>
+          </mat-icon>
+          <mat-form-field class="w-100 form-select">
+            <input type="text" placeholder="Brand" aria-label="Number" matInput [formControl]="BrandControl"
+                   [matAutocomplete]="auto" class="white-text">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let brand of filteredBrands | async" [value]="brand">
+                {{brand}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+        <!-- Legal Entity. -->
+        <th scope="col" *ngIf="partnerListElements[7].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Legal Entity" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Service Type. -->
+        <th scope="col" *ngIf="partnerListElements[8].checked">
+          <mat-icon class="float-right auto-icon position-relative"><i class="material-icons white-text">arrow_drop_down</i>
+          </mat-icon>
+          <mat-form-field class="w-100 form-select">
+            <input type="text" placeholder="Service Type" aria-label="Number" matInput
+                   [formControl]="BrandControl" [matAutocomplete]="auto" class="white-text">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let brand of filteredBrands | async" [value]="brand">
+                {{brand}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+        <!-- Partner Category. -->
+        <th scope="col" *ngIf="partnerListElements[9].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Partner Category" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Events. -->
+        <th scope="col" *ngIf="partnerListElements[10].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Events" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Campaigns. -->
+        <th scope="col" *ngIf="partnerListElements[11].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Campaigns" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Biling Cycle number. -->
+        <th scope="col" *ngIf="partnerListElements[12].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Biling Cycle number" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Biling Cycle Days, months, weeks. -->
+        <th scope="col" *ngIf="partnerListElements[13].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Biling Cycle Days, months, weeks" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Biling Cycle start date. -->
+        <th scope="col" *ngIf="partnerListElements[14].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Biling Cycle start date" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Contract Number. -->
+        <th scope="col" *ngIf="partnerListElements[15].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Contract Number" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Grace period. -->
+        <th scope="col" *ngIf="partnerListElements[16].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Grace period" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Max Credit Limit. -->
+        <th scope="col" *ngIf="partnerListElements[17].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Max Credit Limit" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Order Payment. -->
+        <th scope="col" *ngIf="partnerListElements[18].checked">
+          <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+          <mat-form-field class="w-100 white-text">
+            <input matInput placeholder="Order Payment" [(ngModel)]="filterText" >
+          </mat-form-field>
+        </th>
+        <!-- Enabled/Disabled. -->
+        <th scope="col" *ngIf="partnerListElements[19].checked">
+          <mat-form-field class="w-100 form-select">
+            <mat-select placeholder="Status">
+              <mat-option *ngFor="let status of statuses" [value]="status.value">
+                {{status.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </th>
+        <!-- Open/Close. -->
+        <th scope="col" *ngIf="partnerListElements[20].checked">
+          <mat-form-field class="w-100 form-select">
+            <mat-select placeholder="Open/Close">
+              <mat-option *ngFor="let rest of rests" [value]="rest.value">
+                {{rest.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </th>
+        <!-- Table column btn and download -->
+        <th class="tools-btn">
+          <div class="button-row float-right pb-3">
+            <!-- Add filter and collumn -->
+            <button mat-icon-button [matMenuTriggerFor]="collummenu"
+                    placement="bottom"
+                    mdbTooltip="Add Filter & Column" class="mr-1">
+              <i class="material-icons md-light md-36">add_circle</i>
+            </button>
+            <mat-menu #collummenu="matMenu" class="p-3">
+              <ng-container>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>         
+                <div class="table-list">
+                  <mat-list (click)="$event.stopPropagation()">
+                    <mat-list-item *ngFor="let partnerList of partnerListElements">
+                      <mat-checkbox [(ngModel)]="partnerList.checked">{{partnerList.name}}</mat-checkbox>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+                <!-- lsit for collums and filters -->
+              </ng-container>
+            </mat-menu>
+            <!-- Down to Excel -->
+            <button mat-icon-button
+                    placement="bottom"
+                    mdbTooltip="Download Table">
+              <i class="material-icons md-light md-36">present_to_all</i>
+            </button>
+          </div>
+        </th>
+      </tr>
+      <!-- head custom -->
+      <tr class="head-custom">
+        <th scope="col" class="font-weight-bold">
+          <mat-checkbox [(ngModel)]="selectedAll"
+                        [indeterminate]="this.selectedOne && this.selectedOne.length !== 0 && !selectedAll"
+                        (change)="selectAll();"><span class="headers-text-color">S/N</span>
+          </mat-checkbox>
+        </th>
+        <ng-container *ngFor="let partnerList of partnerListElements">
+          <th *ngIf="partnerList.checked" scope="col" class="font-weight-bold">
+            <span class="headers-text-color">{{partnerList.name}}</span>
+          </th>
+        </ng-container>
+        <th scope="col" class="table-tools font-weight-bold text-center city-style">
+          <span class="headers-text-color">Tools</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody class="banner-color table-custom tbody-custom">
+      <tr mdbTableCol *ngFor="let partner of partners | filter: filterText">
+        <!-- id -->
+        <td class="">
+          <mat-checkbox [(ngModel)]="partner.checked" (change)="checkIfAllSelected(); checkIfOneSelected()">
+            {{partner.id}}
+          </mat-checkbox>
+          <!-- partner name -->
+          <td class="" *ngIf="partnerListElements[0].checked">{{partner.name}}</td>
+          <!-- partner area -->
+          <td class="" *ngIf="partnerListElements[1].checked">{{partner.area}}</td>
+          <!-- partner zone -->
+          <td class="" *ngIf="partnerListElements[2].checked">{{partner.zone}}</td>
+          <!-- phone number -->
+          <td class="" *ngIf="partnerListElements[3].checked">{{partner.partnerContact.phoneNumber}}</td>
+          <!-- partner order acceptance method -->
+          <td class="" *ngIf="partnerListElements[4].checked">{{partner.name}}</td>
+          <!-- partner type -->
+          <td class="" *ngIf="partnerListElements[5].checked">{{partner.partner_type}}</td>
+          <!-- brand -->
+          <td class="" *ngIf="partnerListElements[6].checked">{{partner.brand?.name}}</td>
+          <!-- partner legal entity -->
+          <td class="" *ngIf="partnerListElements[7].checked">{{partner.name}}</td>
+          <!-- partner service type -->
+          <td class="" *ngIf="partnerListElements[8].checked">{{partner.sevicetypes?.name}}</td>
+          <!-- partner category -->
+          <td class="" *ngIf="partnerListElements[9].checked">{{partner.name}}</td>
+          <!-- partner events -->
+          <td class="" *ngIf="partnerListElements[10].checked">{{partner.name}}</td>
+          <!-- partner campaigns -->
+          <td class="" *ngIf="partnerListElements[11].checked">{{partner.name}}</td>
+          <!-- partner billing cycle number -->
+          <td class="" *ngIf="partnerListElements[12].checked">{{partner.billingCycle}}</td>
+          <!-- partner billing cycle days, months, weeks -->
+          <td class="" *ngIf="partnerListElements[13].checked">{{partner.billingCycleType}}</td>
+          <!-- partner cycle start date -->
+          <td class="" *ngIf="partnerListElements[14].checked">{{partner.name}}</td>
+          <!-- partner contract number -->
+          <td class="" *ngIf="partnerListElements[15].checked">{{partner.name}}</td>
+          <!-- partner grace period -->
+          <td class="" *ngIf="partnerListElements[16].checked">{{partner.name}}</td>
+          <!-- partner max credit limit -->
+          <td class="" *ngIf="partnerListElements[17].checked">{{partner.name}}</td>
+          <!-- partner order payment -->
+          <td class="" *ngIf="partnerListElements[18].checked">{{partner.name}}</td>
+          <!-- partner enable/disable -->
+          <td class="" *ngIf="partnerListElements[19].checked">{{partner.status}}</td>
+          <!-- partner open/close -->
+          <td class="" *ngIf="partnerListElements[20].checked">{{partner.open ? 'open' : 'close'}}</td>
+          <!-- tools -->
+          <td class="tools-btn">
+          <div class="button-row text-center">
+            <!-- Edit Partner -->
+            <button mat-icon-button routerLink="/edit-partner" routerLinkActive="active" placement="bottom" mdbTooltip="Edit Partner">
+              <mat-icon><i class="material-icons md-main">create</i></mat-icon>
+            </button>
+            <!-- Partner Menu -->
+            <button mat-icon-button routerLink="/partner-menu" routerLinkActive="active" placement="bottom" mdbTooltip="Partner Menu">
+              <mat-icon><i class="material-icons md-main">restaurant</i></mat-icon>
+            </button>
+            <!-- Commission Rate -->
+            <button mat-icon-button routerLink="/commission-rate" routerLinkActive="active" placement="bottom" mdbTooltip="Commission Rate">
+              <mat-icon><i class="material-icons md-main">widgets</i></mat-icon>
+            </button>
+            <!-- Delivery Fee -->
+            <button mat-icon-button routerLink="/delivery-fee" routerLinkActive="active" placement="bottom" mdbTooltip="Delivery Fee">
+              <mat-icon><i class="material-icons md-main">monetization_on</i></mat-icon>
+            </button>
+            <!-- Working Time -->
+            <button mat-icon-button routerLink="/working-time" routerLinkActive="active" placement="bottom" mdbTooltip="Working Time">
+              <mat-icon><i class="material-icons md-main">date_range</i></mat-icon>
+            </button>
+            <!-- Partner Details -->
+            <button mat-icon-button routerLink="/partner-details" routerLinkActive="active" placement="bottom" mdbTooltip="Partner Details">
+              <mat-icon><i class="material-icons md-main">description</i></mat-icon>
+            </button>
+            <!-- Log History -->
+            <button mat-icon-button routerLink="/log-history" routerLinkActive="active" placement="bottom" mdbTooltip="Log History">
+              <mat-icon><i class="material-icons md-main">history</i></mat-icon>
+            </button>
+            <!-- Copyright -->
+            <button mat-icon-button placement="bottom" mdbTooltip="Copyright">
+              <mat-icon><i class="material-icons md-main">filter_none</i></mat-icon>
+            </button>
+          </div>
+          </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- /table data -->
+</div>

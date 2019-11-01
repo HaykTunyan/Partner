@@ -1,0 +1,93 @@
+<div class="container-fluid" #container>
+  <div class="row  calendarContent">
+    <div class="col-12 mountTurn">
+      <div class = 'dateToday'> 
+        <div class = 'previusButtonContent'>
+          <span class = 'previusMounth' (click) = 'previusMounth()'> 
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill = '#ffffffff'  x="0px" y="0px" width="24px"
+                height="21px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+            <g id="Bounding_Boxes">
+              <path opacity="0.87" fill="none" d="M0,0h24v24H0V0z"/>
+            </g>
+            <g id="Outline_1_">
+              <path d="M17.51,3.87L15.73,2.1L5.84,12l9.9,9.9l1.77-1.77L9.38,12L17.51,3.87z"/>
+            </g>
+            </svg>
+          </span> 
+        </div>
+        <span class = 'titles'>
+          <div class = 'title mounth'>{{ date | date:'MMMM' }} </div>
+          <div class = 'title'>{{ date | date:'yyy' }} </div>
+        </span>
+        <span class = 'nextMounth' (click) = 'nextMounth()'> 
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill = '#ffffffff' x="0px" y="0px" width="24px"
+                height="21px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+            <g id="Bounding_Boxes">
+              <path opacity="0.87" fill="none" d="M24,24H0L0,0l24,0V24z"/>
+            </g>
+            <g id="Outline_1_">
+              <path d="M6.49,20.13l1.77,1.77l9.9-9.9l-9.9-9.9L6.49,3.87L14.62,12L6.49,20.13z"/>
+            </g>
+            </svg>
+        </span> 
+      </div>
+    </div>
+    <div class="col-12 weekNamesContent">
+      <div *ngFor = 'let week of weeknames' class="weekName">
+        {{ week }}
+      </div>
+    </div>
+    <div class="col-12 daysContent">
+     <div>
+       <div *ngFor = 'let day of daysArray' #dayTag [class] = "day? 'days': 'daysNull' " (click) = 'openEvents(day)'>
+         <div *ngIf = 'day' class = 'selected' [ngClass] = '{"isSelected": this.freeDays.indexOf(+day) >= 0}'>
+           <div *ngIf = 'this.freeDays.indexOf(+day) >= 0' class = 'deleteButton' (click) = 'deleteDay($event, day);'>
+              <mat-icon class = 'deleteIcon'>delete_forever</mat-icon>
+           </div>
+            {{ day }}
+         </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 timeInputsContent">
+      <div class = 'inputsAndTitles'>
+        <div class = 'inputTitles'>
+          <div class = 'inputTitle'>From</div>
+          <div class = 'inputTitle'>To</div>
+        </div>
+        <div class = 'inputs'>
+          <div class="timePicker">
+            <input class="timeInput" #firstTimeElem [value] = 'firstTimeValue'
+                   (focus)="IsEdit ? focusFunction('firstTime'): false"
+                   (focusout) = "IsEdit ? focusOutFunction('firstTime'): false"
+                   (keypress) = "IsEdit ? timeValidation($event, firstTimeElem.value, 'firstTimeValue'): false"
+                   (keydown) = "IsEdit ? clearTimeDada($event, 'firstTimeValue'): false"
+                   (input) = "changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                   autocomplete="off" [readonly]="!IsEdit"
+                   onselectstart="return false" onpaste="return false;"
+                   onDrag="return false" onDrop="return false"
+                   autocomplete="off" autocapitalize="off" autocorrect="off">
+            <div class = 'borderBottom'></div>
+            <div class = 'borderContent'>
+              <div class = 'borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+            </div>
+          </div>
+          <div class="timePicker">
+            <input class="timeInput" #secondTimeElem [value] = 'secondTimeValue'
+                   (focus)="IsEdit ? focusFunction('secondTime'): false"
+                   (focusout) = "IsEdit ? focusOutFunction('secondTime'): false"
+                   (keypress) = "IsEdit ? timeValidation($event, secondTimeElem.value, 'secondTimeValue'): false"
+                   (keydown) = "IsEdit ? clearTimeDada($event, 'secondTimeValue'): false"
+                   (input) = "changeTimeFormat(secondTimeElem.value, 'secondTimeValue')" [readonly]="!IsEdit"
+                   onselectstart="return false" onpaste="return false;" onDrag="return false" onDrop="return false"
+                   autocomplete="off" autocapitalize="off" autocorrect="off">
+            <div class = 'borderBottom'></div>
+            <div class = 'borderContent'>
+              <div class = 'borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

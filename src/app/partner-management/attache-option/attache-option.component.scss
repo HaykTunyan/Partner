@@ -1,0 +1,350 @@
+.closeIcon {
+  margin-bottom: -25px;
+  margin-top: 15px;
+  color: #A2ACB1;
+}
+
+// Modal Attach Option
+.modal-attachOpt {
+  margin-top: 50px;
+  width: 800px;
+  background: #455A64;
+  border-radius: 10px;
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .vertical-divider {
+    background: black;
+    width: 2px;
+  }
+}
+
+::ng-deep .mat-input-element {
+  caret-color: white !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: white !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #A2ACB1 !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #A2ACB1 !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: white;
+  padding-left: 10px;
+}
+
+p {
+  margin: 0;
+}
+
+.mat-checkbox-layout {
+  margin: 0 !important;
+}
+
+.addIconStyle {
+  background-color: #ffffff;
+  color: #607D8B;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 15px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+::ng-deep .tooltip-inner {
+  height: 35px;
+  margin: -3px 0 !important;
+  padding: 0 20px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boldTextColor {
+  color: #6E8895;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.saveBtn {
+  background-color: #2691BB;
+  padding: 3px 45px;
+  border-radius: 10px;
+}
+
+//
+
+//modal big div styles
+.modalDiv {
+  width: 100%;
+  padding-top: 4%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 1);
+  overflow-y: scroll;
+}
+
+.modal-addEditOption {
+  overflow: visible !important;
+  width: 50%;
+  max-height: 400px;
+  background: white;
+  margin: 0 auto;
+  overflow-y: scroll;
+  border-radius: 10px;
+}
+
+.modal-addSubChoice {
+  overflow: visible !important;
+  width: 45%;
+  max-height: 400px;
+  background: white;
+  margin: 0 auto;
+  overflow-y: scroll;
+  border-radius: 10px;
+  ::ng-deep .tooltip-inner {
+    height: 35px;
+    margin: -3px 0 !important;
+    padding: 0 20px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+}
+
+.popupButtonsContent {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.buttonContents {
+  display: flex;
+  justify-content: end;
+  .cancel{
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+  }
+  .invite{
+    background-color: #2691BB;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+
+    :hover{
+      background-color: #75B0CC;
+    }
+    :visited{
+      background-color: #75B0CC;
+    }
+    :active{
+      background-color: #75B0CC;
+    }
+  }
+}
+
+.checkbox {
+  width: 40px;
+  height: 20px;
+  background-color: #797E7A;
+  border-radius: 17px;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.checkboxButton {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -1px;
+  top: -2px;
+  background-color: #87969c;
+  border-radius: 50%;
+  transition: left linear 100ms;
+}
+
+.checkboxButtonT {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -1px;
+  top: -2px;
+  background-color: #CED1D6;
+  border-radius: 50%;
+  transition: left linear 100ms;
+}
+
+.checkboxActive {
+  background-color: rgba(89, 177, 13, 0.5);
+}
+
+.checkboxButtonActive {
+  background-color: #59B10D;
+  left: 17px;
+}
+
+.checkboxContent {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.checkboxText {
+  float: left;
+  color: #607D8B;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.logoStyles {
+  position: absolute;
+  top: -35px;
+  right: 90px;
+  color: white;
+
+  mat-icon {
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    background-color: #2691BB;
+    font-size: 50px;
+  }
+}
+
+::ng-deep {
+  .name-type {
+    .mat-form-field-infix {
+      position: inherit;
+      padding-bottom: 10px;
+    }
+
+    .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      width: 50px;
+      padding: 2px;
+      border: 1px solid #CFD8DC;
+      background: #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #607D8B;
+    }
+
+    .mat-form-field.mat-focused .mat-form-field-label {
+      width: 50px;
+      padding: 2px;
+      border: 1px solid #CFD8DC;
+      background: #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #607D8B;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      width: 50px;
+      padding: 2px;
+      border: 1px solid #CFD8DC;
+      border-radius: 10px;
+      text-align: center;
+      color: #DB2323;
+    }
+  }
+}
+
+.choiseHeader {
+  font-size: 16px;
+  font-weight: bold;
+  color: #6E8895;
+  background-color: #ECEFF1;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+  padding: 10px;
+}
+
+.disableNowStyle {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none !important;
+  border: 1px solid #607D8B;;
+  border-radius: 10px;
+  outline: none !important;
+  :focus{
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+//Error mssage styles
+.error-message {
+  color: #f44336;
+  margin-top: -15px;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+.activeStyle {
+  width: 40px;
+  border: 1px solid #CFD8DC;
+  background: #CFD8DC;
+  border-radius: 10px;
+  text-align: center;
+  color: #607D8B;
+}
+
+.notActiveStyle {
+  width: 40px;
+  border: 1px solid #CFD8DC;
+  border-radius: 10px;
+  text-align: center;
+  color: #DB2323;
+}
+
+.visibilityHidden{
+  visibility: hidden;
+}
+
+.disabledbutton {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.addSubChoiceStyle {
+  background-color: #2691BB;
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding: 7px;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.deleteIconStyle{
+  color: #FF0000;
+}
+

@@ -1,0 +1,331 @@
+// Menu Component Style.
+
+
+//Header styles
+.menus-logo {
+  span {
+    position: relative;
+    bottom: 6px;
+    margin-left: 12px;
+  }
+}
+
+// change tooltip text and background color
+::ng-deep .tooltip .tooltip-inner {
+  background-color: #CFD8DC;
+  color: #263238;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .tooltip-arrow {
+  background-color: none;
+  border-bottom: 7px solid #CFD8DC;
+  font-size: 20px;
+}
+
+::ng-deep .tooltip .tooltip-inner::after {
+  border-color: transparent transparent transparent #CFD8DC;
+}
+
+.filter-content {
+  margin-bottom: 70px;
+
+  i {
+    left: 12px;
+  }
+
+  .first-filter {
+    width: 80px;
+  }
+
+  .second-filter {
+    width: 320px;
+  }
+}
+
+.table-wrapper {
+  //background: #FFFFFF;
+  border-radius: 10px;
+
+  .mat-icon-button {
+    width: 35px;
+  }
+
+  .delete-item {
+    line-height: 19px;
+  }
+}
+
+
+//menu list styles
+.menu-content {
+  .table {
+    margin-bottom: 0.31rem;
+
+    tbody {
+      tr {
+        background-color: white;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        padding: 8px;
+
+        td {
+          padding-top: 0;
+          padding-bottom: 0;
+          vertical-align: middle;
+          border-top: none;
+          background-color: white;
+        }
+
+        td:first-child {
+          width: 70px;
+          text-align: center;
+          border-right: 0.5px solid #1C333E;
+        }
+
+        td:last-child {
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+//Pagination style
+.pagination-style {
+  ul {
+    li {
+      background: #FFFFFF;
+      margin-right: 3px;
+      border-radius: 3px;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      a {
+        font-size: 18px;
+        color: #607D8B;
+        font-weight: bold;
+      }
+    }
+    li.active a {
+      font-size: 18px;
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+.pagination .page-item.active .page-link {
+  background: #607D8B;
+  height: 30px;
+  border: none;
+}
+
+.pagination .page-item .page-link:hover{
+  transition: none;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.pagination .page-item.active .page-link:hover{
+  transition: none;
+  border-radius: 3px;
+  background-color: rgba(96,125,139,0.5);
+}
+
+mat-drawer {
+  position: fixed;
+}
+
+.btn-menu {
+  background-color: #2691BB;
+}
+
+.btn-ok {
+  background-color: #2691BB;
+  :hover{
+    animation-duration: 2s;
+    opacity: 0.8;
+  }
+}
+
+.btn-delete {
+  background-color: white;
+  color: red;
+  font-weight: bold;
+  :hover{
+    animation-duration: 2s;
+    background-color: red;
+    color: white;
+    opacity: 0.8;
+  }
+}
+
+.w-45 {
+  width: 49%;
+}
+
+.odd {
+  margin-left: auto;
+}
+
+.even {
+  margin-right: auto;
+}
+
+//.createMenuInputStyles {
+//  border: none;
+//  width: 50%;
+//  margin-left: 15px;
+//  font-weight: bolder;
+//  :focus{
+//    box-shadow: none !important;
+//    outline: none !important;
+//  }
+//}
+
+// Menu All.
+
+.createMenuInputStyles {
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: red;
+    padding-left: 20px;
+  }
+
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background: gray;
+  }
+
+  ::ng-deep .mat-select-value {
+    color: red;
+  }
+
+  ::ng-deep .mat-select-arrow {
+    color: red;
+  }
+
+  ::ng-deep.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+    padding-left: 20px;
+  }
+}
+
+.menus-text-color {
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.modalDiv {
+  width: 100%;
+  padding-top: 4%;
+  height: 100vh;
+  background-color: transparent;
+  overflow-y: scroll;
+}
+
+.modal-menuItemDescriptionLogo {
+  overflow: visible;
+  width: 50%;
+  background: white;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.modal-createOrCopy {
+  width: 25%;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid gray;
+  margin: 0 auto;
+  -webkit-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+  p{
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+  }
+}
+
+.modal-menuItemDescription {
+  width: 50%;
+  background: white;
+  border-radius: 10px;
+  margin: 0 auto;
+  max-height: 60vh;
+  overflow-y: scroll;
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .vertical-divider {
+    background: black;
+    width: 2px;
+  }
+
+  ::ng-deep .mat-input-element {
+    caret-color: black !important;
+  }
+
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: black !important;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #A2ACB1 !important;
+    height: 2px;
+  }
+
+  ::ng-deep .mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #A2ACB1 !important;
+  }
+
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: black;
+    padding-left: 10px;
+  }
+
+}
+
+.logoStyles {
+  position: absolute;
+  top: -15px;
+  right: 90px;
+  color: white;
+  z-index: 1;
+
+  mat-icon {
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 10px 52px -2px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    background-color: #2691BB;
+    font-size: 50px;
+  }
+}
+
+.grayBackground {
+  background-color: #ECEFF1;
+}
+
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}

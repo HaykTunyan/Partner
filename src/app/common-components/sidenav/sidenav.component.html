@@ -1,0 +1,593 @@
+<!-- Sidenav Component View -->
+
+<nav class="nav flex-column nav-width sidenav-component" [ngClass]="{'nav-size': showtext}">
+  <!-- Sidenav Hamburger -->
+  <button mat-button class="nav-btn" type="button">
+    <mat-icon *ngIf="!showtext" (click)="showtext = !showtext"><i class="material-icons md-30 md-main" placement="bottom"  mdbTooltip="List">list</i></mat-icon>
+    <mat-icon *ngIf="showtext" (click)="showtext = !showtext"><i  class="material-icons md-30 md-main" placement="bottom"  mdbTooltip="List">keyboard_arrow_left</i></mat-icon>
+      <i class="fa fa-search menus-icon position-relative" aria-hidden="true"></i>
+      <mat-form-field>
+        <input matInput class="search-input" type="text" [(ngModel)]="filterText">
+      </mat-form-field>
+  </button>
+  <!--Dashboard-->
+  <button mat-button class="nav-btn button-color nav-partner" routerLink="/dashboard">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Dashboard">dashboard</i></mat-icon>
+    <span class="ml-2 sidenav-list">Dashboard</span>
+  </button>
+  <!--CMS-->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['CMS']">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="CMS">how_to_vote</i></mat-icon>
+    <span class="ml-2 sidenav-list">CMS</span>
+  </button>
+  <!-- Partner Management -->
+  <button mat-button
+          [disabled]="!roleNames['Partner Management']"
+          (click)="showlist = !showlist"
+          class="nav-btn nav-partner"
+          [ngClass]="{'button-style': showlist}">
+    <mat-icon><i class="material-icons md-30 md-main" placement="right" mdbTooltip="Partner Management">ballot</i></mat-icon>
+    <span class="ml-2 sidenav-list">Partner Management</span>
+  </button>
+  <!-- ShowList Open/Close -->
+  <ng-container>
+    <!-- <nav class="nav flex-column slide-transition" [ngClass]="{'slide-hide': !showlist}">
+      <button mat-button  *ngFor="let menuItem of menuList | filter: filterText" routerLinkActive="active-sub-item" [routerLinkActiveOptions]="{exact: true}" (click)="productModal.show()"  class="nav-btn button-color w-100" routerLink="/{{menuItem.routerLink}}" >
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="{{menuItem.name}}">{{menuItem.icon}}</i></mat-icon>
+        <span class="ml-2 sidenav-list">{{menuItem.name}}</span>
+      </button>
+    </nav> -->
+    <!--  -->
+    <nav class="nav flex-column slide-transition" [ngClass]="{'slide-hide': !showlist}">
+      <!-- Partner List -->
+      <button mat-button routerLinkActive="active-sub-item" routerLink="/partner-list" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Partner List">store</i></mat-icon>
+        <span class="ml-2 sidenav-list">Partner List</span>
+      </button>
+      <!-- Menu -->
+      <button mat-button routerLinkActive="active-sub-item" routerLink="/menu" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Menu">restaurant</i></mat-icon>
+        <span class="ml-2 sidenav-list">Menu</span>
+      </button>
+      <!-- Product -->
+      <button mat-button (click)="productModal.show()" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Product">local_pizza</i></mat-icon>
+        <span class="ml-2 sidenav-list">Product</span>
+      </button>
+      <!-- Legal Entities -->
+      <button mat-button routerLinkActive="active-sub-item" routerLink="/legal-entities" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Legal Entities">assignment_ind</i></mat-icon>
+        <span class="ml-2 sidenav-list">Legal Entities</span>
+      </button>
+      <!-- Brand List -->
+      <button mat-button (click)="brandlistModal.show()" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Brand List">local_offer</i></mat-icon>
+        <span class="ml-2 sidenav-list">Brand List</span>
+      </button>
+      <!-- Partner Category -->
+      <button mat-button (click)="partnercategoryModal.show()" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Partner Category">style</i></mat-icon>
+        <span class="ml-2 sidenav-list">Partner Category</span>
+      </button>
+      <!-- Service Type -->
+      <button mat-button (click)="servicetypeModal.show()" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Service Type">room_service</i></mat-icon>
+        <span class="ml-2 sidenav-list">Service Type</span>
+      </button>
+      <!-- Service Category -->
+      <button mat-button (click)="servicecategoryModal.show()" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Service Category">category</i></mat-icon>
+        <span class="ml-2 sidenav-list">Service Category</span>
+      </button>
+      <!-- Commission Category -->
+      <button mat-button (click)="commissioncategoryModal.show()" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Commission Category">widgets</i></mat-icon>
+        <span class="ml-2 sidenav-list">Commission Category</span>
+      </button>
+      <!-- Section List -->
+      <button mat-button routerLinkActive="active-sub-item" routerLink="/section-list" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Section List">fastfood</i></mat-icon>
+        <span class="ml-2 sidenav-list">Section List</span>
+      </button>
+      <!-- Section Category -->
+      <button mat-button (click)="sectioncategoryModal.show()" class="nav-btn button-color w-100">
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Section Category">view_comfy</i></mat-icon>
+        <span class="ml-2 sidenav-list">Section Category</span>
+      </button>
+    </nav>
+    <!--  -->
+  </ng-container>
+  <!-- Product List Modal -->
+  <button mat-button class="nav-btn button-color nav-partner" data-toggle="modal" data-target="#basicExampleModal" >
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Product List Modal">local_pizza</i></mat-icon>
+    <span class="ml-2 sidenav-list">Product List Modal</span>
+  </button>
+  <!-- Campaign Management -->
+  <button mat-button routerLinkActive="active-item" [disabled]="!roleNames['Campaign Management']" (click)="showCampaign = !showCampaign" class="nav-btn button-color nav-partner" [ngClass]="{'button-style-campaign': showCampaign}">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Campaign Management">cake</i></mat-icon>
+    <span class="ml-2 sidenav-list">Campaign Management</span>
+  </button>
+  <ng-container>
+    <nav class="nav flex-column slide-transition" [ngClass]="{'slide-hide': !showCampaign}">
+      <button mat-button  *ngFor="let menuItem of campaign" routerLinkActive="active-sub-item" [routerLinkActiveOptions]="{exact: true}" (click)="productModal.show()"  class="nav-btn button-color w-100" routerLink="/{{menuItem.routerLink}}" >
+        <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="{{menuItem.name}}">{{menuItem.icon}}</i></mat-icon>
+        <span class="ml-2 sidenav-list">{{menuItem.name}}</span>
+      </button>
+    </nav>
+  </ng-container>
+  <!-- Logistics Management -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Logistics Manager']">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Logistics Management">departure_board</i></mat-icon>
+    <span class="ml-2 sidenav-list">Logistics Management</span>
+  </button>
+  <!-- Couriers Dispatch Management -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Couriers Dispatch Management']">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Couriers Dispatch Management">directions_car</i></mat-icon>
+    <span class="ml-2 sidenav-list">Couriers Dispatch Management</span>
+  </button>
+  <!-- Customer Support -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Customer Support']">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Customer Support">headset_mic</i></mat-icon>
+    <span class="ml-2 sidenav-list">Customer Support</span>
+  </button>
+  <!-- Reporting -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Reporting']">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Reporting">assessment</i></mat-icon>
+    <span class="ml-2 sidenav-list">Reporting</span>
+  </button>
+  <!-- User Management -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['User Management']"
+          routerLink="/user-management">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom"  mdbTooltip="User Management">perm_identity</i></mat-icon>
+    <span  class="ml-2 sidenav-list">User Management</span>
+  </button>
+  <!-- Zone -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Zone Constructor']"
+          routerLink="/zone">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Zone">place</i></mat-icon>
+    <span class="ml-2 sidenav-list">Zone</span>
+  </button>
+  <!-- Company Management -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Company Management']">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Company Management">business_center</i></mat-icon>
+    <span class="ml-2 sidenav-list">Company Management</span>
+  </button>
+  <!-- Finance Management -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Financial']">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Finance Management">monetization_on</i></mat-icon>
+    <span class="ml-2 sidenav-list">Finance Management</span>
+  </button>
+  <!-- Settings -->
+  <button mat-button class="nav-btn button-color nav-partner" [disabled]="!roleNames['Settings']"
+          (click)="showSettings = !showSettings" [ngClass]="{'button-style': showSettings}">
+    <mat-icon><i class="material-icons md-30 md-main" placement="bottom" mdbTooltip="Settings">settings</i></mat-icon>
+    <span class="ml-2 sidenav-list">Settings</span>
+  </button>
+  <ng-container>
+    <nav class="nav flex-column slide-transition" [ngClass]="{'slide-hide': !showSettings}">
+      <button mat-button  *ngFor="let menuItem of settings" routerLinkActive="active-sub-item"
+              [disabled]="menuItem.name === 'Flow Settings' && !roleNames['Flow Management']"
+              [routerLinkActiveOptions]="{exact: true}" (click)="productModal.show()"
+              class="nav-btn button-color w-100" routerLink="/{{menuItem.routerLink}}" >
+        <mat-icon>
+          <i class="material-icons md-30 md-main" placement="right" mdbTooltip="{{menuItem.name}}">
+            {{menuItem.icon}}
+          </i>
+        </mat-icon>
+        <span class="ml-2 sidenav-list">{{menuItem.name}}</span>
+      </button>
+    </nav>
+  </ng-container>
+  <button mat-button class="nav-btn button-color nav-partner whiteColor">
+    <div class="endButton">
+
+    </div>
+  </button>
+</nav>
+<!-- Product List Dialog  -->
+<div mdbModal #productModal="mdbModal" class="modal fade modal-product" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <mat-form-field class="modal-search">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search by name" [(ngModel)]="newProductName" >
+        </mat-form-field>
+        <button mat-raised-button (click)="addProduct()" class="btn btn-modal mt-2" placement="bottom" mdbTooltip="CREATE PRODUCT">
+          <span class="white-text medium-text">CREATE PRODUCT</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th colspan="4" class="thead-input"> </th>
+              <th scope="col" class="small-text">Primary</th>
+              <th scope="col" class="small-text">Option</th>
+              <th scope="col" class="small-text">Service</th>
+              <th scope="col"> </th>
+            </tr>
+          </thead>
+          <tbody #todoist>
+            <tr *ngFor = "let product of products  | filter:newProductName">
+              <!-- create list -->
+              <th colspan="4" class="small-text">
+                <span>{{product.name}}</span>
+              </th>
+              <!-- Primary -->
+              <td class="btn-border">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button>
+                  <mat-icon><i class="material-icons md-green md-18">stars</i></mat-icon>
+                </button>
+              </td>
+              <!-- Option -->
+              <td class="btn-border">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button>
+                  <mat-icon><i class="material-icons md-green md-18">bubble_chart</i></mat-icon>
+                </button>
+              </td>
+              <!-- Service -->
+              <td class="btn-border">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button>
+                  <mat-icon><i class="material-icons md-18">room_service</i></mat-icon>
+                </button>
+              </td>
+              <!-- Edit and Delete -->
+              <td>
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                  <mat-icon><i class="material-icons md-main md-18">create</i></mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteItem(product.id)" placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons md-error md-18">delete_forever</i></mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Service Category Dialog  -->
+<div mdbModal #servicecategoryModal="mdbModal" class="modal fade modal-product modal-sectioncreate" tabindex="-1" role="dialog" aria-labelledby="servicecategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <mat-form-field class="modal-search">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search by name" [(ngModel)]="newProductName" >
+        </mat-form-field>
+        <button mat-raised-button placement="bottom" mdbTooltip="CREATE ITEM CATEGORY" (click)="addCategory()" class="btn btn-modal mt-2">
+          <span class="white-text medium-text">CREATE ITEM CATEGORY</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="thead-text"><span class="text-danger">ENG</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">РУС</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">ՀԱՅ</span></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody #todoist>
+            <tr *ngFor = "let servicecategory of servicecategorys">
+              <!-- ENG -->
+              <th class="small-text pr-5" scope="col">
+                <span> {{servicecategory.eng}} </span>
+              </th>
+              <!-- RUS -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{servicecategory.rus}} </span>
+              </td>
+              <!-- ARM -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{servicecategory.arm}} </span>
+              </td>
+              <!-- Edit and Delete -->
+              <td class="pr-5">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                  <mat-icon><i class="material-icons md-main md-18">create</i></mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteItem(product.name)" placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons md-error md-18">delete_forever</i></mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Service Type Dialog -->
+<div mdbModal #servicetypeModal="mdbModal" class="modal fade modal-product modal-sectioncreate" tabindex="-1" role="dialog" aria-labelledby="servicetypeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <mat-form-field class="modal-search">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search by name" [(ngModel)]="newProductName" >
+        </mat-form-field>
+        <button mat-raised-button (click)="addTypes()" class="btn btn-modal mt-2" placement="bottom" mdbTooltip="ADD SERVICE TYPE">
+          <span class="white-text medium-text">ADD SERVICE TYPE</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="thead-text"><span class="text-danger">ENG</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">РУС</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">ՀԱՅ</span></th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody #todoist>
+              <tr *ngFor = "let servicetype of servicetypes">
+                <!-- ENG -->
+                <th class="small-text pr-5" scope="col">
+                  <span> {{servicetype.eng}} </span>
+                </th>
+                <!-- RUS -->
+                <td class="small-text pr-5" scope="col">
+                  <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                  <span> {{servicetype.rus}} </span>
+                </td>
+                <!-- ARM -->
+                <td class="small-text pr-5" scope="col">
+                  <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                  <span> {{servicetype.arm}} </span>
+                </td>
+                <!-- Edit and Delete -->
+                <td class="pr-5">
+                  <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                  <button mat-icon-button placement="bottom" mdbTooltip="Atache File">
+                    <mat-icon><i class="material-icons md-main md-18">attach_file</i></mat-icon>
+                  </button>
+                  <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                    <mat-icon><i class="material-icons md-main md-18">create</i></mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="deleteItem(product.name)" placement="bottom" mdbTooltip="Delete">
+                    <mat-icon><i class="material-icons md-error md-18">delete_forever</i></mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Commission Category -->
+<div mdbModal #commissioncategoryModal="mdbModal" class="modal fade modal-product modal-commissioncategory" tabindex="-1" role="dialog" aria-labelledby="commissioncategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <mat-form-field class="modal-search">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search by name" [(ngModel)]="newProductName" >
+        </mat-form-field>
+        <button mat-raised-button (click)="commissions()" class="btn btn-modal mt-2" placement="bottom" mdbTooltip="ADD COMMISSION CATEGORY">
+          <span class="white-text medium-text">ADD COM. CATEGORY</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="thead-text"><span class="text-danger">ENG</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">РУС</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">ՀԱՅ</span></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody #todoist>
+            <tr *ngFor = "let commissioncategory of commissioncategorys">
+              <!-- ENG -->
+              <th class="small-text pr-5" scope="col">
+                <span> {{commissioncategory.eng}} </span>
+              </th>
+              <!-- RUS -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{commissioncategory.rus}} </span>
+              </td>
+              <!-- ARM -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{commissioncategory.arm}} </span>
+              </td>
+              <!-- Edit and Delete -->
+              <td class="pr-3">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                  <mat-icon><i class="material-icons md-main md-18">create</i></mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteItem(product.name)" placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons md-error md-18">delete_forever</i></mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Section Category -->
+<div mdbModal #sectioncategoryModal="mdbModal" class="modal fade modal-product modal-sectioncategory" tabindex="-1" role="dialog" aria-labelledby="sectioncategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <mat-form-field class="modal-search">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search by name" [(ngModel)]="newProductName" >
+        </mat-form-field>
+        <button mat-raised-button (click)="addSection()" class="btn btn-modal mt-2" placement="bottom" mdbTooltip="CREATE SECTION CATEGORY">
+          <span class="white-text medium-text">CREATE SECTION CATEGORY</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="thead-text"><span class="text-danger">ENG</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">РУС</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">ՀԱՅ</span></th>
+              <th scope="col"> </th>
+            </tr>
+          </thead>
+          <tbody #todoist>
+            <tr *ngFor = "let sectioncategory of sectioncategorys">
+              <!-- ENG -->
+              <th class="small-text pr-5" scope="col">
+                <span> {{sectioncategory.eng}} </span>
+              </th>
+              <!-- RUS -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{sectioncategory.rus}} </span>
+              </td>
+              <!-- ARM -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{sectioncategory.arm}} </span>
+              </td>
+              <!-- Edit and Delete -->
+              <td class="pr-3">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                  <mat-icon><i class="material-icons md-main md-18">create</i></mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteItem(product.name)" placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons md-error md-18">delete_forever</i></mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Brand List -->
+<div mdbModal #brandlistModal="mdbModal" class="modal fade modal-product modal-brandlist" tabindex="-1" role="dialog" aria-labelledby="brandlistModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <mat-form-field class="modal-search">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search by name" [(ngModel)]="newBrandName" >
+        </mat-form-field>
+        <button mat-raised-button (click)="addBrand()" class="btn btn-modal mt-2" placement="bottom" mdbTooltip="CREATE SECTION CATEGORY">
+          <span class="white-text medium-text">ADD BRAND</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="thead-text"><span class="text-danger">ENG</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">РУС</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">ՀԱՅ</span></th>
+              <th scope="col"> </th>
+            </tr>
+          </thead>
+          <tbody #todoist>
+            <tr *ngFor = "let brand of brands | filter:newBrandName">
+              <!-- ENG -->
+              <th class="small-text pr-5" scope="col">
+                <span> {{brand.name}} </span>
+              </th>
+              <!-- RUS -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{brand.name}} </span>
+              </td>
+              <!-- ARM -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{brand.name}} </span>
+              </td>
+              <!-- Edit and Delete -->
+              <td class="pr-3">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                  <mat-icon><i class="material-icons md-main md-18">create</i></mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteBrand(brand.id)" placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons md-error md-18">delete_forever</i></mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Partner Category -->
+<div mdbModal #partnercategoryModal="mdbModal" class="modal fade modal-product modal-partnercategory" tabindex="-1" role="dialog" aria-labelledby="partnercategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <mat-form-field class="modal-search">
+          <i class="fa fa-search menus-icon position-absolute" aria-hidden="true"></i>
+          <input matInput class="pl-5" #valueCreate placeholder="Search by name" [(ngModel)]="newProductName" >
+        </mat-form-field>
+        <button mat-raised-button (click)="addSection()" class="btn btn-modal mt-2" placement="bottom" mdbTooltip="CREATE SECTION CATEGORY">
+          <span class="white-text medium-text">CREATE CATEGORY</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="thead-text"><span class="text-danger">ENG</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">РУС</span></th>
+              <th scope="col" class="thead-text"><span class="text-danger">ՀԱՅ</span></th>
+              <th scope="col"> </th>
+            </tr>
+          </thead>
+          <tbody #todoist>
+            <tr *ngFor = "let sectioncategory of sectioncategorys">
+              <!-- ENG -->
+              <th class="small-text pr-5" scope="col">
+                <span> {{sectioncategory.eng}} </span>
+              </th>
+              <!-- RUS -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{sectioncategory.rus}} </span>
+              </td>
+              <!-- ARM -->
+              <td class="small-text pr-5" scope="col">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <span> {{sectioncategory.arm}} </span>
+              </td>
+              <!-- Edit and Delete -->
+              <td class="pr-3">
+                <mat-divider [vertical]="true" class="vertical-divider"></mat-divider>
+                <button mat-icon-button placement="bottom" mdbTooltip="Edit">
+                  <mat-icon><i class="material-icons md-main md-18">create</i></mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteItem(product.name)" placement="bottom" mdbTooltip="Delete">
+                  <mat-icon><i class="material-icons md-error md-18">delete_forever</i></mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

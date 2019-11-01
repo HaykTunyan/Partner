@@ -1,0 +1,166 @@
+<mat-drawer-container class="sponsoredContainer">
+
+
+  <!-- Discount or Delivery fee campaign-->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                  Sponsored Partners Items
+                </div>
+
+                <div class="row sponsoredDivContainer ">
+                  <div class="col-6 ">
+                    <!--backup period checkbox-->
+                    <div class="backupRadiobuttonsContent">
+
+                      <div *ngFor='let radio of discountType; let i = index' class="radiobuttonContent mr-5">
+                        <div class="radioButton" (click)='sponsoredRadioClick(i,discountType,"discountType")'>
+                          <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                        </div>
+                        <div class="radiobuttonName">
+                          {{ radio.name }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col ">
+                      <label class="labelTextArea" for="selectAttachPartner">Attach Partner</label>
+                      <mat-form-field class="selectCampaignType" id="selectAttachPartner">
+                        <mat-select class="matSelect" [value]="partnerValue" (selectionChange)="changeValuePartner($event.value)">
+
+                          <mat-option *ngFor="let type of attachMenuItemSponsored" [value]="type"
+                                      class="matOption">
+                            <img [src]="type.partnerImage" alt="" class="logoPartner">
+                            {{type.partnerName}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-hint *ngIf="sponsoredPartnerValidator">
+                          <span class="mat-error">Partner is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="col ">
+                      <div class="row ">
+                        <label class="labelTextArea" for="paymentWith">Payment With</label>
+                        <div class="backupRadiobuttonsContent" id="paymentWith">
+                          <div *ngFor='let radio of paymentWith; let i = index' class="radiobuttonContent mr-5">
+                            <div class="radioButton" (click)='sponsoredRadioClick(i,paymentWith,"paymentWith")'>
+                              <div class="noChecked" [ngClass]="{ 'checked': radio.checked }"></div>
+                            </div>
+                            <div class="radiobuttonName">
+                              {{ radio.name }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-6 ">
+
+                    <div class="col matChipDiv">
+                      <label class="labelTextArea" for="serviceType">Service Type</label>
+                    <!--  <mat-form-field class="example-chip-list attachMenuItem" id="attachMenu">
+                        <mat-chip-list #chipList>
+                          <mat-chip
+                            *ngFor="let type of attachMenu"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(type.value)">
+                            <img [src]="type.logo" alt="" class="logoPartner">
+                            {{type.viewValue}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            #fruitInput
+                            matInput
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="chipList"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                          >
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let type of partnerServiceTypesList " [value]="type">
+                            <img [src]="type.logo" alt="" class="logoPartner">
+                            {{type.viewValue}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>-->
+
+                      <mat-form-field class="selectCampaignType" id="serviceType">
+                        <mat-select class="matSelect" [value]="serviceTypeValue" (selectionChange)="setValueItemAndServiceType($event.value,'serviceType','id')">
+
+                          <mat-option *ngFor="let type of partnerServiceTypesList" [value]="type"
+                                      class="matOption">
+                            <!--<img [src]="type.partnerImage" alt="" class="logoPartner">-->
+                            {{type.typeName}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-hint *ngIf="serviceTypeValidator">
+                          <span class="mat-error">Service Type is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col matChipDiv">
+                      <label class="labelTextArea" for="menuItem"> Menu Item</label>
+                      <!--<mat-form-field class="example-chip-list attachMenuItem" id="menuItemSponsored">
+                        <mat-chip-list #chipList>
+                          <mat-chip
+                            *ngFor="let type of attachMenu"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(type.value)">
+                            {{type.menuItemName}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            #fruitInput
+                            matInput
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="chipList"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                          >
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let type of attachMenuItem " [value]="type">
+                            <img [src]="type.menuItemImage" alt="" class="logoPartner">
+                            {{type.menuItemName}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>-->
+                      <mat-form-field class="selectCampaignType" id="menuItem">
+                        <mat-select class="matSelect" [value]="menuItemValue" (selectionChange)="setValueItemAndServiceType($event.value,'menuItem','id')">
+
+                          <mat-option *ngFor="let type of attachMenuItem" [value]="type"
+                                      class="matOption">
+                            <img [src]="type.menuItemImage" alt="" class="logoPartner">
+                            {{type.name+ '(' + type.menuName +')'}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-hint *ngIf="menuItemValidator">
+                          <span class="mat-error">Menu Item is required</span>
+                        </mat-hint>
+                      </mat-form-field>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+

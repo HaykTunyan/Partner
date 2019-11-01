@@ -1,0 +1,778 @@
+<!-- Commission Rate Component View -->
+
+<!-- mat-drawer-container -->
+<mat-drawer-container class="sidenav-container commission-rate">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <mat-drawer-content class="commission-rate">
+    <!-- header -->
+    <header>
+      <div class="container-fluid">
+        <div class="commission-navbar">
+         <nav class="nav d-flex justify-content-between">
+          <div class="partner-brand d-flex float-left">
+            <div class="partner-logo position-relative ml-3">
+              <strong class="position-relative part-btn">
+                <button mat-button routerLink="/partner-list" routerLinkActive="active" type="button" class="partner-btn">
+                  Partner List
+                </button>
+              </strong>
+              <strong class="position-relative child-icon">
+                <i class="material-icons">keyboard_arrow_right</i>
+              </strong>
+              <strong class="position-relative part-btn">
+                <button mat-button routerLink="/commission-rate" routerLinkActive="active" type="button" class="partner-btn">
+                  Commission Rate
+                </button>
+              </strong>
+            </div>
+          </div>
+          <div class="button-navbar float-right">
+            <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+              <i class="material-icons md-36">notifications</i>
+            </button>
+            <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User" [matMenuTriggerFor]="menu">
+              <i class="material-icons md-36">person</i>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item routerLink="/login" routerLinkActive="active">Sign Out</button>
+            </mat-menu>
+          </div>
+         </nav>
+        </div>
+      </div>
+    </header>
+    <!-- main -->
+    <main role="main" class="main">
+      <!-- commisson-rate -->
+      <div class="commisson-rate row p-3">
+        <!-- ng container tab one -->
+        <mat-tab-group dynamicHeight class="col-md-12 col-lg-8 col-xl-6 mt-5">
+        <!-- M - M -->
+        <mat-tab label=" M - M " class="tab-rate m-0">
+          <!-- large-box -->
+          <div class="large-box">
+            <!-- mat-list -->
+            <mat-list role="list">
+              <!-- listitem -->
+              <mat-list-item role="listitem" class="w-100">
+                <div class="list-text list-info mr-5">
+                  <span class="font-weight-bold main-color mr-3">Partner Commission Rate</span>
+                  <mat-form-field class="percent-field">
+                    <input matInput  class="percent-input"  type="number" [(ngModel)]="commissionRateDataMM.partnerCommissionRate">
+                  </mat-form-field>
+                  <span class="percent position-relative">
+                    <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                  </span>
+                </div>
+                <div class="list-info">
+                  <span class="font-weight-bold main-color mr-3">Fixed Commission Rate Per Order</span>
+                  <mat-form-field class="percent-field">
+                    <input matInput class="percent-input"  type="number" [(ngModel)]="commissionRateDataMM.fixedComRatePerOrder">
+                  </mat-form-field>
+                  <span class="percent position-relative">AMD</span>
+                </div>
+              </mat-list-item>
+              <!-- listitem -->
+              <div class="mt-5">
+                <!-- Per Menu Item -->
+                <mat-list-item role="listitem" class="w-50">
+                  <div class="lsit-text w-75 mr-3">
+                    <span class="font-weight-bold main-color"> Per Menu Item Category </span>
+                  </div>
+                  <div class="list-info d-flex float-right">
+                    <mat-slide-toggle [(ngModel)]="commissionRateDataMM.menuItemCategoryState" ></mat-slide-toggle>
+                  </div>
+                </mat-list-item>
+                <!-- show for slide toggle -->
+                <mat-list-item role="listitem" *ngIf="commissionRateDataMM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100 mt-3">
+                    <strong class="w-50"> Menu item Category </strong>
+                    <strong class="w-50"> Commission Rate </strong>
+                  </div>
+                </mat-list-item>
+                <!-- Citrus free -->
+                <mat-list-item role="listitem" *ngIf="commissionRateDataMM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select placeholder="Choose menu item" [(value)]="category">
+                          <mat-option value="{{item.name}}" *ngFor="let item of menuItemCategoryData">{{item.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="10" class="percent-input"  type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Diary Free -->
+                <mat-list-item role="listitem" *ngIf="commissionRateDataMM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="diaryFree">
+                          <mat-option value="option1">Diary Free 1</mat-option>
+                          <mat-option value="option2">Diary Free 2</mat-option>
+                          <mat-option value="option3">Diary Free 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="10" class="percent-input"  type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Gluten Free -->
+                <mat-list-item role="listitem" *ngIf="commissionRateDataMM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="glutenFree">
+                          <mat-option value="option1">Gluten Free 1</mat-option>
+                          <mat-option value="option2">Gluten Free 2</mat-option>
+                          <mat-option value="option3">Gluten Free 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="20" class="percent-input"  type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Choose menu item -->
+                <mat-list-item role="listitem" *ngIf="commissionRateDataMM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="choose" class="choose-category">
+                          <mat-option value="option1">Choose menu item 1</mat-option>
+                          <mat-option value="option2">Choose menu item 2</mat-option>
+                          <mat-option value="option3">Choose menu item 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="0" class="percent-input"  type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <div class="my-container">
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+                <div *ngIf="saved" class="saved">Saved</div>
+              </div>
+              <!--<mat-list-item class="float-right"><div>Saved</div></mat-list-item>-->
+              <mat-list-item role="listitem" class="w-100">
+                <div class="w-100">
+                  <button mdbBtn type="button" class="btn-partner float-right" mdbWavesEffect
+                          (click)="commissionRateDataMM.deliveryType='MM'; saveCommissionRateMM()">
+                    <span class="white-text">SAVE</span>
+                  </button>
+                  <button mdbBtn type="button" class="float-right" mdbWavesEffect>
+                    <span class="main-color" (click)="cancelDataMM()">CENCEL</span>
+                  </button>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="P - M" class="tab-rate m-0">
+          <!-- large-box -->
+          <div class="large-box">
+            <!-- mat-list -->
+            <mat-list role="list">
+              <!-- listitem -->
+              <mat-list-item role="listitem" class="w-100">
+                <div class="list-text list-info mr-5">
+                  <span class="font-weight-bold main-color mr-3">Partner Commission Rate</span>
+                  <mat-form-field class="percent-field">
+                    <input matInput  class="percent-input" [(ngModel)]="commissionRateDataPM.partnerCommissionRate"  type="number">
+                  </mat-form-field>
+                  <span class="percent position-relative">
+                    <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                  </span>
+                </div>
+                <div class="list-info">
+                  <span class="font-weight-bold main-color mr-3">Fixed Commission Rate Per Order</span>
+                  <mat-form-field class="percent-field">
+                    <input matInput class="percent-input" [(ngModel)]="commissionRateDataPM.fixedComRatePerOrder"  type="number">
+                  </mat-form-field>
+                  <span class="percent position-relative">AMD</span>
+                </div>
+              </mat-list-item>
+              <!-- listitem -->
+              <div class="mt-5">
+                <!-- Per Menu Item -->
+                <mat-list-item role="listitem" class="w-50">
+                  <div class="lsit-text w-75 mr-3">
+                    <span class="font-weight-bold main-color">Per Menu Item Category</span>
+                  </div>
+                  <div class="list-info d-flex float-right">
+                    <mat-slide-toggle [(ngModel)] = "commissionRateDataPM.menuItemCategoryState"></mat-slide-toggle>
+                  </div>
+                </mat-list-item>
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataPM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100 mt-3">
+                    <strong class="w-50">Menu item Category</strong>
+                    <strong class="w-50">Commission Rate</strong>
+                  </div>
+                </mat-list-item>
+                <!-- Citrus free -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataPM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select placeholder="Choose menu item" [(value)]="category">
+                          <mat-option value="{{item.name}}" *ngFor="let item of menuItemCategoryData">{{item.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="10" class="percent-input"  type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Diary Free -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataPM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="diaryFree">
+                          <mat-option value="option1">Diary Free 1</mat-option>
+                          <mat-option value="option2">Diary Free 2</mat-option>
+                          <mat-option value="option3">Diary Free 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>      
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="10" class="percent-input"  type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Gluten Free -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataPM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="glutenFree">
+                          <mat-option value="option1">Gluten Free 1</mat-option>
+                          <mat-option value="option2">Gluten Free 2</mat-option>
+                          <mat-option value="option3">Gluten Free 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="20" class="percent-input"  type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Choose menu item -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataPM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="choose" class="choose-category">
+                          <mat-option value="option1">Choose menu item 1</mat-option>
+                          <mat-option value="option2">Choose menu item 2</mat-option>
+                          <mat-option value="option3">Choose menu item 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field ">
+                        <input matInput value="0" class="percent-input" type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <div class="my-container">
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+                <div *ngIf="saved" class="saved">Saved</div>
+              </div>
+              <mat-list-item role="listitem" class="w-100">
+                <div class="w-100">
+                  <button mdbBtn type="button" class="btn-partner float-right" mdbWavesEffect (click)="commissionRateDataPM.deliveryType='PM';
+                   saveCommissionRatePM()">
+                    <span class="white-text">SAVE</span>
+                  </button>
+                  <button mdbBtn type="button" class="float-right" mdbWavesEffect>
+                    <span class="main-color" (click)="cancelDataPM()">CANCEL</span>
+                  </button>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="M - P" class="tab-rate ml-3 mr-3">
+          <!-- large-box -->
+          <div class="large-box">
+            <!-- mat-list -->
+            <mat-list role="list">
+              <!-- listitem -->
+              <mat-list-item role="listitem" class="w-100">
+                <div class="list-text list-info mr-5">
+                  <span class="font-weight-bold main-color mr-3">Partner Commission Rate</span>
+                  <mat-form-field class="percent-field">
+                    <input matInput type="number" class="percent-input"  type="number" [(ngModel)]="commissionRateDataMP.partnerCommissionRate">
+                  </mat-form-field>
+                  <span class="percent position-relative">
+                    <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                  </span>
+                </div>
+                <div class="list-info">
+                  <span class="font-weight-bold main-color mr-3">Fixed Commission Rate Per Order</span>
+                  <mat-form-field class="percent-field">
+                    <input matInput  class="percent-input"  type="number" [(ngModel)]="commissionRateDataMP.fixedComRatePerOrder">
+                  </mat-form-field>
+                  <span class="percent position-relative">AMD</span>
+                </div>
+              </mat-list-item>
+              <!-- listitem -->
+              <div class="mt-5">
+                <!-- Per Menu Item -->
+                <mat-list-item role="listitem" class="w-50">
+                  <div class="lsit-text w-75 mr-3">
+                    <span class="font-weight-bold main-color">Per Menu Item Category</span>
+                  </div>
+                  <div class="list-info d-flex float-right">
+                    <mat-slide-toggle [(ngModel)] = "commissionRateDataMP.menuItemCategoryState"></mat-slide-toggle>
+                  </div>
+                </mat-list-item>
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataMP.menuItemCategoryState" class="w-100">
+                <div class="d-flex w-100 mt-3">
+                  <strong class="w-50">Menu item Category</strong>
+                  <strong class="w-50">Commission Rate</strong>
+                </div>
+                </mat-list-item>
+                <!-- Citrus free -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataMP.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="citrusFree">
+                          <mat-option value="option1">Citrus free</mat-option>
+                          <mat-option value="option2">Citrus free</mat-option>
+                          <mat-option value="option3">Citrus free</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="10"  type="number" class="percent-input">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Diary Free -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataMP.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="diaryFree">
+                          <mat-option value="option1">Diary Free 1</mat-option>
+                          <mat-option value="option2">Diary Free 2</mat-option>
+                          <mat-option value="option3">Diary Free 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>      
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="10"  type="number" class="percent-input">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Gluten Free -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataMP.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="glutenFree">
+                          <mat-option value="option1">Gluten Free 1</mat-option>
+                          <mat-option value="option2">Gluten Free 2</mat-option>
+                          <mat-option value="option3">Gluten Free 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="20"  type="number" class="percent-input">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Choose menu item -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataMP.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="choose" class="choose-category">
+                          <mat-option value="option1">Choose menu item 1</mat-option>
+                          <mat-option value="option2">Choose menu item 2</mat-option>
+                          <mat-option value="option3">Choose menu item 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field ">
+                        <input matInput value="0"  type="number" class="percent-input">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <div class="my-container">
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
+                <div *ngIf="saved" class="saved">Saved</div>
+              </div>
+              <mat-list-item role="listitem" class="w-100">
+                <div class="w-100">
+                  <button mdbBtn type="button" class="btn-partner float-right" mdbWavesEffect (click)="commissionRateDataMP.deliveryType='MP';
+                   saveCommissionRateMP()">
+                    <span class="white-text">SAVE</span>
+                  </button>
+                  <button mdbBtn type="button" class="float-right" mdbWavesEffect>
+                    <span class="main-color" (click)="cancelDataMP()">CANCEL</span>
+                  </button>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        </mat-tab-group>
+        <!-- ng container tab two -->
+        <mat-tab-group *ngIf="showTwotab" dynamicHeight #tabtwo class="col-md-12 col-lg-8 col-xl-6 mt-5">
+        <!-- M - M -->
+        <mat-tab label=" M - M " class="tab-rate m-0">
+          <!-- large-box -->
+          <div class="large-box">
+            <!-- mat-list -->
+            <mat-list role="list">
+              <div class="w-100">
+                <button mat-icon-button (click) = "showTwotab = !showTwotab" type="button" class="float-right" placement="bottom" mdbTooltip="Delete">
+                  <i class="material-icons md-error">delete_forever</i>
+                </button>
+              </div>
+              <!-- listitem -->
+              <mat-list-item role="listitem" class="w-100">  
+                <div class="list-text col-4">
+                  <span class="font-weight-bold">Threshold value Level 1</span>
+                </div>
+                <div class="list-info d-flex col-8">
+                  <mat-radio-group class="d-inline align-middle">
+                    <mat-radio-button [checked]="false" value="1" class="mr-3 align-middle">Affects All</mat-radio-button>
+                    <mat-radio-button [checked]="true" value="2" class="align-middle">Affects Equal or Over Threshold</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </mat-list-item>
+              <!-- listitem -->
+              <div class="mt-5 mb-5">
+                <mat-list-item role="listitem" class="w-100">
+                  <div class="lsit-text d-flex flex-column w-50">
+                    <span class="font-weight-bold main-color">Equals or more than</span>
+                    <div class="per-item ml-3">
+                      <mat-form-field class="per-field">
+                        <input matInput class="per-input text-center" type="number" [(ngModel)]="commissionRateDataThresholdMM.money">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="list-info w-50">
+                    <span class="font-weight-bold main-color">Partner default commission rate</span>
+                    <div class="per-percent ml-3">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="20" type="number" [(ngModel)]="commissionRateDataThresholdMM.defaultCommissionRate">
+                      </mat-form-field>
+                      <span class="position-relative">
+                        <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                      </span>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Per Menu Item -->
+                <mat-list-item role="listitem" class="w-50 mt-5">
+                  <div class="lsit-text w-75 mr-3">
+                    <span class="font-weight-bold main-color">Per Menu Item Category</span>
+                  </div>
+                  <div class="list-info d-flex float-right">
+                    <mat-slide-toggle [(ngModel)]="commissionRateDataThresholdMM.menuItemCategoryState"></mat-slide-toggle>
+                  </div>
+                </mat-list-item>
+                <!--  -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataThresholdMM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100 mt-3">
+                    <strong class="w-50"> Menu Item Category </strong>
+                    <strong class="w-50"> Commission Rate </strong>
+                  </div>
+                </mat-list-item>
+                <!-- menu item -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataThresholdMM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="choose">
+                          <mat-option value="option1">Choose menu item 1</mat-option>
+                          <mat-option value="option2">Choose menu item 2</mat-option>
+                          <mat-option value="option3">Choose menu item 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field ">
+                        <input matInput value="0" class="percent-input" type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <mat-list-item role="listitem" class="w-100">
+                <div class="w-100 button-row">
+                  <button mdbBtn type="button" class="btn-partner float-right" mdbWavesEffect (click)="saveCommissionRateTrasholdMM()">
+                    <span class="white-text">SAVE</span>
+                  </button>
+                  <button mdbBtn type="button" class="float-right" mdbWavesEffect (click)="cancelDataTresholdMM()">
+                    <span class="main-color">CANCEL</span>
+                  </button>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+        <mat-tab label="P - M" class="tab-rate m-0">
+         <!-- large-box -->
+         <div class="large-box">
+          <!-- mat-list -->
+          <mat-list role="list">
+            <div class="w-100">
+              <button mat-icon-button (click) = "showTwotab = !showTwotab" type="button" class="float-right" placement="bottom" mdbTooltip="Delete">
+                <i class="material-icons md-error">delete_forever</i>
+              </button>
+            </div>
+            <!-- listitem -->
+            <mat-list-item role="listitem" class="w-100">
+              <div class="list-text col-4">
+                <span class="font-weight-bold">Threshold value Level 1</span>
+              </div>
+              <div class="list-info d-flex col-8">
+                <mat-radio-group class="d-inline align-middle">
+                  <mat-radio-button [checked]="false" value="1" class="mr-3 align-middle">Affects All</mat-radio-button>
+                  <mat-radio-button [checked]="true" value="2" class="align-middle">Affects Equal or Over Threshold</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </mat-list-item>
+            <!-- listitem -->
+            <div class=" mt-5 mb-5">
+              <mat-list-item role="listitem" class="w-100">
+                <div class="lsit-text d-flex flex-column w-50">
+                  <span class="font-weight-bold main-color">Equals or more than</span>
+                    <div class="per-item ml-3">
+                      <mat-form-field class="per-field">
+                        <input matInput class="per-input text-center" type="number" [(ngModel)]="commissionRateDataThresholdPM.money">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="list-info w-50">
+                    <span class="font-weight-bold main-color">Partner default commission rate</span>
+                    <div class="per-percent ml-3">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="20" type="number" [(ngModel)]="commissionRateDataThresholdPM.defaultCommissionRate">
+                      </mat-form-field>
+                      <span class="position-relative">
+                        <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                      </span>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Per Menu Item -->
+                <mat-list-item role="listitem" class="w-50 mt-5">
+                  <div class="lsit-text w-75 mr-3">
+                    <span class="font-weight-bold main-color">Per Menu Item Category</span>
+                  </div>
+                  <div class="list-info d-flex float-right">
+                    <mat-slide-toggle [(ngModel)]="commissionRateDataThresholdPM.menuItemCategoryState"></mat-slide-toggle>
+                  </div>
+                </mat-list-item>
+                <!--  -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataThresholdPM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100 mt-3">
+                    <strong class="w-50 main-color">Menu Item Category</strong>
+                    <strong class="w-50 main-color">Commission Rate</strong>
+                  </div>
+                </mat-list-item>
+                <!-- menu item -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataThresholdPM.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="choose">
+                          <mat-option value="option1">Choose menu item 1</mat-option>
+                          <mat-option value="option2">Choose menu item 2</mat-option>
+                          <mat-option value="option3">Choose menu item 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field ">
+                        <input matInput value="0" class="percent-input" type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <mat-list-item role="listitem" class="w-100">
+                <div class="w-100 button-row">
+                  <button mdbBtn type="button" class="btn-partner float-right" mdbWavesEffect>
+                    <span class="white-text">SAVE</span>
+                  </button>
+                  <button mdbBtn type="button" class="float-right" mdbWavesEffect (click)="cancelDataTresholdPM()">
+                    <span class="main-color">CANCEL</span>
+                  </button>
+                </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+      <mat-tab label="M - P" class="tab-rate ml-3 mr-3">
+        <!-- large-box -->
+        <div class="large-box">
+          <!-- mat-list -->
+          <mat-list role="list">
+            <div class="w-100">
+              <button mat-icon-button (click) = "showTwotab = !showTwotab" type="button" class="float-right" placement="bottom" mdbTooltip="Delete">
+                <i class="material-icons md-error">delete_forever</i>
+              </button>
+            </div>
+            <!-- listitem -->
+            <mat-list-item role="listitem" class="w-100">
+              <div class="list-text col-4">
+                <span class="font-weight-bold">Threshold value Level 1</span>
+              </div>
+              <div class="list-info d-flex col-8">
+                <mat-radio-group class="d-inline align-middle">
+                  <mat-radio-button [checked]="false" value="1" class="mr-3 align-middle">Affects All</mat-radio-button>
+                  <mat-radio-button [checked]="true" value="2" class="align-middle">Affects Equal or Over Threshold</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </mat-list-item>
+            <!-- listitem -->
+            <div class="mt-5 mb-5">
+              <mat-list-item role="listitem" class="w-100">
+                <div class="lsit-text d-flex flex-column w-50">
+                  <span class="font-weight-bold main-color">Equals or more than</span>
+                    <div class="per-item ml-3">
+                      <mat-form-field class="per-field">
+                        <input matInput  class="per-input text-center" type="number" [(ngModel)]="commissionRateDataThresholdMP.money">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="list-info w-50">
+                    <span class="font-weight-bold main-color">Partner default commission rate</span>
+                    <div class="per-percent ml-3">
+                      <mat-form-field class="percent-field">
+                        <input matInput value="20" type="number" [(ngModel)]="commissionRateDataThresholdMP.defaultCommissionRate">
+                      </mat-form-field>
+                      <span class="position-relative">
+                        <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                      </span>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <!-- Per Menu Item -->
+                <mat-list-item role="listitem" class="w-50 mt-5">
+                  <div class="lsit-text w-75 mr-3">
+                    <span class="font-weight-bold main-color">Per Menu Item Category</span>
+                  </div>
+                  <div class="list-info d-flex float-right">
+                    <mat-slide-toggle [(ngModel)]="commissionRateDataThresholdMP.menuItemCategoryState" ></mat-slide-toggle>
+                  </div>
+                </mat-list-item>
+                <!-- Menu and Commission -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataThresholdMP.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100 mt-3">
+                    <strong class="w-50 main-color">Menu Item Category</strong>
+                    <strong class="w-50 main-color">Commission Rate</strong>
+                  </div>
+                </mat-list-item>
+                <!-- menu item -->
+                <mat-list-item role="listitem" *ngIf = "commissionRateDataThresholdMP.menuItemCategoryState" class="w-100">
+                  <div class="d-flex w-100">
+                    <div class="w-50">
+                      <mat-form-field class="category-field pr-5">
+                        <mat-select [(value)]="choose">
+                          <mat-option value="option1">Choose menu item 1</mat-option>
+                          <mat-option value="option2">Choose menu item 2</mat-option>
+                          <mat-option value="option3">Choose menu item 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="w-50">
+                      <mat-form-field class="percent-field ">
+                        <input matInput value="0" class="percent-input" type="number">
+                      </mat-form-field>
+                      <mat-icon><i class="material-icons md-main">%</i></mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <!-- Button all -->
+              <mat-list-item role="listitem" class="w-100">
+                <div class="w-100 button-row">
+                  <button mdbBtn type="button" class="btn-partner float-right" mdbWavesEffect>
+                    <span class="white-text">SAVE</span>
+                  </button>
+                  <button mdbBtn type="button" class="float-right" mdbWavesEffect (click)="cancelDataTresholdMP()">
+                    <span class="main-color">CANCEL</span>
+                  </button>
+                </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+        </mat-tab-group>
+        <div class="col-md-12 col-lg-4 col-xl-6 mt-5">
+          <div class="d-flex justify-content-center w-100 h-100">
+            <!-- Add Threshold -->
+            <button mat-icon-button (click)="showTwotab = !showTwotab" placement="right" mdbTooltip="Add Filter & Column" class="mr-auto mt-auto mb-auto">
+              <i class="material-icons md-light md-72">add_circle</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+

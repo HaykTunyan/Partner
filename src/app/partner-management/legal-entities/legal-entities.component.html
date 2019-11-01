@@ -1,0 +1,450 @@
+<div #scrollableContent class='scrollable-content'
+     (scroll)="scrollEvent(scrollableContent.scrollTop, allContent.clientHeight)">
+
+  <!-- mat sidenav container -->
+  <mat-drawer-container class="sidenav-container legal-entities">
+    <!-- mat-drawer -->
+    <mat-drawer class="drawer" mode="side" opened>
+      <sidenav></sidenav>
+    </mat-drawer>
+    <!-- mat sidenav -->
+    <mat-drawer-content>
+      <!-- header -->
+      <div #allContent>
+        <header>
+          <div class="container-fluid">
+            <div class="legal-navbar">
+              <nav class="nav d-flex justify-content-between">
+                <div class="legal-brand d-flex float-left">
+                  <div class="legal-logo position-relative ml-3">
+                    <i class="material-icons position-relative child-icon white-text">store</i>
+                    <strong class="position-relative part-btn">
+                      <button mat-button routerLink="/legal-entities" routerLinkActive="active" type="button" class="partner-btn">
+                        Legal Entity
+                      </button>
+                    </strong>
+                  </div>
+                </div>
+                <div class="button-navbar float-right" >
+                  <button mat-raised-button type="button" class="btn-partner ml-2" placement="bottom" mdbTooltip="Add LEGAL ENTITY"
+                          (click)="fillNewLegalEntiti()">
+                    <strong class="button-text">ADD LEGAL ENTITY</strong>
+                  </button>
+                  <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+                    <i class="material-icons md-36">notifications</i>
+                  </button>
+                  <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User" [matMenuTriggerFor]="menu">
+                    <i class="material-icons md-36">person</i>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLink="/login">Sign Out</button>
+                  </mat-menu>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </header>
+        <!-- sidenav content -->
+        <div class="sidenav-content">
+          <!-- aside menu -->
+          <div class="container-fluid mt-4">
+            <div class="data-table w-100">
+              <!-- legal entity table and filter -->
+              <table mdbTable striped="true" hover="true">
+                <thead class="main-color thead-custom">
+                <!-- search thead -->
+                <tr>
+                  <!-- S/N. -->
+                  <th scope="col">
+                    <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="S/N" class="white-text"  autocomplete="off"
+                             [(ngModel)]="filter.id" (keypress) = 'numberValidation($event)'
+                             (input) = 'typeFilterInput()'>
+                    </mat-form-field>
+                  </th>
+                  <!-- Search by name. -->
+                  <th scope="col" *ngIf="leaglEntitiListElements[0].checked">
+                    <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Search by name" [(ngModel)]="filter.name" autocomplete="off"
+                             (input) = 'typeFilterInput()'>
+                    </mat-form-field >
+                  </th>
+                  <!-- Address -->
+                  <th scope="col" *ngIf="leaglEntitiListElements[1].checked">
+                    <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Address" [(ngModel)]="filter.address" autocomplete="off"
+                             (input) = 'typeFilterInput()'>
+                    </mat-form-field >
+                  </th>
+                  <!-- Bank -->
+                  <th scope="col" *ngIf="leaglEntitiListElements[2].checked">
+                    <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Bank" [(ngModel)]="filter.bank" autocomplete="off"
+                             (input) = 'typeFilterInput()'>
+                    </mat-form-field >
+                  </th>
+                  <!-- Bank Number. -->
+                  <th scope="col" *ngIf="leaglEntitiListElements[3].checked">
+                    <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                    <mat-form-field class="w-100 white-text">
+                      <input matInput placeholder="Bank Number" [(ngModel)]="filter.bankNumber" autocomplete="off"
+                             (input) = 'typeFilterInput()'>
+                    </mat-form-field >
+                  </th>
+                  <!-- Table column btn and download -->
+                  <th class="tools-btn">
+                    <div class="button-row float-right pb-3">
+                      <!-- Add filter and collumn -->
+                      <button mat-icon-button [matMenuTriggerFor]="collummenu" placement="bottom" mdbTooltip="Add Filter & Column" class="mr-1">
+                        <i class="material-icons md-light md-36">add_circle</i>
+                      </button>
+                      <mat-menu #collummenu="matMenu" class="p-3">
+                        <ng-container>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          <div class="table-list">
+                            <mat-list (click)="$event.stopPropagation()">
+                              <mat-list-item *ngFor="let partnerList of leaglEntitiListElements">
+                                <mat-checkbox [(ngModel)]="partnerList.checked">{{partnerList.name}}</mat-checkbox>
+                              </mat-list-item>
+                            </mat-list>
+                          </div>
+                          <!-- lsit for collums and filters -->
+                        </ng-container>
+                      </mat-menu>
+                      <!-- Down to Excel -->
+                      <a href = '{{DOMEIN}}'>
+                        <button mat-icon-button placement="bottom" mdbTooltip="Download Table">
+                          <i class="material-icons md-light md-36">present_to_all</i>
+                        </button>
+                      </a>
+                    </div>
+                  </th>
+                </tr>
+                <!-- head custom -->
+                <tr class="head-custom">
+                  <th scope="col" class="font-weight-bold columnTitleContent">
+                    <mat-checkbox [(ngModel)]="selectedAll" [indeterminate]="this.selectedOne && this.selectedOne.length !== 0 && !selectedAll" (change)="selectAll();">
+                      <span class="headers-text-color">S/N</span>
+                    </mat-checkbox>
+                    <mat-icon *ngIf='!sortId[0].sort.status'
+                              class="cursor sortButton noselect" (click)="sortButton('sortId', 0)">
+                      unfold_more
+                    </mat-icon>
+                    <mat-icon *ngIf='sortId[0].sort.status == "asc"'
+                              class="cursor sortButton noselect" (click)="sortButton('sortId', 0)">
+                      expand_less
+                    </mat-icon>
+                    <mat-icon *ngIf='sortId[0].sort.status == "desc"'
+                              class="cursor sortButton marginTop noselect" (click)="sortButton('sortId', 0)">
+                      expand_more
+                    </mat-icon>
+                  </th>
+                  <ng-container *ngFor="let leaglEntitiLi of leaglEntitiListElements; let i = index">
+                    <th *ngIf="leaglEntitiLi.checked" scope="col" class="font-weight-bold columnTitleContent">
+                      <span class="headers-text-color">{{leaglEntitiLi.name}}</span>
+                      <mat-icon *ngIf='!leaglEntitiLi.sort.status'
+                                class="cursor sortButton noselect" (click)="sortButton('leaglEntitiListElements', i)">
+                        unfold_more
+                      </mat-icon>
+                      <mat-icon *ngIf='leaglEntitiLi.sort.status == "asc"'
+                                class="cursor sortButton noselect" (click)="sortButton('leaglEntitiListElements', i)">
+                        expand_less
+                      </mat-icon>
+                      <mat-icon *ngIf='leaglEntitiLi.sort.status == "desc"'
+                                class="cursor sortButton marginTop noselect" (click)="sortButton('leaglEntitiListElements', i)">
+                        expand_more
+                      </mat-icon>
+                    </th>
+                  </ng-container>
+                  <th scope="col" class="table-tools font-weight-bold text-center city-style">
+                    <span class="headers-text-color">Tools</span>
+                  </th>
+                </tr>
+                </thead>
+                <tbody class="banner-color table-custom tbody-custom">
+                <tr mdbTableCol *ngFor="let legal of legalEntiti">
+                  <!-- id -->
+                  <td>
+                    <mat-checkbox [(ngModel)]="legal.checked" (change)="checkIfAllSelected(); checkIfOneSelected()">
+                      {{legal.id}}
+                    </mat-checkbox>
+                  </td>
+                  <!-- partner name -->
+                  <td *ngIf="leaglEntitiListElements[0].checked">{{legal.name}}</td>
+                  <!-- partner area -->
+                  <td *ngIf="leaglEntitiListElements[1].checked">{{legal.address}}</td>
+                  <!-- partner zone -->
+                  <td *ngIf="leaglEntitiListElements[2].checked">{{legal.bank}}</td>
+                  <!-- phone number -->
+                  <td *ngIf="leaglEntitiListElements[3].checked">{{legal.bankNumber}}</td>
+                  <!-- tools -->
+                  <td class="tools-btn">
+                    <div class="button-row text-center">
+                      <!-- Edit Partner -->
+                      <button mat-icon-button (click)="fillNewLegalEntiti(legal)"
+                              placement="bottom" mdbTooltip="Edit Partner">
+                        <mat-icon><i class="material-icons md-main">create</i></mat-icon>
+                      </button>
+                      <!-- Partner Details -->
+                      <button mat-icon-button (click)="openDatalistPopup(legal)"
+                              routerLinkActive="active" placement="bottom" mdbTooltip="Partner Details">
+                        <mat-icon><i class="material-icons md-main">description</i></mat-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <!-- /table data -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  <!-- Add Legal Entity -->
+  <div *ngIf='isPopupActive' class='popupContent'
+       (click) = 'clickOutsidePopup("mouseInsidePopup", "cancelNewSelection")'>
+    <div class='popupOpacity' (click) = 'clickOutsidePopup("mouseInsidePopup", "cancelNewSelection")'>
+      <div class='whiteContent' (mouseenter)="dontClosePopup('mouseInsidePopup')"
+           (mouseleave)="closePopup('mouseInsidePopup')">
+        <div class = 'popupTitle'>ADD LEGAL ENTITY</div>
+        <div class='userIconContent'>
+          <i class="material-icons md-light md-48 userLogo">
+            assignment_ind
+          </i>
+        </div>
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-6 d-flex flex-row">
+              <div class="d-flex w-100 mr-3 col-2 inputText">
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class="main-color small-text">Name</span>
+                </strong>
+              </div>
+              <div class="mt-0 col-6">
+                <div class = 'nameInputContent'>
+                  <div class = 'inputContent'>
+                      <div class="inputWhitBorder">
+                          <input class="nameInput" #nameElem [value] = 'newLegalEntiti.name'
+                            (focus)="IsEdit ? inputFocus('name'): false"
+                            (focusout) = "IsEdit ? inputFocusOut('name', nameElem.value): false"
+                            (input) = "getNameInputValue(nameElem.value, 'name')"
+                            autocomplete="off" [readonly]="!IsEdit"
+                            autocomplete="off" autocapitalize="off" autocorrect="off">
+                          <div class = 'borderBottom'
+                          [ngClass]="{'errorBorderBottom': repeatName || emptyNameField}"></div>
+                          <div class = 'borderContent'>
+                            <div class = 'borderActive'
+                            [ngClass]="{'errorBorder': repeatName || emptyNameField, 'inputActive': name}">
+                          </div>
+                          </div>
+                      </div>
+                      <div class = 'errorMassageContent' >
+                        <span class = 'errorMassage' [ngClass] = "{'showError': emptyNameField}">
+                            Required name!
+                        </span>
+                        <span class = 'errorMassage' [ngClass] = "{'showError': repeatName}">
+                           This name is already exist!
+                        </span>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="mt-0 w-25 col-2 p-0">
+                <button class = 'clearButton' mat-button matSuffix mat-icon-button aria-label="Clear"
+                        (click)="newLegalEntiti.name=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="col-6 d-flex flex-row">
+              <div class="d-flex w-100 mr-3 col-2 inputText">
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class="main-color small-text">Bank</span>
+                </strong>
+              </div>
+              <div class="mt-0 col-6">
+                <mat-form-field class="content-field position-relative w-100">
+                  <input matInput [(ngModel)]="newLegalEntiti.bank">
+                </mat-form-field>
+              </div>
+              <div class="mt-0 w-25 col-2 p-0">
+                <button class = 'clearButton' mat-button matSuffix mat-icon-button aria-label="Clear"
+                        (click)="newLegalEntiti.bank=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="col-6 d-flex flex-row">
+              <div class="d-flex w-100 mr-3 col-2 inputText">
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class="main-color small-text">Address</span>
+                </strong>
+              </div>
+              <div class="mt-0 col-6">
+                <mat-form-field class="content-field position-relative w-100">
+                  <input matInput [(ngModel)]="newLegalEntiti.address">
+                </mat-form-field>
+              </div>
+              <div class="mt-0 w-25 col-2 p-0">
+                <button class = 'clearButton' mat-button matSuffix mat-icon-button aria-label="Clear"
+                        (click)="newLegalEntiti.address=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="col-6 d-flex flex-row">
+              <div class="d-flex w-100 mr-3 col-2 inputText">
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class="main-color small-text">Bank Number</span>
+                </strong>
+              </div>
+              <div class="mt-0 col-6">
+                <mat-form-field class="content-field position-relative">
+                  <input matInput [(ngModel)]="newLegalEntiti.bankNumber" >
+                </mat-form-field>
+              </div>
+              <div class="mt-0 w-25 col-2 p-0">
+                <button class = 'clearButton' mat-button matSuffix mat-icon-button aria-label="Clear"
+                        (click)="newLegalEntiti.bankNumber=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='popupButtonsContent'>
+        <span>
+          <div class='checkboxContent'
+               (mouseenter)="dontClosePopup('mouseInsidePopup')"
+               (mouseleave)="closePopup('mouseInsidePopup')">
+            <div class='checkbox' [ngClass]='{"checkboxActive" : newLegalEntiti.active}'
+                 (click)='activateNewOrChangeableSelection()'>
+              <div class='checkboxButton'
+                   [ngClass]='{"checkboxButtonActive" : newLegalEntiti.active}'>
+              </div>
+            </div>
+            <div  class='checkboxText noselect' *ngIf="newLegalEntiti.active; else notActive"  >
+               ENABLE NOW
+            </div>
+            <ng-template #notActive>
+             <div  class='checkboxText noselect' >
+                 DISABLE NOW
+             </div>
+              </ng-template>
+          </div>
+        </span>
+        <div class='buttonContents' (mouseenter)="dontClosePopup('mouseInsidePopup')"
+             (mouseleave)="closePopup('mouseInsidePopup')">
+          <div class='discard noselect' (click)='cancelNewSelection()'>
+            CANCEL
+          </div>
+          <button class="btn btn-primary invite" (click)='pushOnSaveButton()'>
+            SAVE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Details Legal Entity -->
+  <div *ngIf='isDatalistPopupActive' class='popupContent'
+       (click) = 'clickOutsidePopup("mouseInsidePopupDatalist", "canceDatalistPopupActive")'>
+    <div class='popupOpacity'
+         (click) = 'clickOutsidePopup("mouseInsidePopupDatalist", "canceDatalistPopupActive")'>
+      <div class='whiteContent' (mouseenter)="dontClosePopup('mouseInsidePopupDatalist')"
+           (mouseleave)="closePopup('mouseInsidePopupDatalist')">
+        <div class='userIconContent'>
+          <i class="material-icons md-light md-48 userLogo">
+            assignment_ind
+          </i>
+        </div>
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 detailsTitle">
+              Legal Entity Details
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="d-flex w-100 mr-3">
+                <strong class="d-flex flex-column position-relative input-name mr-2">
+                  <span class="main-color small-text font-weight-bold ">Name:</span>
+                </strong>
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class=" small-text">{{newLegalEntiti.name}}</span>
+                </strong>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="d-flex w-100 mr-3">
+                <strong class="d-flex flex-column position-relative input-name mr-2">
+                  <span class="main-color small-text font-weight-bold">Bank:</span>
+                </strong>
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class=" small-text">{{newLegalEntiti.bank}}</span>
+                </strong>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="d-flex w-100 mr-3">
+                <strong class="d-flex flex-column position-relative input-name mr-2">
+                  <span class="main-color small-text font-weight-bold">Address:</span>
+                </strong>
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class=" small-text">{{newLegalEntiti.address}}</span>
+                </strong>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="d-flex w-100 mr-3">
+                <strong class="d-flex flex-column position-relative input-name mr-2">
+                  <span class="main-color small-text font-weight-bold">Bank Number:</span>
+                </strong>
+                <strong class="d-flex flex-column position-relative input-name">
+                  <span class=" small-text">{{newLegalEntiti.bankNumber}}</span>
+                </strong>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-6">
+              <div class="w-100">
+                <strong class=" position-relative input-name w-100">
+                      <span class="main-color small-text w-100 font-weight-bold">
+                        {{ 'Attached Partners ' + filterArray.length }}
+                      </span>
+                </strong>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex w-100">
+                <i class="fa fa-search menus-icon filterInputIcon" aria-hidden="true"></i>
+                <mat-form-field class="w-100">
+                  <input matInput class="search-input w-100 filterInput" type="text" [(ngModel)]="partnerFilterText">
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-list role="list">
+                  <mat-list-item role="listitem" class="font-weight-bold"
+                                 *ngFor = 'let text of filterArray | filterBy: partnerFilterText'>
+                    {{text}}
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

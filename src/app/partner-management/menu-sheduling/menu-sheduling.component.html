@@ -1,0 +1,61 @@
+<!-- Menu Sheduling Component View -->
+
+<!-- mat sidenav container -->
+<mat-drawer-container class="sidenav-container working-time">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content>
+  <!-- header -->
+  <header>
+    <div class="container-fluid">
+      <div class="partner-navbar">
+        <nav class="nav d-flex justify-content-between">
+          <div class="partner-brand d-flex float-left">
+            <div class="partner-logo position-relative ml-3">
+              <i class="material-icons position-relative child-icon white-text">store</i>
+              <strong class=" position-relative part-btn">
+                <button mat-button routerLink="/partner-menu" routerLinkActive="active" type="button" class="partner-btn">
+                  Menu Item 
+                </button>
+              </strong>
+              <strong><i class="material-icons position-relative child-icon">keyboard_arrow_right</i></strong>
+              <strong class="position-relative part-btn">
+                <button mat-button routerLink="/menu-sheduling" routerLinkActive="active"  type="button" class="partner-btn">
+                  Scheduling
+                </button>
+              </strong>
+            </div>
+          </div>
+          <div class="button-navbar float-right">
+            <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+              <i class="material-icons md-36">notifications</i>
+            </button>
+            <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User">
+              <i class="material-icons md-36">person</i>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- sidenav content -->
+  <div class = 'container-fluid'>
+    <div class="row">
+      <div class="col-12">
+       <app-fixed-period></app-fixed-period>
+       <app-limit></app-limit>
+       <div class = 'block'>
+         <div class = 'reminder-calendar'>
+            <div>
+              <reminder-calendar></reminder-calendar>
+            </div>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  </mat-drawer-content>
+</mat-drawer-container>

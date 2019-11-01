@@ -1,0 +1,148 @@
+// Country Component Style
+
+.allPadding {
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+.pageTitle {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  padding-left: 40px;
+  padding-top: 20px;
+}
+
+.publicIcon {
+  margin-right: 10px;
+}
+
+.paddingRight {
+  padding-right: 2%;
+}
+
+.paddingLeft {
+  padding-left: 2%;
+}
+
+.box {
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header {
+  text-align: center;
+  background-color: #B4CAD8;
+  color: #607D8B;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.content {
+  background-color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 40px;
+  height: 420px;
+}
+
+.bigBox {
+  margin-bottom: 70px;
+  margin-top: 30px;
+}
+
+.infoName {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.info {
+  border-bottom: solid 1px #C0D0D6;
+  color: #607D8B;
+  padding-left: 4px;
+  padding-bottom: 9px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.payment {
+  border-bottom: solid 1px #C0D0D6;
+  color: #607D8B;
+  padding-left: 4px;
+  padding-bottom: 9px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkbox {
+  width: 40px;
+  height: 20px;
+  background-color: rgba(168, 184, 190, 0.5);
+  border-radius: 17px;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.checkboxButton {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -1px;
+  top: -2px;
+  background-color: #87969c;
+  border-radius: 50%;
+  transition: left linear 100ms;
+}
+
+.checkboxActive {
+  background-color: rgba(89, 177, 13, 0.5);
+}
+
+.checkboxButtonActive {
+  background-color: #59B10D;
+  left: 17px;
+}
+
+.emailContent {
+  background-color: white;
+  height: 300px;
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-right: 40px;
+}
+
+.emailTextAndInput {
+  display: flex;
+  align-items: center;
+}
+
+.emailText {
+  color: #607D8B;
+  font-weight: bold;
+  width: 420px;
+}
+
+.example-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.clearIcon {
+  cursor: pointer;
+}

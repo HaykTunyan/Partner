@@ -1,0 +1,176 @@
+.block{
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    margin: 40px 10px;
+    padding: 10px 25px;
+}
+.inputsContent{
+    margin-top: 30px;
+}
+.calendarButtonsContent{
+    position: absolute;
+    bottom: 4px;
+    right: 15px;
+}
+.saveButton{
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #2691BB !important;
+    padding: 10px 35px;
+    font-weight: bold;
+}
+.cancelButton{
+    background-color: transparent;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: none;
+    color: #607D8B;
+    font-size: 16px;
+}
+
+
+#calendar {
+    input {
+      //color: white;
+    }
+  
+    input .mat-form-field-placeholder {
+      color: red;
+    }
+  
+    .dummy-input-field .mat-input-placeholder {
+      color: red;
+    }
+  
+  }
+.labelTextArea{
+    font-size: 14px;
+    font-weight: bold;
+    color: #607D8B;
+}
+  .calendarIcon {
+    //color: white;
+    transform: scale(1.4);
+    margin-bottom: 10px;
+}
+
+
+//calendar style
+.borderBottom{
+  border-bottom: 1px solid rgba(0,0,0,.42);
+}
+
+.backupRadiobuttonsContent{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.radiobuttonContent{
+  margin: 20px 40px 10px 0px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.radioButton{
+  width: 22px;
+  height: 22px;
+  border: solid 2px #607D8B;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noChecked{
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background-color: #607D8B;
+  transition-padding: width, height;
+  -webkit-transition-property: width, height;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.radiobuttonName{
+  font-weight: 400;
+}
+
+.box {
+  //height: 410px;
+  background-color: white;
+  border-radius: 10px;
+  //margin-top: 30px;
+  //padding-top: 10px;
+}
+
+.padding-right {
+  padding-right: 2%;
+}
+
+
+.DateContent{
+  border: solid 3px #607D8B;
+  border-radius: 10px;
+  padding-left: 10px;
+  width: 500px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+mat-form-field{
+  width: 120px;
+  position: relative;
+}
+
+.dateInput{
+  display: inline-block;
+  width: 130px;
+}
+.timePicker{
+  display: inline-block;
+}
+
+.timeInput{
+  border: none;
+  width: 60px;
+  text-align: center;
+}
+.marginRightTime{
+  margin-right: 10px;
+}
+
+.borderContent{
+  display: flex;
+  justify-content: center;
+}
+.borderActive{
+  border-bottom: 2px solid #3f51b5;
+  margin-top: -1px;
+  width: 0%;
+  transition: width linear 200ms;
+  opacity: 0;
+}
+
+.timeInput:focus{
+  outline: none !important;
+}
+.line{
+  color: black;
+  font-size: 30px;
+  width: 40px;
+  text-align: center;
+}
+.inputActive{
+  opacity: 1;
+  width: 100%;
+}
+

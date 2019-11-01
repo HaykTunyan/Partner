@@ -1,0 +1,134 @@
+<!-- Working Time Component VIew -->
+
+<!-- mat sidenav container -->
+<mat-drawer-container class="sidenav-container working-time">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content>
+  <!-- header -->
+  <header>
+    <div class="container-fluid">
+      <div class="partner-navbar">
+        <nav class="nav d-flex justify-content-between">
+          <div class="partner-brand d-flex float-left">
+            <div class="partner-logo position-relative ml-3">
+              <i class="material-icons position-relative child-icon white-text">store</i>
+              <strong class=" position-relative part-btn">
+                <button mat-button routerLink="/partner-list" routerLinkActive="active" type="button" class="partner-btn">
+                  Partners Name
+                </button>
+              </strong>
+              <strong><i class="material-icons position-relative child-icon">keyboard_arrow_right</i></strong>
+              <strong class="position-relative part-btn">
+                <button mat-button routerLink="/working-time" routerLinkActive="active"  type="button" class="partner-btn">
+                  Scheduling
+                </button>
+              </strong>
+            </div>
+          </div>
+          <div class="button-navbar float-right">
+            <button mat-icon-button type="button" class="btn-notifications ml-2" placement="bottom" mdbTooltip="Notifications">
+              <i class="material-icons md-36">notifications</i>
+            </button>
+            <button mat-icon-button type="button" class="btn-notifications" placement="bottom" mdbTooltip="User">
+              <i class="material-icons md-36">person</i>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- sidenav content -->
+  <div class = 'container-fluid'>
+    <div class="row">
+      <div class="col-12">
+        <div class = 'block'>
+          <div class="titles">
+            <div class = 'scheduleTitle'>
+                Selling Schedule
+            </div>
+            <div class = 'calendarTitle'>
+              Exceptions
+            </div>
+          </div>
+          <div class = 'calendarAndSchedule'>
+            <div class = 'schedule'>
+               <div class = 'weeknames'>
+                  <div class = 'weekTopSpace'>
+                  </div>
+                  <div *ngFor = 'let name of weekDays; let i = index' class = 'weekName' 
+                  [ngClass] = '{ "bgColor": i%2 !== 0 }'>
+                    {{ name }}
+                  </div>
+               </div>
+               <div class = 'timesContent'>
+                  <div class = 'timeTitleContent'>
+                    <div class = 'timeTitle'>From</div>
+                    <div class = 'timeTitle'>To</div>
+                  </div>
+                  <div *ngFor = 'let times of timesArray; let i = index' class = 'timeInputsContent' [ngClass] = '{ "bgColor": i%2 !== 0 }'>
+                    <div class = 'timeInputContent' >
+                      <div class="timePicker">
+                        <input class="timeInput" #firstTimeElem [value] = 'times.firstTimeValue' [ngClass] = '{ "bgColor": i%2 !== 0 }'
+                               (focus)="IsEdit ? focusFunction('firstTime', i): false"
+                               (focusout) = "IsEdit ? focusOutFunction('firstTime', i): false"
+                               (keypress) = "IsEdit ? timeValidation($event, firstTimeElem.value, 'firstTimeValue', i): false"
+                               (keydown) = "IsEdit ? clearTimeDada($event, 'firstTimeValue', i): false"
+                               (input) = "changeTimeFormat(firstTimeElem.value, 'firstTimeValue', i)"
+                               autocomplete="off" [readonly]="!IsEdit"
+                               onselectstart="return false" onpaste="return false;"
+                               onDrag="return false" onDrop="return false"
+                               autocomplete="off" autocapitalize="off" autocorrect="off">
+                        <div class = 'borderBottom'></div>
+                        <div class = 'borderContent'>
+                          <div class = 'borderActive' [ngClass]="{'inputActive': timeInputsFocus[i].firstTime}"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class = 'timeInputContent'>
+                      <div class="timePicker">
+                        <input class="timeInput" #secondTimeElem [value] = 'times.secondTimeValue' [ngClass] = '{ "bgColor": i%2 !== 0 }'
+                               (focus)="IsEdit ? focusFunction('secondTime', i): false"
+                               (focusout) = "IsEdit ? focusOutFunction('secondTime', i): false"
+                               (keypress) = "IsEdit ? timeValidation($event, secondTimeElem.value, 'secondTimeValue', i): false"
+                               (keydown) = "IsEdit ? clearTimeDada($event, 'secondTimeValue', i): false"
+                               (input) = "changeTimeFormat(secondTimeElem.value, 'secondTimeValue', i)" [readonly]="!IsEdit"
+                               onselectstart="return false" onpaste="return false;" onDrag="return false" onDrop="return false"
+                               autocomplete="off" autocapitalize="off" autocorrect="off">
+                        <div class = 'borderBottom'></div>
+                        <div class = 'borderContent'>
+                          <div class = 'borderActive' [ngClass]="{'inputActive': timeInputsFocus[i].secondTime}"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+            <div class="calendar">
+              <calendar></calendar>
+            </div>
+          </div>
+          <div class = 'calendarButtonsContent'>
+            <button class = 'btn btn-primary saveButton'>SAVE</button>
+          </div>
+        </div>
+       <deactivate-period></deactivate-period>
+       <daily-limit></daily-limit>
+       <div class = 'block'>
+         <div class = 'reminder-calendar'>
+            <div>
+                <reminder-calendar></reminder-calendar>
+            </div>
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+

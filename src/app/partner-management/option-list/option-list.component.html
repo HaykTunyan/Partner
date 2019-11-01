@@ -1,0 +1,352 @@
+<!-- Option List Component View -->
+
+<!-- mat sidenav container -->
+<mat-drawer-container class="sidenav-container" *ngIf="!showDescription">
+  <!-- mat-drawer -->
+  <mat-drawer class="drawer" mode="side" opened>
+    <sidenav></sidenav>
+  </mat-drawer>
+  <!-- mat sidenav -->
+  <mat-drawer-content class="option-list">
+    <!-- header -->
+    <header>
+      <div class="container-fluid">
+        <div class="legal-navbar">
+          <nav class="nav d-flex justify-content-between align-items-center">
+            <div class="legal-brand d-flex float-left">
+              <div class="legal-logo position-relative ml-3 mt-3">
+                <i class="material-icons position-relative child-icon white-text">store</i>
+                <strong class="position-relative part-btn">
+                  <button mat-button routerLink="/menu" routerLinkActive="active" type="button">
+                    Menu
+                  </button>
+                </strong>
+                <strong class="position-relative child-icon"><i class="material-icons">keyboard_arrow_right</i></strong>
+                <strong class="position-relative part-btn">
+                  <button mat-button routerLink="/option-list" routerLinkActive="active" type="button">
+                    Option List
+                  </button>
+                </strong>
+              </div>
+            </div>
+            <div class="button-navbar float-right">
+              <button type="button" class="btn mr-3 btn-partner">
+                <span class="button-text">CREATE OPTION</span>
+              </button>
+              <button mat-icon-button type="button" class="btn-notifications mx-2" placement="bottom"
+                      mdbTooltip="Notifications">
+                <i class="material-icons md-36">notifications</i>
+              </button>
+              <button mat-icon-button type="button" class="btn-notifications mx-2" placement="bottom" mdbTooltip="User"
+                      [matMenuTriggerFor]="menu">
+                <i class="material-icons md-36">person</i>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/login">Sign Out</button>
+              </mat-menu>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- sidenav content -->
+    <div class="sidenav-content">
+      <!-- option list -->
+      <div class="container-fluid mt-4">
+        <div class="data-table w-100">
+          <!--<table mdbTable *ngIf="this.selectedOne && this.selectedOne.length !== 0 || selectedAll">-->
+          <!--<thead class="main-color thead-custom">-->
+          <!--&lt;!&ndash; button thead &ndash;&gt;-->
+          <!--<tr>-->
+          <!--&lt;!&ndash; button row &ndash;&gt;-->
+          <!--<th scope="col">-->
+          <!--<div class="button-row">-->
+          <!--&lt;!&ndash; Create &ndash;&gt;-->
+          <!--<button mat-icon-button placement="bottom" mdbTooltip="Edit List">-->
+          <!--<mat-icon><i class="material-icons md-light">create</i></mat-icon>-->
+          <!--</button>-->
+          <!--&lt;!&ndash; Contacts &ndash;&gt;-->
+          <!--<button mat-icon-button placement="bottom" mdbTooltip="Partner Menu">-->
+          <!--<mat-icon><i class="material-icons md-light">restaurant</i></mat-icon>-->
+          <!--</button>-->
+          <!--&lt;!&ndash; Percent &ndash;&gt;-->
+          <!--<button mat-icon-button placement="bottom" mdbTooltip="Commission Rate">-->
+          <!--<mat-icon class="percent-icon position-relative"><i class="material-icons md-light">widgets</i></mat-icon>-->
+          <!--</button>-->
+          <!--&lt;!&ndash; Money &ndash;&gt;-->
+          <!--<button mat-icon-button placement="bottom" mdbTooltip="Transition">-->
+          <!--<mat-icon><i class="material-icons md-light">monetization_on</i></mat-icon>-->
+          <!--</button>-->
+          <!--&lt;!&ndash; Date &ndash;&gt;-->
+          <!--<button mat-icon-button placement="bottom" mdbTooltip="Working Time">-->
+          <!--<mat-icon><i class="material-icons md-light">date_range</i></mat-icon>-->
+          <!--</button>-->
+          <!--</div>-->
+          <!--</th>-->
+          <!--</tr>  -->
+          <!--</thead>-->
+          <!--</table>-->
+          <!-- option list table and filter -->
+          <table mdbTable striped="true" hover="true">
+            <thead class="main-color thead-custom">
+            <!-- search thead -->
+            <tr>
+              <!-- S/N. -->
+              <th scope="col">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="S/N" class="white-text" type="text">
+                </mat-form-field>
+              </th>
+
+
+              <!-- Search by option name. -->
+              <th scope="col" *ngIf="optionListElements[0].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Search by option name" [(ngModel)]="filterText">
+                </mat-form-field>
+              </th>
+              <!--Attached Menu Items-->
+              <th scope="col" *ngIf="optionListElements[1].checked">
+                <mat-icon class="float-right auto-icon position-relative">
+                  <i class="material-icons  white-text">arrow_drop_down</i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Attached Menu Items" aria-label="Number"
+                         matInput [formControl]="TypeControl" [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let item of attachedMenuItems | async" [value]="item">
+                      {{item}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!--Status-->
+              <th scope="col" *ngIf="optionListElements[2].checked">
+                <mat-icon class="float-right auto-icon position-relative">
+                  <i class="material-icons  white-text">arrow_drop_down</i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Status" aria-label="Number"
+                         matInput [formControl]="TypeControl" [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let partnertype of filteredPartnertypes | async" [value]="partnertype">
+                      {{partnertype}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!--Multiple Choice-->
+              <th scope="col" *ngIf="optionListElements[3].checked">
+                <mat-icon class="float-right auto-icon position-relative">
+                  <i class="material-icons  white-text">arrow_drop_down</i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Multiple Choice" aria-label="Number"
+                         matInput [formControl]="TypeControl" [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let partnertype of filteredPartnertypes | async" [value]="partnertype">
+                      {{partnertype}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!--Maximum Number of Selections-->
+              <th scope="col" *ngIf="optionListElements[4].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Maximum Number of Selections" [(ngModel)]="filterText">
+                </mat-form-field>
+              </th>
+              <!-- Minimum Number of Selections -->
+              <th scope="col" *ngIf="optionListElements[5].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Minimum Number of Selections" [(ngModel)]="filterText">
+                </mat-form-field>
+              </th>
+              <!-- Price -->
+              <th scope="col" *ngIf="optionListElements[6].checked">
+                <mat-icon class="float-right auto-icon position-relative">
+                  <i class="material-icons white-text">arrow_drop_down</i>
+                </mat-icon>
+                <mat-form-field class="w-100 form-select">
+                  <input type="text" placeholder="Price" aria-label="Number"
+                         matInput [formControl]="BrandControl" [matAutocomplete]="auto" class="white-text">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let brand of filteredBrands | async" [value]="brand">
+                      {{brand}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </th>
+              <!-- Limit -->
+              <th scope="col" *ngIf="optionListElements[7].checked">
+                <i class="fa fa-search menus-icon position-relative white-text" aria-hidden="true"></i>
+                <mat-form-field class="w-100 white-text">
+                  <input matInput placeholder="Limit" [(ngModel)]="filterText">
+                </mat-form-field>
+              </th>
+              <!-- Table column btn and download -->
+              <th class="tools-btn">
+                <div class="button-row float-right pb-3">
+                  <!-- Add filter and collumn -->
+                  <button mat-icon-button [matMenuTriggerFor]="collummenu" placement="bottom"
+                          mdbTooltip="Add Filter & Column" class="mr-1">
+                    <i class="material-icons md-light md-36">add_circle</i>
+                  </button>
+                  <mat-menu #collummenu="matMenu" class="p-3">
+                    <ng-container>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <div class="table-list">
+                        <mat-list (click)="$event.stopPropagation()">
+                          <mat-list-item *ngFor="let optionList of optionListElements">
+                            <mat-checkbox [(ngModel)]="optionList.checked">{{optionList.name}}</mat-checkbox>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+                      <!-- lsit for collums and filters -->
+                    </ng-container>
+                  </mat-menu>
+                  <!-- Down to Excel -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Download Table">
+                    <i class="material-icons md-light md-36">archive</i>
+                  </button>
+                  <button mat-icon-button placement="bottom" mdbTooltip="Upload Table">
+                    <i class="material-icons md-light md-36">unarchive</i>
+                  </button>
+                </div>
+              </th>
+            </tr>
+            <!-- head custom -->
+            <tr class="head-custom">
+              <!-- S/N -->
+              <th scope="col" class="font-weight-bold">
+                <mat-checkbox [(ngModel)]="selectedAll"
+                              [indeterminate]="this.selectedOne && this.selectedOne.length !== 0 && !selectedAll"
+                              (change)="selectAll();">
+                  <span class="headers-text-color">S/N</span>
+                </mat-checkbox>
+              </th>
+              <!-- Partner List  -->
+              <ng-container *ngFor="let optionList of optionListElements; let i=index">
+                <th *ngIf="optionList.checked" scope="col" class="font-weight-bold ">
+                  <span class="headers-text-color"> {{optionList.name}} </span>
+
+                  <mat-icon *ngIf='!optionList.sort.status'
+                            class="cursor sortButton noselect float-right sortIconStyles" (click)="sortButton(i)">
+                    unfold_more
+                  </mat-icon>
+                  <mat-icon *ngIf='optionList.sort.status == "asc"'
+                            class="cursor sortButton noselect float-right sortIconStyles" (click)="sortButton(i)">
+                    expand_less
+                  </mat-icon>
+                  <mat-icon *ngIf='optionList.sort.status == "desc"'
+                            class="cursor sortButton marginTop noselect float-right sortIconStyles"
+                            (click)="sortButton(i)">
+                    expand_more
+                  </mat-icon>
+                </th>
+              </ng-container>
+              <!-- Tools -->
+              <th scope="col" class="table-tools font-weight-bold text-center city-style">
+                <span class="headers-text-color">Tools</span>
+              </th>
+            </tr>
+            </thead>
+            <tbody class="banner-color table-custom tbody-custom">
+            <tr mdbTableCol *ngFor="let option of options | filter: filterText; let ind=index">
+              <!-- id -->
+              <td>
+                <mat-checkbox [(ngModel)]="option.checked" (change)="checkIfAllSelected(); checkIfOneSelected()">
+                  {{ ind }}
+                </mat-checkbox>
+              </td>
+              <!-- partner name -->
+              <td *ngIf="optionListElements[0].checked">{{option.name}}</td>
+              <!-- partner area -->
+              <td *ngIf="optionListElements[1].checked">{{option.attachedMenuItems}}</td>
+              <!-- partner zone -->
+              <td *ngIf="optionListElements[2].checked">{{option.status}}</td>
+              <!-- phone number -->
+              <td *ngIf="optionListElements[3].checked">{{option.multipleChoice}}</td>
+              <!-- partner order acceptance method -->
+              <td *ngIf="optionListElements[4].checked">{{option.maxNumberOfSelections}}</td>
+              <!-- partner type -->
+              <td *ngIf="optionListElements[5].checked">{{option.minNumberOfSelections}}</td>
+              <!-- brand -->
+              <td *ngIf="optionListElements[6].checked">{{option.price}}</td>
+              <td *ngIf="optionListElements[7].checked">{{option.limit}}</td>
+              <!-- tools -->
+              <td class="tools-btn">
+                <div class="button-row text-center">
+                  <!-- Option LIst Edit -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Edit Option List">
+                    <mat-icon><i class="material-icons md-main">create</i></mat-icon>
+                  </button>
+                  <!-- Option List Details -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Option List Details"
+                          (click)="showDescriptionFunc(ind)">
+                    <mat-icon><i class="material-icons md-main">description</i></mat-icon>
+                  </button>
+                  <!-- Option List History -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Option List History">
+                    <mat-icon><i class="material-icons md-main">history</i></mat-icon>
+                  </button>
+                  <!-- Option List Copyright -->
+                  <button mat-icon-button placement="bottom" mdbTooltip="Menu Items Details">
+                    <mat-icon><i class="material-icons md-main">filter_none</i></mat-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- /table data -->
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<div *ngIf="showDescription" class="modalDiv ">
+  <div class="modal-menuItemDescriptionLogo position-relative">
+    <div class="logoStyles">
+      <mat-icon>description</mat-icon>
+    </div>
+  </div>
+  <div class="modal-menuItemDescription mt-4">
+    <div class="my-4">
+      <div class="col-12 menus-text-color ">
+        <p class="m-0">Option Name</p>
+      </div>
+      <mat-form-field class="col-12">
+        <span matPrefix><i class="px-2 material-icons fa fa-search md-dark" aria-hidden="true"></i></span>
+        <input matInput placeholder="Search" autocomplete="off">
+      </mat-form-field>
+      <div class="col-12">
+        <div class="row px-5 m-0">
+          <p class="col-4 m-0 py-2 menus-text-color" style="border-right: 1px solid black">
+            Attached Menu {{menuIdMenuItemId['menuId']}}
+          </p>
+          <p class="col-8 m-0 py-2 menus-text-color">
+            Attached Menu Item {{menuIdMenuItemId['menuItemId']}}
+          </p>
+        </div>
+        <div class="row px-5 m-0" *ngFor="let opt of optionDetails; let ind=index"
+             [ngClass]="{'grayBackground':ind%2===1}" style="font-weight: bolder;">
+          <p class="col-4 m-0 py-2 " style="border-right: 1px solid black">
+            {{opt['name']}}
+          </p>
+          <p class="col-8 m-0 py-2 ">
+            <span *ngFor="let item of opt['items']"> {{item}} , </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

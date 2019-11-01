@@ -1,0 +1,258 @@
+  <!-- Customers List Selection -->
+  <mat-drawer-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 allPadding">
+          <div class="row">
+            <div class="col-12">
+              <div class="box bigBox">
+                <div class="header ">
+                  Customers List Selection
+                </div>
+
+
+                <div class="row ">
+                  <div class="col-12 customersAllMarginLeft">
+                    <mat-checkbox [checked]="allCheckedValue" (change)="getStatusCheckBoxAll($event.checked,'allEvent','allCheckedValue')">ALL</mat-checkbox>
+                  </div>
+                </div>
+
+                <div class="row leftDiv ">
+
+                  <div class="col-6  ">
+
+                    <div class="customersAllMarginLeft">
+                      <mat-checkbox [checked]="registrationDateChecked" (change)="getStatusCheckBox($event.checked,'regDateEvent','registrationDateChecked')">Registration Date</mat-checkbox>
+                      <!--calendar Section start-->
+                      <div class='DateContent' [ngClass]="{'disableSection' : !registrationDateChecked}">
+                        <div class="dateInput">
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="registrationPikerStart" [formControl]="date1" [value]="startDate"
+                                   (dateInput)="getDate($event, 'startDate')"
+                                   (keypress)="false"
+                                   (keydown)="keyDownDateInput($event, 1)"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <mat-datepicker-toggle matSuffix [for]="registrationPikerStart">
+                              <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #registrationPikerStart></mat-datepicker>
+                            <mat-hint *ngIf="regDateValidator">
+                              <span class="mat-error">Time is required</span>
+                            </mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div class="timePicker">
+                          <input class="timeInput" #firstTimeElem [value]='firstTimeValue'
+                                 (focus)="focusFunction('firstTime')" (focusout)="focusOutFunction('firstTime')"
+                                 (keypress)="timeValidation($event, firstTimeElem.value, 'firstTimeValue')"
+                                 (keydown)="clearTimeDada($event, 'firstTimeValue')"
+                                 (input)="changeTimeFormat(firstTimeElem.value, 'firstTimeValue')"
+                                 autocomplete="off"
+                                 onselectstart="return false"
+                                 onpaste="return false;"
+                                 onDrag="return false"
+                                 onDrop="return false"
+                                 autocomplete="off" autocapitalize="off" autocorrect="off">
+                          <div class='borderBottom'></div>
+                          <div class='borderContent'>
+                            <div class='borderActive' [ngClass]="{'inputActive': firstTime}"></div>
+                          </div>
+                        </div>
+                        <div class="line">
+                          -
+                        </div>
+                        <div class="timePicker marginRightTime">
+                          <input class="timeInput" #secondTimeElem [value]='secondTimeValue'
+                                 (focus)="focusFunction('secondTime')" (focusout)="focusOutFunction('secondTime')"
+                                 (keypress)="timeValidation($event, secondTimeElem.value, 'secondTimeValue')"
+                                 (keydown)="clearTimeDada($event, 'secondTimeValue')"
+                                 (input)="changeTimeFormat(secondTimeElem.value, 'secondTimeValue')"
+                                 onselectstart="return false"
+                                 onpaste="return false;"
+                                 onDrag="return false"
+                                 onDrop="return false"
+                                 autocomplete="off" autocapitalize="off" autocorrect="off">
+                          <div class='borderBottom'></div>
+                          <div class='borderContent'>
+                            <div class='borderActive' [ngClass]="{'inputActive': secondTime}"></div>
+                          </div>
+                        </div>
+                        <div class='dateInput'>
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="registrationPikerEnd" [formControl]="date2" [value]="endDate"
+                                   (dateInput)="getDate($event, 'endDate')" (keypress)="false"
+                                   (keydown)="keyDownDateInput($event, 2)"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <mat-datepicker-toggle matSuffix [for]="registrationPikerEnd">
+                              <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #registrationPikerEnd></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+
+                      <!--calendar section end-->
+                    </div>
+                  </div>
+                  <div class="col-6  ">
+                    <div class="customersAllMarginLeft">
+                      <mat-checkbox [checked]="birthDayDateChecked" (change)="getStatusCheckBox($event.checked,'birthDayDateEvent','birthDayDateChecked')">Birthday Date</mat-checkbox>
+                      <!--calendar Section start-->
+                      <div class='DateContent' [ngClass]="{'disableSection' : !birthDayDateChecked}" >
+                        <div class="dateInput">
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="birthDayPikerStart" [formControl]="date3" [value]="startDateBirthDay"
+                                   (dateInput)="getDate($event, 'startDateBirthDay')"
+                                   (keypress)="false"
+                                   (keydown)="keyDownDateInput($event, 1)"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <mat-datepicker-toggle matSuffix [for]="birthDayPikerStart">
+                              <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #birthDayPikerStart></mat-datepicker>
+                            <mat-hint *ngIf="birthdayDateValidator">
+                              <span class="mat-error">Time is required</span>
+                            </mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div class="timePicker">
+                          <input class="timeInput" #firstTimeElemBirthDay [value]='firstTimeValueBirthDay'
+                                 (focus)="focusFunction('firstTimeBirthDay')" (focusout)="focusOutFunction('firstTimeBirthDay')"
+                                 (keypress)="timeValidation($event, firstTimeElemBirthDay.value, 'firstTimeValueBirthDay')"
+                                 (keydown)="clearTimeDada($event, 'firstTimeValueBirthDay')"
+                                 (input)="changeTimeFormat(firstTimeElemBirthDay.value, 'firstTimeValueBirthDay')"
+                                 autocomplete="off"
+                                 onselectstart="return false"
+                                 onpaste="return false;"
+                                 onDrag="return false"
+                                 onDrop="return false"
+                                 autocomplete="off" autocapitalize="off" autocorrect="off">
+                          <div class='borderBottom'></div>
+                          <div class='borderContent'>
+                            <div class='borderActive' [ngClass]="{'inputActive': firstTimeBirthDay}"></div>
+                          </div>
+                        </div>
+                        <div class="line">
+                          -
+                        </div>
+                        <div class="timePicker marginRightTime">
+                          <input class="timeInput" #secondTimeElemBirthDay [value]='secondTimeValueBirthDay'
+                                 (focus)="focusFunction('secondTimeBirthDay')" (focusout)="focusOutFunction('secondTimeBirthDay')"
+                                 (keypress)="timeValidation($event, secondTimeElemBirthDay.value, 'secondTimeValueBirthDay')"
+                                 (keydown)="clearTimeDada($event, 'secondTimeValueBirthDay')"
+                                 (input)="changeTimeFormat(secondTimeElemBirthDay.value, 'secondTimeValueBirthDay')"
+                                 onselectstart="return false"
+                                 onpaste="return false;"
+                                 onDrag="return false"
+                                 onDrop="return false"
+                                 autocomplete="off" autocapitalize="off" autocorrect="off">
+                          <div class='borderBottom'></div>
+                          <div class='borderContent'>
+                            <div class='borderActive' [ngClass]="{'inputActive': secondTimeBirthDay}"></div>
+                          </div>
+                        </div>
+                        <div class='dateInput'>
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="birthDayPikerEnd" [formControl]="date4" [value]="endDateBirthDay"
+                                   (dateInput)="getDate($event, 'endDateBirthDay')" (keypress)="false"
+                                   (keydown)="keyDownDateInput($event, 2)"
+                                   onselectstart="return false"
+                                   onpaste="return false;"
+                                   onDrag="return false"
+                                   onDrop="return false"
+                                   autocomplete="off" autocapitalize="off" autocorrect="off">
+                            <mat-datepicker-toggle matSuffix [for]="birthDayPikerEnd">
+                              <mat-icon matDatepickerToggleIcon class='calendarIcon'>arrow_drop_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #birthDayPikerEnd></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+
+                      <!--calendar section end-->
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row rightDiv mb-5">
+
+                  <div class="col-6">
+                    <div class="customersAllMarginLeft">
+                      <mat-checkbox [checked]="corporateClientChecked" (change)="getStatusCheckBox($event.checked,'corporateClientEvent','corporateClientChecked')">Corporate Client</mat-checkbox>
+                      <!--calendar Section start-->
+                      <div class="col " [ngClass]="{'disableSection' : !corporateClientChecked}">
+
+                        <mat-form-field class="selectCustomersType" >
+                          <mat-select class="matSelect" [value]="corporateTypeValue" (selectionChange)="changeValueSelectOption($event.value.id,'corporateClient','id')">
+
+                            <mat-option *ngFor="let client of corporateClientArray" [value]="client"
+                                        class="matOption">
+
+                              {{client.corporateClientName}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-hint *ngIf="corporateClientValidator">
+                            <span class="mat-error">Corporate client is required</span>
+                          </mat-hint>
+                        </mat-form-field>
+                      </div>
+
+
+                      <!--calendar section end-->
+                    </div>
+                  </div>
+
+                  <div class="col-6 ">
+
+                    <div class="customersAllMarginLeft">
+                      <mat-checkbox [checked]="labelChecked" (change)="getStatusCheckBox($event.checked,'labelEvent','labelChecked')">Label</mat-checkbox>
+                      <!--calendar Section start-->
+
+                      <div class="col " [ngClass]="{'disableSection' : !labelChecked}">
+
+                        <mat-form-field class="selectCustomersType" >
+                          <mat-select class="matSelect" [value]="labelValue" (selectionChange)="changeValueSelectOption($event.value.id,'label','id')">
+
+                            <mat-option *ngFor="let label of label" [value]="label"
+                                        class="matOption">
+
+                              {{label.name}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-hint *ngIf="labelValidator">
+                            <span class="mat-error">Label  is required</span>
+                          </mat-hint>
+                        </mat-form-field>
+                      </div>
+
+                      <!--calendar section end-->
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+
+
